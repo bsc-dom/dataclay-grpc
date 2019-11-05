@@ -2,7 +2,7 @@ syntax = "proto3";
 package dataclay.communication.grpc.logicmodule;
 import "dataclay/communication/grpc/messages/logicmodule/logicmodule_messages.proto";
 import "dataclay/communication/grpc/messages/common/common_messages.proto";
-option java_package = "dataclay.communication.grpc.generated.logicmodule";
+option java_package = "es.bsc.dataclay.communication.grpc.generated.logicmodule";
 option java_outer_classname="LogicModuleGrpcService";
 // Interface exported by the server.
 service LogicModule {

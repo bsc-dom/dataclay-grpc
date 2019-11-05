@@ -1,6 +1,6 @@
 syntax = "proto3";
 package dataclay.communication.grpc.common;
-option java_package = "dataclay.communication.grpc.messages.common";
+option java_package = "es.bsc.dataclay.communication.grpc.messages.common";
 
 message Credential {
 	string password = 1;

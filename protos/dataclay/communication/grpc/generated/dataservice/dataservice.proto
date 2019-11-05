@@ -2,7 +2,7 @@ syntax = "proto3";
 package dataclay.communication.grpc.dataservice;
 import "dataclay/communication/grpc/messages/dataservice/dataservice_messages.proto";
 import "dataclay/communication/grpc/messages/common/common_messages.proto";
-option java_package = "dataclay.communication.grpc.generated.dataservice";
+option java_package = "es.bsc.dataclay.communication.grpc.generated.dataservice";
 option java_outer_classname="DataServiceGrpcService";
 
 // Interface exported by the server.

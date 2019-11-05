@@ -1,7 +1,7 @@
 syntax = "proto3";
 package dataclay.communication.grpc.logicmodule;
 import "dataclay/communication/grpc/messages/common/common_messages.proto";
-option java_package = "dataclay.communication.grpc.messages.logicmodule";
+option java_package = "es.bsc.dataclay.communication.grpc.messages.logicmodule";
 option java_multiple_files = false;
 
 message NewAccountNoAdminRequest {
