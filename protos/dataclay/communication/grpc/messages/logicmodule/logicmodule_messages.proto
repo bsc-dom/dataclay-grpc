@@ -744,6 +744,11 @@ message GetObjectFromAliasResponse {
 	dataclay.communication.grpc.common.ExceptionInfo excInfo = 4;
 }
 
+message RegisterObjectResponse {
+	dataclay.communication.grpc.common.ObjectID objectID = 1;
+	dataclay.communication.grpc.common.ExceptionInfo excInfo = 2;
+}
+
 message AddAliasRequest{
 	dataclay.communication.grpc.common.ObjectID objectIDToHaveAlias = 1;
 	string alias = 2;

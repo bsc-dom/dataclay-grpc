@@ -95,7 +95,7 @@ service LogicModule {
 	rpc addAlias(AddAliasRequest) returns (dataclay.communication.grpc.common.ExceptionInfo) {}
 	rpc registerObjectFromGC(RegisterObjectForGCRequest) returns (dataclay.communication.grpc.common.ExceptionInfo) {}
 	rpc unregisterObjects(UnregisterObjectsRequest) returns (dataclay.communication.grpc.common.ExceptionInfo) {}
-	rpc registerObject(RegisterObjectRequest) returns (dataclay.communication.grpc.common.ExceptionInfo) {}
+	rpc registerObject(RegisterObjectRequest) returns (RegisterObjectResponse) {}
 	rpc setDataSetIDFromGarbageCollector(SetDataSetIDFromGarbageCollectorRequest) returns (dataclay.communication.grpc.common.ExceptionInfo) {}
 	
 	// Storage Location
