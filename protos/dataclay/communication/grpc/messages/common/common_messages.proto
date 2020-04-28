@@ -85,6 +85,18 @@ message FederatedObjectInfo {
 	repeated string alias = 4;
 }
 
+message ObjectInfo {
+	ObjectID objectID = 1;
+	bool isLoaded = 2;
+	bool isMaster = 3;
+}
+
+enum ObjectInfoFlags {
+	OBJECTID = 0;
+	ISLOADED = 1;
+	ISMASTER = 2;
+}
+
 message GetTracesResponse { 
 	map<string, bytes> traces = 1;
 	dataclay.communication.grpc.common.ExceptionInfo excInfo = 2;

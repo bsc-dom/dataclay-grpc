@@ -310,3 +310,13 @@ message GetObjectGraphResponse {
 	bytes serializedGraph = 1;
 	dataclay.communication.grpc.common.ExceptionInfo excInfo = 2;
 }
+
+message BatchObjectInfoRequest {
+	repeated dataclay.communication.grpc.common.ObjectID queryObjects = 1;
+	repeated dataclay.communication.grpc.common.ObjectInfoFlags queryFlags = 2;
+}
+
+message BatchObjectInfoResponse {
+	repeated dataclay.communication.grpc.common.ObjectInfo objectsInfo = 1;
+	dataclay.communication.grpc.common.ExceptionInfo excInfo = 2;
+}
