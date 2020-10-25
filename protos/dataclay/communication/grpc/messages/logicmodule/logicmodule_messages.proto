@@ -973,3 +973,27 @@ message ObjectExistsInDataClayResponse {
 	bool exists = 1;
 	dataclay.communication.grpc.common.ExceptionInfo excInfo = 2;
 }
+
+message GetClassesInNamespaceRequest {
+	string namespaceName = 1;
+}
+
+message GetClassesInNamespaceResponse {
+	string namespaceYaml = 1;
+	repeated string metaClassYaml = 2;
+	dataclay.communication.grpc.common.ExceptionInfo excInfo = 3;
+}
+
+message RegisterClassesInNamespaceFromExternalDataClayRequest {
+	string namespaceName = 1;
+	dataclay.communication.grpc.common.DataClayInstanceID dataClayID = 2;
+}
+
+message GetStorageLocationIDRequest {
+	string slName = 1;
+}
+
+message GetStorageLocationIDResponse {
+	dataclay.communication.grpc.common.StorageLocationID storageLocationID = 1;
+	dataclay.communication.grpc.common.ExceptionInfo excInfo = 2;
+}

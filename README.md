@@ -6,10 +6,20 @@
 
 - Compile in javaclay
 
-The dedicated mvn plugin is taking care of it
-
+```
+mvn protobuf:compile-custom -Pprotogen
+```
+to create just grpc-stubs or
+```
+mvn clean compile -Pprotogen
+```
+to compile all javaclay including new protos
 - Compile in pyclay
 
 ```
-python3 setup.py protobufferize
+pip install grpcio-tools protobufferize
+python setup.py protobufferize
 ```
+
+**NOTE**: if protbufferize cannot be installed via pip, please clone
+it from https://github.com/bsc-dom/protobufferize and run `python setup.py install`

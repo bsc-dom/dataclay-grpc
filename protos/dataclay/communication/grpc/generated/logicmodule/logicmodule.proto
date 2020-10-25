@@ -9,6 +9,7 @@ service LogicModule {
 
 	rpc autoregisterSL(AutoRegisterSLRequest) returns (dataclay.communication.grpc.common.ExceptionInfo) {}
 	rpc autoregisterEE(AutoRegisterEERequest) returns (AutoRegisterEEResponse) {}
+	rpc getStorageLocationID(GetStorageLocationIDRequest) returns (GetStorageLocationIDResponse) {}
 	
 	rpc unregisterStorageLocation(UnregisterStorageLocationRequest) returns (dataclay.communication.grpc.common.ExceptionInfo) {}
 	rpc unregisterExecutionEnvironment(UnregisterExecutionEnvironmentRequest) returns (dataclay.communication.grpc.common.ExceptionInfo) {}
@@ -132,7 +133,9 @@ service LogicModule {
 	rpc unfederateObjectWithAllDCs(UnfederateObjectWithAllDCsRequest) returns (dataclay.communication.grpc.common.ExceptionInfo) {}
 	rpc migrateFederatedObjects(MigrateFederatedObjectsRequest) returns (dataclay.communication.grpc.common.ExceptionInfo) {}
 	rpc federateAllObjects(FederateAllObjectsRequest) returns (dataclay.communication.grpc.common.ExceptionInfo) {}
-	
+	rpc getClassesInNamespace(GetClassesInNamespaceRequest) returns (GetClassesInNamespaceResponse) {}
+	rpc registerClassesInNamespaceFromExternalDataClay(RegisterClassesInNamespaceFromExternalDataClayRequest) returns (dataclay.communication.grpc.common.ExceptionInfo) {}
+
 	// Stubs
 	rpc getStubs(GetStubsRequest) returns (GetStubsResponse) {}
 	rpc getBabelStubs(GetBabelStubsRequest) returns (GetBabelStubsResponse) {}
