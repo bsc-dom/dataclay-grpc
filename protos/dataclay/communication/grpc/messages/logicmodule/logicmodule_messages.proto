@@ -984,7 +984,7 @@ message GetClassesInNamespaceResponse {
 	dataclay.communication.grpc.common.ExceptionInfo excInfo = 3;
 }
 
-message RegisterClassesInNamespaceFromExternalDataClayRequest {
+message ImportModelsFromExternalDataClayRequest {
 	string namespaceName = 1;
 	dataclay.communication.grpc.common.DataClayInstanceID dataClayID = 2;
 }
@@ -995,5 +995,22 @@ message GetStorageLocationIDRequest {
 
 message GetStorageLocationIDResponse {
 	dataclay.communication.grpc.common.StorageLocationID storageLocationID = 1;
+	dataclay.communication.grpc.common.ExceptionInfo excInfo = 2;
+}
+
+message NotifyExecutionEnvironmentShutdownRequest {
+	dataclay.communication.grpc.common.ExecutionEnvironmentID executionEnvironmentID = 1;
+}
+
+message NotifyStorageLocationShutdownRequest {
+	dataclay.communication.grpc.common.StorageLocationID storageLocationID = 1;
+}
+
+message ExistsActiveEnvironmentsForSLRequest {
+	dataclay.communication.grpc.common.StorageLocationID storageLocationID = 1;
+}
+
+message ExistsActiveEnvironmentsForSLResponse {
+	bool exists = 1;
 	dataclay.communication.grpc.common.ExceptionInfo excInfo = 2;
 }
