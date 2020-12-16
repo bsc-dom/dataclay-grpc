@@ -86,15 +86,18 @@ message FederatedObjectInfo {
 }
 
 message ObjectInfo {
-	ObjectID objectID = 1;
-	bool isLoaded = 2;
-	bool isMaster = 3;
+	ExecutionEnvironmentID backendID = 1;
+	ObjectID objectID = 2;
+	bool isLoaded = 3;
+	bool isMaster = 4;
+	bool isLocal = 5;
 }
 
 enum ObjectInfoFlags {
 	OBJECTID = 0;
 	ISLOADED = 1;
 	ISMASTER = 2;
+	ISLOCAL = 3;
 }
 
 message GetTracesResponse { 

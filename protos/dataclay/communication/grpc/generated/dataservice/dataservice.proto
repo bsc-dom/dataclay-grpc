@@ -16,6 +16,7 @@ service DataService {
 	rpc enrichClass(EnrichClassRequest) returns (dataclay.communication.grpc.common.ExceptionInfo) {}
 
 	// Execution Environment
+	rpc batchObjectInfo(BatchObjectInfoRequest) returns (BatchObjectInfoResponse) {}
 	rpc newPersistentInstance(NewPersistentInstanceRequest) returns (NewPersistentInstanceResponse) {}
 	rpc storeObjects(StoreObjectsRequest) returns (dataclay.communication.grpc.common.ExceptionInfo) {}
 	rpc getCopyOfObject(GetCopyOfObjectRequest) returns (GetCopyOfObjectResponse) {}
