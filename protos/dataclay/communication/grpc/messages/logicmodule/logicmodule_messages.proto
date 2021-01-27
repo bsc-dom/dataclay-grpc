@@ -782,7 +782,9 @@ message SetDataSetIDFromGarbageCollectorRequest {
 message NewVersionRequest {
 	dataclay.communication.grpc.common.SessionID sessionID = 1;
 	dataclay.communication.grpc.common.ObjectID objectID = 2;
-	dataclay.communication.grpc.common.ExecutionEnvironmentID optDestBackendID = 3;
+	dataclay.communication.grpc.common.MetaClassID classID = 3;
+	dataclay.communication.grpc.common.ExecutionEnvironmentID hint = 4;
+	dataclay.communication.grpc.common.ExecutionEnvironmentID optDestBackendID = 5;
 }
 
 message NewVersionResponse {
@@ -798,8 +800,10 @@ message ConsolidateVersionRequest {
 message NewReplicaRequest {
 	dataclay.communication.grpc.common.SessionID sessionID = 1;
 	dataclay.communication.grpc.common.ObjectID objectID = 2;
-	dataclay.communication.grpc.common.ExecutionEnvironmentID destBackendID = 3;
-	bool recursive = 4;
+	dataclay.communication.grpc.common.MetaClassID classID = 3;
+	dataclay.communication.grpc.common.ExecutionEnvironmentID hint = 4;
+	dataclay.communication.grpc.common.ExecutionEnvironmentID destBackendID = 5;
+	bool recursive = 6;
 }
 
 message NewReplicaResponse {
