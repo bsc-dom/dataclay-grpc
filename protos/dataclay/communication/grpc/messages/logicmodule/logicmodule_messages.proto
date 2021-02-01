@@ -785,6 +785,7 @@ message NewVersionRequest {
 	dataclay.communication.grpc.common.MetaClassID classID = 3;
 	dataclay.communication.grpc.common.ExecutionEnvironmentID hint = 4;
 	dataclay.communication.grpc.common.ExecutionEnvironmentID optDestBackendID = 5;
+	string destHostname = 6;
 }
 
 message NewVersionResponse {
@@ -803,7 +804,8 @@ message NewReplicaRequest {
 	dataclay.communication.grpc.common.MetaClassID classID = 3;
 	dataclay.communication.grpc.common.ExecutionEnvironmentID hint = 4;
 	dataclay.communication.grpc.common.ExecutionEnvironmentID destBackendID = 5;
-	bool recursive = 6;
+	string destHostname = 6;
+	bool recursive = 7;
 }
 
 message NewReplicaResponse {
