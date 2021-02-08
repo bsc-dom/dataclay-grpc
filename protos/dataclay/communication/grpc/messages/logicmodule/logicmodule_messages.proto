@@ -691,10 +691,9 @@ message RegisterObjectForGCRequest {
 	dataclay.communication.grpc.common.ExecutionEnvironmentID backendID = 2;
 }
 
-message RegisterObjectRequest {
-	dataclay.communication.grpc.common.RegistrationInfo regInfo = 1;
+message RegisterObjectsRequest {
+	repeated string regInfos = 1;
 	dataclay.communication.grpc.common.ExecutionEnvironmentID backendID = 2;
-	string alias = 3;
 	dataclay.communication.grpc.common.Langs lang = 4;
 
 }
@@ -744,8 +743,8 @@ message GetObjectFromAliasResponse {
 	dataclay.communication.grpc.common.ExceptionInfo excInfo = 4;
 }
 
-message RegisterObjectResponse {
-	dataclay.communication.grpc.common.ObjectID objectID = 1;
+message RegisterObjectsResponse {
+	repeated dataclay.communication.grpc.common.ObjectID objectIDs = 1;
 	dataclay.communication.grpc.common.ExceptionInfo excInfo = 2;
 }
 
@@ -796,21 +795,6 @@ message NewVersionResponse {
 message ConsolidateVersionRequest {
 	dataclay.communication.grpc.common.SessionID sessionID = 1;
 	string versionInfoYaml = 2;
-}
-
-message NewReplicaRequest {
-	dataclay.communication.grpc.common.SessionID sessionID = 1;
-	dataclay.communication.grpc.common.ObjectID objectID = 2;
-	dataclay.communication.grpc.common.MetaClassID classID = 3;
-	dataclay.communication.grpc.common.ExecutionEnvironmentID hint = 4;
-	dataclay.communication.grpc.common.ExecutionEnvironmentID destBackendID = 5;
-	string destHostname = 6;
-	bool recursive = 7;
-}
-
-message NewReplicaResponse {
-	dataclay.communication.grpc.common.ExecutionEnvironmentID destBackendID = 1;
-	dataclay.communication.grpc.common.ExceptionInfo excInfo = 2;
 }
 
 message MoveObjectRequest {

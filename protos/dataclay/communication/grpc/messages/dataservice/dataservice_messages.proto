@@ -54,10 +54,6 @@ message StoreObjectsRequest {
 	repeated dataclay.communication.grpc.common.ObjectID idsWithAlias = 4;
 }
 
-message NewMetaDataRequest {
-	map<string, string> mdInfos = 1;
-}
-
 message GetCopyOfObjectRequest {
     dataclay.communication.grpc.common.SessionID sessionID = 1;
     dataclay.communication.grpc.common.ObjectID objectID = 2;
@@ -79,48 +75,18 @@ message GetObjectsRequest {
 	dataclay.communication.grpc.common.SessionID sessionID = 1;
 	repeated dataclay.communication.grpc.common.ObjectID objectIDS = 2;
 	bool recursive = 3;
-	bool moving = 4;
+	bool removeHints = 4;
+	bool getOnlyRefs = 5;
 }
 
 message GetObjectsResponse {
-	map<string, string> objects = 1;
-	dataclay.communication.grpc.common.ExceptionInfo excInfo = 2;
-}
-
-message GetFederatedObjectsRequest {
-	dataclay.communication.grpc.common.DataClayInstanceID extDataClayID = 1;
-	repeated dataclay.communication.grpc.common.ObjectID objectIDS = 2;
-}
-
-message GetFederatedObjectsResponse {
-	repeated dataclay.communication.grpc.common.ObjectWithDataParamOrReturn objects = 1;
-	dataclay.communication.grpc.common.ExceptionInfo excInfo = 2;
-}
-
-message FilterObjectRequest {
-	dataclay.communication.grpc.common.SessionID sessionID = 1;
-	dataclay.communication.grpc.common.ObjectID objectID = 2;
-	string conditions = 3;
-}
-
-message FilterObjectResponse {
-	dataclay.communication.grpc.common.SerializedParametersOrReturn ret = 1;
-	dataclay.communication.grpc.common.ExceptionInfo excInfo = 2;
-}
-
-message GetReferencedObjectIDsRequest {
-	dataclay.communication.grpc.common.SessionID sessionID = 1;
-	repeated dataclay.communication.grpc.common.ObjectID objectIDS = 2;
-}
-
-message GetReferencedObjectIDsResponse {
-	repeated dataclay.communication.grpc.common.ObjectID objectIDs = 1;
+	map<string, dataclay.communication.grpc.common.ObjectWithDataParamOrReturn> objects = 1;
 	dataclay.communication.grpc.common.ExceptionInfo excInfo = 2;
 }
 
 message MakePersistentRequest { 
 	dataclay.communication.grpc.common.SessionID sessionID = 1;
-	dataclay.communication.grpc.common.SerializedParametersOrReturn params = 2;
+	repeated dataclay.communication.grpc.common.ObjectWithDataParamOrReturn objects = 2;
 }
 
 message FederateRequest { 
@@ -176,12 +142,9 @@ message UpsertObjectsRequest {
 message NewReplicaRequest {
 	dataclay.communication.grpc.common.SessionID sessionID = 1;
 	dataclay.communication.grpc.common.ObjectID objectID = 2;
-	bool recursive = 3;
-}
-
-message NewReplicaResponse {
-	map<string, string> replicatedObjects = 1;
-	dataclay.communication.grpc.common.ExceptionInfo excInfo = 2;
+	dataclay.communication.grpc.common.ExecutionEnvironmentID destBackendID = 3;
+	bool registerMetaData = 4;
+	bool recursive = 5;
 }
 
 message MoveObjectsRequest {

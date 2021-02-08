@@ -99,14 +99,13 @@ service LogicModule {
 	rpc addAlias(AddAliasRequest) returns (dataclay.communication.grpc.common.ExceptionInfo) {}
 	rpc registerObjectFromGC(RegisterObjectForGCRequest) returns (dataclay.communication.grpc.common.ExceptionInfo) {}
 	rpc unregisterObjects(UnregisterObjectsRequest) returns (dataclay.communication.grpc.common.ExceptionInfo) {}
-	rpc registerObject(RegisterObjectRequest) returns (RegisterObjectResponse) {}
+	rpc registerObjects(RegisterObjectsRequest) returns (RegisterObjectsResponse) {}
 	rpc setDataSetIDFromGarbageCollector(SetDataSetIDFromGarbageCollectorRequest) returns (dataclay.communication.grpc.common.ExceptionInfo) {}
 	
 	// Storage Location
 	rpc setDataSetID(SetDataSetIDRequest) returns (dataclay.communication.grpc.common.ExceptionInfo) {}
 	rpc newVersion(NewVersionRequest) returns (NewVersionResponse) {}
 	rpc consolidateVersion(ConsolidateVersionRequest) returns (dataclay.communication.grpc.common.ExceptionInfo) {}
-	rpc newReplica(NewReplicaRequest) returns (NewReplicaResponse) {}
 	rpc moveObject(MoveObjectRequest) returns (MoveObjectResponse) {}
 	rpc setObjectReadOnly(SetObjectReadOnlyRequest) returns (dataclay.communication.grpc.common.ExceptionInfo) {}
 	rpc setObjectReadWrite(SetObjectReadWriteRequest) returns (dataclay.communication.grpc.common.ExceptionInfo) {}
