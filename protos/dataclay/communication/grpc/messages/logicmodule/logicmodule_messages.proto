@@ -9,13 +9,13 @@ message NewAccountNoAdminRequest {
 }
 
 message NewAccountRequest {
-	dataclay.communication.grpc.common.AccountID adminID = 1;
+	string adminID = 1;
 	dataclay.communication.grpc.common.Credential admincredential = 2;
 	string yamlNewAccount = 3;
 }
 
 message NewAccountResponse {
-	dataclay.communication.grpc.common.AccountID newAccountID = 1;
+	string newAccountID = 1;
 	dataclay.communication.grpc.common.ExceptionInfo excInfo = 2;
 }
 
@@ -29,12 +29,12 @@ message GetAccountIDRequest {
 }
 
 message GetAccountIDResponse {
-	dataclay.communication.grpc.common.AccountID newAccountID = 1;
+	string newAccountID = 1;
 	dataclay.communication.grpc.common.ExceptionInfo excInfo = 2;
 }
 
 message AutoRegisterSLRequest {
-	dataclay.communication.grpc.common.StorageLocationID storageLocationID = 1;
+	string storageLocationID = 1;
 	string dsName = 2;
 	string dsHostname = 3;
 	int32 dsPort = 4;
@@ -42,7 +42,7 @@ message AutoRegisterSLRequest {
 
 
 message AutoRegisterEERequest {
-	dataclay.communication.grpc.common.ExecutionEnvironmentID executionEnvironmentID = 1;
+	string executionEnvironmentID = 1;
 	string eeName = 2;
 	string eeHostname = 3;
 	int32 eePort = 4;
@@ -50,20 +50,20 @@ message AutoRegisterEERequest {
 }
 
 message AutoRegisterEEResponse {
-	dataclay.communication.grpc.common.StorageLocationID storageLocationID = 1;
+	string storageLocationID = 1;
 	dataclay.communication.grpc.common.ExceptionInfo excInfo = 2;
 }
 
 message UnregisterStorageLocationRequest {
-	dataclay.communication.grpc.common.StorageLocationID storageLocationID = 1;
+	string storageLocationID = 1;
 }
 
 message UnregisterExecutionEnvironmentRequest {
-	dataclay.communication.grpc.common.ExecutionEnvironmentID executionEnvironmentID = 1;
+	string executionEnvironmentID = 1;
 }
 
 message PerformSetAccountsRequest {
-	dataclay.communication.grpc.common.AccountID accountID = 1;
+	string accountID = 1;
 	dataclay.communication.grpc.common.Credential credential = 2;
 	string yaml = 3;
 }
@@ -74,7 +74,7 @@ message PerformSetAccountsResponse {
 }
 
 message PerformSetOperationsRequest {
-	dataclay.communication.grpc.common.AccountID accountID = 1;
+	string accountID = 1;
 	dataclay.communication.grpc.common.Credential credential = 2;
 	string yaml = 3;
 }
@@ -85,7 +85,7 @@ message PerformSetOperationsResponse {
 }
 
 message GetAccountListRequest {
-	dataclay.communication.grpc.common.AccountID adminID = 1;
+	string adminID = 1;
 	dataclay.communication.grpc.common.Credential admincredential = 2;
 }
 
@@ -95,11 +95,11 @@ message GetAccountListResponse {
 }
 
 message NewSessionRequest {
-	dataclay.communication.grpc.common.AccountID accountID = 1;
+	string accountID = 1;
 	dataclay.communication.grpc.common.Credential credential = 2;
-	repeated dataclay.communication.grpc.common.ContractID contractIDs = 3;
-	repeated dataclay.communication.grpc.common.DataSetID dataSetIDs = 4;
-	dataclay.communication.grpc.common.DataSetID storeDataSet = 5;
+	repeated string contractIDs = 3;
+	repeated string dataSetIDs = 4;
+	string storeDataSet = 5;
 	dataclay.communication.grpc.common.Langs sessionLang = 6;
 }
 
@@ -109,29 +109,29 @@ message NewSessionResponse {
 }
 
 message GetInfoOfSessionForDSRequest {
-	dataclay.communication.grpc.common.SessionID sessionID = 1;
+	string sessionID = 1;
 }
 
 message GetInfoOfSessionForDSResponse {
-	dataclay.communication.grpc.common.DataSetID dataSetID = 1;
+	string dataSetID = 1;
 	int64 date = 2;
-	repeated dataclay.communication.grpc.common.DataSetID dataSetIDs = 3;
+	repeated string dataSetIDs = 3;
 	dataclay.communication.grpc.common.ExceptionInfo excInfo = 4;
 }
 
 message NewNamespaceRequest {
-	dataclay.communication.grpc.common.AccountID accountID = 1;
+	string accountID = 1;
 	dataclay.communication.grpc.common.Credential credential = 2;
 	string newNamespaceYaml = 3;
 }
 
 message NewNamespaceResponse {
-	dataclay.communication.grpc.common.NamespaceID namespaceID = 1;
+	string namespaceID = 1;
 	dataclay.communication.grpc.common.ExceptionInfo excInfo = 2;
 }
 
 message GetNamespacesRequest {
-	dataclay.communication.grpc.common.AccountID accountID = 1;
+	string accountID = 1;
 	dataclay.communication.grpc.common.Credential credential = 2;
 }
 
@@ -141,24 +141,24 @@ message GetNamespacesResponse {
 }
 
 message RemoveNamespaceRequest {
-	dataclay.communication.grpc.common.AccountID accountID = 1;
+	string accountID = 1;
 	dataclay.communication.grpc.common.Credential credential = 2;
 	string namespaceName = 3;
 }
 
 message GetNamespaceIDRequest {
-	dataclay.communication.grpc.common.AccountID accountID = 1;
+	string accountID = 1;
 	dataclay.communication.grpc.common.Credential credential = 2;
 	string namespaceName = 3;
 }
 
 message GetNamespaceIDResponse {
-	dataclay.communication.grpc.common.NamespaceID namespaceID = 1;
+	string namespaceID = 1;
 	dataclay.communication.grpc.common.ExceptionInfo excInfo = 2;
 }
 
 message GetNamespaceLangRequest {
-	dataclay.communication.grpc.common.AccountID accountID = 1;
+	string accountID = 1;
 	dataclay.communication.grpc.common.Credential credential = 2;
 	string namespaceName = 3;
 }
@@ -169,61 +169,61 @@ message GetNamespaceLangResponse {
 }
 
 message GetObjectDataSetIDRequest {
-	dataclay.communication.grpc.common.SessionID sessionID = 1;
-	dataclay.communication.grpc.common.ObjectID objectID = 2;
+	string sessionID = 1;
+	string objectID = 2;
 }
 
 message GetObjectDataSetIDResponse {
-	dataclay.communication.grpc.common.DataSetID dataSetID = 1;
+	string dataSetID = 1;
 	dataclay.communication.grpc.common.ExceptionInfo excInfo = 2;
 }
 
 message ImportInterfaceRequest {
-	dataclay.communication.grpc.common.AccountID accountID = 1;
+	string accountID = 1;
 	dataclay.communication.grpc.common.Credential credential = 2;
-	dataclay.communication.grpc.common.NamespaceID namespaceID = 3;
-	dataclay.communication.grpc.common.ContractID contractID = 4;
-	dataclay.communication.grpc.common.InterfaceID interfaceID = 5;
+	string namespaceID = 3;
+	string contractID = 4;
+	string interfaceID = 5;
 }
 
 
 message ImportContractRequest {
-	dataclay.communication.grpc.common.AccountID accountID = 1;
+	string accountID = 1;
 	dataclay.communication.grpc.common.Credential credential = 2;
-	dataclay.communication.grpc.common.NamespaceID namespaceID = 3;
-	dataclay.communication.grpc.common.ContractID contractID = 4;
+	string namespaceID = 3;
+	string contractID = 4;
 }
 
 message NewDataSetRequest {
-	dataclay.communication.grpc.common.AccountID accountID = 1;
+	string accountID = 1;
 	dataclay.communication.grpc.common.Credential credential = 2;
 	string dataSetYaml = 3;
 }
 
 message NewDataSetResponse {
-	dataclay.communication.grpc.common.DataSetID dataSetID = 1;
+	string dataSetID = 1;
 	dataclay.communication.grpc.common.ExceptionInfo excInfo = 2;
 }
 
 message RemoveDataSetRequest {
-	dataclay.communication.grpc.common.AccountID accountID = 1;
+	string accountID = 1;
 	dataclay.communication.grpc.common.Credential credential = 2;
 	string dataSetName = 3;
 }
 
 message GetDataSetIDRequest {
-	dataclay.communication.grpc.common.AccountID accountID = 1;
+	string accountID = 1;
 	dataclay.communication.grpc.common.Credential credential = 2;
 	string dataSetName = 3;
 }
 
 message GetDataSetIDResponse {
-	dataclay.communication.grpc.common.DataSetID dataSetID = 1;
+	string dataSetID = 1;
 	dataclay.communication.grpc.common.ExceptionInfo excInfo = 2;
 }
 
 message GetPublicDataSetsRequest {
-	dataclay.communication.grpc.common.AccountID accountID = 1;
+	string accountID = 1;
 	dataclay.communication.grpc.common.Credential credential = 2;
 }
 
@@ -233,7 +233,7 @@ message GetPublicDataSetsResponse {
 }
 
 message GetAccountDataSetsRequest {
-	dataclay.communication.grpc.common.AccountID accountID = 1;
+	string accountID = 1;
 	dataclay.communication.grpc.common.Credential credential = 2;
 }
 
@@ -244,7 +244,7 @@ message GetAccountDataSetsResponse {
 
 
 message CheckDataSetIsPublicRequest {
-	dataclay.communication.grpc.common.DataSetID dataSetID = 1;
+	string dataSetID = 1;
 }
 
 message CheckDataSetIsPublicResponse {
@@ -253,7 +253,7 @@ message CheckDataSetIsPublicResponse {
 }
 
 message NewClassRequest {
-	dataclay.communication.grpc.common.AccountID accountID = 1;
+	string accountID = 1;
 	dataclay.communication.grpc.common.Credential credential = 2;
 	dataclay.communication.grpc.common.Langs language = 3;
 	map<string, string> newClasses = 4;
@@ -265,7 +265,7 @@ message NewClassResponse {
 }
 
 message NewClassIDRequest {
-	dataclay.communication.grpc.common.AccountID accountID = 1;
+	string accountID = 1;
 	dataclay.communication.grpc.common.Credential credential = 2;
 	dataclay.communication.grpc.common.Langs language = 3;
 	string className = 4;
@@ -274,75 +274,75 @@ message NewClassIDRequest {
 
 
 message NewClassIDResponse {
-	dataclay.communication.grpc.common.MetaClassID classID = 1;
+	string classID = 1;
 	dataclay.communication.grpc.common.ExceptionInfo excInfo = 2;
 }
 
 message RemoveClassRequest {
-	dataclay.communication.grpc.common.AccountID accountID = 1;
+	string accountID = 1;
 	dataclay.communication.grpc.common.Credential credential = 2;
-	dataclay.communication.grpc.common.NamespaceID namespaceID = 3;
+	string namespaceID = 3;
 	string className = 4;
 }
 
 message RemoveOperationRequest {
-	dataclay.communication.grpc.common.AccountID accountID = 1;
+	string accountID = 1;
 	dataclay.communication.grpc.common.Credential credential = 2;
-	dataclay.communication.grpc.common.NamespaceID namespaceID = 3;
+	string namespaceID = 3;
 	string className = 4;
 	string operationNameAndSignature = 5;
 }
 
 message RemoveImplementationRequest {
-	dataclay.communication.grpc.common.AccountID accountID = 1;
+	string accountID = 1;
 	dataclay.communication.grpc.common.Credential credential = 2;
-	dataclay.communication.grpc.common.NamespaceID namespaceID = 3;
+	string namespaceID = 3;
 	string className = 4;
-	dataclay.communication.grpc.common.ImplementationID implementationID = 5;
+	string implementationID = 5;
 }
 
 message GetOperationIDRequest {
-	dataclay.communication.grpc.common.AccountID accountID = 1;
+	string accountID = 1;
 	dataclay.communication.grpc.common.Credential credential = 2;
-	dataclay.communication.grpc.common.NamespaceID namespaceID = 3;
+	string namespaceID = 3;
 	string className = 4;
 	string operationNameAndSignature = 5;
 }
 
 message GetOperationIDResponse {
-	dataclay.communication.grpc.common.OperationID operationID = 1;
+	string operationID = 1;
 	dataclay.communication.grpc.common.ExceptionInfo excInfo = 2;
 }
 
 message GetPropertyIDRequest {
-	dataclay.communication.grpc.common.AccountID accountID = 1;
+	string accountID = 1;
 	dataclay.communication.grpc.common.Credential credential = 2;
-	dataclay.communication.grpc.common.NamespaceID namespaceID = 3;
+	string namespaceID = 3;
 	string className = 4;
 	string propertyName = 5;
 }
 
 message GetPropertyIDResponse {
-	dataclay.communication.grpc.common.PropertyID propertyID = 1;
+	string propertyID = 1;
 	dataclay.communication.grpc.common.ExceptionInfo excInfo = 2;
 }
 
 message GetClassIDRequest {
-	dataclay.communication.grpc.common.AccountID accountID = 1;
+	string accountID = 1;
 	dataclay.communication.grpc.common.Credential credential = 2;
-	dataclay.communication.grpc.common.NamespaceID namespaceID = 3;
+	string namespaceID = 3;
 	string className = 4;
 }
 
 message GetClassIDResponse {
-	dataclay.communication.grpc.common.MetaClassID classID = 1;
+	string classID = 1;
 	dataclay.communication.grpc.common.ExceptionInfo excInfo = 2;
 }
 
 message GetClassInfoRequest {
-	dataclay.communication.grpc.common.AccountID accountID = 1;
+	string accountID = 1;
 	dataclay.communication.grpc.common.Credential credential = 2;
-	dataclay.communication.grpc.common.NamespaceID namespaceID = 3;
+	string namespaceID = 3;
 	string className = 4;
 }
 
@@ -352,9 +352,9 @@ message GetClassInfoResponse {
 }
 
 message GetInfoOfClassesInNamespaceRequest {
-	dataclay.communication.grpc.common.AccountID accountID = 1;
+	string accountID = 1;
 	dataclay.communication.grpc.common.Credential credential = 2;
-	dataclay.communication.grpc.common.NamespaceID namespaceID = 3;
+	string namespaceID = 3;
 }
 
 message GetInfoOfClassesInNamespaceResponse {
@@ -363,9 +363,9 @@ message GetInfoOfClassesInNamespaceResponse {
 }
 
 message GetImportedClassesInfoInNamespaceRequest {
-	dataclay.communication.grpc.common.AccountID accountID = 1;
+	string accountID = 1;
 	dataclay.communication.grpc.common.Credential credential = 2;
-	dataclay.communication.grpc.common.NamespaceID namespaceID = 3;
+	string namespaceID = 3;
 }
 
 message GetImportedClassesInfoInNamespaceResponse {
@@ -374,47 +374,47 @@ message GetImportedClassesInfoInNamespaceResponse {
 }
 
 message GetClassIDFromImportRequest {
-	dataclay.communication.grpc.common.AccountID accountID = 1;
+	string accountID = 1;
 	dataclay.communication.grpc.common.Credential credential = 2;
-	dataclay.communication.grpc.common.NamespaceID namespaceID = 3;
+	string namespaceID = 3;
 	string className = 4;
 }
 
 message GetClassIDFromImportResponse {
-	dataclay.communication.grpc.common.MetaClassID classID = 1;
+	string classID = 1;
 	dataclay.communication.grpc.common.ExceptionInfo excInfo = 2;
 }
 
 message NewContractRequest {
-	dataclay.communication.grpc.common.AccountID accountID = 1;
+	string accountID = 1;
 	dataclay.communication.grpc.common.Credential credential = 2;
 	string newContractYaml = 3;
 }
 
 message NewContractResponse {
-	dataclay.communication.grpc.common.ContractID contractID = 1;
+	string contractID = 1;
 	dataclay.communication.grpc.common.ExceptionInfo excInfo = 2;
 }
 
 message RegisterToPublicContractRequest {
-	dataclay.communication.grpc.common.AccountID accountID = 1;
+	string accountID = 1;
 	dataclay.communication.grpc.common.Credential credential = 2;
-	dataclay.communication.grpc.common.ContractID contractID = 3;
+	string contractID = 3;
 }
 
 message RegisterToPublicContractOfNamespaceRequest {
-	dataclay.communication.grpc.common.AccountID accountID = 1;
+	string accountID = 1;
 	dataclay.communication.grpc.common.Credential credential = 2;
-	dataclay.communication.grpc.common.NamespaceID namespaceID = 3;
+	string namespaceID = 3;
 }
 
 message RegisterToPublicContractOfNamespaceResponse {
-	dataclay.communication.grpc.common.ContractID contractID = 1;
+	string contractID = 1;
 	dataclay.communication.grpc.common.ExceptionInfo excInfo = 2;
 }
 
 message GetContractIDsOfApplicantRequest {
-	dataclay.communication.grpc.common.AccountID applicantID = 1;
+	string applicantID = 1;
 	dataclay.communication.grpc.common.Credential credential = 2;
 }
 
@@ -424,9 +424,9 @@ message GetContractIDsOfApplicantResponse {
 }
 
 message GetContractIDsOfProviderRequest {
-	dataclay.communication.grpc.common.AccountID providerID = 1;
+	string providerID = 1;
 	dataclay.communication.grpc.common.Credential credential = 2;
-	dataclay.communication.grpc.common.NamespaceID namespaceIDOfProvider = 3;
+	string namespaceIDOfProvider = 3;
 }
 
 message GetContractIDsOfProviderResponse {
@@ -435,9 +435,9 @@ message GetContractIDsOfProviderResponse {
 }
 
 message GetContractsOfApplicantWithProvRequest {
-	dataclay.communication.grpc.common.AccountID applicantID = 1;
+	string applicantID = 1;
 	dataclay.communication.grpc.common.Credential credential = 2;
-	dataclay.communication.grpc.common.NamespaceID namespaceIDOfProvider = 3;
+	string namespaceIDOfProvider = 3;
 }
 
 message GetContractsOfApplicantWithProvResponse {
@@ -446,24 +446,24 @@ message GetContractsOfApplicantWithProvResponse {
 }
 
 message NewDataContractRequest {
-	dataclay.communication.grpc.common.AccountID accountID = 1;
+	string accountID = 1;
 	dataclay.communication.grpc.common.Credential credential = 2;
 	string dataContractYaml = 3;
 }
 
 message NewDataContractResponse {
-	dataclay.communication.grpc.common.DataContractID dataContractID = 1;
+	string dataContractID = 1;
 	dataclay.communication.grpc.common.ExceptionInfo excInfo = 2;
 }
 
 message RegisterToPublicDataContractRequest {
-	dataclay.communication.grpc.common.AccountID accountID = 1;
+	string accountID = 1;
 	dataclay.communication.grpc.common.Credential credential = 2;
-	dataclay.communication.grpc.common.DataContractID dataContractID = 3;
+	string dataContractID = 3;
 }
 
 message GetDataContractIDsOfApplicantRequest {
-	dataclay.communication.grpc.common.AccountID applicantID = 1;
+	string applicantID = 1;
 	dataclay.communication.grpc.common.Credential credential = 2;
 }
 
@@ -473,9 +473,9 @@ message GetDataContractIDsOfApplicantResponse {
 }
 
 message GetDataContractIDsOfProviderRequest {
-	dataclay.communication.grpc.common.AccountID providerID = 1;
+	string providerID = 1;
 	dataclay.communication.grpc.common.Credential credential = 2;
-	dataclay.communication.grpc.common.DataSetID dataSetIDOfProvider = 3;
+	string dataSetIDOfProvider = 3;
 }
 
 message GetDataContractIDsOfProviderResponse {
@@ -484,9 +484,9 @@ message GetDataContractIDsOfProviderResponse {
 }
 
 message GetDataContractInfoOfApplicantWithProvRequest {
-	dataclay.communication.grpc.common.AccountID applicantID = 1;
+	string applicantID = 1;
 	dataclay.communication.grpc.common.Credential credential = 2;
-	dataclay.communication.grpc.common.DataSetID dataSetIDOfProvider = 3;
+	string dataSetIDOfProvider = 3;
 }
 
 message GetDataContractInfoOfApplicantWithProvResponse {
@@ -495,20 +495,20 @@ message GetDataContractInfoOfApplicantWithProvResponse {
 }
 
 message NewInterfaceRequest {
-	dataclay.communication.grpc.common.AccountID applicantID = 1;
+	string applicantID = 1;
 	dataclay.communication.grpc.common.Credential credential = 2;
 	string interfaceYaml = 3;
 }
 
 message NewInterfaceResponse {
-	dataclay.communication.grpc.common.InterfaceID interfaceID = 1;
+	string interfaceID = 1;
 	dataclay.communication.grpc.common.ExceptionInfo excInfo = 2;
 }
 
 message GetInterfaceInfoRequest {
-	dataclay.communication.grpc.common.AccountID applicantID = 1;
+	string applicantID = 1;
 	dataclay.communication.grpc.common.Credential credential = 2;
-	dataclay.communication.grpc.common.InterfaceID interfaceID = 3;
+	string interfaceID = 3;
 }
 
 message GetInterfaceInfoResponse {
@@ -517,32 +517,32 @@ message GetInterfaceInfoResponse {
 }
 
 message RemoveInterfaceRequest {
-	dataclay.communication.grpc.common.AccountID applicantID = 1;
+	string applicantID = 1;
 	dataclay.communication.grpc.common.Credential credential = 2;
-	dataclay.communication.grpc.common.NamespaceID namespaceID = 3;
-	dataclay.communication.grpc.common.InterfaceID interfaceID = 4;
+	string namespaceID = 3;
+	string interfaceID = 4;
 }
 
-message GetStorageLocationForDSRequest {
-	dataclay.communication.grpc.common.StorageLocationID storageLocationID = 1;
+message GetStorageLocationInfoRequest {
+	string storageLocationID = 1;
 }
 
-message GetStorageLocationForDSResponse {
+message GetStorageLocationInfoResponse {
 	string storageLocationYaml = 1;
 	dataclay.communication.grpc.common.ExceptionInfo excInfo = 2;
 }
 
-message GetExecutionEnvironmentForDSRequest {
-	dataclay.communication.grpc.common.ExecutionEnvironmentID execEnvID = 1;
+message GetExecutionEnvironmentInfoRequest {
+	string execEnvID = 1;
 }
 
-message GetExecutionEnvironmentForDSResponse {
+message GetExecutionEnvironmentInfoResponse {
 	string execEnvYaml = 1;
 	dataclay.communication.grpc.common.ExceptionInfo excInfo = 2;
 }
 
 message GetDataClayIDResponse {
-	dataclay.communication.grpc.common.DataClayInstanceID dataClayID = 1;
+	string dataClayID = 1;
 	dataclay.communication.grpc.common.ExceptionInfo excInfo = 2;
 }
 
@@ -552,7 +552,7 @@ message RegisterExternalDataClayRequest {
 }
 
 message RegisterExternalDataClayOverrideAuthorityRequest {
-	dataclay.communication.grpc.common.AccountID adminAccountID = 1;
+	string adminAccountID = 1;
 	dataclay.communication.grpc.common.Credential adminCredential = 2;
 	string hostname = 3;
 	int32 port = 4;
@@ -560,18 +560,18 @@ message RegisterExternalDataClayOverrideAuthorityRequest {
 }
 
 message RegisterExternalDataClayResponse {
-	dataclay.communication.grpc.common.DataClayInstanceID extDataClayID = 1;
+	string extDataClayID = 1;
 	dataclay.communication.grpc.common.ExceptionInfo excInfo = 2;
 }
 
 message NotifyRegistrationOfExternalDataClayRequest { 
-	dataclay.communication.grpc.common.DataClayInstanceID extDataClayID = 1;
+	string extDataClayID = 1;
 	string hostname = 2;
 	int32 port = 3;
 }
 
 message NotifyRegistrationOfExternalDataClayResponse {
-	dataclay.communication.grpc.common.DataClayInstanceID extDataClayID = 1;
+	string extDataClayID = 1;
 	dataclay.communication.grpc.common.ExceptionInfo excInfo = 2;
 }
 
@@ -582,12 +582,12 @@ message GetExternalDataclayIDRequest {
 }
 
 message GetExternalDataclayIDResponse {
-	dataclay.communication.grpc.common.DataClayInstanceID extDataClayID = 1;
+	string extDataClayID = 1;
 	dataclay.communication.grpc.common.ExceptionInfo excInfo = 2;
 }
 
 message GetExtDataClayInfoRequest {
-	dataclay.communication.grpc.common.DataClayInstanceID extDataClayID = 1;
+	string extDataClayID = 1;
 }
 
 message GetExtDataClayInfoResponse {
@@ -596,48 +596,48 @@ message GetExtDataClayInfoResponse {
 }
 
 message FederateObjectRequest {
-	dataclay.communication.grpc.common.SessionID sessionID = 1;
-	dataclay.communication.grpc.common.ObjectID objectID = 2;
-	dataclay.communication.grpc.common.DataClayInstanceID extDataClayID = 3;
+	string sessionID = 1;
+	string objectID = 2;
+	string extDataClayID = 3;
 	bool recursive = 4;
 }
 
 message UnfederateObjectRequest {
-	dataclay.communication.grpc.common.SessionID sessionID = 1;
-	dataclay.communication.grpc.common.ObjectID objectID = 2;
-	dataclay.communication.grpc.common.DataClayInstanceID extDataClayID = 3;
+	string sessionID = 1;
+	string objectID = 2;
+	string extDataClayID = 3;
 	bool recursive = 4;
 }
 
 message UnfederateObjectWithAllDCsRequest { 
-	dataclay.communication.grpc.common.SessionID sessionID = 1;
-	dataclay.communication.grpc.common.ObjectID objectID = 2;
+	string sessionID = 1;
+	string objectID = 2;
 	bool recursive = 3;
 }
 
 message MigrateFederatedObjectsRequest { 
-	dataclay.communication.grpc.common.SessionID sessionID = 1;
-	dataclay.communication.grpc.common.DataClayInstanceID externalOriginDataClayID = 2;
-	dataclay.communication.grpc.common.DataClayInstanceID externalDestinationDataClayID = 3;
+	string sessionID = 1;
+	string externalOriginDataClayID = 2;
+	string externalDestinationDataClayID = 3;
 }
 
 message FederateAllObjectsRequest { 
-	dataclay.communication.grpc.common.SessionID sessionID = 1;
-	dataclay.communication.grpc.common.DataClayInstanceID externalDestinationDataClayID = 3;
+	string sessionID = 1;
+	string externalDestinationDataClayID = 3;
 }
 
 message UnfederateAllObjectsRequest { 
-	dataclay.communication.grpc.common.SessionID sessionID = 1;
-	dataclay.communication.grpc.common.DataClayInstanceID extDataClayID = 2;
+	string sessionID = 1;
+	string extDataClayID = 2;
 }
 
 
 message UnfederateAllObjectsWithAllDCsRequest { 
-	dataclay.communication.grpc.common.SessionID sessionID = 1;
+	string sessionID = 1;
 }
 
 message NotifyFederatedObjectsRequest {
-	dataclay.communication.grpc.common.DataClayInstanceID srcDcID = 1;
+	string srcDcID = 1;
 	string srcDcHost = 2;
 	int32 srcDcPort = 3;
 	map<string, string> objectsInfo = 4;
@@ -645,13 +645,13 @@ message NotifyFederatedObjectsRequest {
 }
 
 message NotifyUnfederatedObjectsRequest {
-	dataclay.communication.grpc.common.DataClayInstanceID srcDcID = 1;
-	repeated dataclay.communication.grpc.common.ObjectID objectsIDs = 2;
+	string srcDcID = 1;
+	repeated string objectsIDs = 2;
 }
 
 message CheckObjectFederatedWithDataClayInstanceRequest {
-	dataclay.communication.grpc.common.ObjectID objectID = 1;
-	dataclay.communication.grpc.common.DataClayInstanceID extDataClayID = 2;
+	string objectID = 1;
+	string extDataClayID = 2;
 }
 
 message CheckObjectFederatedWithDataClayInstanceResponse {
@@ -660,7 +660,7 @@ message CheckObjectFederatedWithDataClayInstanceResponse {
 }
 
 message CheckObjectFederatedRequest {
-	dataclay.communication.grpc.common.ObjectID objectID = 1;
+	string objectID = 1;
 }
 
 message CheckObjectFederatedResponse {
@@ -669,61 +669,48 @@ message CheckObjectFederatedResponse {
 }
 
 message GetDataClaysObjectIsFederatedWithRequest {
-	dataclay.communication.grpc.common.ObjectID objectID = 1;
+	string objectID = 1;
 }
 
 message GetDataClaysObjectIsFederatedWithResponse {
-	repeated dataclay.communication.grpc.common.DataClayInstanceID extDataClayIDs = 1;
+	repeated string extDataClayIDs = 1;
 	dataclay.communication.grpc.common.ExceptionInfo excInfo = 2;
 }
 
 message GetExternalSourceDataClayOfObjectRequest {
-	dataclay.communication.grpc.common.ObjectID objectID = 1;
+	string objectID = 1;
 }
 
 message GetExternalSourceDataClayOfObjectResponse {
-	dataclay.communication.grpc.common.DataClayInstanceID extDataClayID = 1;
+	string extDataClayID = 1;
 	dataclay.communication.grpc.common.ExceptionInfo excInfo = 2;
 }
 	
 message RegisterObjectForGCRequest {
 	dataclay.communication.grpc.common.RegistrationInfo regInfo = 1;
-	dataclay.communication.grpc.common.ExecutionEnvironmentID backendID = 2;
+	string backendID = 2;
 }
 
 message RegisterObjectRequest {
 	dataclay.communication.grpc.common.RegistrationInfo regInfo = 1;
-	dataclay.communication.grpc.common.ExecutionEnvironmentID backendID = 2;
+	string backendID = 2;
 	string alias = 3;
 	dataclay.communication.grpc.common.Langs lang = 4;
 
 }
 
-message GetExecutionEnvironmentsInfoRequest {
-	dataclay.communication.grpc.common.SessionID sessionID = 1;
-	dataclay.communication.grpc.common.Langs execEnvLang = 2;
-	bool fromClient = 3;
+message GetAllExecutionEnvironmentsInfoRequest {
+	dataclay.communication.grpc.common.Langs execEnvLang = 1;
 }
 
-message GetExecutionEnvironmentsInfoResponse {
+message GetAllExecutionEnvironmentsInfoResponse {
 	map<string, string> execEnvs = 1;
 	dataclay.communication.grpc.common.ExceptionInfo excInfo = 2;
 }
 
-message GetExecutionEnvironmentsNamesRequest {
-	dataclay.communication.grpc.common.AccountID accountID = 1;
-	dataclay.communication.grpc.common.Credential credential = 2;
-	dataclay.communication.grpc.common.Langs execEnvLang = 3;
-}
-
-message GetExecutionEnvironmentsNamesResponse {
-	repeated string execEnvs = 1;
-	dataclay.communication.grpc.common.ExceptionInfo excInfo = 2;
-}
-
 message GetObjectInfoRequest {
-	dataclay.communication.grpc.common.SessionID sessionID = 1;
-	dataclay.communication.grpc.common.ObjectID objectID = 2;
+	string sessionID = 1;
+	string objectID = 2;
 }
 
 message GetObjectInfoResponse {
@@ -733,34 +720,34 @@ message GetObjectInfoResponse {
 }
 
 message GetObjectFromAliasRequest {
-	dataclay.communication.grpc.common.SessionID sessionID = 1;
+	string sessionID = 1;
 	string alias = 2;
 }
 
 message GetObjectFromAliasResponse {
-	dataclay.communication.grpc.common.ObjectID objectID = 1;
-	dataclay.communication.grpc.common.MetaClassID classID = 2;
-	dataclay.communication.grpc.common.ExecutionEnvironmentID hint = 3;
+	string objectID = 1;
+	string classID = 2;
+	string hint = 3;
 	dataclay.communication.grpc.common.ExceptionInfo excInfo = 4;
 }
 
 message RegisterObjectResponse {
-	dataclay.communication.grpc.common.ObjectID objectID = 1;
+	string objectID = 1;
 	dataclay.communication.grpc.common.ExceptionInfo excInfo = 2;
 }
 
 message AddAliasRequest{
-	dataclay.communication.grpc.common.ObjectID objectIDToHaveAlias = 1;
+	string objectIDToHaveAlias = 1;
 	string alias = 2;
 }
 
 message DeleteAliasRequest {
-	dataclay.communication.grpc.common.SessionID sessionID = 1;
+	string sessionID = 1;
 	string alias = 2;
 }
 
 message GetObjectsMetaDataInfoOfClassForNMRequest {
-	dataclay.communication.grpc.common.MetaClassID classID = 1;
+	string classID = 1;
 }
 
 message GetObjectsMetaDataInfoOfClassForNMResponse {
@@ -769,22 +756,22 @@ message GetObjectsMetaDataInfoOfClassForNMResponse {
 }
 
 message SetDataSetIDRequest { 
-	dataclay.communication.grpc.common.SessionID sessionID = 1;
-	dataclay.communication.grpc.common.ObjectID objectID = 2;
-	dataclay.communication.grpc.common.DataSetID datasetID = 3;
+	string sessionID = 1;
+	string objectID = 2;
+	string datasetID = 3;
 }
 
 message SetDataSetIDFromGarbageCollectorRequest { 
-	dataclay.communication.grpc.common.ObjectID objectID = 1;
-	dataclay.communication.grpc.common.DataSetID datasetID = 2;
+	string objectID = 1;
+	string datasetID = 2;
 }
 
 message NewVersionRequest {
-	dataclay.communication.grpc.common.SessionID sessionID = 1;
-	dataclay.communication.grpc.common.ObjectID objectID = 2;
-	dataclay.communication.grpc.common.MetaClassID classID = 3;
-	dataclay.communication.grpc.common.ExecutionEnvironmentID hint = 4;
-	dataclay.communication.grpc.common.ExecutionEnvironmentID optDestBackendID = 5;
+	string sessionID = 1;
+	string objectID = 2;
+	string classID = 3;
+	string hint = 4;
+	string optDestBackendID = 5;
 }
 
 message NewVersionResponse {
@@ -793,50 +780,50 @@ message NewVersionResponse {
 }
 
 message ConsolidateVersionRequest {
-	dataclay.communication.grpc.common.SessionID sessionID = 1;
+	string sessionID = 1;
 	string versionInfoYaml = 2;
 }
 
 message NewReplicaRequest {
-	dataclay.communication.grpc.common.SessionID sessionID = 1;
-	dataclay.communication.grpc.common.ObjectID objectID = 2;
-	dataclay.communication.grpc.common.MetaClassID classID = 3;
-	dataclay.communication.grpc.common.ExecutionEnvironmentID hint = 4;
-	dataclay.communication.grpc.common.ExecutionEnvironmentID destBackendID = 5;
+	string sessionID = 1;
+	string objectID = 2;
+	string classID = 3;
+	string hint = 4;
+	string destBackendID = 5;
 	bool recursive = 6;
 }
 
 message NewReplicaResponse {
-	dataclay.communication.grpc.common.ExecutionEnvironmentID destBackendID = 1;
+	string destBackendID = 1;
 	dataclay.communication.grpc.common.ExceptionInfo excInfo = 2;
 }
 
 message MoveObjectRequest {
-	dataclay.communication.grpc.common.SessionID sessionID = 1;
-	dataclay.communication.grpc.common.ObjectID objectID = 2;
-	dataclay.communication.grpc.common.ExecutionEnvironmentID srcBackendID = 3;
-	dataclay.communication.grpc.common.ExecutionEnvironmentID destBackendID = 4;
+	string sessionID = 1;
+	string objectID = 2;
+	string srcBackendID = 3;
+	string destBackendID = 4;
 	bool recursive = 5;
 }
 
 message MoveObjectResponse {
-	repeated dataclay.communication.grpc.common.ObjectID objectIDs = 1;
+	repeated string objectIDs = 1;
 	dataclay.communication.grpc.common.ExceptionInfo excInfo = 2;
 }
 
 message SetObjectReadOnlyRequest {
-	dataclay.communication.grpc.common.SessionID sessionID = 1;
-	dataclay.communication.grpc.common.ObjectID objectID = 2;
+	string sessionID = 1;
+	string objectID = 2;
 }
 
 message SetObjectReadWriteRequest {
-	dataclay.communication.grpc.common.SessionID sessionID = 1;
-	dataclay.communication.grpc.common.ObjectID objectID = 2;
+	string sessionID = 1;
+	string objectID = 2;
 }
 
 message GetMetadataByOIDRequest {
-	dataclay.communication.grpc.common.SessionID sessionID = 1;
-	dataclay.communication.grpc.common.ObjectID objectID = 2;
+	string sessionID = 1;
+	string objectID = 2;
 }
 
 message GetMetadataByOIDResponse {
@@ -845,7 +832,7 @@ message GetMetadataByOIDResponse {
 }
 
 message GetMetadataByOIDForDSRequest {
-	dataclay.communication.grpc.common.ObjectID objectID = 1;
+	string objectID = 1;
 }
 
 message GetMetadataByOIDForDSResponse {
@@ -854,12 +841,12 @@ message GetMetadataByOIDForDSResponse {
 }
 
 message ExecuteImplementationRequest {
-	dataclay.communication.grpc.common.SessionID sessionID = 1;
-	dataclay.communication.grpc.common.OperationID operationID = 2;
-	dataclay.communication.grpc.common.ImplementationID implementationID = 3;
-	dataclay.communication.grpc.common.ContractID contractID = 4;
-	dataclay.communication.grpc.common.InterfaceID interfaceID = 5;
-	dataclay.communication.grpc.common.ObjectID objectID = 6;
+	string sessionID = 1;
+	string operationID = 2;
+	string implementationID = 3;
+	string contractID = 4;
+	string interfaceID = 5;
+	string objectID = 6;
 	dataclay.communication.grpc.common.SerializedParametersOrReturn params = 7;
 }
 
@@ -869,11 +856,11 @@ message ExecuteImplementationResponse {
 }
 
 message ExecuteMethodOnTargetRequest {
-	dataclay.communication.grpc.common.SessionID sessionID = 1;
-	dataclay.communication.grpc.common.ObjectID objectID = 2;
+	string sessionID = 1;
+	string objectID = 2;
 	string operationNameAndSignature = 3;
 	dataclay.communication.grpc.common.SerializedParametersOrReturn params = 4;
-	dataclay.communication.grpc.common.ExecutionEnvironmentID targetBackendID = 5;
+	string targetBackendID = 5;
 }
 
 message ExecuteMethodOnTargetResponse {
@@ -882,18 +869,18 @@ message ExecuteMethodOnTargetResponse {
 }
 
 message SynchronizeFederatedObjectRequest {
-	dataclay.communication.grpc.common.DataClayInstanceID extDataClayID = 1;
-	dataclay.communication.grpc.common.ObjectID objectID = 2;
-	dataclay.communication.grpc.common.ImplementationID implementationID = 3;
+	string extDataClayID = 1;
+	string objectID = 2;
+	string implementationID = 3;
 	dataclay.communication.grpc.common.SerializedParametersOrReturn params = 4;
 	bool allBackends = 5;
 }
 
 message GetStubsRequest {
-	dataclay.communication.grpc.common.AccountID applicantAccountID = 1;
+	string applicantAccountID = 1;
 	dataclay.communication.grpc.common.Credential credentials = 2;
 	dataclay.communication.grpc.common.Langs language = 3;
-	repeated dataclay.communication.grpc.common.ContractID contractIDs = 4;
+	repeated string contractIDs = 4;
 }
 
 message GetStubsResponse {
@@ -902,9 +889,9 @@ message GetStubsResponse {
 }
 
 message GetBabelStubsRequest {
-	dataclay.communication.grpc.common.AccountID accountID = 1;
+	string accountID = 1;
 	dataclay.communication.grpc.common.Credential credentials = 2;
-	repeated dataclay.communication.grpc.common.ContractID contractIDs = 4;
+	repeated string contractIDs = 4;
 }
 
 message GetBabelStubsResponse {
@@ -913,7 +900,7 @@ message GetBabelStubsResponse {
 }
 
 message GetClassNameForDSRequest {
-	dataclay.communication.grpc.common.MetaClassID classID = 1;
+	string classID = 1;
 }
 
 message GetClassNameForDSResponse {
@@ -922,7 +909,7 @@ message GetClassNameForDSResponse {
 }
 
 message GetClassNameAndNamespaceForDSRequest {
-	dataclay.communication.grpc.common.MetaClassID classID = 1;
+	string classID = 1;
 }
 
 message GetClassNameAndNamespaceForDSResponse {
@@ -932,7 +919,7 @@ message GetClassNameAndNamespaceForDSResponse {
 }
 
 message RegisterECARequest {
-	dataclay.communication.grpc.common.AccountID applicantAccountID = 1;
+	string applicantAccountID = 1;
 	dataclay.communication.grpc.common.Credential credentials = 2;
 	string eca = 3;
 }
@@ -942,12 +929,12 @@ message AdviseEventRequest {
 }
 
 message GetContractIDOfDataClayProviderRequest {
-	dataclay.communication.grpc.common.AccountID applicantAccountID = 1;
+	string applicantAccountID = 1;
 	dataclay.communication.grpc.common.Credential credentials = 2;
 }
 
 message GetContractIDOfDataClayProviderResponse {
-	dataclay.communication.grpc.common.ContractID contractID = 1;
+	string contractID = 1;
 	dataclay.communication.grpc.common.ExceptionInfo excInfo = 2;
 }
 
@@ -956,11 +943,11 @@ message ActivateTracingRequest {
 }
 
 message CloseSessionRequest {
-	dataclay.communication.grpc.common.SessionID sessionID = 1;
+	string sessionID = 1;
 }
 
 message UnregisterObjectsRequest { 
-	repeated dataclay.communication.grpc.common.ObjectID objectsToUnregister = 1;
+	repeated string objectsToUnregister = 1;
 	
 }
 
@@ -970,7 +957,7 @@ message IsPrefetchingEnabledResponse {
 }
 
 message ObjectExistsInDataClayRequest { 
-	dataclay.communication.grpc.common.ObjectID objectID = 1;
+	string objectID = 1;
 }
 
 message ObjectExistsInDataClayResponse { 
@@ -990,7 +977,7 @@ message GetClassesInNamespaceResponse {
 
 message ImportModelsFromExternalDataClayRequest {
 	string namespaceName = 1;
-	dataclay.communication.grpc.common.DataClayInstanceID dataClayID = 2;
+	string dataClayID = 2;
 }
 
 message GetStorageLocationIDRequest {
@@ -998,23 +985,33 @@ message GetStorageLocationIDRequest {
 }
 
 message GetStorageLocationIDResponse {
-	dataclay.communication.grpc.common.StorageLocationID storageLocationID = 1;
+	string storageLocationID = 1;
 	dataclay.communication.grpc.common.ExceptionInfo excInfo = 2;
 }
 
 message NotifyExecutionEnvironmentShutdownRequest {
-	dataclay.communication.grpc.common.ExecutionEnvironmentID executionEnvironmentID = 1;
+	string executionEnvironmentID = 1;
 }
 
 message NotifyStorageLocationShutdownRequest {
-	dataclay.communication.grpc.common.StorageLocationID storageLocationID = 1;
+	string storageLocationID = 1;
 }
 
 message ExistsActiveEnvironmentsForSLRequest {
-	dataclay.communication.grpc.common.StorageLocationID storageLocationID = 1;
+	string storageLocationID = 1;
 }
 
 message ExistsActiveEnvironmentsForSLResponse {
 	bool exists = 1;
 	dataclay.communication.grpc.common.ExceptionInfo excInfo = 2;
+}
+
+message MetadataInfo {
+	string dataClayID = 1;
+	bool isReadOnly = 2;
+	string datasetID = 3;
+	string metaclassID = 4;
+	repeated string locations = 5;
+	string alias = 6;
+	string ownerID = 7;
 }

@@ -9,7 +9,6 @@ service LogicModule {
 
 	rpc autoregisterSL(AutoRegisterSLRequest) returns (dataclay.communication.grpc.common.ExceptionInfo) {}
 	rpc autoregisterEE(AutoRegisterEERequest) returns (AutoRegisterEEResponse) {}
-	rpc getStorageLocationID(GetStorageLocationIDRequest) returns (GetStorageLocationIDResponse) {}
 	rpc unregisterStorageLocation(UnregisterStorageLocationRequest) returns (dataclay.communication.grpc.common.ExceptionInfo) {}
 	rpc unregisterExecutionEnvironment(UnregisterExecutionEnvironmentRequest) returns (dataclay.communication.grpc.common.ExceptionInfo) {}
 	rpc checkAlive(communication.grpc.common.EmptyMessage) returns (dataclay.communication.grpc.common.ExceptionInfo) {}
@@ -85,12 +84,11 @@ service LogicModule {
 	rpc removeInterface(RemoveInterfaceRequest) returns (communication.grpc.common.ExceptionInfo) {}
 
 	// EE-SL information
-	rpc getExecutionEnvironmentsInfo(GetExecutionEnvironmentsInfoRequest) returns (GetExecutionEnvironmentsInfoResponse) {}
-	rpc getExecutionEnvironmentsNames(GetExecutionEnvironmentsNamesRequest) returns (GetExecutionEnvironmentsNamesResponse) {}
-	// TODO: modify next functions also called from Python to more scalable information
-	rpc getExecutionEnvironmentForDS(GetExecutionEnvironmentForDSRequest) returns (GetExecutionEnvironmentForDSResponse) {}
-	rpc getStorageLocationForDS(GetStorageLocationForDSRequest) returns (GetStorageLocationForDSResponse) {}
-	
+	rpc getAllExecutionEnvironmentsInfo(GetAllExecutionEnvironmentsInfoRequest) returns (GetAllExecutionEnvironmentsInfoResponse) {}
+	rpc getStorageLocationID(GetStorageLocationIDRequest) returns (GetStorageLocationIDResponse) {}
+	rpc getStorageLocationInfo(GetStorageLocationInfoRequest) returns (GetStorageLocationInfoResponse) {}
+	rpc getExecutionEnvironmentInfo(GetStorageLocationInfoRequest) returns (GetStorageLocationInfoResponse) {}
+
 	// Object Metadata
 	rpc getObjectInfo(GetObjectInfoRequest) returns (GetObjectInfoResponse) {}
 	rpc getObjectFromAlias(GetObjectFromAliasRequest) returns (GetObjectFromAliasResponse) {}
