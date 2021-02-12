@@ -22,7 +22,6 @@ service DataService {
 	rpc updateObject(UpdateObjectRequest) returns (dataclay.communication.grpc.common.ExceptionInfo) {}
 	rpc getObjects(GetObjectsRequest) returns (GetObjectsResponse) {}
 	
-	rpc newMetaData(NewMetaDataRequest) returns (dataclay.communication.grpc.common.ExceptionInfo) {}
 	rpc newVersion(NewVersionRequest) returns (NewVersionResponse) {}
 	rpc consolidateVersion(ConsolidateVersionRequest) returns (dataclay.communication.grpc.common.ExceptionInfo) {}
 	rpc upsertObjects(UpsertObjectsRequest) returns (dataclay.communication.grpc.common.ExceptionInfo) {}
@@ -36,14 +35,7 @@ service DataService {
 	rpc federate(FederateRequest) returns (dataclay.communication.grpc.common.ExceptionInfo) {}
 	rpc unfederate(UnfederateRequest) returns (dataclay.communication.grpc.common.ExceptionInfo) {}
 	rpc exists(ExistsRequest) returns (ExistsResponse) {}
-	
-	// Federation
-	rpc getFederatedObjects(GetFederatedObjectsRequest) returns (GetFederatedObjectsResponse) {}
-	rpc getReferencedObjectsIDs(GetReferencedObjectIDsRequest) returns (GetReferencedObjectIDsResponse) {}
-	
-	// Filtering
-	rpc filterObject(FilterObjectRequest) returns (FilterObjectResponse) {}
-	
+
 	// Storage Location
 	rpc storeToDB(StoreToDBRequest) returns (dataclay.communication.grpc.common.ExceptionInfo) {}
 	rpc getFromDB(GetFromDBRequest) returns (GetFromDBResponse){}

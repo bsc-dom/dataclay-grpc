@@ -54,10 +54,6 @@ message StoreObjectsRequest {
 	repeated string idsWithAlias = 4;
 }
 
-message NewMetaDataRequest {
-	map<string, string> mdInfos = 1;
-}
-
 message GetCopyOfObjectRequest {
     string sessionID = 1;
     string objectID = 2;
@@ -79,53 +75,23 @@ message GetObjectsRequest {
 	string sessionID = 1;
 	repeated string objectIDS = 2;
 	bool recursive = 3;
-	bool moving = 4;
+	bool removeHints = 4;
+	bool getOnlyRefs = 5;
 }
 
 message GetObjectsResponse {
-	map<string, string> objects = 1;
-	dataclay.communication.grpc.common.ExceptionInfo excInfo = 2;
-}
-
-message GetFederatedObjectsRequest {
-	string extDataClayID = 1;
-	repeated string objectIDS = 2;
-}
-
-message GetFederatedObjectsResponse {
-	repeated dataclay.communication.grpc.common.ObjectWithDataParamOrReturn objects = 1;
-	dataclay.communication.grpc.common.ExceptionInfo excInfo = 2;
-}
-
-message FilterObjectRequest {
-	string sessionID = 1;
-	string objectID = 2;
-	string conditions = 3;
-}
-
-message FilterObjectResponse {
-	dataclay.communication.grpc.common.SerializedParametersOrReturn ret = 1;
-	dataclay.communication.grpc.common.ExceptionInfo excInfo = 2;
-}
-
-message GetReferencedObjectIDsRequest {
-	string sessionID = 1;
-	repeated string objectIDS = 2;
-}
-
-message GetReferencedObjectIDsResponse {
-	repeated string objectIDs = 1;
+	map<string, dataclay.communication.grpc.common.ObjectWithDataParamOrReturn> objects = 1;
 	dataclay.communication.grpc.common.ExceptionInfo excInfo = 2;
 }
 
 message MakePersistentRequest { 
 	string sessionID = 1;
-	dataclay.communication.grpc.common.SerializedParametersOrReturn params = 2;
+	repeated dataclay.communication.grpc.common.ObjectWithDataParamOrReturn objects = 2;
 }
 
 message FederateRequest { 
 	string sessionID = 1;
-	dataclay.communication.grpc.common.SerializedParametersOrReturn params = 2;
+	repeated dataclay.communication.grpc.common.ObjectWithDataParamOrReturn objects = 2;
 }
 
 message UnfederateRequest { 
@@ -144,11 +110,6 @@ message ExecuteImplementationRequest {
 message ExecuteImplementationResponse {
 	dataclay.communication.grpc.common.SerializedParametersOrReturn ret = 1;
 	dataclay.communication.grpc.common.ExceptionInfo excInfo = 2;
-}
-
-message SetNotVolatileRequest {
-	string objectID = 1;
-	string storaDataSet = 2;
 }
 
 message NewVersionRequest {
@@ -176,7 +137,8 @@ message UpsertObjectsRequest {
 message NewReplicaRequest {
 	string sessionID = 1;
 	string objectID = 2;
-	bool recursive = 3;
+	string destBackendID = 3;
+	bool recursive = 4;
 }
 
 message NewReplicaResponse {
@@ -202,10 +164,6 @@ message RemoveObjectsRequest {
 	bool recursive = 3;
 	bool moving = 4;
 	string newHint = 5;
-}
-
-message JumpMapThreadMsg {
-	map<int64, string> jumpMapThread = 1;
 }
 
 message RemoveObjectsResponse {

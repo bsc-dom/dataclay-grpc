@@ -87,7 +87,7 @@ service LogicModule {
 	rpc getAllExecutionEnvironmentsInfo(GetAllExecutionEnvironmentsInfoRequest) returns (GetAllExecutionEnvironmentsInfoResponse) {}
 	rpc getStorageLocationID(GetStorageLocationIDRequest) returns (GetStorageLocationIDResponse) {}
 	rpc getStorageLocationInfo(GetStorageLocationInfoRequest) returns (GetStorageLocationInfoResponse) {}
-	rpc getExecutionEnvironmentInfo(GetStorageLocationInfoRequest) returns (GetStorageLocationInfoResponse) {}
+	rpc getExecutionEnvironmentInfo(GetStorageLocationInfoRequest) returns (GetExecutionEnvironmentInfoResponse) {}
 
 	// Object Metadata
 	rpc getObjectInfo(GetObjectInfoRequest) returns (GetObjectInfoResponse) {}
