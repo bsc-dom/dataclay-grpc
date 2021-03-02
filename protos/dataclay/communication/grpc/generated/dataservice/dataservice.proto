@@ -34,7 +34,11 @@ service DataService {
 	rpc makePersistent(MakePersistentRequest) returns (dataclay.communication.grpc.common.ExceptionInfo) {}
 	rpc federate(FederateRequest) returns (dataclay.communication.grpc.common.ExceptionInfo) {}
 	rpc unfederate(UnfederateRequest) returns (dataclay.communication.grpc.common.ExceptionInfo) {}
+
+	rpc notifyFederation(NotifyFederationRequest) returns (dataclay.communication.grpc.common.ExceptionInfo) {}
+	rpc notifyUnfederation(NotifyUnfederationRequest) returns (dataclay.communication.grpc.common.ExceptionInfo) {}
 	rpc exists(ExistsRequest) returns (ExistsResponse) {}
+	rpc synchronize(SynchronizeRequest) returns (dataclay.communication.grpc.common.ExceptionInfo) {}
 
 	// Storage Location
 	rpc storeToDB(StoreToDBRequest) returns (dataclay.communication.grpc.common.ExceptionInfo) {}

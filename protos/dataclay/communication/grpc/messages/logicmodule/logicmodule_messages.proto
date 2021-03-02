@@ -264,20 +264,6 @@ message NewClassResponse {
 	dataclay.communication.grpc.common.ExceptionInfo excInfo = 2;
 }
 
-message NewClassIDRequest {
-	string accountID = 1;
-	dataclay.communication.grpc.common.Credential credential = 2;
-	dataclay.communication.grpc.common.Langs language = 3;
-	string className = 4;
-	map<string, string> newClasses = 5;
-}
-
-
-message NewClassIDResponse {
-	string classID = 1;
-	dataclay.communication.grpc.common.ExceptionInfo excInfo = 2;
-}
-
 message RemoveClassRequest {
 	string accountID = 1;
 	dataclay.communication.grpc.common.Credential credential = 2;
@@ -528,7 +514,7 @@ message GetStorageLocationInfoRequest {
 }
 
 message GetStorageLocationInfoResponse {
-	string storageLocationYaml = 1;
+	dataclay.communication.grpc.common.StorageLocationInfo storageLocationInfo = 1;
 	dataclay.communication.grpc.common.ExceptionInfo excInfo = 2;
 }
 
@@ -537,7 +523,7 @@ message GetExecutionEnvironmentInfoRequest {
 }
 
 message GetExecutionEnvironmentInfoResponse {
-	string execEnvYaml = 1;
+	dataclay.communication.grpc.common.ExecutionEnvironmentInfo executionEnvironmentInfo = 1;
 	dataclay.communication.grpc.common.ExceptionInfo excInfo = 2;
 }
 
@@ -591,120 +577,34 @@ message GetExtDataClayInfoRequest {
 }
 
 message GetExtDataClayInfoResponse {
-	string extDataClayYaml = 1;
+	dataclay.communication.grpc.common.DataClayInstance extDataClayInfo = 1;
 	dataclay.communication.grpc.common.ExceptionInfo excInfo = 2;
 }
 
-message FederateObjectRequest {
-	string sessionID = 1;
-	string objectID = 2;
-	string extDataClayID = 3;
-	bool recursive = 4;
-}
-
-message UnfederateObjectRequest {
-	string sessionID = 1;
-	string objectID = 2;
-	string extDataClayID = 3;
-	bool recursive = 4;
-}
-
-message UnfederateObjectWithAllDCsRequest { 
-	string sessionID = 1;
-	string objectID = 2;
-	bool recursive = 3;
-}
-
-message MigrateFederatedObjectsRequest { 
-	string sessionID = 1;
-	string externalOriginDataClayID = 2;
-	string externalDestinationDataClayID = 3;
-}
-
-message FederateAllObjectsRequest { 
-	string sessionID = 1;
-	string externalDestinationDataClayID = 3;
-}
-
-message UnfederateAllObjectsRequest { 
-	string sessionID = 1;
-	string extDataClayID = 2;
-}
-
-
-message UnfederateAllObjectsWithAllDCsRequest { 
-	string sessionID = 1;
-}
-
-message NotifyFederatedObjectsRequest {
-	string srcDcID = 1;
-	string srcDcHost = 2;
-	int32 srcDcPort = 3;
-	map<string, string> objectsInfo = 4;
-	map<string, dataclay.communication.grpc.common.SerializedParametersOrReturn> federatedObjects = 5;
-}
-
-message NotifyUnfederatedObjectsRequest {
-	string srcDcID = 1;
-	repeated string objectsIDs = 2;
-}
-
-message CheckObjectFederatedWithDataClayInstanceRequest {
-	string objectID = 1;
-	string extDataClayID = 2;
-}
-
-message CheckObjectFederatedWithDataClayInstanceResponse {
-	bool isFederated = 1;
-	dataclay.communication.grpc.common.ExceptionInfo excInfo = 2;
-}
-
-message CheckObjectFederatedRequest {
-	string objectID = 1;
-}
-
-message CheckObjectFederatedResponse {
-	bool isFederated = 1;
-	dataclay.communication.grpc.common.ExceptionInfo excInfo = 2;
-}
-
-message GetDataClaysObjectIsFederatedWithRequest {
-	string objectID = 1;
-}
-
-message GetDataClaysObjectIsFederatedWithResponse {
-	repeated string extDataClayIDs = 1;
-	dataclay.communication.grpc.common.ExceptionInfo excInfo = 2;
-}
-
-message GetExternalSourceDataClayOfObjectRequest {
-	string objectID = 1;
-}
-
-message GetExternalSourceDataClayOfObjectResponse {
-	string extDataClayID = 1;
-	dataclay.communication.grpc.common.ExceptionInfo excInfo = 2;
-}
-	
 message RegisterObjectForGCRequest {
 	dataclay.communication.grpc.common.RegistrationInfo regInfo = 1;
 	string backendID = 2;
 }
 
-message RegisterObjectRequest {
-	dataclay.communication.grpc.common.RegistrationInfo regInfo = 1;
+message RegisterObjectsRequest {
+	repeated dataclay.communication.grpc.common.RegistrationInfo regInfos = 1;
 	string backendID = 2;
-	string alias = 3;
-	dataclay.communication.grpc.common.Langs lang = 4;
-
+	dataclay.communication.grpc.common.Langs lang = 3;
 }
+
+message RegisterObjectsResponse {
+	repeated string objectIDs = 1;
+	dataclay.communication.grpc.common.ExceptionInfo excInfo = 2;
+}
+
 
 message GetAllExecutionEnvironmentsInfoRequest {
 	dataclay.communication.grpc.common.Langs execEnvLang = 1;
+	bool getExternal = 2;
 }
 
 message GetAllExecutionEnvironmentsInfoResponse {
-	map<string, string> execEnvs = 1;
+	map<string, dataclay.communication.grpc.common.ExecutionEnvironmentInfo> execEnvs = 1;
 	dataclay.communication.grpc.common.ExceptionInfo excInfo = 2;
 }
 
@@ -731,10 +631,6 @@ message GetObjectFromAliasResponse {
 	dataclay.communication.grpc.common.ExceptionInfo excInfo = 4;
 }
 
-message RegisterObjectResponse {
-	string objectID = 1;
-	dataclay.communication.grpc.common.ExceptionInfo excInfo = 2;
-}
 
 message AddAliasRequest{
 	string objectIDToHaveAlias = 1;
@@ -751,7 +647,7 @@ message GetObjectsMetaDataInfoOfClassForNMRequest {
 }
 
 message GetObjectsMetaDataInfoOfClassForNMResponse {
-	map<string, string> mdataInfo = 1;
+	map<string, dataclay.communication.grpc.common.MetaDataInfo> mdataInfo = 1;
 	dataclay.communication.grpc.common.ExceptionInfo excInfo = 2;
 }
 
@@ -764,38 +660,6 @@ message SetDataSetIDRequest {
 message SetDataSetIDFromGarbageCollectorRequest { 
 	string objectID = 1;
 	string datasetID = 2;
-}
-
-message NewVersionRequest {
-	string sessionID = 1;
-	string objectID = 2;
-	string classID = 3;
-	string hint = 4;
-	string optDestBackendID = 5;
-}
-
-message NewVersionResponse {
-	string versionInfoYaml = 1;
-	dataclay.communication.grpc.common.ExceptionInfo excInfo = 2;
-}
-
-message ConsolidateVersionRequest {
-	string sessionID = 1;
-	string versionInfoYaml = 2;
-}
-
-message NewReplicaRequest {
-	string sessionID = 1;
-	string objectID = 2;
-	string classID = 3;
-	string hint = 4;
-	string destBackendID = 5;
-	bool recursive = 6;
-}
-
-message NewReplicaResponse {
-	string destBackendID = 1;
-	dataclay.communication.grpc.common.ExceptionInfo excInfo = 2;
 }
 
 message MoveObjectRequest {
@@ -827,7 +691,7 @@ message GetMetadataByOIDRequest {
 }
 
 message GetMetadataByOIDResponse {
-	string objMdataYaml = 1;
+	dataclay.communication.grpc.common.MetaDataInfo mdInfo = 1;
 	dataclay.communication.grpc.common.ExceptionInfo excInfo = 2;
 }
 
@@ -836,7 +700,7 @@ message GetMetadataByOIDForDSRequest {
 }
 
 message GetMetadataByOIDForDSResponse {
-	string objMdataYaml = 1;
+	dataclay.communication.grpc.common.MetaDataInfo mdInfo = 1;
 	dataclay.communication.grpc.common.ExceptionInfo excInfo = 2;
 }
 
