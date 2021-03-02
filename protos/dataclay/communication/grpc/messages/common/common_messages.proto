@@ -56,8 +56,13 @@ message DataClayObjectMetaData {
 	map<int32, string> oids = 1;
 	map<int32, string> classids = 2;
 	map<int32, string> hints = 3;
-	map<int32, string> extDataClayIDs = 4;
-	int32 numRefs = 5;
+	int32 numRefs = 4;
+	string origObjectID = 5;
+	string rootLocation = 6;
+	string originLocation = 7;
+	repeated string replicaLocations = 8;
+	string alias = 9;
+	bool isReadOnly = 10;
 }
 
 message PersistentObjectInDB {
@@ -70,6 +75,7 @@ message RegistrationInfo {
 	string classID = 2;
 	string sessionID = 3;
 	string dataSetID = 4;
+	string alias = 5;
 }
 
 message FederatedObjectInfo {
@@ -85,8 +91,40 @@ message GetTracesResponse {
 	
 }
 
-message ExceptionInfo{
+message ExceptionInfo {
 	bool isException = 1;
 	bytes serializedException = 2;
 	bytes exceptionMessage = 3;
+}
+
+message MetaDataInfo {
+	string objectID = 1;
+	bool isReadOnly = 2;
+	string datasetID = 3;
+	string metaclassID = 4;
+	repeated string locations = 5;
+	string alias = 6;
+	string ownerID = 7;
+}
+
+message StorageLocationInfo {
+	string id = 1;
+	string hostname = 2;
+	string name = 3;
+	int32 port = 4;
+}
+
+message ExecutionEnvironmentInfo {
+	string id = 1;
+	string hostname = 2;
+	string name = 3;
+	int32 port = 4;
+	Langs language = 5;
+	string dataClayInstanceID = 6;
+}
+
+message DataClayInstance {
+	string id = 1;
+	repeated string hosts = 2;
+	repeated int32 ports = 3;
 }

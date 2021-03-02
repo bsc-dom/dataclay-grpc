@@ -54,7 +54,6 @@ service LogicModule {
 
 	// Class Manager
 	rpc newClass(NewClassRequest) returns (NewClassResponse) {}
-	rpc newClassID(NewClassIDRequest) returns (NewClassIDResponse) {}
 	rpc removeClass(RemoveClassRequest) returns (dataclay.communication.grpc.common.ExceptionInfo) {}
 	rpc removeOperation(RemoveOperationRequest) returns (dataclay.communication.grpc.common.ExceptionInfo) {}
 	rpc removeImplementation(RemoveImplementationRequest) returns (dataclay.communication.grpc.common.ExceptionInfo) {}
@@ -87,7 +86,7 @@ service LogicModule {
 	rpc getAllExecutionEnvironmentsInfo(GetAllExecutionEnvironmentsInfoRequest) returns (GetAllExecutionEnvironmentsInfoResponse) {}
 	rpc getStorageLocationID(GetStorageLocationIDRequest) returns (GetStorageLocationIDResponse) {}
 	rpc getStorageLocationInfo(GetStorageLocationInfoRequest) returns (GetStorageLocationInfoResponse) {}
-	rpc getExecutionEnvironmentInfo(GetStorageLocationInfoRequest) returns (GetExecutionEnvironmentInfoResponse) {}
+	rpc getExecutionEnvironmentInfo(GetExecutionEnvironmentInfoRequest) returns (GetExecutionEnvironmentInfoResponse) {}
 
 	// Object Metadata
 	rpc getObjectInfo(GetObjectInfoRequest) returns (GetObjectInfoResponse) {}
@@ -97,23 +96,19 @@ service LogicModule {
 	rpc addAlias(AddAliasRequest) returns (dataclay.communication.grpc.common.ExceptionInfo) {}
 	rpc registerObjectFromGC(RegisterObjectForGCRequest) returns (dataclay.communication.grpc.common.ExceptionInfo) {}
 	rpc unregisterObjects(UnregisterObjectsRequest) returns (dataclay.communication.grpc.common.ExceptionInfo) {}
-	rpc registerObject(RegisterObjectRequest) returns (RegisterObjectResponse) {}
+	rpc registerObjects(RegisterObjectsRequest) returns (RegisterObjectsResponse) {}
 	rpc setDataSetIDFromGarbageCollector(SetDataSetIDFromGarbageCollectorRequest) returns (dataclay.communication.grpc.common.ExceptionInfo) {}
-	
+	rpc getMetadataByOID(GetMetadataByOIDRequest) returns (GetMetadataByOIDResponse) {}
+
 	// Storage Location
 	rpc setDataSetID(SetDataSetIDRequest) returns (dataclay.communication.grpc.common.ExceptionInfo) {}
-	rpc newVersion(NewVersionRequest) returns (NewVersionResponse) {}
-	rpc consolidateVersion(ConsolidateVersionRequest) returns (dataclay.communication.grpc.common.ExceptionInfo) {}
-	rpc newReplica(NewReplicaRequest) returns (NewReplicaResponse) {}
 	rpc moveObject(MoveObjectRequest) returns (MoveObjectResponse) {}
 	rpc setObjectReadOnly(SetObjectReadOnlyRequest) returns (dataclay.communication.grpc.common.ExceptionInfo) {}
 	rpc setObjectReadWrite(SetObjectReadWriteRequest) returns (dataclay.communication.grpc.common.ExceptionInfo) {}
-	rpc getMetadataByOID(GetMetadataByOIDRequest) returns (GetMetadataByOIDResponse) {}
 
 	// Execution Environment
 	rpc executeImplementation(ExecuteImplementationRequest) returns (ExecuteImplementationResponse) {}
 	rpc executeMethodOnTarget(ExecuteMethodOnTargetRequest) returns (ExecuteMethodOnTargetResponse) {}
-	rpc synchronizeFederatedObject(SynchronizeFederatedObjectRequest) returns (dataclay.communication.grpc.common.ExceptionInfo) {}
 
 	// Federation 
 	rpc getDataClayID(communication.grpc.common.EmptyMessage) returns (GetDataClayIDResponse) {}
@@ -122,18 +117,6 @@ service LogicModule {
 	rpc notifyRegistrationOfExternalDataClay(NotifyRegistrationOfExternalDataClayRequest) returns (NotifyRegistrationOfExternalDataClayResponse) {}
 	rpc getExternalDataClayInfo(GetExtDataClayInfoRequest) returns (GetExtDataClayInfoResponse) {}
 	rpc getExternalDataclayId(GetExternalDataclayIDRequest) returns (GetExternalDataclayIDResponse) {}
-	rpc federateObject(FederateObjectRequest) returns (dataclay.communication.grpc.common.ExceptionInfo) {}
-	rpc unfederateObject(UnfederateObjectRequest) returns (dataclay.communication.grpc.common.ExceptionInfo) {}
-	rpc notifyUnfederatedObjects(NotifyUnfederatedObjectsRequest) returns (dataclay.communication.grpc.common.ExceptionInfo) {}
-	rpc notifyFederatedObjects(NotifyFederatedObjectsRequest) returns (dataclay.communication.grpc.common.ExceptionInfo) {}
-	rpc checkObjectIsFederatedWithDataClayInstance(CheckObjectFederatedWithDataClayInstanceRequest) returns (CheckObjectFederatedWithDataClayInstanceResponse) {}
-	rpc getDataClaysObjectIsFederatedWith(GetDataClaysObjectIsFederatedWithRequest) returns (GetDataClaysObjectIsFederatedWithResponse) {}
-	rpc getExternalSourceDataClayOfObject(GetExternalSourceDataClayOfObjectRequest) returns (GetExternalSourceDataClayOfObjectResponse) {}
-	rpc unfederateAllObjects(UnfederateAllObjectsRequest) returns (dataclay.communication.grpc.common.ExceptionInfo) {}
-	rpc unfederateAllObjectsWithAllDCs(UnfederateAllObjectsWithAllDCsRequest) returns (dataclay.communication.grpc.common.ExceptionInfo) {}
-	rpc unfederateObjectWithAllDCs(UnfederateObjectWithAllDCsRequest) returns (dataclay.communication.grpc.common.ExceptionInfo) {}
-	rpc migrateFederatedObjects(MigrateFederatedObjectsRequest) returns (dataclay.communication.grpc.common.ExceptionInfo) {}
-	rpc federateAllObjects(FederateAllObjectsRequest) returns (dataclay.communication.grpc.common.ExceptionInfo) {}
 	rpc getClassesInNamespace(GetClassesInNamespaceRequest) returns (GetClassesInNamespaceResponse) {}
 	rpc importModelsFromExternalDataClay(ImportModelsFromExternalDataClayRequest) returns (dataclay.communication.grpc.common.ExceptionInfo) {}
 

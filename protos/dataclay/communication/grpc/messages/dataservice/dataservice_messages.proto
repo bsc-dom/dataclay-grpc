@@ -75,12 +75,11 @@ message GetObjectsRequest {
 	string sessionID = 1;
 	repeated string objectIDS = 2;
 	bool recursive = 3;
-	bool removeHints = 4;
-	bool getOnlyRefs = 5;
+	string destBackendID = 4;
 }
 
 message GetObjectsResponse {
-	map<string, dataclay.communication.grpc.common.ObjectWithDataParamOrReturn> objects = 1;
+	repeated dataclay.communication.grpc.common.ObjectWithDataParamOrReturn objects = 1;
 	dataclay.communication.grpc.common.ExceptionInfo excInfo = 2;
 }
 
@@ -89,12 +88,26 @@ message MakePersistentRequest {
 	repeated dataclay.communication.grpc.common.ObjectWithDataParamOrReturn objects = 2;
 }
 
-message FederateRequest { 
+message FederateRequest {
+	string sessionID = 1;
+	string objectID = 2;
+	string externalExecutionEnvironmentID = 3;
+	bool recursive = 4;
+}
+
+message NotifyFederationRequest {
 	string sessionID = 1;
 	repeated dataclay.communication.grpc.common.ObjectWithDataParamOrReturn objects = 2;
 }
 
-message UnfederateRequest { 
+message UnfederateRequest {
+	string sessionID = 1;
+	string objectID = 2;
+	string externalExecutionEnvironmentID = 3;
+	bool recursive = 4;
+}
+
+message NotifyUnfederationRequest {
 	string sessionID = 1;
 	repeated string objectIDs = 2;
 }
@@ -115,18 +128,17 @@ message ExecuteImplementationResponse {
 message NewVersionRequest {
 	string sessionID = 1;
 	string objectID = 2;
-	string metadataInfo = 3;
+	string destBackendID = 3;
 }
 
 message NewVersionResponse {
 	string objectID = 1;
-	map<string, string> versionedIDs = 2;
-	dataclay.communication.grpc.common.ExceptionInfo excInfo = 3;
+	dataclay.communication.grpc.common.ExceptionInfo excInfo = 2;
 }
 
 message ConsolidateVersionRequest {
 	string sessionID = 1;
-	string versionInfo = 2;
+	string versionObjectID = 2;
 }
 
 message UpsertObjectsRequest {
@@ -172,7 +184,7 @@ message RemoveObjectsResponse {
 }
 
 message MigrateObjectsRequest {
-	map<string, string> destStorageLocs = 1;
+	map<string, dataclay.communication.grpc.common.StorageLocationInfo> destStorageLocs = 1;
 }
 
 message MigratedObjects {
@@ -244,6 +256,14 @@ message UpdateRefsRequest {
 message GetRetainedReferencesResponse {
 	repeated string retainedReferences = 1;
 	dataclay.communication.grpc.common.ExceptionInfo excInfo = 2;
+}
+
+message SynchronizeRequest {
+	string objectID = 1;
+	string implementationID = 2;
+	string sessionID = 3;
+	dataclay.communication.grpc.common.SerializedParametersOrReturn params = 4;
+	string callingBackendID = 5;
 }
 
 message ExistsRequest { 
