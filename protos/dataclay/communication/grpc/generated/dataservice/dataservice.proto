@@ -61,8 +61,12 @@ service DataService {
 	rpc getTraces(communication.grpc.common.EmptyMessage) returns (communication.grpc.common.GetTracesResponse) {}
 
 	// Garbage collection
+	rpc deleteAlias(DeleteAliasRequest) returns (dataclay.communication.grpc.common.ExceptionInfo) {}
+	rpc detachObjectFromSession(DetachObjectFromSessionRequest) returns (dataclay.communication.grpc.common.ExceptionInfo) {}
 	rpc closeSessionInDS(CloseSessionInDSRequest) returns (dataclay.communication.grpc.common.ExceptionInfo) {}
  	rpc updateRefs(UpdateRefsRequest) returns (dataclay.communication.grpc.common.ExceptionInfo) {}
  	rpc getRetainedReferences(communication.grpc.common.EmptyMessage) returns (GetRetainedReferencesResponse) {}
+	rpc getNumObjects(communication.grpc.common.EmptyMessage) returns (communication.grpc.common.GetNumObjectsResponse) {}
+	rpc getNumObjectsInEE(communication.grpc.common.EmptyMessage) returns (communication.grpc.common.GetNumObjectsResponse) {}
 
 }

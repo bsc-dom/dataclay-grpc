@@ -128,3 +128,9 @@ message DataClayInstance {
 	repeated string hosts = 2;
 	repeated int32 ports = 3;
 }
+
+
+message GetNumObjectsResponse {
+	int32 numObjs = 1;
+	dataclay.communication.grpc.common.ExceptionInfo excInfo = 2;
+}

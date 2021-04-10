@@ -642,6 +642,11 @@ message DeleteAliasRequest {
 	string alias = 2;
 }
 
+message DeleteAliasResponse {
+	string objectID = 1;
+	dataclay.communication.grpc.common.ExceptionInfo excInfo = 2;
+}
+
 message GetObjectsMetaDataInfoOfClassForNMRequest {
 	string classID = 1;
 }

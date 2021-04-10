@@ -91,7 +91,7 @@ service LogicModule {
 	// Object Metadata
 	rpc getObjectInfo(GetObjectInfoRequest) returns (GetObjectInfoResponse) {}
 	rpc getObjectFromAlias(GetObjectFromAliasRequest) returns (GetObjectFromAliasResponse) {}
-	rpc deleteAlias(DeleteAliasRequest) returns (dataclay.communication.grpc.common.ExceptionInfo) {}
+	rpc deleteAlias(DeleteAliasRequest) returns (DeleteAliasResponse) {}
 	rpc getObjectsMetaDataInfoOfClassForNM(GetObjectsMetaDataInfoOfClassForNMRequest) returns (GetObjectsMetaDataInfoOfClassForNMResponse) {}
 	rpc addAlias(AddAliasRequest) returns (dataclay.communication.grpc.common.ExceptionInfo) {}
 	rpc registerObjectFromGC(RegisterObjectForGCRequest) returns (dataclay.communication.grpc.common.ExceptionInfo) {}
@@ -99,6 +99,7 @@ service LogicModule {
 	rpc registerObjects(RegisterObjectsRequest) returns (RegisterObjectsResponse) {}
 	rpc setDataSetIDFromGarbageCollector(SetDataSetIDFromGarbageCollectorRequest) returns (dataclay.communication.grpc.common.ExceptionInfo) {}
 	rpc getMetadataByOID(GetMetadataByOIDRequest) returns (GetMetadataByOIDResponse) {}
+	rpc getNumObjects(communication.grpc.common.EmptyMessage) returns (communication.grpc.common.GetNumObjectsResponse) {}
 
 	// Storage Location
 	rpc setDataSetID(SetDataSetIDRequest) returns (dataclay.communication.grpc.common.ExceptionInfo) {}
