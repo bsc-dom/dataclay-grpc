@@ -511,6 +511,7 @@ message RemoveInterfaceRequest {
 
 message GetStorageLocationInfoRequest {
 	string storageLocationID = 1;
+	bool fromBackend = 2;
 }
 
 message GetStorageLocationInfoResponse {
@@ -520,6 +521,7 @@ message GetStorageLocationInfoResponse {
 
 message GetExecutionEnvironmentInfoRequest {
 	string execEnvID = 1;
+	bool fromBackend = 2;
 }
 
 message GetExecutionEnvironmentInfoResponse {
@@ -601,6 +603,7 @@ message RegisterObjectsResponse {
 message GetAllExecutionEnvironmentsInfoRequest {
 	dataclay.communication.grpc.common.Langs execEnvLang = 1;
 	bool getExternal = 2;
+	bool fromBackend = 3;
 }
 
 message GetAllExecutionEnvironmentsInfoResponse {
