@@ -44,8 +44,9 @@ service DataService {
 	rpc storeToDB(StoreToDBRequest) returns (dataclay.communication.grpc.common.ExceptionInfo) {}
 	rpc getFromDB(GetFromDBRequest) returns (GetFromDBResponse){}
 	rpc updateToDB(UpdateToDBRequest) returns (dataclay.communication.grpc.common.ExceptionInfo) {}
-	rpc deleteToDB(DeleteToDBRequest) returns (dataclay.communication.grpc.common.ExceptionInfo) {} 
- 	rpc existsInDB(ExistsInDBRequest) returns (ExistsInDBResponse) {}
+	rpc deleteToDB(DeleteToDBRequest) returns (dataclay.communication.grpc.common.ExceptionInfo) {}
+	rpc deleteSetFromDB(DeleteSetFromDBRequest) returns (dataclay.communication.grpc.common.ExceptionInfo) {}
+	rpc existsInDB(ExistsInDBRequest) returns (ExistsInDBResponse) {}
 
 	// Others
 	rpc cleanExecutionClassDirectory(communication.grpc.common.EmptyMessage) returns (dataclay.communication.grpc.common.ExceptionInfo) {}
@@ -64,9 +65,8 @@ service DataService {
 	rpc deleteAlias(DeleteAliasRequest) returns (dataclay.communication.grpc.common.ExceptionInfo) {}
 	rpc detachObjectFromSession(DetachObjectFromSessionRequest) returns (dataclay.communication.grpc.common.ExceptionInfo) {}
 	rpc closeSessionInDS(CloseSessionInDSRequest) returns (dataclay.communication.grpc.common.ExceptionInfo) {}
- 	rpc updateRefs(UpdateRefsRequest) returns (dataclay.communication.grpc.common.ExceptionInfo) {}
  	rpc getRetainedReferences(communication.grpc.common.EmptyMessage) returns (GetRetainedReferencesResponse) {}
 	rpc getNumObjects(communication.grpc.common.EmptyMessage) returns (communication.grpc.common.GetNumObjectsResponse) {}
 	rpc getNumObjectsInEE(communication.grpc.common.EmptyMessage) returns (communication.grpc.common.GetNumObjectsResponse) {}
-
+	rpc getObjectGraph(communication.grpc.common.EmptyMessage) returns (GetObjectGraphResponse) {}
 }
