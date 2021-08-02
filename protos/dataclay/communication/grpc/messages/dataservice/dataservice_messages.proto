@@ -251,6 +251,11 @@ message DeleteToDBRequest {
 	string objectID = 2;
 }
 
+message DeleteSetFromDBRequest {
+	repeated string objectIDs = 1;
+	dataclay.communication.grpc.common.ExceptionInfo excInfo = 2;
+}
+
 message UpdateRefsRequest {
 	map<string, int32> refsToUpdate = 1;
 }
@@ -294,4 +299,9 @@ message DetachObjectFromSessionRequest {
 message DeleteAliasRequest {
 	string objectID = 1;
 	string sessionID = 2;
+}
+
+message GetObjectGraphResponse {
+	bytes serializedGraph = 1;
+	dataclay.communication.grpc.common.ExceptionInfo excInfo = 2;
 }
