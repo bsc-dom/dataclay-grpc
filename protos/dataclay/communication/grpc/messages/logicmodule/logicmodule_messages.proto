@@ -889,7 +889,7 @@ message MetadataInfo {
 }
 
 message BatchObjectInfoRequest {
-	repeated dataclay.communication.grpc.common.ObjectID queryObjects = 1;
+	repeated string queryObjects = 1;
 	repeated dataclay.communication.grpc.common.ObjectInfoFlags queryFlags = 2;
 }
 
