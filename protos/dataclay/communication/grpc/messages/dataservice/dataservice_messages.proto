@@ -305,8 +305,3 @@ message GetObjectGraphResponse {
 	bytes serializedGraph = 1;
 	dataclay.communication.grpc.common.ExceptionInfo excInfo = 2;
 }
-
-message GetObjectGraphResponse {
-	bytes serializedGraph = 1;
-	dataclay.communication.grpc.common.ExceptionInfo excInfo = 2;
-}
