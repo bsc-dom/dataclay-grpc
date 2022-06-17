@@ -23,3 +23,13 @@ python setup.py protobufferize
 
 **NOTE**: if protbufferize cannot be installed via pip, please clone
 it from https://github.com/bsc-dom/protobufferize and run `python setup.py install`
+
+# Packaging Python
+
+python3 -m pip install --upgrade build
+
+python3 -m build
+
+python3 -m pip install --upgrade twine
+
+python3 -m twine upload --repository testpypi dist/*

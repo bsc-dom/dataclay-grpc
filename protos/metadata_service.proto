@@ -1,0 +1,52 @@
+syntax = "proto3";
+
+package dataclay.protos.metadata_service;
+
+service MetadataService {
+
+    // Account Manager
+    rpc NewAccount(NewAccountRequest) returns (NewAccountResponse) {}
+    rpc GetAccount(GetAccountRequest) returns (GetAccountResponse) {}
+
+    // Session Manager
+    rpc NewSession(NewSessionRequest) returns (NewSessionResponse) {}
+
+    // Dataset Manager
+    rpc NewDataset(NewDatasetRequest) returns (NewDatasetResponse) {}
+
+}
+
+message NewAccountRequest {
+    string username = 1;
+    string password = 2;
+}
+
+message NewAccountResponse {
+    string username = 1;
+}
+
+message NewSessionRequest {
+    string username = 1;
+    string password = 2;
+    string default_dataset = 3;
+}
+
+message NewSessionResponse {
+    string id = 1;
+}
+
+message GetAccountRequest {
+    string username = 1;
+}
+
+message GetAccountResponse {
+}
+
+message NewDatasetRequest {
+    string username = 1;
+    string password = 2;
+    string dataset = 3;
+}
+
+message NewDatasetResponse {
+}
