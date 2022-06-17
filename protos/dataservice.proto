@@ -1,7 +1,7 @@
 syntax = "proto3";
-package dataclay.communication.grpc.dataservice;
-import "dataclay/communication/grpc/messages/dataservice/dataservice_messages.proto";
-import "dataclay/communication/grpc/messages/common/common_messages.proto";
+package protos.dataservice;
+import "protos/dataservice_messages.proto";
+import "protos/common_messages.proto";
 option java_package = "es.bsc.dataclay.communication.grpc.generated.dataservice";
 option java_outer_classname="DataServiceGrpcService";
 
@@ -9,64 +9,64 @@ option java_outer_classname="DataServiceGrpcService";
 service DataService {
 
 	// Deployment
-	rpc initBackendID(InitBackendIDRequest) returns (dataclay.communication.grpc.common.ExceptionInfo) {}
-	rpc associateExecutionEnvironment(AssociateExecutionEnvironmentRequest) returns (dataclay.communication.grpc.common.ExceptionInfo) {}
-	rpc deployMetaClasses(DeployMetaClassesRequest) returns (dataclay.communication.grpc.common.ExceptionInfo) {}
-	rpc deployClasses(DeployClassesRequest) returns (dataclay.communication.grpc.common.ExceptionInfo) {}
-	rpc enrichClass(EnrichClassRequest) returns (dataclay.communication.grpc.common.ExceptionInfo) {}
+	rpc initBackendID(InitBackendIDRequest) returns (protos.common.ExceptionInfo) {}
+	rpc associateExecutionEnvironment(AssociateExecutionEnvironmentRequest) returns (protos.common.ExceptionInfo) {}
+	rpc deployMetaClasses(DeployMetaClassesRequest) returns (protos.common.ExceptionInfo) {}
+	rpc deployClasses(DeployClassesRequest) returns (protos.common.ExceptionInfo) {}
+	rpc enrichClass(EnrichClassRequest) returns (protos.common.ExceptionInfo) {}
 
 	// Execution Environment
 	rpc newPersistentInstance(NewPersistentInstanceRequest) returns (NewPersistentInstanceResponse) {}
-	rpc storeObjects(StoreObjectsRequest) returns (dataclay.communication.grpc.common.ExceptionInfo) {}
+	rpc storeObjects(StoreObjectsRequest) returns (protos.common.ExceptionInfo) {}
 	rpc getCopyOfObject(GetCopyOfObjectRequest) returns (GetCopyOfObjectResponse) {}
-	rpc updateObject(UpdateObjectRequest) returns (dataclay.communication.grpc.common.ExceptionInfo) {}
+	rpc updateObject(UpdateObjectRequest) returns (protos.common.ExceptionInfo) {}
 	rpc getObjects(GetObjectsRequest) returns (GetObjectsResponse) {}
 	
 	rpc newVersion(NewVersionRequest) returns (NewVersionResponse) {}
-	rpc consolidateVersion(ConsolidateVersionRequest) returns (dataclay.communication.grpc.common.ExceptionInfo) {}
-	rpc upsertObjects(UpsertObjectsRequest) returns (dataclay.communication.grpc.common.ExceptionInfo) {}
+	rpc consolidateVersion(ConsolidateVersionRequest) returns (protos.common.ExceptionInfo) {}
+	rpc upsertObjects(UpsertObjectsRequest) returns (protos.common.ExceptionInfo) {}
 	rpc newReplica(NewReplicaRequest) returns (NewReplicaResponse) {}
 	rpc moveObjects(MoveObjectsRequest) returns (MoveObjectsResponse) {}
 	rpc removeObjects(RemoveObjectsRequest) returns (RemoveObjectsResponse) {}
 	rpc migrateObjectsToBackends(MigrateObjectsRequest) returns (MigrateObjectsResponse) {}
 	rpc getClassIDFromObjectInMemory(GetClassIDFromObjectInMemoryRequest) returns (GetClassIDFromObjectInMemoryResponse) {}
 	rpc executeImplementation(ExecuteImplementationRequest) returns (ExecuteImplementationResponse) {}
-	rpc makePersistent(MakePersistentRequest) returns (dataclay.communication.grpc.common.ExceptionInfo) {}
-	rpc federate(FederateRequest) returns (dataclay.communication.grpc.common.ExceptionInfo) {}
-	rpc unfederate(UnfederateRequest) returns (dataclay.communication.grpc.common.ExceptionInfo) {}
+	rpc makePersistent(MakePersistentRequest) returns (protos.common.ExceptionInfo) {}
+	rpc federate(FederateRequest) returns (protos.common.ExceptionInfo) {}
+	rpc unfederate(UnfederateRequest) returns (protos.common.ExceptionInfo) {}
 
-	rpc notifyFederation(NotifyFederationRequest) returns (dataclay.communication.grpc.common.ExceptionInfo) {}
-	rpc notifyUnfederation(NotifyUnfederationRequest) returns (dataclay.communication.grpc.common.ExceptionInfo) {}
+	rpc notifyFederation(NotifyFederationRequest) returns (protos.common.ExceptionInfo) {}
+	rpc notifyUnfederation(NotifyUnfederationRequest) returns (protos.common.ExceptionInfo) {}
 	rpc exists(ExistsRequest) returns (ExistsResponse) {}
-	rpc synchronize(SynchronizeRequest) returns (dataclay.communication.grpc.common.ExceptionInfo) {}
+	rpc synchronize(SynchronizeRequest) returns (protos.common.ExceptionInfo) {}
 
 	// Storage Location
-	rpc storeToDB(StoreToDBRequest) returns (dataclay.communication.grpc.common.ExceptionInfo) {}
+	rpc storeToDB(StoreToDBRequest) returns (protos.common.ExceptionInfo) {}
 	rpc getFromDB(GetFromDBRequest) returns (GetFromDBResponse){}
-	rpc updateToDB(UpdateToDBRequest) returns (dataclay.communication.grpc.common.ExceptionInfo) {}
-	rpc deleteToDB(DeleteToDBRequest) returns (dataclay.communication.grpc.common.ExceptionInfo) {}
-	rpc deleteSetFromDB(DeleteSetFromDBRequest) returns (dataclay.communication.grpc.common.ExceptionInfo) {}
+	rpc updateToDB(UpdateToDBRequest) returns (protos.common.ExceptionInfo) {}
+	rpc deleteToDB(DeleteToDBRequest) returns (protos.common.ExceptionInfo) {}
+	rpc deleteSetFromDB(DeleteSetFromDBRequest) returns (protos.common.ExceptionInfo) {}
 	rpc existsInDB(ExistsInDBRequest) returns (ExistsInDBResponse) {}
 
 	// Others
-	rpc cleanExecutionClassDirectory(communication.grpc.common.EmptyMessage) returns (dataclay.communication.grpc.common.ExceptionInfo) {}
-	rpc closeDbHandler(communication.grpc.common.EmptyMessage) returns (dataclay.communication.grpc.common.ExceptionInfo) {}
-	rpc shutDown(communication.grpc.common.EmptyMessage) returns (dataclay.communication.grpc.common.ExceptionInfo) {}
-	rpc disconnectFromOthers(communication.grpc.common.EmptyMessage) returns (dataclay.communication.grpc.common.ExceptionInfo) {}
-	rpc registerPendingObjects(communication.grpc.common.EmptyMessage) returns (dataclay.communication.grpc.common.ExceptionInfo) {}
+	rpc cleanExecutionClassDirectory(protos.common.EmptyMessage) returns (protos.common.ExceptionInfo) {}
+	rpc closeDbHandler(protos.common.EmptyMessage) returns (protos.common.ExceptionInfo) {}
+	rpc shutDown(protos.common.EmptyMessage) returns (protos.common.ExceptionInfo) {}
+	rpc disconnectFromOthers(protos.common.EmptyMessage) returns (protos.common.ExceptionInfo) {}
+	rpc registerPendingObjects(protos.common.EmptyMessage) returns (protos.common.ExceptionInfo) {}
 
 	// Paraver
-	rpc cleanCaches(communication.grpc.common.EmptyMessage) returns (dataclay.communication.grpc.common.ExceptionInfo) {}
-	rpc activateTracing(ActivateTracingRequest) returns (dataclay.communication.grpc.common.ExceptionInfo) {}
-	rpc deactivateTracing(communication.grpc.common.EmptyMessage) returns (dataclay.communication.grpc.common.ExceptionInfo) {}
-	rpc getTraces(communication.grpc.common.EmptyMessage) returns (communication.grpc.common.GetTracesResponse) {}
+	rpc cleanCaches(protos.common.EmptyMessage) returns (protos.common.ExceptionInfo) {}
+	rpc activateTracing(ActivateTracingRequest) returns (protos.common.ExceptionInfo) {}
+	rpc deactivateTracing(protos.common.EmptyMessage) returns (protos.common.ExceptionInfo) {}
+	rpc getTraces(protos.common.EmptyMessage) returns (protos.common.GetTracesResponse) {}
 
 	// Garbage collection
-	rpc deleteAlias(DeleteAliasRequest) returns (dataclay.communication.grpc.common.ExceptionInfo) {}
-	rpc detachObjectFromSession(DetachObjectFromSessionRequest) returns (dataclay.communication.grpc.common.ExceptionInfo) {}
-	rpc closeSessionInDS(CloseSessionInDSRequest) returns (dataclay.communication.grpc.common.ExceptionInfo) {}
- 	rpc getRetainedReferences(communication.grpc.common.EmptyMessage) returns (GetRetainedReferencesResponse) {}
-	rpc getNumObjects(communication.grpc.common.EmptyMessage) returns (communication.grpc.common.GetNumObjectsResponse) {}
-	rpc getNumObjectsInEE(communication.grpc.common.EmptyMessage) returns (communication.grpc.common.GetNumObjectsResponse) {}
-	rpc getObjectGraph(communication.grpc.common.EmptyMessage) returns (GetObjectGraphResponse) {}
+	rpc deleteAlias(DeleteAliasRequest) returns (protos.common.ExceptionInfo) {}
+	rpc detachObjectFromSession(DetachObjectFromSessionRequest) returns (protos.common.ExceptionInfo) {}
+	rpc closeSessionInDS(CloseSessionInDSRequest) returns (protos.common.ExceptionInfo) {}
+ 	rpc getRetainedReferences(protos.common.EmptyMessage) returns (GetRetainedReferencesResponse) {}
+	rpc getNumObjects(protos.common.EmptyMessage) returns (protos.common.GetNumObjectsResponse) {}
+	rpc getNumObjectsInEE(protos.common.EmptyMessage) returns (protos.common.GetNumObjectsResponse) {}
+	rpc getObjectGraph(protos.common.EmptyMessage) returns (GetObjectGraphResponse) {}
 }

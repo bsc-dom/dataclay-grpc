@@ -1,6 +1,6 @@
 syntax = "proto3";
 
-package dataclay.protos.metadata_service;
+package protos.metadata_service;
 
 service MetadataService {
 

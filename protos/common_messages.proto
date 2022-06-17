@@ -1,5 +1,5 @@
 syntax = "proto3";
-package dataclay.communication.grpc.common;
+package protos.common;
 option java_package = "es.bsc.dataclay.communication.grpc.messages.common";
 
 message Credential {
@@ -87,7 +87,7 @@ message FederatedObjectInfo {
 
 message GetTracesResponse { 
 	map<string, bytes> traces = 1;
-	dataclay.communication.grpc.common.ExceptionInfo excInfo = 2;
+	protos.common.ExceptionInfo excInfo = 2;
 	
 }
 
@@ -132,5 +132,5 @@ message DataClayInstance {
 
 message GetNumObjectsResponse {
 	int32 numObjs = 1;
-	dataclay.communication.grpc.common.ExceptionInfo excInfo = 2;
+	protos.common.ExceptionInfo excInfo = 2;
 }
