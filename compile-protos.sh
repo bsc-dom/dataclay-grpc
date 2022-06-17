@@ -18,4 +18,4 @@ protos/metadata_service.proto
 
 # Replace wrong import from pb2_grpc.py
 sed -i 's/from protos/from ./g' \
-src/python/dataclay_common/protos/*_pb2_grpc.py
+src/python/dataclay_common/protos/*pb2*.py
