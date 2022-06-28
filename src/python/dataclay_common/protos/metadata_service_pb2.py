@@ -14,7 +14,7 @@ _sym_db = _symbol_database.Default()
 
 
 
-DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\x1dprotos/metadata_service.proto\x12\x17protos.metadata_service\"7\n\x11NewAccountRequest\x12\x10\n\x08username\x18\x01 \x01(\t\x12\x10\n\x08password\x18\x02 \x01(\t\"&\n\x12NewAccountResponse\x12\x10\n\x08username\x18\x01 \x01(\t\"P\n\x11NewSessionRequest\x12\x10\n\x08username\x18\x01 \x01(\t\x12\x10\n\x08password\x18\x02 \x01(\t\x12\x17\n\x0f\x64\x65\x66\x61ult_dataset\x18\x03 \x01(\t\" \n\x12NewSessionResponse\x12\n\n\x02id\x18\x01 \x01(\t\"%\n\x11GetAccountRequest\x12\x10\n\x08username\x18\x01 \x01(\t\"\x14\n\x12GetAccountResponse\"H\n\x11NewDatasetRequest\x12\x10\n\x08username\x18\x01 \x01(\t\x12\x10\n\x08password\x18\x02 \x01(\t\x12\x0f\n\x07\x64\x61taset\x18\x03 \x01(\t\"\x14\n\x12NewDatasetResponse2\xb5\x03\n\x0fMetadataService\x12g\n\nNewAccount\x12*.protos.metadata_service.NewAccountRequest\x1a+.protos.metadata_service.NewAccountResponse\"\x00\x12g\n\nGetAccount\x12*.protos.metadata_service.GetAccountRequest\x1a+.protos.metadata_service.GetAccountResponse\"\x00\x12g\n\nNewSession\x12*.protos.metadata_service.NewSessionRequest\x1a+.protos.metadata_service.NewSessionResponse\"\x00\x12g\n\nNewDataset\x12*.protos.metadata_service.NewDatasetRequest\x1a+.protos.metadata_service.NewDatasetResponse\"\x00\x62\x06proto3')
+DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\x1dprotos/metadata_service.proto\x12\x17protos.metadata_service\"7\n\x11NewAccountRequest\x12\x10\n\x08username\x18\x01 \x01(\t\x12\x10\n\x08password\x18\x02 \x01(\t\"&\n\x12NewAccountResponse\x12\x10\n\x08username\x18\x01 \x01(\t\"P\n\x11NewSessionRequest\x12\x10\n\x08username\x18\x01 \x01(\t\x12\x10\n\x08password\x18\x02 \x01(\t\x12\x17\n\x0f\x64\x65\x66\x61ult_dataset\x18\x03 \x01(\t\" \n\x12NewSessionResponse\x12\n\n\x02id\x18\x01 \x01(\t\"%\n\x11GetAccountRequest\x12\x10\n\x08username\x18\x01 \x01(\t\"\x14\n\x12GetAccountResponse\"H\n\x11NewDatasetRequest\x12\x10\n\x08username\x18\x01 \x01(\t\x12\x10\n\x08password\x18\x02 \x01(\t\x12\x0f\n\x07\x64\x61taset\x18\x03 \x01(\t\"\x14\n\x12NewDatasetResponse\"!\n\x13\x43loseSessionRequest\x12\n\n\x02id\x18\x01 \x01(\t\"\x16\n\x14\x43loseSessionResponse2\xa4\x04\n\x0fMetadataService\x12g\n\nNewAccount\x12*.protos.metadata_service.NewAccountRequest\x1a+.protos.metadata_service.NewAccountResponse\"\x00\x12g\n\nGetAccount\x12*.protos.metadata_service.GetAccountRequest\x1a+.protos.metadata_service.GetAccountResponse\"\x00\x12g\n\nNewSession\x12*.protos.metadata_service.NewSessionRequest\x1a+.protos.metadata_service.NewSessionResponse\"\x00\x12m\n\x0c\x43loseSession\x12,.protos.metadata_service.CloseSessionRequest\x1a-.protos.metadata_service.CloseSessionResponse\"\x00\x12g\n\nNewDataset\x12*.protos.metadata_service.NewDatasetRequest\x1a+.protos.metadata_service.NewDatasetResponse\"\x00\x62\x06proto3')
 
 
 
@@ -26,6 +26,8 @@ _GETACCOUNTREQUEST = DESCRIPTOR.message_types_by_name['GetAccountRequest']
 _GETACCOUNTRESPONSE = DESCRIPTOR.message_types_by_name['GetAccountResponse']
 _NEWDATASETREQUEST = DESCRIPTOR.message_types_by_name['NewDatasetRequest']
 _NEWDATASETRESPONSE = DESCRIPTOR.message_types_by_name['NewDatasetResponse']
+_CLOSESESSIONREQUEST = DESCRIPTOR.message_types_by_name['CloseSessionRequest']
+_CLOSESESSIONRESPONSE = DESCRIPTOR.message_types_by_name['CloseSessionResponse']
 NewAccountRequest = _reflection.GeneratedProtocolMessageType('NewAccountRequest', (_message.Message,), {
   'DESCRIPTOR' : _NEWACCOUNTREQUEST,
   '__module__' : 'protos.metadata_service_pb2'
@@ -82,6 +84,20 @@ NewDatasetResponse = _reflection.GeneratedProtocolMessageType('NewDatasetRespons
   })
 _sym_db.RegisterMessage(NewDatasetResponse)
 
+CloseSessionRequest = _reflection.GeneratedProtocolMessageType('CloseSessionRequest', (_message.Message,), {
+  'DESCRIPTOR' : _CLOSESESSIONREQUEST,
+  '__module__' : 'protos.metadata_service_pb2'
+  # @@protoc_insertion_point(class_scope:protos.metadata_service.CloseSessionRequest)
+  })
+_sym_db.RegisterMessage(CloseSessionRequest)
+
+CloseSessionResponse = _reflection.GeneratedProtocolMessageType('CloseSessionResponse', (_message.Message,), {
+  'DESCRIPTOR' : _CLOSESESSIONRESPONSE,
+  '__module__' : 'protos.metadata_service_pb2'
+  # @@protoc_insertion_point(class_scope:protos.metadata_service.CloseSessionResponse)
+  })
+_sym_db.RegisterMessage(CloseSessionResponse)
+
 _METADATASERVICE = DESCRIPTOR.services_by_name['MetadataService']
 if _descriptor._USE_C_DESCRIPTORS == False:
 
@@ -102,6 +118,10 @@ if _descriptor._USE_C_DESCRIPTORS == False:
   _NEWDATASETREQUEST._serialized_end=404
   _NEWDATASETRESPONSE._serialized_start=406
   _NEWDATASETRESPONSE._serialized_end=426
-  _METADATASERVICE._serialized_start=429
-  _METADATASERVICE._serialized_end=866
+  _CLOSESESSIONREQUEST._serialized_start=428
+  _CLOSESESSIONREQUEST._serialized_end=461
+  _CLOSESESSIONRESPONSE._serialized_start=463
+  _CLOSESESSIONRESPONSE._serialized_end=485
+  _METADATASERVICE._serialized_start=488
+  _METADATASERVICE._serialized_end=1036
 # @@protoc_insertion_point(module_scope)

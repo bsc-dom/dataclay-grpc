@@ -29,6 +29,11 @@ class MetadataServiceStub(object):
                 request_serializer=protos_dot_metadata__service__pb2.NewSessionRequest.SerializeToString,
                 response_deserializer=protos_dot_metadata__service__pb2.NewSessionResponse.FromString,
                 )
+        self.CloseSession = channel.unary_unary(
+                '/protos.metadata_service.MetadataService/CloseSession',
+                request_serializer=protos_dot_metadata__service__pb2.CloseSessionRequest.SerializeToString,
+                response_deserializer=protos_dot_metadata__service__pb2.CloseSessionResponse.FromString,
+                )
         self.NewDataset = channel.unary_unary(
                 '/protos.metadata_service.MetadataService/NewDataset',
                 request_serializer=protos_dot_metadata__service__pb2.NewDatasetRequest.SerializeToString,
@@ -59,6 +64,12 @@ class MetadataServiceServicer(object):
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
+    def CloseSession(self, request, context):
+        """Missing associated documentation comment in .proto file."""
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
     def NewDataset(self, request, context):
         """Dataset Manager
         """
@@ -83,6 +94,11 @@ def add_MetadataServiceServicer_to_server(servicer, server):
                     servicer.NewSession,
                     request_deserializer=protos_dot_metadata__service__pb2.NewSessionRequest.FromString,
                     response_serializer=protos_dot_metadata__service__pb2.NewSessionResponse.SerializeToString,
+            ),
+            'CloseSession': grpc.unary_unary_rpc_method_handler(
+                    servicer.CloseSession,
+                    request_deserializer=protos_dot_metadata__service__pb2.CloseSessionRequest.FromString,
+                    response_serializer=protos_dot_metadata__service__pb2.CloseSessionResponse.SerializeToString,
             ),
             'NewDataset': grpc.unary_unary_rpc_method_handler(
                     servicer.NewDataset,
@@ -147,6 +163,23 @@ class MetadataService(object):
         return grpc.experimental.unary_unary(request, target, '/protos.metadata_service.MetadataService/NewSession',
             protos_dot_metadata__service__pb2.NewSessionRequest.SerializeToString,
             protos_dot_metadata__service__pb2.NewSessionResponse.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def CloseSession(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/protos.metadata_service.MetadataService/CloseSession',
+            protos_dot_metadata__service__pb2.CloseSessionRequest.SerializeToString,
+            protos_dot_metadata__service__pb2.CloseSessionResponse.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 

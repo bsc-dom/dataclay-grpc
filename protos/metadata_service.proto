@@ -10,6 +10,7 @@ service MetadataService {
 
     // Session Manager
     rpc NewSession(NewSessionRequest) returns (NewSessionResponse) {}
+    rpc CloseSession(CloseSessionRequest) returns (CloseSessionResponse) {}
 
     // Dataset Manager
     rpc NewDataset(NewDatasetRequest) returns (NewDatasetResponse) {}
@@ -49,4 +50,11 @@ message NewDatasetRequest {
 }
 
 message NewDatasetResponse {
+}
+
+message CloseSessionRequest {
+    string id = 1;
+}
+
+message CloseSessionResponse {
 }
