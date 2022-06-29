@@ -18,7 +18,7 @@ class MetadataServiceStub(object):
         self.NewAccount = channel.unary_unary(
                 '/protos.metadata_service.MetadataService/NewAccount',
                 request_serializer=protos_dot_metadata__service__pb2.NewAccountRequest.SerializeToString,
-                response_deserializer=protos_dot_metadata__service__pb2.NewAccountResponse.FromString,
+                response_deserializer=google_dot_protobuf_dot_empty__pb2.Empty.FromString,
                 )
         self.GetAccount = channel.unary_unary(
                 '/protos.metadata_service.MetadataService/GetAccount',
@@ -33,12 +33,12 @@ class MetadataServiceStub(object):
         self.CloseSession = channel.unary_unary(
                 '/protos.metadata_service.MetadataService/CloseSession',
                 request_serializer=protos_dot_metadata__service__pb2.CloseSessionRequest.SerializeToString,
-                response_deserializer=protos_dot_metadata__service__pb2.CloseSessionResponse.FromString,
+                response_deserializer=google_dot_protobuf_dot_empty__pb2.Empty.FromString,
                 )
         self.NewDataset = channel.unary_unary(
                 '/protos.metadata_service.MetadataService/NewDataset',
                 request_serializer=protos_dot_metadata__service__pb2.NewDatasetRequest.SerializeToString,
-                response_deserializer=protos_dot_metadata__service__pb2.NewDatasetResponse.FromString,
+                response_deserializer=google_dot_protobuf_dot_empty__pb2.Empty.FromString,
                 )
         self.GetDataclayID = channel.unary_unary(
                 '/protos.metadata_service.MetadataService/GetDataclayID',
@@ -96,7 +96,7 @@ def add_MetadataServiceServicer_to_server(servicer, server):
             'NewAccount': grpc.unary_unary_rpc_method_handler(
                     servicer.NewAccount,
                     request_deserializer=protos_dot_metadata__service__pb2.NewAccountRequest.FromString,
-                    response_serializer=protos_dot_metadata__service__pb2.NewAccountResponse.SerializeToString,
+                    response_serializer=google_dot_protobuf_dot_empty__pb2.Empty.SerializeToString,
             ),
             'GetAccount': grpc.unary_unary_rpc_method_handler(
                     servicer.GetAccount,
@@ -111,12 +111,12 @@ def add_MetadataServiceServicer_to_server(servicer, server):
             'CloseSession': grpc.unary_unary_rpc_method_handler(
                     servicer.CloseSession,
                     request_deserializer=protos_dot_metadata__service__pb2.CloseSessionRequest.FromString,
-                    response_serializer=protos_dot_metadata__service__pb2.CloseSessionResponse.SerializeToString,
+                    response_serializer=google_dot_protobuf_dot_empty__pb2.Empty.SerializeToString,
             ),
             'NewDataset': grpc.unary_unary_rpc_method_handler(
                     servicer.NewDataset,
                     request_deserializer=protos_dot_metadata__service__pb2.NewDatasetRequest.FromString,
-                    response_serializer=protos_dot_metadata__service__pb2.NewDatasetResponse.SerializeToString,
+                    response_serializer=google_dot_protobuf_dot_empty__pb2.Empty.SerializeToString,
             ),
             'GetDataclayID': grpc.unary_unary_rpc_method_handler(
                     servicer.GetDataclayID,
@@ -146,7 +146,7 @@ class MetadataService(object):
             metadata=None):
         return grpc.experimental.unary_unary(request, target, '/protos.metadata_service.MetadataService/NewAccount',
             protos_dot_metadata__service__pb2.NewAccountRequest.SerializeToString,
-            protos_dot_metadata__service__pb2.NewAccountResponse.FromString,
+            google_dot_protobuf_dot_empty__pb2.Empty.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
@@ -197,7 +197,7 @@ class MetadataService(object):
             metadata=None):
         return grpc.experimental.unary_unary(request, target, '/protos.metadata_service.MetadataService/CloseSession',
             protos_dot_metadata__service__pb2.CloseSessionRequest.SerializeToString,
-            protos_dot_metadata__service__pb2.CloseSessionResponse.FromString,
+            google_dot_protobuf_dot_empty__pb2.Empty.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
@@ -214,7 +214,7 @@ class MetadataService(object):
             metadata=None):
         return grpc.experimental.unary_unary(request, target, '/protos.metadata_service.MetadataService/NewDataset',
             protos_dot_metadata__service__pb2.NewDatasetRequest.SerializeToString,
-            protos_dot_metadata__service__pb2.NewDatasetResponse.FromString,
+            google_dot_protobuf_dot_empty__pb2.Empty.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 

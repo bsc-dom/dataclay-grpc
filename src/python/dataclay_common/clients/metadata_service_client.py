@@ -27,17 +27,18 @@ class MDSClient:
             password=password,
             default_dataset=default_dataset
         )
-        return self.stub.NewSession(request)
+        response = self.stub.NewSession(request)
+        return response.id
 
     def close_session(self, id):
         request = metadata_service_pb2.CloseSessionRequest(id=str(id))
-        return self.stub.CloseSession(request)
+        self.stub.CloseSession(request)
 
     # Account Manager
 
     def new_account(self, username, password):
         request = metadata_service_pb2.NewAccountRequest(username=username, password=password)
-        return self.stub.NewAccount(request)
+        self.stub.NewAccount(request)
 
     # Dataset Manager
 
@@ -47,9 +48,10 @@ class MDSClient:
             password=password,
             dataset=dataset
         )
-        return self.stub.NewDataset(request)
+        self.stub.NewDataset(request)
 
     # Federation
 
     def get_dataclay_id(self):
-        return self.stub.GetDataclayID(Empty())
+        response = self.stub.GetDataclayID(Empty())
+        return response.dataclay_id

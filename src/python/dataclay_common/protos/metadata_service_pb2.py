@@ -15,20 +15,17 @@ _sym_db = _symbol_database.Default()
 from google.protobuf import empty_pb2 as google_dot_protobuf_dot_empty__pb2
 
 
-DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\x1dprotos/metadata_service.proto\x12\x17protos.metadata_service\x1a\x1bgoogle/protobuf/empty.proto\"7\n\x11NewAccountRequest\x12\x10\n\x08username\x18\x01 \x01(\t\x12\x10\n\x08password\x18\x02 \x01(\t\"&\n\x12NewAccountResponse\x12\x10\n\x08username\x18\x01 \x01(\t\"%\n\x11GetAccountRequest\x12\x10\n\x08username\x18\x01 \x01(\t\"\x14\n\x12GetAccountResponse\"P\n\x11NewSessionRequest\x12\x10\n\x08username\x18\x01 \x01(\t\x12\x10\n\x08password\x18\x02 \x01(\t\x12\x17\n\x0f\x64\x65\x66\x61ult_dataset\x18\x03 \x01(\t\" \n\x12NewSessionResponse\x12\n\n\x02id\x18\x01 \x01(\t\"!\n\x13\x43loseSessionRequest\x12\n\n\x02id\x18\x01 \x01(\t\"\x16\n\x14\x43loseSessionResponse\"H\n\x11NewDatasetRequest\x12\x10\n\x08username\x18\x01 \x01(\t\x12\x10\n\x08password\x18\x02 \x01(\t\x12\x0f\n\x07\x64\x61taset\x18\x03 \x01(\t\"\x14\n\x12NewDatasetResponse\",\n\x15GetDataclayIDResponse\x12\x13\n\x0b\x64\x61taclay_id\x18\x01 \x01(\t2\xff\x04\n\x0fMetadataService\x12g\n\nNewAccount\x12*.protos.metadata_service.NewAccountRequest\x1a+.protos.metadata_service.NewAccountResponse\"\x00\x12g\n\nGetAccount\x12*.protos.metadata_service.GetAccountRequest\x1a+.protos.metadata_service.GetAccountResponse\"\x00\x12g\n\nNewSession\x12*.protos.metadata_service.NewSessionRequest\x1a+.protos.metadata_service.NewSessionResponse\"\x00\x12m\n\x0c\x43loseSession\x12,.protos.metadata_service.CloseSessionRequest\x1a-.protos.metadata_service.CloseSessionResponse\"\x00\x12g\n\nNewDataset\x12*.protos.metadata_service.NewDatasetRequest\x1a+.protos.metadata_service.NewDatasetResponse\"\x00\x12Y\n\rGetDataclayID\x12\x16.google.protobuf.Empty\x1a..protos.metadata_service.GetDataclayIDResponse\"\x00\x62\x06proto3')
+DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\x1dprotos/metadata_service.proto\x12\x17protos.metadata_service\x1a\x1bgoogle/protobuf/empty.proto\"7\n\x11NewAccountRequest\x12\x10\n\x08username\x18\x01 \x01(\t\x12\x10\n\x08password\x18\x02 \x01(\t\"%\n\x11GetAccountRequest\x12\x10\n\x08username\x18\x01 \x01(\t\"\x14\n\x12GetAccountResponse\"P\n\x11NewSessionRequest\x12\x10\n\x08username\x18\x01 \x01(\t\x12\x10\n\x08password\x18\x02 \x01(\t\x12\x17\n\x0f\x64\x65\x66\x61ult_dataset\x18\x03 \x01(\t\" \n\x12NewSessionResponse\x12\n\n\x02id\x18\x01 \x01(\t\"!\n\x13\x43loseSessionRequest\x12\n\n\x02id\x18\x01 \x01(\t\"H\n\x11NewDatasetRequest\x12\x10\n\x08username\x18\x01 \x01(\t\x12\x10\n\x08password\x18\x02 \x01(\t\x12\x0f\n\x07\x64\x61taset\x18\x03 \x01(\t\",\n\x15GetDataclayIDResponse\x12\x13\n\x0b\x64\x61taclay_id\x18\x01 \x01(\t2\xbe\x04\n\x0fMetadataService\x12R\n\nNewAccount\x12*.protos.metadata_service.NewAccountRequest\x1a\x16.google.protobuf.Empty\"\x00\x12g\n\nGetAccount\x12*.protos.metadata_service.GetAccountRequest\x1a+.protos.metadata_service.GetAccountResponse\"\x00\x12g\n\nNewSession\x12*.protos.metadata_service.NewSessionRequest\x1a+.protos.metadata_service.NewSessionResponse\"\x00\x12V\n\x0c\x43loseSession\x12,.protos.metadata_service.CloseSessionRequest\x1a\x16.google.protobuf.Empty\"\x00\x12R\n\nNewDataset\x12*.protos.metadata_service.NewDatasetRequest\x1a\x16.google.protobuf.Empty\"\x00\x12Y\n\rGetDataclayID\x12\x16.google.protobuf.Empty\x1a..protos.metadata_service.GetDataclayIDResponse\"\x00\x62\x06proto3')
 
 
 
 _NEWACCOUNTREQUEST = DESCRIPTOR.message_types_by_name['NewAccountRequest']
-_NEWACCOUNTRESPONSE = DESCRIPTOR.message_types_by_name['NewAccountResponse']
 _GETACCOUNTREQUEST = DESCRIPTOR.message_types_by_name['GetAccountRequest']
 _GETACCOUNTRESPONSE = DESCRIPTOR.message_types_by_name['GetAccountResponse']
 _NEWSESSIONREQUEST = DESCRIPTOR.message_types_by_name['NewSessionRequest']
 _NEWSESSIONRESPONSE = DESCRIPTOR.message_types_by_name['NewSessionResponse']
 _CLOSESESSIONREQUEST = DESCRIPTOR.message_types_by_name['CloseSessionRequest']
-_CLOSESESSIONRESPONSE = DESCRIPTOR.message_types_by_name['CloseSessionResponse']
 _NEWDATASETREQUEST = DESCRIPTOR.message_types_by_name['NewDatasetRequest']
-_NEWDATASETRESPONSE = DESCRIPTOR.message_types_by_name['NewDatasetResponse']
 _GETDATACLAYIDRESPONSE = DESCRIPTOR.message_types_by_name['GetDataclayIDResponse']
 NewAccountRequest = _reflection.GeneratedProtocolMessageType('NewAccountRequest', (_message.Message,), {
   'DESCRIPTOR' : _NEWACCOUNTREQUEST,
@@ -36,13 +33,6 @@ NewAccountRequest = _reflection.GeneratedProtocolMessageType('NewAccountRequest'
   # @@protoc_insertion_point(class_scope:protos.metadata_service.NewAccountRequest)
   })
 _sym_db.RegisterMessage(NewAccountRequest)
-
-NewAccountResponse = _reflection.GeneratedProtocolMessageType('NewAccountResponse', (_message.Message,), {
-  'DESCRIPTOR' : _NEWACCOUNTRESPONSE,
-  '__module__' : 'protos.metadata_service_pb2'
-  # @@protoc_insertion_point(class_scope:protos.metadata_service.NewAccountResponse)
-  })
-_sym_db.RegisterMessage(NewAccountResponse)
 
 GetAccountRequest = _reflection.GeneratedProtocolMessageType('GetAccountRequest', (_message.Message,), {
   'DESCRIPTOR' : _GETACCOUNTREQUEST,
@@ -79,26 +69,12 @@ CloseSessionRequest = _reflection.GeneratedProtocolMessageType('CloseSessionRequ
   })
 _sym_db.RegisterMessage(CloseSessionRequest)
 
-CloseSessionResponse = _reflection.GeneratedProtocolMessageType('CloseSessionResponse', (_message.Message,), {
-  'DESCRIPTOR' : _CLOSESESSIONRESPONSE,
-  '__module__' : 'protos.metadata_service_pb2'
-  # @@protoc_insertion_point(class_scope:protos.metadata_service.CloseSessionResponse)
-  })
-_sym_db.RegisterMessage(CloseSessionResponse)
-
 NewDatasetRequest = _reflection.GeneratedProtocolMessageType('NewDatasetRequest', (_message.Message,), {
   'DESCRIPTOR' : _NEWDATASETREQUEST,
   '__module__' : 'protos.metadata_service_pb2'
   # @@protoc_insertion_point(class_scope:protos.metadata_service.NewDatasetRequest)
   })
 _sym_db.RegisterMessage(NewDatasetRequest)
-
-NewDatasetResponse = _reflection.GeneratedProtocolMessageType('NewDatasetResponse', (_message.Message,), {
-  'DESCRIPTOR' : _NEWDATASETRESPONSE,
-  '__module__' : 'protos.metadata_service_pb2'
-  # @@protoc_insertion_point(class_scope:protos.metadata_service.NewDatasetResponse)
-  })
-_sym_db.RegisterMessage(NewDatasetResponse)
 
 GetDataclayIDResponse = _reflection.GeneratedProtocolMessageType('GetDataclayIDResponse', (_message.Message,), {
   'DESCRIPTOR' : _GETDATACLAYIDRESPONSE,
@@ -113,26 +89,20 @@ if _descriptor._USE_C_DESCRIPTORS == False:
   DESCRIPTOR._options = None
   _NEWACCOUNTREQUEST._serialized_start=87
   _NEWACCOUNTREQUEST._serialized_end=142
-  _NEWACCOUNTRESPONSE._serialized_start=144
-  _NEWACCOUNTRESPONSE._serialized_end=182
-  _GETACCOUNTREQUEST._serialized_start=184
-  _GETACCOUNTREQUEST._serialized_end=221
-  _GETACCOUNTRESPONSE._serialized_start=223
-  _GETACCOUNTRESPONSE._serialized_end=243
-  _NEWSESSIONREQUEST._serialized_start=245
-  _NEWSESSIONREQUEST._serialized_end=325
-  _NEWSESSIONRESPONSE._serialized_start=327
-  _NEWSESSIONRESPONSE._serialized_end=359
-  _CLOSESESSIONREQUEST._serialized_start=361
-  _CLOSESESSIONREQUEST._serialized_end=394
-  _CLOSESESSIONRESPONSE._serialized_start=396
-  _CLOSESESSIONRESPONSE._serialized_end=418
-  _NEWDATASETREQUEST._serialized_start=420
-  _NEWDATASETREQUEST._serialized_end=492
-  _NEWDATASETRESPONSE._serialized_start=494
-  _NEWDATASETRESPONSE._serialized_end=514
-  _GETDATACLAYIDRESPONSE._serialized_start=516
-  _GETDATACLAYIDRESPONSE._serialized_end=560
-  _METADATASERVICE._serialized_start=563
-  _METADATASERVICE._serialized_end=1202
+  _GETACCOUNTREQUEST._serialized_start=144
+  _GETACCOUNTREQUEST._serialized_end=181
+  _GETACCOUNTRESPONSE._serialized_start=183
+  _GETACCOUNTRESPONSE._serialized_end=203
+  _NEWSESSIONREQUEST._serialized_start=205
+  _NEWSESSIONREQUEST._serialized_end=285
+  _NEWSESSIONRESPONSE._serialized_start=287
+  _NEWSESSIONRESPONSE._serialized_end=319
+  _CLOSESESSIONREQUEST._serialized_start=321
+  _CLOSESESSIONREQUEST._serialized_end=354
+  _NEWDATASETREQUEST._serialized_start=356
+  _NEWDATASETREQUEST._serialized_end=428
+  _GETDATACLAYIDRESPONSE._serialized_start=430
+  _GETDATACLAYIDRESPONSE._serialized_end=474
+  _METADATASERVICE._serialized_start=477
+  _METADATASERVICE._serialized_end=1051
 # @@protoc_insertion_point(module_scope)

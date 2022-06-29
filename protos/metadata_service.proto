@@ -7,15 +7,15 @@ import "google/protobuf/empty.proto";
 service MetadataService {
 
     // Account Manager
-    rpc NewAccount(NewAccountRequest) returns (NewAccountResponse) {}
+    rpc NewAccount(NewAccountRequest) returns (google.protobuf.Empty) {}
     rpc GetAccount(GetAccountRequest) returns (GetAccountResponse) {}
 
     // Session Manager
     rpc NewSession(NewSessionRequest) returns (NewSessionResponse) {}
-    rpc CloseSession(CloseSessionRequest) returns (CloseSessionResponse) {}
+    rpc CloseSession(CloseSessionRequest) returns (google.protobuf.Empty) {}
 
     // Dataset Manager
-    rpc NewDataset(NewDatasetRequest) returns (NewDatasetResponse) {}
+    rpc NewDataset(NewDatasetRequest) returns (google.protobuf.Empty) {}
 
     // Federation
     rpc GetDataclayID(google.protobuf.Empty) returns (GetDataclayIDResponse) {}
@@ -28,10 +28,6 @@ service MetadataService {
 message NewAccountRequest {
     string username = 1;
     string password = 2;
-}
-
-message NewAccountResponse {
-    string username = 1;
 }
 
 message GetAccountRequest {
@@ -57,18 +53,12 @@ message CloseSessionRequest {
     string id = 1;
 }
 
-message CloseSessionResponse {
-}
-
 // Dataset Manager
 
 message NewDatasetRequest {
     string username = 1;
     string password = 2;
     string dataset = 3;
-}
-
-message NewDatasetResponse {
 }
 
 // Federation
