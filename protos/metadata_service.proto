@@ -2,6 +2,8 @@ syntax = "proto3";
 
 package protos.metadata_service;
 
+import "google/protobuf/empty.proto";
+
 service MetadataService {
 
     // Account Manager
@@ -15,7 +17,13 @@ service MetadataService {
     // Dataset Manager
     rpc NewDataset(NewDatasetRequest) returns (NewDatasetResponse) {}
 
+    // Federation
+    rpc GetDataclayID(google.protobuf.Empty) returns (GetDataclayIDResponse) {}
+    
+
 }
+
+// Account Manager
 
 message NewAccountRequest {
     string username = 1;
@@ -25,6 +33,15 @@ message NewAccountRequest {
 message NewAccountResponse {
     string username = 1;
 }
+
+message GetAccountRequest {
+    string username = 1;
+}
+
+message GetAccountResponse {
+}
+
+// Session Manager
 
 message NewSessionRequest {
     string username = 1;
@@ -36,12 +53,14 @@ message NewSessionResponse {
     string id = 1;
 }
 
-message GetAccountRequest {
-    string username = 1;
+message CloseSessionRequest {
+    string id = 1;
 }
 
-message GetAccountResponse {
+message CloseSessionResponse {
 }
+
+// Dataset Manager
 
 message NewDatasetRequest {
     string username = 1;
@@ -52,9 +71,8 @@ message NewDatasetRequest {
 message NewDatasetResponse {
 }
 
-message CloseSessionRequest {
-    string id = 1;
-}
+// Federation
 
-message CloseSessionResponse {
+message GetDataclayIDResponse {
+    string dataclay_id = 1;
 }
