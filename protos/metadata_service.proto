@@ -3,6 +3,7 @@ syntax = "proto3";
 package protos.metadata_service;
 
 import "google/protobuf/empty.proto";
+import "protos/common_messages.proto";
 
 service MetadataService {
 
@@ -16,6 +17,9 @@ service MetadataService {
 
     // Dataset Manager
     rpc NewDataset(NewDatasetRequest) returns (google.protobuf.Empty) {}
+
+    // EE-SL information
+	rpc GetAllExecutionEnvironments(GetAllExecutionEnvironmentsRequest) returns (GetAllExecutionEnvironmentsResponse) {}
 
     // Federation
     rpc GetDataclayID(google.protobuf.Empty) returns (GetDataclayIDResponse) {}
@@ -59,6 +63,18 @@ message NewDatasetRequest {
     string username = 1;
     string password = 2;
     string dataset = 3;
+}
+
+// EE-SL information
+
+message GetAllExecutionEnvironmentsRequest {
+	protos.common.Langs language = 1;
+	bool get_external = 2;
+	bool from_backend = 3;
+}
+
+message GetAllExecutionEnvironmentsResponse {
+	map<string, protos.common.ExecutionEnvironmentInfo> execution_environments = 1;
 }
 
 // Federation

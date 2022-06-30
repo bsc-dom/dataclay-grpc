@@ -13,9 +13,10 @@ _sym_db = _symbol_database.Default()
 
 
 from google.protobuf import empty_pb2 as google_dot_protobuf_dot_empty__pb2
+from . import common_messages_pb2 as protos_dot_common__messages__pb2
 
 
-DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\x1dprotos/metadata_service.proto\x12\x17protos.metadata_service\x1a\x1bgoogle/protobuf/empty.proto\"7\n\x11NewAccountRequest\x12\x10\n\x08username\x18\x01 \x01(\t\x12\x10\n\x08password\x18\x02 \x01(\t\"%\n\x11GetAccountRequest\x12\x10\n\x08username\x18\x01 \x01(\t\"\x14\n\x12GetAccountResponse\"P\n\x11NewSessionRequest\x12\x10\n\x08username\x18\x01 \x01(\t\x12\x10\n\x08password\x18\x02 \x01(\t\x12\x17\n\x0f\x64\x65\x66\x61ult_dataset\x18\x03 \x01(\t\" \n\x12NewSessionResponse\x12\n\n\x02id\x18\x01 \x01(\t\"!\n\x13\x43loseSessionRequest\x12\n\n\x02id\x18\x01 \x01(\t\"H\n\x11NewDatasetRequest\x12\x10\n\x08username\x18\x01 \x01(\t\x12\x10\n\x08password\x18\x02 \x01(\t\x12\x0f\n\x07\x64\x61taset\x18\x03 \x01(\t\",\n\x15GetDataclayIDResponse\x12\x13\n\x0b\x64\x61taclay_id\x18\x01 \x01(\t2\xbe\x04\n\x0fMetadataService\x12R\n\nNewAccount\x12*.protos.metadata_service.NewAccountRequest\x1a\x16.google.protobuf.Empty\"\x00\x12g\n\nGetAccount\x12*.protos.metadata_service.GetAccountRequest\x1a+.protos.metadata_service.GetAccountResponse\"\x00\x12g\n\nNewSession\x12*.protos.metadata_service.NewSessionRequest\x1a+.protos.metadata_service.NewSessionResponse\"\x00\x12V\n\x0c\x43loseSession\x12,.protos.metadata_service.CloseSessionRequest\x1a\x16.google.protobuf.Empty\"\x00\x12R\n\nNewDataset\x12*.protos.metadata_service.NewDatasetRequest\x1a\x16.google.protobuf.Empty\"\x00\x12Y\n\rGetDataclayID\x12\x16.google.protobuf.Empty\x1a..protos.metadata_service.GetDataclayIDResponse\"\x00\x62\x06proto3')
+DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\x1dprotos/metadata_service.proto\x12\x17protos.metadata_service\x1a\x1bgoogle/protobuf/empty.proto\x1a\x1cprotos/common_messages.proto\"7\n\x11NewAccountRequest\x12\x10\n\x08username\x18\x01 \x01(\t\x12\x10\n\x08password\x18\x02 \x01(\t\"%\n\x11GetAccountRequest\x12\x10\n\x08username\x18\x01 \x01(\t\"\x14\n\x12GetAccountResponse\"P\n\x11NewSessionRequest\x12\x10\n\x08username\x18\x01 \x01(\t\x12\x10\n\x08password\x18\x02 \x01(\t\x12\x17\n\x0f\x64\x65\x66\x61ult_dataset\x18\x03 \x01(\t\" \n\x12NewSessionResponse\x12\n\n\x02id\x18\x01 \x01(\t\"!\n\x13\x43loseSessionRequest\x12\n\n\x02id\x18\x01 \x01(\t\"H\n\x11NewDatasetRequest\x12\x10\n\x08username\x18\x01 \x01(\t\x12\x10\n\x08password\x18\x02 \x01(\t\x12\x0f\n\x07\x64\x61taset\x18\x03 \x01(\t\"x\n\"GetAllExecutionEnvironmentsRequest\x12&\n\x08language\x18\x01 \x01(\x0e\x32\x14.protos.common.Langs\x12\x14\n\x0cget_external\x18\x02 \x01(\x08\x12\x14\n\x0c\x66rom_backend\x18\x03 \x01(\x08\"\x85\x02\n#GetAllExecutionEnvironmentsResponse\x12w\n\x16\x65xecution_environments\x18\x01 \x03(\x0b\x32W.protos.metadata_service.GetAllExecutionEnvironmentsResponse.ExecutionEnvironmentsEntry\x1a\x65\n\x1a\x45xecutionEnvironmentsEntry\x12\x0b\n\x03key\x18\x01 \x01(\t\x12\x36\n\x05value\x18\x02 \x01(\x0b\x32\'.protos.common.ExecutionEnvironmentInfo:\x02\x38\x01\",\n\x15GetDataclayIDResponse\x12\x13\n\x0b\x64\x61taclay_id\x18\x01 \x01(\t2\xdb\x05\n\x0fMetadataService\x12R\n\nNewAccount\x12*.protos.metadata_service.NewAccountRequest\x1a\x16.google.protobuf.Empty\"\x00\x12g\n\nGetAccount\x12*.protos.metadata_service.GetAccountRequest\x1a+.protos.metadata_service.GetAccountResponse\"\x00\x12g\n\nNewSession\x12*.protos.metadata_service.NewSessionRequest\x1a+.protos.metadata_service.NewSessionResponse\"\x00\x12V\n\x0c\x43loseSession\x12,.protos.metadata_service.CloseSessionRequest\x1a\x16.google.protobuf.Empty\"\x00\x12R\n\nNewDataset\x12*.protos.metadata_service.NewDatasetRequest\x1a\x16.google.protobuf.Empty\"\x00\x12\x9a\x01\n\x1bGetAllExecutionEnvironments\x12;.protos.metadata_service.GetAllExecutionEnvironmentsRequest\x1a<.protos.metadata_service.GetAllExecutionEnvironmentsResponse\"\x00\x12Y\n\rGetDataclayID\x12\x16.google.protobuf.Empty\x1a..protos.metadata_service.GetDataclayIDResponse\"\x00\x62\x06proto3')
 
 
 
@@ -26,6 +27,9 @@ _NEWSESSIONREQUEST = DESCRIPTOR.message_types_by_name['NewSessionRequest']
 _NEWSESSIONRESPONSE = DESCRIPTOR.message_types_by_name['NewSessionResponse']
 _CLOSESESSIONREQUEST = DESCRIPTOR.message_types_by_name['CloseSessionRequest']
 _NEWDATASETREQUEST = DESCRIPTOR.message_types_by_name['NewDatasetRequest']
+_GETALLEXECUTIONENVIRONMENTSREQUEST = DESCRIPTOR.message_types_by_name['GetAllExecutionEnvironmentsRequest']
+_GETALLEXECUTIONENVIRONMENTSRESPONSE = DESCRIPTOR.message_types_by_name['GetAllExecutionEnvironmentsResponse']
+_GETALLEXECUTIONENVIRONMENTSRESPONSE_EXECUTIONENVIRONMENTSENTRY = _GETALLEXECUTIONENVIRONMENTSRESPONSE.nested_types_by_name['ExecutionEnvironmentsEntry']
 _GETDATACLAYIDRESPONSE = DESCRIPTOR.message_types_by_name['GetDataclayIDResponse']
 NewAccountRequest = _reflection.GeneratedProtocolMessageType('NewAccountRequest', (_message.Message,), {
   'DESCRIPTOR' : _NEWACCOUNTREQUEST,
@@ -76,6 +80,28 @@ NewDatasetRequest = _reflection.GeneratedProtocolMessageType('NewDatasetRequest'
   })
 _sym_db.RegisterMessage(NewDatasetRequest)
 
+GetAllExecutionEnvironmentsRequest = _reflection.GeneratedProtocolMessageType('GetAllExecutionEnvironmentsRequest', (_message.Message,), {
+  'DESCRIPTOR' : _GETALLEXECUTIONENVIRONMENTSREQUEST,
+  '__module__' : 'protos.metadata_service_pb2'
+  # @@protoc_insertion_point(class_scope:protos.metadata_service.GetAllExecutionEnvironmentsRequest)
+  })
+_sym_db.RegisterMessage(GetAllExecutionEnvironmentsRequest)
+
+GetAllExecutionEnvironmentsResponse = _reflection.GeneratedProtocolMessageType('GetAllExecutionEnvironmentsResponse', (_message.Message,), {
+
+  'ExecutionEnvironmentsEntry' : _reflection.GeneratedProtocolMessageType('ExecutionEnvironmentsEntry', (_message.Message,), {
+    'DESCRIPTOR' : _GETALLEXECUTIONENVIRONMENTSRESPONSE_EXECUTIONENVIRONMENTSENTRY,
+    '__module__' : 'protos.metadata_service_pb2'
+    # @@protoc_insertion_point(class_scope:protos.metadata_service.GetAllExecutionEnvironmentsResponse.ExecutionEnvironmentsEntry)
+    })
+  ,
+  'DESCRIPTOR' : _GETALLEXECUTIONENVIRONMENTSRESPONSE,
+  '__module__' : 'protos.metadata_service_pb2'
+  # @@protoc_insertion_point(class_scope:protos.metadata_service.GetAllExecutionEnvironmentsResponse)
+  })
+_sym_db.RegisterMessage(GetAllExecutionEnvironmentsResponse)
+_sym_db.RegisterMessage(GetAllExecutionEnvironmentsResponse.ExecutionEnvironmentsEntry)
+
 GetDataclayIDResponse = _reflection.GeneratedProtocolMessageType('GetDataclayIDResponse', (_message.Message,), {
   'DESCRIPTOR' : _GETDATACLAYIDRESPONSE,
   '__module__' : 'protos.metadata_service_pb2'
@@ -87,22 +113,30 @@ _METADATASERVICE = DESCRIPTOR.services_by_name['MetadataService']
 if _descriptor._USE_C_DESCRIPTORS == False:
 
   DESCRIPTOR._options = None
-  _NEWACCOUNTREQUEST._serialized_start=87
-  _NEWACCOUNTREQUEST._serialized_end=142
-  _GETACCOUNTREQUEST._serialized_start=144
-  _GETACCOUNTREQUEST._serialized_end=181
-  _GETACCOUNTRESPONSE._serialized_start=183
-  _GETACCOUNTRESPONSE._serialized_end=203
-  _NEWSESSIONREQUEST._serialized_start=205
-  _NEWSESSIONREQUEST._serialized_end=285
-  _NEWSESSIONRESPONSE._serialized_start=287
-  _NEWSESSIONRESPONSE._serialized_end=319
-  _CLOSESESSIONREQUEST._serialized_start=321
-  _CLOSESESSIONREQUEST._serialized_end=354
-  _NEWDATASETREQUEST._serialized_start=356
-  _NEWDATASETREQUEST._serialized_end=428
-  _GETDATACLAYIDRESPONSE._serialized_start=430
-  _GETDATACLAYIDRESPONSE._serialized_end=474
-  _METADATASERVICE._serialized_start=477
-  _METADATASERVICE._serialized_end=1051
+  _GETALLEXECUTIONENVIRONMENTSRESPONSE_EXECUTIONENVIRONMENTSENTRY._options = None
+  _GETALLEXECUTIONENVIRONMENTSRESPONSE_EXECUTIONENVIRONMENTSENTRY._serialized_options = b'8\001'
+  _NEWACCOUNTREQUEST._serialized_start=117
+  _NEWACCOUNTREQUEST._serialized_end=172
+  _GETACCOUNTREQUEST._serialized_start=174
+  _GETACCOUNTREQUEST._serialized_end=211
+  _GETACCOUNTRESPONSE._serialized_start=213
+  _GETACCOUNTRESPONSE._serialized_end=233
+  _NEWSESSIONREQUEST._serialized_start=235
+  _NEWSESSIONREQUEST._serialized_end=315
+  _NEWSESSIONRESPONSE._serialized_start=317
+  _NEWSESSIONRESPONSE._serialized_end=349
+  _CLOSESESSIONREQUEST._serialized_start=351
+  _CLOSESESSIONREQUEST._serialized_end=384
+  _NEWDATASETREQUEST._serialized_start=386
+  _NEWDATASETREQUEST._serialized_end=458
+  _GETALLEXECUTIONENVIRONMENTSREQUEST._serialized_start=460
+  _GETALLEXECUTIONENVIRONMENTSREQUEST._serialized_end=580
+  _GETALLEXECUTIONENVIRONMENTSRESPONSE._serialized_start=583
+  _GETALLEXECUTIONENVIRONMENTSRESPONSE._serialized_end=844
+  _GETALLEXECUTIONENVIRONMENTSRESPONSE_EXECUTIONENVIRONMENTSENTRY._serialized_start=743
+  _GETALLEXECUTIONENVIRONMENTSRESPONSE_EXECUTIONENVIRONMENTSENTRY._serialized_end=844
+  _GETDATACLAYIDRESPONSE._serialized_start=846
+  _GETDATACLAYIDRESPONSE._serialized_end=890
+  _METADATASERVICE._serialized_start=893
+  _METADATASERVICE._serialized_end=1624
 # @@protoc_insertion_point(module_scope)

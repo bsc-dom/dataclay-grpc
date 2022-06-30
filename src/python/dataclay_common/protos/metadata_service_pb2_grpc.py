@@ -40,6 +40,11 @@ class MetadataServiceStub(object):
                 request_serializer=protos_dot_metadata__service__pb2.NewDatasetRequest.SerializeToString,
                 response_deserializer=google_dot_protobuf_dot_empty__pb2.Empty.FromString,
                 )
+        self.GetAllExecutionEnvironments = channel.unary_unary(
+                '/protos.metadata_service.MetadataService/GetAllExecutionEnvironments',
+                request_serializer=protos_dot_metadata__service__pb2.GetAllExecutionEnvironmentsRequest.SerializeToString,
+                response_deserializer=protos_dot_metadata__service__pb2.GetAllExecutionEnvironmentsResponse.FromString,
+                )
         self.GetDataclayID = channel.unary_unary(
                 '/protos.metadata_service.MetadataService/GetDataclayID',
                 request_serializer=google_dot_protobuf_dot_empty__pb2.Empty.SerializeToString,
@@ -83,6 +88,13 @@ class MetadataServiceServicer(object):
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
+    def GetAllExecutionEnvironments(self, request, context):
+        """EE-SL information
+        """
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
     def GetDataclayID(self, request, context):
         """Federation
         """
@@ -117,6 +129,11 @@ def add_MetadataServiceServicer_to_server(servicer, server):
                     servicer.NewDataset,
                     request_deserializer=protos_dot_metadata__service__pb2.NewDatasetRequest.FromString,
                     response_serializer=google_dot_protobuf_dot_empty__pb2.Empty.SerializeToString,
+            ),
+            'GetAllExecutionEnvironments': grpc.unary_unary_rpc_method_handler(
+                    servicer.GetAllExecutionEnvironments,
+                    request_deserializer=protos_dot_metadata__service__pb2.GetAllExecutionEnvironmentsRequest.FromString,
+                    response_serializer=protos_dot_metadata__service__pb2.GetAllExecutionEnvironmentsResponse.SerializeToString,
             ),
             'GetDataclayID': grpc.unary_unary_rpc_method_handler(
                     servicer.GetDataclayID,
@@ -215,6 +232,23 @@ class MetadataService(object):
         return grpc.experimental.unary_unary(request, target, '/protos.metadata_service.MetadataService/NewDataset',
             protos_dot_metadata__service__pb2.NewDatasetRequest.SerializeToString,
             google_dot_protobuf_dot_empty__pb2.Empty.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def GetAllExecutionEnvironments(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/protos.metadata_service.MetadataService/GetAllExecutionEnvironments',
+            protos_dot_metadata__service__pb2.GetAllExecutionEnvironmentsRequest.SerializeToString,
+            protos_dot_metadata__service__pb2.GetAllExecutionEnvironmentsResponse.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 

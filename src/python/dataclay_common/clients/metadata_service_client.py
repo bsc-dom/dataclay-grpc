@@ -50,6 +50,18 @@ class MDSClient:
         )
         self.stub.NewDataset(request)
 
+    # EE-SL information
+
+    def get_all_execution_environments(self, language, get_external=True, from_backend=False):
+        request = metadata_service_pb2.GetAllExecutionEnvironmentsRequest(
+            language=language,
+            get_external=get_external,
+            from_backend=from_backend
+        )
+        response = self.stub.GetAllExecutionEnvironments(request)
+        return response
+
+
     # Federation
 
     def get_dataclay_id(self):
