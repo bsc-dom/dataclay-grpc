@@ -6,25 +6,27 @@ import "google/protobuf/empty.proto";
 import "protos/common_messages.proto";
 
 service MetadataService {
-
+    
     // Account Manager
     rpc NewAccount(NewAccountRequest) returns (google.protobuf.Empty) {}
     rpc GetAccount(GetAccountRequest) returns (GetAccountResponse) {}
-
+    
     // Session Manager
     rpc NewSession(NewSessionRequest) returns (NewSessionResponse) {}
     rpc CloseSession(CloseSessionRequest) returns (google.protobuf.Empty) {}
 
     // Dataset Manager
     rpc NewDataset(NewDatasetRequest) returns (google.protobuf.Empty) {}
-
+    
     // EE-SL information
 	rpc GetAllExecutionEnvironments(GetAllExecutionEnvironmentsRequest) returns (GetAllExecutionEnvironmentsResponse) {}
-
+    
     // Federation
     rpc GetDataclayID(google.protobuf.Empty) returns (GetDataclayIDResponse) {}
     
-
+    // Autoregister
+    rpc AutoregisterEE(AutoRegisterEERequest) returns (google.protobuf.Empty) {}
+    
 }
 
 // Account Manager
@@ -81,4 +83,13 @@ message GetAllExecutionEnvironmentsResponse {
 
 message GetDataclayIDResponse {
     string dataclay_id = 1;
+}
+
+// Autoregister
+message AutoRegisterEERequest {
+	string id = 1;
+	string name = 2;
+	string hostname = 3;
+	int32 port = 4;
+	protos.common.Langs lang = 5;
 }

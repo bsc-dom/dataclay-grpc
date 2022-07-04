@@ -50,6 +50,11 @@ class MetadataServiceStub(object):
                 request_serializer=google_dot_protobuf_dot_empty__pb2.Empty.SerializeToString,
                 response_deserializer=protos_dot_metadata__service__pb2.GetDataclayIDResponse.FromString,
                 )
+        self.AutoregisterEE = channel.unary_unary(
+                '/protos.metadata_service.MetadataService/AutoregisterEE',
+                request_serializer=protos_dot_metadata__service__pb2.AutoRegisterEERequest.SerializeToString,
+                response_deserializer=google_dot_protobuf_dot_empty__pb2.Empty.FromString,
+                )
 
 
 class MetadataServiceServicer(object):
@@ -102,6 +107,13 @@ class MetadataServiceServicer(object):
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
+    def AutoregisterEE(self, request, context):
+        """Autoregister
+        """
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
 
 def add_MetadataServiceServicer_to_server(servicer, server):
     rpc_method_handlers = {
@@ -139,6 +151,11 @@ def add_MetadataServiceServicer_to_server(servicer, server):
                     servicer.GetDataclayID,
                     request_deserializer=google_dot_protobuf_dot_empty__pb2.Empty.FromString,
                     response_serializer=protos_dot_metadata__service__pb2.GetDataclayIDResponse.SerializeToString,
+            ),
+            'AutoregisterEE': grpc.unary_unary_rpc_method_handler(
+                    servicer.AutoregisterEE,
+                    request_deserializer=protos_dot_metadata__service__pb2.AutoRegisterEERequest.FromString,
+                    response_serializer=google_dot_protobuf_dot_empty__pb2.Empty.SerializeToString,
             ),
     }
     generic_handler = grpc.method_handlers_generic_handler(
@@ -266,5 +283,22 @@ class MetadataService(object):
         return grpc.experimental.unary_unary(request, target, '/protos.metadata_service.MetadataService/GetDataclayID',
             google_dot_protobuf_dot_empty__pb2.Empty.SerializeToString,
             protos_dot_metadata__service__pb2.GetDataclayIDResponse.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def AutoregisterEE(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/protos.metadata_service.MetadataService/AutoregisterEE',
+            protos_dot_metadata__service__pb2.AutoRegisterEERequest.SerializeToString,
+            google_dot_protobuf_dot_empty__pb2.Empty.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)

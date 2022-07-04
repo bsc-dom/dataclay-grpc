@@ -67,3 +67,15 @@ class MDSClient:
     def get_dataclay_id(self):
         response = self.stub.GetDataclayID(Empty())
         return response.dataclay_id
+
+    # Autoregister
+
+    def autoregister_ee(self, id, name, hostname, port, lang):
+        request = metadata_service_pb2.AutoRegisterEERequest(
+            id=id,
+            name=name,
+            hostname=hostname,
+            port=port,
+            lang=lang
+        )
+        self.stub.AutoregisterEE(request)
