@@ -76,7 +76,7 @@ message GetAllExecutionEnvironmentsRequest {
 }
 
 message GetAllExecutionEnvironmentsResponse {
-	map<string, protos.common.ExecutionEnvironmentInfo> execution_environments = 1;
+	map<string, protos.common.ExecutionEnvironment> exe_envs = 1;
 }
 
 // Federation

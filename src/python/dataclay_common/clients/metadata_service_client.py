@@ -6,6 +6,7 @@ from google.protobuf.empty_pb2 import Empty
 
 from dataclay_common.protos import metadata_service_pb2_grpc
 from dataclay_common.protos import metadata_service_pb2
+from dataclay_common.managers.dataclay_manager import ExecutionEnvironment
 
 logger = logging.getLogger(__name__)
 
@@ -59,7 +60,11 @@ class MDSClient:
             from_backend=from_backend
         )
         response = self.stub.GetAllExecutionEnvironments(request)
-        return response
+
+        result = dict()
+        for id, proto in response.exe_envs.items():
+                result[id] = ExecutionEnvironment.from_proto(proto)
+        return result
 
 
     # Federation

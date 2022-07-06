@@ -134,3 +134,14 @@ message GetNumObjectsResponse {
 	int32 numObjs = 1;
 	protos.common.ExceptionInfo excInfo = 2;
 }
+
+// New
+
+message ExecutionEnvironment {
+	string id = 1;
+	string hostname = 2;
+	string name = 3;
+	int32 port = 4;
+	Langs language = 5;
+	string dataClayInstanceID = 6;
+}
