@@ -143,5 +143,5 @@ message ExecutionEnvironment {
 	string name = 3;
 	int32 port = 4;
 	Langs language = 5;
-	string dataClayInstanceID = 6;
+	string dataclay_id = 6;
 }

@@ -73,6 +73,7 @@ class MDSClient:
         response = self.stub.GetDataclayID(Empty())
         return response.dataclay_id
 
+
     # Autoregister
 
     def autoregister_ee(self, id, name, hostname, port, lang):

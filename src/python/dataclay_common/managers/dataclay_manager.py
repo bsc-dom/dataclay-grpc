@@ -2,16 +2,18 @@ import json
 import uuid
 
 from dataclay_common.protos import common_messages_pb2
+from dataclay_common.protos.common_messages_pb2 import LANG_NONE
 
 
 class ExecutionEnvironment:
-    def __init__(self, id, hostname, name, port, language):
+    def __init__(self, id, name, hostname, port, language, dataclay_id):
         # TODO: Create new uuid if id is none
         self.id = id
-        self.hostname = hostname
         self.name = name
+        self.hostname = hostname
         self.port = port
         self.language = language
+        self.dataclay_id = dataclay_id
 
     def key(self):
         return f'/executionenvironment/{self.id}'
@@ -26,7 +28,8 @@ class ExecutionEnvironment:
                       value['hostname'],
                       value['name'],
                       value['port'],
-                      value['language'])
+                      value['language'],
+                      value['dataclay_id'])
         return exe_env
 
     @classmethod
@@ -35,7 +38,8 @@ class ExecutionEnvironment:
                       proto.hostname,
                       proto.name,
                       proto.port,
-                      proto.language)
+                      proto.language,
+                      proto.dataclay_id)
         return exe_env
 
     # TODO: Improve it with __getattributes__ and interface
@@ -45,7 +49,8 @@ class ExecutionEnvironment:
             hostname=self.hostname,
             name=self.name,
             port=self.port,
-            language=self.language)
+            language=self.language,
+            dataclay_id=self.dataclay_id)
 
 
 class DataclayManager:
@@ -60,7 +65,7 @@ class DataclayManager:
 
         self.etcd_client.put(exe_env.key(), exe_env.value())
 
-    def get_all_execution_environments(self):
+    def get_all_execution_environments(self, lang=None):
         """Get all execution environments"""
 
         prefix = '/executionenvironment/'
@@ -68,7 +73,9 @@ class DataclayManager:
         exe_envs = dict()
         for value, metadata in values:
             key = metadata.key.decode().split('/')[-1]
-            exe_envs[key] = ExecutionEnvironment.from_json(value)
+            exe_env = ExecutionEnvironment.from_json(value)
+            if (lang is None or lang == LANG_NONE or exe_env.language == lang):
+                exe_envs[key] = exe_env
         return exe_envs
 
     def exists_ee(self, id):
