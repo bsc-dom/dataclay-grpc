@@ -42,9 +42,7 @@ class MDSClient:
     ###################
 
     def new_account(self, username, password):
-        request = metadata_service_pb2.NewAccountRequest(
-            username=username, password=password
-        )
+        request = metadata_service_pb2.NewAccountRequest(username=username, password=password)
         self.stub.NewAccount(request)
 
     ###################
@@ -61,9 +59,7 @@ class MDSClient:
     # EE-SL information #
     #####################
 
-    def get_all_execution_environments(
-        self, language, get_external=True, from_backend=False
-    ):
+    def get_all_execution_environments(self, language, get_external=True, from_backend=False):
         request = metadata_service_pb2.GetAllExecutionEnvironmentsRequest(
             language=language, get_external=get_external, from_backend=from_backend
         )

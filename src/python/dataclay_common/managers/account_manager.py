@@ -6,8 +6,7 @@ logger = logging.getLogger(__name__)
 
 # TODO: Extend class to generic with key(), value(), ...
 class Account:
-    def __init__(self, username, password=None,
-                 role='NORMAL', namespaces=[], datasets=[]):
+    def __init__(self, username, password=None, role="NORMAL", namespaces=[], datasets=[]):
         # TODO: Remove namespaces from account?
         self.username = username
         self.password = password
@@ -18,11 +17,13 @@ class Account:
     @classmethod
     def from_json(cls, s):
         value = json.loads(s)
-        account = cls(value['username'],
-                      password=value['password'],
-                      role=value['role'],
-                      namespaces=value['namespaces'],
-                      datasets=value['datasets'])
+        account = cls(
+            value["username"],
+            password=value["password"],
+            role=value["role"],
+            namespaces=value["namespaces"],
+            datasets=value["datasets"],
+        )
         return account
 
     def validate(self, password, role=None):
@@ -34,7 +35,7 @@ class Account:
         return True
 
     def key(self):
-        return f'/account/{self.username}'
+        return f"/account/{self.username}"
 
     def value(self):
         return json.dumps(self.__dict__)
@@ -42,7 +43,7 @@ class Account:
 
 class AccountManager:
 
-    lock = 'lock_account'
+    lock = "lock_account"
 
     def __init__(self, etcd_client):
         self.etcd_client = etcd_client
@@ -52,17 +53,17 @@ class AccountManager:
 
     def get_account(self, username):
         # Get account from etcd and checks that it exists
-        key = f'/account/{username}'
+        key = f"/account/{username}"
         value = self.etcd_client.get(key)[0]
         if value is None:
-            raise Exception(f'Account {username} does not exists!')
+            raise Exception(f"Account {username} does not exists!")
 
         return Account.from_json(value)
 
     def exists_account(self, username):
-        """"Returns ture if the account exists"""
+        """ "Returns ture if the account exists"""
 
-        key = f'/account/{username}'
+        key = f"/account/{username}"
         value = self.etcd_client.get(key)[0]
         return value is not None
 
@@ -71,5 +72,5 @@ class AccountManager:
 
         with self.etcd_client.lock(self.lock):
             if self.exists_account(account.username):
-                raise Exception(f'Account {account.username} already exists!')
+                raise Exception(f"Account {account.username} already exists!")
             self.put_account(account)
