@@ -4,12 +4,18 @@ import uuid
 
 class Dataset:
     def __init__(self, name, owner, is_public=False):
+        """
+        Args:
+            name: Name of the dataset.
+            owner: Username of the dataset owner.
+            is_public: If dataset has public access.
+        """
         self.name = name
         self.owner = owner
         self.is_public = is_public
 
     def key(self):
-        return f'/dataset/{self.name}'
+        return f"/dataset/{self.name}"
 
     def value(self):
         return json.dumps(self.__dict__)
@@ -17,13 +23,13 @@ class Dataset:
     @classmethod
     def from_json(cls, s):
         value = json.loads(s)
-        dataset = cls(value['name'], value['owner'],
-            is_public=value['is_public'])
+        dataset = cls(value["name"], value["owner"], is_public=value["is_public"])
         return dataset
+
 
 class DatasetManager:
 
-    lock = 'lock_dataset'
+    lock = "lock_dataset"
 
     def __init__(self, etcd_client):
         self.etcd_client = etcd_client
@@ -34,18 +40,17 @@ class DatasetManager:
 
     def get_dataset(self, name):
         # Get dataset from etcd and checks that it exists
-        key = f'/dataset/{name}'
+        key = f"/dataset/{name}"
         value = self.etcd_client.get(key)[0]
         if value is None:
-            raise Exception(f'Dataset {name} does not exists!')
+            raise Exception(f"Dataset {name} does not exists!")
 
         return Dataset.from_json(value)
 
-
     def exists_dataset(self, name):
-        """"Returns true if dataset exists"""
+        """ "Returns true if dataset exists"""
 
-        key = f'/dataset/{name}'
+        key = f"/dataset/{name}"
         value = self.etcd_client.get(key)[0]
         return value is not None
 
@@ -54,5 +59,5 @@ class DatasetManager:
 
         with self.etcd_client.lock(self.lock):
             if self.exists_dataset(dataset.name):
-                raise Exception(f'Dataset {dataset.name} already exists!')
+                raise Exception(f"Dataset {dataset.name} already exists!")
             self.put_dataset(dataset)

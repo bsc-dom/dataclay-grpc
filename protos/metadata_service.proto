@@ -26,10 +26,15 @@ service MetadataService {
     
     // Autoregister
     rpc AutoregisterEE(AutoRegisterEERequest) returns (google.protobuf.Empty) {}
-    
+
+    // Object Metadata
+	rpc RegisterObjects(RegisterObjectsRequest) returns (RegisterObjectsResponse) {}
+
 }
 
+// ***************
 // Account Manager
+// ***************
 
 message NewAccountRequest {
     string username = 1;
@@ -43,7 +48,9 @@ message GetAccountRequest {
 message GetAccountResponse {
 }
 
+// ***************
 // Session Manager
+// ***************
 
 message NewSessionRequest {
     string username = 1;
@@ -59,7 +66,9 @@ message CloseSessionRequest {
     string id = 1;
 }
 
+// ***************
 // Dataset Manager
+// ***************
 
 message NewDatasetRequest {
     string username = 1;
@@ -67,7 +76,9 @@ message NewDatasetRequest {
     string dataset = 3;
 }
 
+// *****************
 // EE-SL information
+// *****************
 
 message GetAllExecutionEnvironmentsRequest {
 	protos.common.Langs language = 1;
@@ -79,17 +90,35 @@ message GetAllExecutionEnvironmentsResponse {
 	map<string, protos.common.ExecutionEnvironment> exe_envs = 1;
 }
 
+// **********
 // Federation
+// **********
 
 message GetDataclayIDResponse {
     string dataclay_id = 1;
 }
 
+// ************
 // Autoregister
+// ************
 message AutoRegisterEERequest {
 	string id = 1;
 	string name = 2;
 	string hostname = 3;
 	int32 port = 4;
 	protos.common.Langs lang = 5;
+}
+
+// ***************
+// Object Metadata
+// ***************
+
+message RegisterObjectsRequest {
+	repeated protos.common.ObjectRegisterInfo objects_info = 1;
+	string backend_id = 2;
+	protos.common.Langs lang = 3;
+}
+
+message RegisterObjectsResponse {
+	repeated string objects_id = 1;
 }

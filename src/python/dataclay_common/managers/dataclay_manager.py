@@ -16,7 +16,7 @@ class ExecutionEnvironment:
         self.dataclay_id = dataclay_id
 
     def key(self):
-        return f'/executionenvironment/{self.id}'
+        return f"/executionenvironment/{self.id}"
 
     def value(self):
         return json.dumps(self.__dict__)
@@ -24,22 +24,26 @@ class ExecutionEnvironment:
     @classmethod
     def from_json(cls, s):
         value = json.loads(s)
-        exe_env = cls(value['id'],
-                      value['hostname'],
-                      value['name'],
-                      value['port'],
-                      value['language'],
-                      value['dataclay_id'])
+        exe_env = cls(
+            value["id"],
+            value["hostname"],
+            value["name"],
+            value["port"],
+            value["language"],
+            value["dataclay_id"],
+        )
         return exe_env
 
     @classmethod
     def from_proto(cls, proto):
-        exe_env = cls(proto.id,
-                      proto.hostname,
-                      proto.name,
-                      proto.port,
-                      proto.language,
-                      proto.dataclay_id)
+        exe_env = cls(
+            proto.id,
+            proto.hostname,
+            proto.name,
+            proto.port,
+            proto.language,
+            proto.dataclay_id,
+        )
         return exe_env
 
     # TODO: Improve it with __getattributes__ and interface
@@ -50,12 +54,13 @@ class ExecutionEnvironment:
             name=self.name,
             port=self.port,
             language=self.language,
-            dataclay_id=self.dataclay_id)
+            dataclay_id=self.dataclay_id,
+        )
 
 
 class DataclayManager:
 
-    lock = 'lock_dataclay'
+    lock = "lock_dataclay"
 
     def __init__(self, etcd_client):
         self.etcd_client = etcd_client
@@ -68,20 +73,20 @@ class DataclayManager:
     def get_all_execution_environments(self, lang=None):
         """Get all execution environments"""
 
-        prefix = '/executionenvironment/'
+        prefix = "/executionenvironment/"
         values = self.etcd_client.get_prefix(prefix)
         exe_envs = dict()
         for value, metadata in values:
-            key = metadata.key.decode().split('/')[-1]
+            key = metadata.key.decode().split("/")[-1]
             exe_env = ExecutionEnvironment.from_json(value)
-            if (lang is None or lang == LANG_NONE or exe_env.language == lang):
+            if lang is None or lang == LANG_NONE or exe_env.language == lang:
                 exe_envs[key] = exe_env
         return exe_envs
 
     def exists_ee(self, id):
-        """"Returns true if the execution environment exists"""
+        """ "Returns true if the execution environment exists"""
 
-        key = f'/executionenvironment/{id}'
+        key = f"/executionenvironment/{id}"
         value = self.etcd_client.get(key)[0]
         return value is not None
 
@@ -90,5 +95,5 @@ class DataclayManager:
 
         with self.etcd_client.lock(self.lock):
             if self.exists_ee(exe_env.id):
-                raise Exception(f'ExecutionEnvironment {exe_env.id} already exists!')
+                raise Exception(f"ExecutionEnvironment {exe_env.id} already exists!")
             self.put_ee(exe_env)
