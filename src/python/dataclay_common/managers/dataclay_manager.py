@@ -26,8 +26,8 @@ class ExecutionEnvironment:
         value = json.loads(s)
         exe_env = cls(
             value["id"],
-            value["hostname"],
             value["name"],
+            value["hostname"],
             value["port"],
             value["language"],
             value["dataclay_id"],
@@ -38,8 +38,8 @@ class ExecutionEnvironment:
     def from_proto(cls, proto):
         exe_env = cls(
             proto.id,
-            proto.hostname,
             proto.name,
+            proto.hostname,
             proto.port,
             proto.language,
             proto.dataclay_id,
@@ -50,8 +50,8 @@ class ExecutionEnvironment:
     def get_proto(self):
         return common_messages_pb2.ExecutionEnvironment(
             id=self.id,
-            hostname=self.hostname,
             name=self.name,
+            hostname=self.hostname,
             port=self.port,
             language=self.language,
             dataclay_id=self.dataclay_id,

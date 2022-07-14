@@ -29,6 +29,7 @@ service MetadataService {
 
     // Object Metadata
 	rpc RegisterObjects(RegisterObjectsRequest) returns (RegisterObjectsResponse) {}
+	rpc RegisterObject(RegisterObjectRequest) returns (google.protobuf.Empty) {}
 
 }
 
@@ -121,4 +122,9 @@ message RegisterObjectsRequest {
 
 message RegisterObjectsResponse {
 	repeated string objects_id = 1;
+}
+
+message RegisterObjectRequest {
+	protos.common.ObjectMetadata object_md = 1;
+	string session_id = 2;
 }

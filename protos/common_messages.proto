@@ -139,8 +139,8 @@ message GetNumObjectsResponse {
 
 message ExecutionEnvironment {
 	string id = 1;
-	string hostname = 2;
-	string name = 3;
+	string name = 2;
+	string hostname = 3;
 	int32 port = 4;
 	Langs language = 5;
 	string dataclay_id = 6;
@@ -152,4 +152,15 @@ message ObjectRegisterInfo {
 	string session_id = 3;
 	string dataset_name = 4;
 	string alias = 5;
+}
+
+message ObjectMetadata {
+	string id = 1;
+	string alias_name = 2;
+	string dataset_name = 3;
+	string class_id = 4;
+	repeated string execution_environment_ids = 5;
+	Langs language = 6;
+	string owner = 7;
+	bool is_read_only = 8;
 }

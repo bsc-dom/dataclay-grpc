@@ -8,6 +8,7 @@ from dataclay_common.protos import metadata_service_pb2_grpc
 from dataclay_common.protos import metadata_service_pb2
 from dataclay_common.protos import common_messages_pb2
 from dataclay_common.managers.dataclay_manager import ExecutionEnvironment
+from dataclay_common.managers.object_manager import ObjectMetadata
 
 logger = logging.getLogger(__name__)
 
@@ -107,9 +108,10 @@ class MDSClient:
         request = metadata_service_pb2.RegisterObjectsRequest(
             objects_info=objects_info, backend_id=str(backend_id), lang=lang
         )
-        response = self.stub.RegisterObjects(request)
+        self.stub.RegisterObjects(request)
 
-        # result = list()
-        # for oid in response.objectIDs:
-        #     result.append(Utils.get_id(oid))
-        # return result
+    def register_object(self, object_md, session_id):
+        request = metadata_service_pb2.RegisterObjectRequest(
+            object_md=object_md.get_proto(), session_id=session_id
+        )
+        self.stub.RegisterObject(request)

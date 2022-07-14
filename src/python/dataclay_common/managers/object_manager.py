@@ -39,36 +39,65 @@ class ObjectMetadata:
     def __init__(
         self,
         id,
-        class_id,
+        alias_name,
         dataset_name,
-        execution_environments_id,
-        lang,
+        class_id,
+        execution_environment_ids,
+        language,
         owner,
         is_read_only=False,
-        alias=None,
     ):
-        """
-        Args:
-            id: Object id.
-            class_id: Object's class id.
-            dataset_name: Object's dataset name.
-            execution_environments_id: List of execution environments where the object is stored
-            is_read_only: If object is read only
-            alias: Object's alias
-            lang: Object's language
-            owner: Username of object's owner account
-        """
         self.id = id
-        self.class_id = class_id
+        self.alias_name = alias_name
         self.dataset_name = dataset_name
-        self.execution_environments_id = execution_environments_id
-        self.lang = lang
+        self.class_id = class_id
+        self.execution_environment_ids = execution_environment_ids
+        self.language = language
         self.owner = owner
         self.is_read_only = is_read_only
-        self.alias = alias
 
     def key(self):
         return f"/object/{self.id}"
+
+    def value(self):
+        return json.dumps(self.__dict__)
+
+    @classmethod
+    def from_proto(cls, proto):
+        object_md = cls(
+            proto.id,
+            proto.alias_name,
+            proto.dataset_name,
+            proto.class_id,
+            list(proto.execution_environment_ids),
+            proto.language,
+            proto.owner,
+            proto.is_read_only,
+        )
+        return object_md
+
+    def get_proto(self):
+        return common_messages_pb2.ObjectMetadata(
+            id=str(self.id),
+            alias_name=self.alias_name,
+            dataset_name=self.dataset_name,
+            class_id=str(self.class_id),
+            execution_environment_ids=self.execution_environment_ids,
+            language=self.language,
+            owner=self.owner,
+            is_read_only=self.is_read_only,
+        )
+
+
+class Alias:
+    def __init__(self, name, dataset_name, object_id):
+        """Return an instance of an Alias"""
+        self.name = name
+        self.dataset_name = dataset_name
+        self.object_id = object_id
+
+    def key(self):
+        return f"/alias/{self.dataset_name}/{self.name}"
 
     def value(self):
         return json.dumps(self.__dict__)
@@ -83,3 +112,6 @@ class ObjectManager:
 
     def register_object(self, object_metadata):
         self.etcd_client.put(object_metadata.key(), object_metadata.value())
+
+    def put(self, o):
+        self.etcd_client.put(o.key(), o.value())
