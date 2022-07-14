@@ -3,36 +3,7 @@ import uuid
 
 from dataclay_common.protos import common_messages_pb2
 from dataclay_common.protos.common_messages_pb2 import LANG_NONE
-
-
-class ObjectRegisterInfo:
-    def __init__(self, object_id, class_id, session_id, dataset_name, alias):
-        # TODO: Create new uuid if id is none
-        self.object_id = object_id
-        self.class_id = class_id
-        self.session_id = session_id
-        self.dataset_name = dataset_name
-        self.alias = alias
-
-    @classmethod
-    def from_proto(cls, proto):
-        object_reg_info = cls(
-            proto.object_id,
-            proto.class_id,
-            proto.session_id,
-            proto.dataset_name,
-            proto.alias,
-        )
-        return object_reg_info
-
-    def get_proto(self):
-        return common_messages_pb2.ObjectRegisterInfo(
-            object_id=self.object_id,
-            class_id=self.class_id,
-            session_id=self.session_id,
-            dataset_name=self.dataset_name,
-            alias=self.alias,
-        )
+from dataclay_common.exceptions.exceptions import *
 
 
 class ObjectMetadata:
@@ -88,6 +59,21 @@ class ObjectMetadata:
             is_read_only=self.is_read_only,
         )
 
+    @classmethod
+    def from_json(cls, s):
+        value = json.loads(s)
+        object_md = cls(
+            value["id"],
+            value["alias_name"],
+            value["dataset_name"],
+            value["class_id"],
+            value["execution_environment_ids"],
+            value["language"],
+            value["owner"],
+            value["is_read_only"],
+        )
+        return object_md
+
 
 class Alias:
     def __init__(self, name, dataset_name, object_id):
@@ -102,6 +88,12 @@ class Alias:
     def value(self):
         return json.dumps(self.__dict__)
 
+    @classmethod
+    def from_json(cls, s):
+        value = json.loads(s)
+        alias = cls(value["name"], value["dataset_name"], value["object_id"])
+        return alias
+
 
 class ObjectManager:
 
@@ -115,3 +107,29 @@ class ObjectManager:
 
     def put(self, o):
         self.etcd_client.put(o.key(), o.value())
+
+    def get_alias(self, alias_name, dataset_name):
+        # Get dataset from etcd and checks that it exists
+        key = f"/alias/{dataset_name}/{alias_name}"
+        value = self.etcd_client.get(key)[0]
+        if value is None:
+            raise AliasDoesNotExistError
+
+        return Alias.from_json(value)
+
+    def get_object_md(self, object_id):
+        # Get dataset from etcd and checks that it exists
+        key = f"/object/{object_id}"
+        value = self.etcd_client.get(key)[0]
+        if value is None:
+            raise ObjectDoesNotExistError
+
+        return ObjectMetadata.from_json(value)
+
+    def new_alias(self, alias):
+        """Creates a new alias and checks that the alias doesn't exists"""
+
+        with self.etcd_client.lock(self.lock):
+            if self.etcd_client.get(alias.key())[0] is not None:
+                raise AliasAlreadyExistError
+            self.put(alias)

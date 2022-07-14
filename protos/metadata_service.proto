@@ -28,8 +28,9 @@ service MetadataService {
     rpc AutoregisterEE(AutoRegisterEERequest) returns (google.protobuf.Empty) {}
 
     // Object Metadata
-	rpc RegisterObjects(RegisterObjectsRequest) returns (RegisterObjectsResponse) {}
 	rpc RegisterObject(RegisterObjectRequest) returns (google.protobuf.Empty) {}
+    rpc GetObjectFromAlias(GetObjectFromAliasRequest) returns (GetObjectFromAliasResponse) {}
+
 
 }
 
@@ -114,17 +115,19 @@ message AutoRegisterEERequest {
 // Object Metadata
 // ***************
 
-message RegisterObjectsRequest {
-	repeated protos.common.ObjectRegisterInfo objects_info = 1;
-	string backend_id = 2;
-	protos.common.Langs lang = 3;
-}
-
-message RegisterObjectsResponse {
-	repeated string objects_id = 1;
-}
-
 message RegisterObjectRequest {
-	protos.common.ObjectMetadata object_md = 1;
-	string session_id = 2;
+	string session_id = 1;
+	protos.common.ObjectMetadata object_md = 2;
+}
+
+message GetObjectFromAliasRequest {
+	string session_id = 1;
+	string alias_name = 2;
+    string dataset_name = 3;
+}
+
+message GetObjectFromAliasResponse {
+	string object_id = 1;
+	string class_id = 2;
+	string hint = 3;
 }

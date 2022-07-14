@@ -69,3 +69,37 @@ class SessionAlreadyExistError(SessionError):
 
 class SessionIsNotActiveError(SessionError):
     pass
+
+
+###########
+# Alias #
+###########
+
+
+class AliasError(DataClayException):
+    pass
+
+
+class AliasDoesNotExistError(AliasError):
+    pass
+
+
+class AliasAlreadyExistError(AliasError):
+    pass
+
+
+###########
+# Object #
+###########
+
+
+class ObjectError(DataClayException):
+    pass
+
+
+class ObjectDoesNotExistError(ObjectError):
+    pass
+
+
+class ObjectAlreadyExistError(ObjectError):
+    pass

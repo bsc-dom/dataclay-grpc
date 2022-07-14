@@ -55,15 +55,15 @@ class MetadataServiceStub(object):
                 request_serializer=protos_dot_metadata__service__pb2.AutoRegisterEERequest.SerializeToString,
                 response_deserializer=google_dot_protobuf_dot_empty__pb2.Empty.FromString,
                 )
-        self.RegisterObjects = channel.unary_unary(
-                '/protos.metadata_service.MetadataService/RegisterObjects',
-                request_serializer=protos_dot_metadata__service__pb2.RegisterObjectsRequest.SerializeToString,
-                response_deserializer=protos_dot_metadata__service__pb2.RegisterObjectsResponse.FromString,
-                )
         self.RegisterObject = channel.unary_unary(
                 '/protos.metadata_service.MetadataService/RegisterObject',
                 request_serializer=protos_dot_metadata__service__pb2.RegisterObjectRequest.SerializeToString,
                 response_deserializer=google_dot_protobuf_dot_empty__pb2.Empty.FromString,
+                )
+        self.GetObjectFromAlias = channel.unary_unary(
+                '/protos.metadata_service.MetadataService/GetObjectFromAlias',
+                request_serializer=protos_dot_metadata__service__pb2.GetObjectFromAliasRequest.SerializeToString,
+                response_deserializer=protos_dot_metadata__service__pb2.GetObjectFromAliasResponse.FromString,
                 )
 
 
@@ -124,14 +124,14 @@ class MetadataServiceServicer(object):
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
-    def RegisterObjects(self, request, context):
+    def RegisterObject(self, request, context):
         """Object Metadata
         """
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
-    def RegisterObject(self, request, context):
+    def GetObjectFromAlias(self, request, context):
         """Missing associated documentation comment in .proto file."""
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
@@ -180,15 +180,15 @@ def add_MetadataServiceServicer_to_server(servicer, server):
                     request_deserializer=protos_dot_metadata__service__pb2.AutoRegisterEERequest.FromString,
                     response_serializer=google_dot_protobuf_dot_empty__pb2.Empty.SerializeToString,
             ),
-            'RegisterObjects': grpc.unary_unary_rpc_method_handler(
-                    servicer.RegisterObjects,
-                    request_deserializer=protos_dot_metadata__service__pb2.RegisterObjectsRequest.FromString,
-                    response_serializer=protos_dot_metadata__service__pb2.RegisterObjectsResponse.SerializeToString,
-            ),
             'RegisterObject': grpc.unary_unary_rpc_method_handler(
                     servicer.RegisterObject,
                     request_deserializer=protos_dot_metadata__service__pb2.RegisterObjectRequest.FromString,
                     response_serializer=google_dot_protobuf_dot_empty__pb2.Empty.SerializeToString,
+            ),
+            'GetObjectFromAlias': grpc.unary_unary_rpc_method_handler(
+                    servicer.GetObjectFromAlias,
+                    request_deserializer=protos_dot_metadata__service__pb2.GetObjectFromAliasRequest.FromString,
+                    response_serializer=protos_dot_metadata__service__pb2.GetObjectFromAliasResponse.SerializeToString,
             ),
     }
     generic_handler = grpc.method_handlers_generic_handler(
@@ -337,23 +337,6 @@ class MetadataService(object):
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
     @staticmethod
-    def RegisterObjects(request,
-            target,
-            options=(),
-            channel_credentials=None,
-            call_credentials=None,
-            insecure=False,
-            compression=None,
-            wait_for_ready=None,
-            timeout=None,
-            metadata=None):
-        return grpc.experimental.unary_unary(request, target, '/protos.metadata_service.MetadataService/RegisterObjects',
-            protos_dot_metadata__service__pb2.RegisterObjectsRequest.SerializeToString,
-            protos_dot_metadata__service__pb2.RegisterObjectsResponse.FromString,
-            options, channel_credentials,
-            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
-
-    @staticmethod
     def RegisterObject(request,
             target,
             options=(),
@@ -367,5 +350,22 @@ class MetadataService(object):
         return grpc.experimental.unary_unary(request, target, '/protos.metadata_service.MetadataService/RegisterObject',
             protos_dot_metadata__service__pb2.RegisterObjectRequest.SerializeToString,
             google_dot_protobuf_dot_empty__pb2.Empty.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def GetObjectFromAlias(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/protos.metadata_service.MetadataService/GetObjectFromAlias',
+            protos_dot_metadata__service__pb2.GetObjectFromAliasRequest.SerializeToString,
+            protos_dot_metadata__service__pb2.GetObjectFromAliasResponse.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)

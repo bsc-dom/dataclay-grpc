@@ -93,25 +93,15 @@ class MDSClient:
     # Object Metadata #
     ###################
 
-    def register_objects(self, reg_infos, backend_id, lang):
-        objects_info = []
-        for reg_info in reg_infos:
-            object_info = common_messages_pb2.ObjectRegisterInfo(
-                object_id=str(reg_info.object_id),
-                class_id=str(reg_info.class_id),
-                session_id=str(reg_info.store_session_id),
-                dataset_name=str(reg_info.dataset_id),
-                alias=reg_info.alias,
-            )
-            objects_info.append(object_info)
-
-        request = metadata_service_pb2.RegisterObjectsRequest(
-            objects_info=objects_info, backend_id=str(backend_id), lang=lang
-        )
-        self.stub.RegisterObjects(request)
-
-    def register_object(self, object_md, session_id):
+    def register_object(self, session_id, object_md):
         request = metadata_service_pb2.RegisterObjectRequest(
-            object_md=object_md.get_proto(), session_id=session_id
+            session_id=session_id, object_md=object_md.get_proto()
         )
         self.stub.RegisterObject(request)
+
+    def get_object_from_alias(self, session_id, alias_name, dataset_name):
+        request = metadata_service_pb2.GetObjectFromAliasRequest(
+            session_id=session_id, alias_name=alias_name, dataset_name=dataset_name
+        )
+        response = self.stub.GetObjectFromAlias(request)
+        return response.object_id, response.class_id, response.hint

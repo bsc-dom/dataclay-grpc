@@ -16,7 +16,7 @@ from google.protobuf import empty_pb2 as google_dot_protobuf_dot_empty__pb2
 from . import common_messages_pb2 as protos_dot_common__messages__pb2
 
 
-DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\x1dprotos/metadata_service.proto\x12\x17protos.metadata_service\x1a\x1bgoogle/protobuf/empty.proto\x1a\x1cprotos/common_messages.proto\"7\n\x11NewAccountRequest\x12\x10\n\x08username\x18\x01 \x01(\t\x12\x10\n\x08password\x18\x02 \x01(\t\"%\n\x11GetAccountRequest\x12\x10\n\x08username\x18\x01 \x01(\t\"\x14\n\x12GetAccountResponse\"P\n\x11NewSessionRequest\x12\x10\n\x08username\x18\x01 \x01(\t\x12\x10\n\x08password\x18\x02 \x01(\t\x12\x17\n\x0f\x64\x65\x66\x61ult_dataset\x18\x03 \x01(\t\" \n\x12NewSessionResponse\x12\n\n\x02id\x18\x01 \x01(\t\"!\n\x13\x43loseSessionRequest\x12\n\n\x02id\x18\x01 \x01(\t\"H\n\x11NewDatasetRequest\x12\x10\n\x08username\x18\x01 \x01(\t\x12\x10\n\x08password\x18\x02 \x01(\t\x12\x0f\n\x07\x64\x61taset\x18\x03 \x01(\t\"x\n\"GetAllExecutionEnvironmentsRequest\x12&\n\x08language\x18\x01 \x01(\x0e\x32\x14.protos.common.Langs\x12\x14\n\x0cget_external\x18\x02 \x01(\x08\x12\x14\n\x0c\x66rom_backend\x18\x03 \x01(\x08\"\xd7\x01\n#GetAllExecutionEnvironmentsResponse\x12[\n\x08\x65xe_envs\x18\x01 \x03(\x0b\x32I.protos.metadata_service.GetAllExecutionEnvironmentsResponse.ExeEnvsEntry\x1aS\n\x0c\x45xeEnvsEntry\x12\x0b\n\x03key\x18\x01 \x01(\t\x12\x32\n\x05value\x18\x02 \x01(\x0b\x32#.protos.common.ExecutionEnvironment:\x02\x38\x01\",\n\x15GetDataclayIDResponse\x12\x13\n\x0b\x64\x61taclay_id\x18\x01 \x01(\t\"u\n\x15\x41utoRegisterEERequest\x12\n\n\x02id\x18\x01 \x01(\t\x12\x0c\n\x04name\x18\x02 \x01(\t\x12\x10\n\x08hostname\x18\x03 \x01(\t\x12\x0c\n\x04port\x18\x04 \x01(\x05\x12\"\n\x04lang\x18\x05 \x01(\x0e\x32\x14.protos.common.Langs\"\x89\x01\n\x16RegisterObjectsRequest\x12\x37\n\x0cobjects_info\x18\x01 \x03(\x0b\x32!.protos.common.ObjectRegisterInfo\x12\x12\n\nbackend_id\x18\x02 \x01(\t\x12\"\n\x04lang\x18\x03 \x01(\x0e\x32\x14.protos.common.Langs\"-\n\x17RegisterObjectsResponse\x12\x12\n\nobjects_id\x18\x01 \x03(\t\"]\n\x15RegisterObjectRequest\x12\x30\n\tobject_md\x18\x01 \x01(\x0b\x32\x1d.protos.common.ObjectMetadata\x12\x12\n\nsession_id\x18\x02 \x01(\t2\x8b\x08\n\x0fMetadataService\x12R\n\nNewAccount\x12*.protos.metadata_service.NewAccountRequest\x1a\x16.google.protobuf.Empty\"\x00\x12g\n\nGetAccount\x12*.protos.metadata_service.GetAccountRequest\x1a+.protos.metadata_service.GetAccountResponse\"\x00\x12g\n\nNewSession\x12*.protos.metadata_service.NewSessionRequest\x1a+.protos.metadata_service.NewSessionResponse\"\x00\x12V\n\x0c\x43loseSession\x12,.protos.metadata_service.CloseSessionRequest\x1a\x16.google.protobuf.Empty\"\x00\x12R\n\nNewDataset\x12*.protos.metadata_service.NewDatasetRequest\x1a\x16.google.protobuf.Empty\"\x00\x12\x9a\x01\n\x1bGetAllExecutionEnvironments\x12;.protos.metadata_service.GetAllExecutionEnvironmentsRequest\x1a<.protos.metadata_service.GetAllExecutionEnvironmentsResponse\"\x00\x12Y\n\rGetDataclayID\x12\x16.google.protobuf.Empty\x1a..protos.metadata_service.GetDataclayIDResponse\"\x00\x12Z\n\x0e\x41utoregisterEE\x12..protos.metadata_service.AutoRegisterEERequest\x1a\x16.google.protobuf.Empty\"\x00\x12v\n\x0fRegisterObjects\x12/.protos.metadata_service.RegisterObjectsRequest\x1a\x30.protos.metadata_service.RegisterObjectsResponse\"\x00\x12Z\n\x0eRegisterObject\x12..protos.metadata_service.RegisterObjectRequest\x1a\x16.google.protobuf.Empty\"\x00\x62\x06proto3')
+DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\x1dprotos/metadata_service.proto\x12\x17protos.metadata_service\x1a\x1bgoogle/protobuf/empty.proto\x1a\x1cprotos/common_messages.proto\"7\n\x11NewAccountRequest\x12\x10\n\x08username\x18\x01 \x01(\t\x12\x10\n\x08password\x18\x02 \x01(\t\"%\n\x11GetAccountRequest\x12\x10\n\x08username\x18\x01 \x01(\t\"\x14\n\x12GetAccountResponse\"P\n\x11NewSessionRequest\x12\x10\n\x08username\x18\x01 \x01(\t\x12\x10\n\x08password\x18\x02 \x01(\t\x12\x17\n\x0f\x64\x65\x66\x61ult_dataset\x18\x03 \x01(\t\" \n\x12NewSessionResponse\x12\n\n\x02id\x18\x01 \x01(\t\"!\n\x13\x43loseSessionRequest\x12\n\n\x02id\x18\x01 \x01(\t\"H\n\x11NewDatasetRequest\x12\x10\n\x08username\x18\x01 \x01(\t\x12\x10\n\x08password\x18\x02 \x01(\t\x12\x0f\n\x07\x64\x61taset\x18\x03 \x01(\t\"x\n\"GetAllExecutionEnvironmentsRequest\x12&\n\x08language\x18\x01 \x01(\x0e\x32\x14.protos.common.Langs\x12\x14\n\x0cget_external\x18\x02 \x01(\x08\x12\x14\n\x0c\x66rom_backend\x18\x03 \x01(\x08\"\xd7\x01\n#GetAllExecutionEnvironmentsResponse\x12[\n\x08\x65xe_envs\x18\x01 \x03(\x0b\x32I.protos.metadata_service.GetAllExecutionEnvironmentsResponse.ExeEnvsEntry\x1aS\n\x0c\x45xeEnvsEntry\x12\x0b\n\x03key\x18\x01 \x01(\t\x12\x32\n\x05value\x18\x02 \x01(\x0b\x32#.protos.common.ExecutionEnvironment:\x02\x38\x01\",\n\x15GetDataclayIDResponse\x12\x13\n\x0b\x64\x61taclay_id\x18\x01 \x01(\t\"u\n\x15\x41utoRegisterEERequest\x12\n\n\x02id\x18\x01 \x01(\t\x12\x0c\n\x04name\x18\x02 \x01(\t\x12\x10\n\x08hostname\x18\x03 \x01(\t\x12\x0c\n\x04port\x18\x04 \x01(\x05\x12\"\n\x04lang\x18\x05 \x01(\x0e\x32\x14.protos.common.Langs\"]\n\x15RegisterObjectRequest\x12\x12\n\nsession_id\x18\x01 \x01(\t\x12\x30\n\tobject_md\x18\x02 \x01(\x0b\x32\x1d.protos.common.ObjectMetadata\"Y\n\x19GetObjectFromAliasRequest\x12\x12\n\nsession_id\x18\x01 \x01(\t\x12\x12\n\nalias_name\x18\x02 \x01(\t\x12\x14\n\x0c\x64\x61taset_name\x18\x03 \x01(\t\"O\n\x1aGetObjectFromAliasResponse\x12\x11\n\tobject_id\x18\x01 \x01(\t\x12\x10\n\x08\x63lass_id\x18\x02 \x01(\t\x12\x0c\n\x04hint\x18\x03 \x01(\t2\x94\x08\n\x0fMetadataService\x12R\n\nNewAccount\x12*.protos.metadata_service.NewAccountRequest\x1a\x16.google.protobuf.Empty\"\x00\x12g\n\nGetAccount\x12*.protos.metadata_service.GetAccountRequest\x1a+.protos.metadata_service.GetAccountResponse\"\x00\x12g\n\nNewSession\x12*.protos.metadata_service.NewSessionRequest\x1a+.protos.metadata_service.NewSessionResponse\"\x00\x12V\n\x0c\x43loseSession\x12,.protos.metadata_service.CloseSessionRequest\x1a\x16.google.protobuf.Empty\"\x00\x12R\n\nNewDataset\x12*.protos.metadata_service.NewDatasetRequest\x1a\x16.google.protobuf.Empty\"\x00\x12\x9a\x01\n\x1bGetAllExecutionEnvironments\x12;.protos.metadata_service.GetAllExecutionEnvironmentsRequest\x1a<.protos.metadata_service.GetAllExecutionEnvironmentsResponse\"\x00\x12Y\n\rGetDataclayID\x12\x16.google.protobuf.Empty\x1a..protos.metadata_service.GetDataclayIDResponse\"\x00\x12Z\n\x0e\x41utoregisterEE\x12..protos.metadata_service.AutoRegisterEERequest\x1a\x16.google.protobuf.Empty\"\x00\x12Z\n\x0eRegisterObject\x12..protos.metadata_service.RegisterObjectRequest\x1a\x16.google.protobuf.Empty\"\x00\x12\x7f\n\x12GetObjectFromAlias\x12\x32.protos.metadata_service.GetObjectFromAliasRequest\x1a\x33.protos.metadata_service.GetObjectFromAliasResponse\"\x00\x62\x06proto3')
 
 
 
@@ -32,9 +32,9 @@ _GETALLEXECUTIONENVIRONMENTSRESPONSE = DESCRIPTOR.message_types_by_name['GetAllE
 _GETALLEXECUTIONENVIRONMENTSRESPONSE_EXEENVSENTRY = _GETALLEXECUTIONENVIRONMENTSRESPONSE.nested_types_by_name['ExeEnvsEntry']
 _GETDATACLAYIDRESPONSE = DESCRIPTOR.message_types_by_name['GetDataclayIDResponse']
 _AUTOREGISTEREEREQUEST = DESCRIPTOR.message_types_by_name['AutoRegisterEERequest']
-_REGISTEROBJECTSREQUEST = DESCRIPTOR.message_types_by_name['RegisterObjectsRequest']
-_REGISTEROBJECTSRESPONSE = DESCRIPTOR.message_types_by_name['RegisterObjectsResponse']
 _REGISTEROBJECTREQUEST = DESCRIPTOR.message_types_by_name['RegisterObjectRequest']
+_GETOBJECTFROMALIASREQUEST = DESCRIPTOR.message_types_by_name['GetObjectFromAliasRequest']
+_GETOBJECTFROMALIASRESPONSE = DESCRIPTOR.message_types_by_name['GetObjectFromAliasResponse']
 NewAccountRequest = _reflection.GeneratedProtocolMessageType('NewAccountRequest', (_message.Message,), {
   'DESCRIPTOR' : _NEWACCOUNTREQUEST,
   '__module__' : 'protos.metadata_service_pb2'
@@ -120,26 +120,26 @@ AutoRegisterEERequest = _reflection.GeneratedProtocolMessageType('AutoRegisterEE
   })
 _sym_db.RegisterMessage(AutoRegisterEERequest)
 
-RegisterObjectsRequest = _reflection.GeneratedProtocolMessageType('RegisterObjectsRequest', (_message.Message,), {
-  'DESCRIPTOR' : _REGISTEROBJECTSREQUEST,
-  '__module__' : 'protos.metadata_service_pb2'
-  # @@protoc_insertion_point(class_scope:protos.metadata_service.RegisterObjectsRequest)
-  })
-_sym_db.RegisterMessage(RegisterObjectsRequest)
-
-RegisterObjectsResponse = _reflection.GeneratedProtocolMessageType('RegisterObjectsResponse', (_message.Message,), {
-  'DESCRIPTOR' : _REGISTEROBJECTSRESPONSE,
-  '__module__' : 'protos.metadata_service_pb2'
-  # @@protoc_insertion_point(class_scope:protos.metadata_service.RegisterObjectsResponse)
-  })
-_sym_db.RegisterMessage(RegisterObjectsResponse)
-
 RegisterObjectRequest = _reflection.GeneratedProtocolMessageType('RegisterObjectRequest', (_message.Message,), {
   'DESCRIPTOR' : _REGISTEROBJECTREQUEST,
   '__module__' : 'protos.metadata_service_pb2'
   # @@protoc_insertion_point(class_scope:protos.metadata_service.RegisterObjectRequest)
   })
 _sym_db.RegisterMessage(RegisterObjectRequest)
+
+GetObjectFromAliasRequest = _reflection.GeneratedProtocolMessageType('GetObjectFromAliasRequest', (_message.Message,), {
+  'DESCRIPTOR' : _GETOBJECTFROMALIASREQUEST,
+  '__module__' : 'protos.metadata_service_pb2'
+  # @@protoc_insertion_point(class_scope:protos.metadata_service.GetObjectFromAliasRequest)
+  })
+_sym_db.RegisterMessage(GetObjectFromAliasRequest)
+
+GetObjectFromAliasResponse = _reflection.GeneratedProtocolMessageType('GetObjectFromAliasResponse', (_message.Message,), {
+  'DESCRIPTOR' : _GETOBJECTFROMALIASRESPONSE,
+  '__module__' : 'protos.metadata_service_pb2'
+  # @@protoc_insertion_point(class_scope:protos.metadata_service.GetObjectFromAliasResponse)
+  })
+_sym_db.RegisterMessage(GetObjectFromAliasResponse)
 
 _METADATASERVICE = DESCRIPTOR.services_by_name['MetadataService']
 if _descriptor._USE_C_DESCRIPTORS == False:
@@ -171,12 +171,12 @@ if _descriptor._USE_C_DESCRIPTORS == False:
   _GETDATACLAYIDRESPONSE._serialized_end=844
   _AUTOREGISTEREEREQUEST._serialized_start=846
   _AUTOREGISTEREEREQUEST._serialized_end=963
-  _REGISTEROBJECTSREQUEST._serialized_start=966
-  _REGISTEROBJECTSREQUEST._serialized_end=1103
-  _REGISTEROBJECTSRESPONSE._serialized_start=1105
-  _REGISTEROBJECTSRESPONSE._serialized_end=1150
-  _REGISTEROBJECTREQUEST._serialized_start=1152
-  _REGISTEROBJECTREQUEST._serialized_end=1245
-  _METADATASERVICE._serialized_start=1248
-  _METADATASERVICE._serialized_end=2283
+  _REGISTEROBJECTREQUEST._serialized_start=965
+  _REGISTEROBJECTREQUEST._serialized_end=1058
+  _GETOBJECTFROMALIASREQUEST._serialized_start=1060
+  _GETOBJECTFROMALIASREQUEST._serialized_end=1149
+  _GETOBJECTFROMALIASRESPONSE._serialized_start=1151
+  _GETOBJECTFROMALIASRESPONSE._serialized_end=1230
+  _METADATASERVICE._serialized_start=1233
+  _METADATASERVICE._serialized_end=2277
 # @@protoc_insertion_point(module_scope)
