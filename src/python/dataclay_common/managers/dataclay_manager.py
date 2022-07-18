@@ -23,16 +23,7 @@ class ExecutionEnvironment:
 
     @classmethod
     def from_json(cls, s):
-        value = json.loads(s)
-        exe_env = cls(
-            value["id"],
-            value["name"],
-            value["hostname"],
-            value["port"],
-            value["language"],
-            value["dataclay_id"],
-        )
-        return exe_env
+        return cls(**json.loads(s))
 
     @classmethod
     def from_proto(cls, proto):

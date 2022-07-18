@@ -16,15 +16,7 @@ class Account:
 
     @classmethod
     def from_json(cls, s):
-        value = json.loads(s)
-        account = cls(
-            value["username"],
-            password=value["password"],
-            role=value["role"],
-            namespaces=value["namespaces"],
-            datasets=value["datasets"],
-        )
-        return account
+        return cls(**json.loads(s))
 
     def validate(self, password, role=None):
         # TODO: Keep password as hash + salt

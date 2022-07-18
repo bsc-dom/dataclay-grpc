@@ -61,18 +61,7 @@ class ObjectMetadata:
 
     @classmethod
     def from_json(cls, s):
-        value = json.loads(s)
-        object_md = cls(
-            value["id"],
-            value["alias_name"],
-            value["dataset_name"],
-            value["class_id"],
-            value["execution_environment_ids"],
-            value["language"],
-            value["owner"],
-            value["is_read_only"],
-        )
-        return object_md
+        return cls(**json.loads(s))
 
 
 class Alias:
