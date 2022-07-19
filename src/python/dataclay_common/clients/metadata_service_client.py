@@ -105,3 +105,9 @@ class MDSClient:
         )
         response = self.stub.GetObjectFromAlias(request)
         return response.object_id, response.class_id, response.hint
+
+    def delete_alias(self, session_id, alias_name, dataset_name):
+        request = metadata_service_pb2.DeleteAliasRequest(
+            session_id=session_id, alias_name=alias_name, dataset_name=dataset_name
+        )
+        self.stub.DeleteAlias(request)

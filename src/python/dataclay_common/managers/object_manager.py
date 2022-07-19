@@ -79,9 +79,7 @@ class Alias:
 
     @classmethod
     def from_json(cls, s):
-        value = json.loads(s)
-        alias = cls(value["name"], value["dataset_name"], value["object_id"])
-        return alias
+        return cls(**json.loads(s))
 
 
 class ObjectManager:
@@ -122,3 +120,15 @@ class ObjectManager:
             if self.etcd_client.get(alias.key())[0] is not None:
                 raise AliasAlreadyExistError(alias.name, alias.dataset_name)
             self.put(alias)
+
+    def delete_alias(self, alias_name, dataset_name):
+
+        alias = self.get_alias(alias_name, dataset_name)
+        object_md = self.get_object_md(alias.object_id)
+
+        # Remove alias from object metadata
+        object_md.alias_name = None
+        self.put(object_md)
+
+        # Remove alias metadata
+        self.etcd_client.delete(alias.key())

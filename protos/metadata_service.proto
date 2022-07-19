@@ -30,6 +30,8 @@ service MetadataService {
     // Object Metadata
 	rpc RegisterObject(RegisterObjectRequest) returns (google.protobuf.Empty) {}
     rpc GetObjectFromAlias(GetObjectFromAliasRequest) returns (GetObjectFromAliasResponse) {}
+	rpc DeleteAlias(DeleteAliasRequest) returns (google.protobuf.Empty) {}
+    
 
 
 }
@@ -130,4 +132,10 @@ message GetObjectFromAliasResponse {
 	string object_id = 1;
 	string class_id = 2;
 	string hint = 3;
+}
+
+message DeleteAliasRequest {
+	string session_id = 1;
+	string alias_name = 2;
+    string dataset_name = 3;
 }
