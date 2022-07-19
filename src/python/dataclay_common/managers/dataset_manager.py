@@ -1,6 +1,8 @@
 import json
 import uuid
 
+from dataclay_common.exceptions.exceptions import *
+
 
 class Dataset:
     def __init__(self, name, owner, is_public=False):
@@ -36,19 +38,19 @@ class DatasetManager:
         # Store dataset in etcd
         self.etcd_client.put(dataset.key(), dataset.value())
 
-    def get_dataset(self, name):
+    def get_dataset(self, dataset_name):
         # Get dataset from etcd and checks that it exists
-        key = f"/dataset/{name}"
+        key = f"/dataset/{dataset_name}"
         value = self.etcd_client.get(key)[0]
         if value is None:
-            raise Exception(f"Dataset {name} does not exists!")
+            raise DatasetDoesNotExistError(dataset_name)
 
         return Dataset.from_json(value)
 
-    def exists_dataset(self, name):
+    def exists_dataset(self, dataset_name):
         """ "Returns true if dataset exists"""
 
-        key = f"/dataset/{name}"
+        key = f"/dataset/{dataset_name}"
         value = self.etcd_client.get(key)[0]
         return value is not None
 
@@ -57,5 +59,5 @@ class DatasetManager:
 
         with self.etcd_client.lock(self.lock):
             if self.exists_dataset(dataset.name):
-                raise Exception(f"Dataset {dataset.name} already exists!")
+                raise DatasetAlreadyExistError(dataset.name)
             self.put_dataset(dataset)

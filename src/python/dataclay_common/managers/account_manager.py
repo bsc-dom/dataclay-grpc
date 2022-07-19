@@ -1,6 +1,8 @@
 import json
 import logging
 
+from dataclay_common.exceptions.exceptions import *
+
 logger = logging.getLogger(__name__)
 
 
@@ -48,7 +50,7 @@ class AccountManager:
         key = f"/account/{username}"
         value = self.etcd_client.get(key)[0]
         if value is None:
-            raise Exception(f"Account {username} does not exists!")
+            raise AccountDoesNotExistError(username)
 
         return Account.from_json(value)
 
@@ -64,5 +66,5 @@ class AccountManager:
 
         with self.etcd_client.lock(self.lock):
             if self.exists_account(account.username):
-                raise Exception(f"Account {account.username} already exists!")
+                raise AccountAlreadyExistError(account.username)
             self.put_account(account)

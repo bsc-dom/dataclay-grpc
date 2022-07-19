@@ -102,7 +102,7 @@ class ObjectManager:
         key = f"/alias/{dataset_name}/{alias_name}"
         value = self.etcd_client.get(key)[0]
         if value is None:
-            raise AliasDoesNotExistError
+            raise AliasDoesNotExistError(alias_name, dataset_name)
 
         return Alias.from_json(value)
 
@@ -111,7 +111,7 @@ class ObjectManager:
         key = f"/object/{object_id}"
         value = self.etcd_client.get(key)[0]
         if value is None:
-            raise ObjectDoesNotExistError
+            raise ObjectDoesNotExistError(object_id)
 
         return ObjectMetadata.from_json(value)
 
@@ -120,5 +120,5 @@ class ObjectManager:
 
         with self.etcd_client.lock(self.lock):
             if self.etcd_client.get(alias.key())[0] is not None:
-                raise AliasAlreadyExistError
+                raise AliasAlreadyExistError(alias.name, alias.dataset_name)
             self.put(alias)

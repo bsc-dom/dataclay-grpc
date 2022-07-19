@@ -3,6 +3,7 @@ import uuid
 
 from dataclay_common.protos import common_messages_pb2
 from dataclay_common.protos.common_messages_pb2 import LANG_NONE
+from dataclay_common.exceptions.exceptions import *
 
 
 class ExecutionEnvironment:
@@ -86,5 +87,5 @@ class DataclayManager:
 
         with self.etcd_client.lock(self.lock):
             if self.exists_ee(exe_env.id):
-                raise Exception(f"ExecutionEnvironment {exe_env.id} already exists!")
+                raise ExecutionEnvironmentAlreadyExistError(exe_env.id)
             self.put_ee(exe_env)

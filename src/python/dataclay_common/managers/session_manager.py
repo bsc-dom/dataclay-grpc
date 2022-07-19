@@ -39,10 +39,10 @@ class SessionManager:
         key = f"/session/{session_id}"
         value = self.etcd_client.get(key)[0]
         if value is None:
-            raise SessionDoesNotExistError
+            raise SessionDoesNotExistError(session_id)
 
         return Session.from_json(value)
 
-    def delete_session(self, id):
-        key = f"/session/{id}"
+    def delete_session(self, session_id):
+        key = f"/session/{session_id}"
         self.etcd_client.delete(key)
