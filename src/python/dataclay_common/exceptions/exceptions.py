@@ -18,15 +18,23 @@ class DataClayException(Exception):
 
 
 class AccountError(DataClayException):
-    pass
+    def __init__(self, username):
+        self.username = username
 
 
 class AccountDoesNotExistError(AccountError):
-    pass
+    def __str__(self):
+        return f"Account {self.username} does not exist"
 
 
 class AccountAlreadyExistError(AccountError):
-    pass
+    def __str__(self):
+        return f"Account {self.username} already exist"
+
+
+class AccountInvalidCredentialsError(AccountError):
+    def __str__(self):
+        return f"Account {self.username} invalid credentials"
 
 
 ###########
@@ -35,19 +43,27 @@ class AccountAlreadyExistError(AccountError):
 
 
 class DatasetError(DataClayException):
-    pass
+    def __init__(self, dataset_name):
+        self.dataset_name = dataset_name
 
 
 class DatasetDoesNotExistError(DatasetError):
-    pass
+    def __str__(self):
+        return f"Dataset {self.dataset_name} does not exist"
 
 
 class DatasetAlreadyExistError(DatasetError):
-    pass
+    def __str__(self):
+        return f"Dataset {self.dataset_name} already exist"
 
 
 class DatasetIsNotAccessibleError(DatasetError):
-    pass
+    def __init__(self, dataset_name, username):
+        self.dataset_name = dataset_name
+        self.username = username
+
+    def __str__(self):
+        return f"Dataset {self.dataset_name} is not accessible by {self.username}"
 
 
 ###########
@@ -56,19 +72,23 @@ class DatasetIsNotAccessibleError(DatasetError):
 
 
 class SessionError(DataClayException):
-    pass
+    def __init__(self, session_id):
+        self.session_id = session_id
 
 
 class SessionDoesNotExistError(SessionError):
-    pass
+    def __str__(self):
+        return f"Session {self.session_id} does not exist"
 
 
 class SessionAlreadyExistError(SessionError):
-    pass
+    def __str__(self):
+        return f"Session {self.session_id} already exist"
 
 
 class SessionIsNotActiveError(SessionError):
-    pass
+    def __str__(self):
+        return f"Session {self.session_id} is not active"
 
 
 ###########
@@ -77,15 +97,19 @@ class SessionIsNotActiveError(SessionError):
 
 
 class AliasError(DataClayException):
-    pass
+    def __init__(self, alias_name, dataset_name):
+        self.alias_name = alias_name
+        self.dataset_name = dataset_name
 
 
 class AliasDoesNotExistError(AliasError):
-    pass
+    def __str__(self):
+        return f"Alias {self.dataset_name}/{self.alias_name} does not exist"
 
 
 class AliasAlreadyExistError(AliasError):
-    pass
+    def __str__(self):
+        return f"Alias {self.dataset_name}/{self.alias_name} already exist"
 
 
 ###########
@@ -94,12 +118,35 @@ class AliasAlreadyExistError(AliasError):
 
 
 class ObjectError(DataClayException):
-    pass
+    def __init__(self, object_id):
+        self.object_id = object_id
 
 
 class ObjectDoesNotExistError(ObjectError):
-    pass
+    def __str__(self):
+        return f"Object {self.object_id} does not exist!"
 
 
 class ObjectAlreadyExistError(ObjectError):
-    pass
+    def __str__(self):
+        return f"Object {self.object_id} already exist!"
+
+
+#########################
+# Execution Environment #
+#########################
+
+
+class ExecutionEnvironmentError(DataClayException):
+    def __init__(self, ee_id):
+        self.ee_id = ee_id
+
+
+class ExecutionEnvironmentDoesNotExistError(ExecutionEnvironmentError):
+    def __str__(self):
+        return f"Execution Environment {self.ee_id} does not exist!"
+
+
+class ExecutionEnvironmentAlreadyExistError(ExecutionEnvironmentError):
+    def __str__(self):
+        return f"Execution Environment {self.ee_id} already exist!"
