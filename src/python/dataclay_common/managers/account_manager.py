@@ -1,6 +1,8 @@
 import json
 import logging
 
+from passlib.hash import bcrypt
+
 from dataclay_common.exceptions.exceptions import *
 
 logger = logging.getLogger(__name__)
@@ -8,21 +10,24 @@ logger = logging.getLogger(__name__)
 
 # TODO: Extend class to generic with key(), value(), ...
 class Account:
-    def __init__(self, username, password=None, role="NORMAL", namespaces=[], datasets=[]):
+    def __init__(
+        self, username, password=None, role="NORMAL", namespaces=[], datasets=[], **kwargs
+    ):
         # TODO: Remove namespaces from account?
         self.username = username
-        self.password = password
+        if password is not None:
+            self.hashed_password = bcrypt.hash(password)
         self.role = role
         self.namespaces = namespaces
         self.datasets = datasets
+        self.__dict__.update(kwargs)
 
     @classmethod
     def from_json(cls, s):
         return cls(**json.loads(s))
 
-    def validate(self, password, role=None):
-        # TODO: Keep password as hash + salt
-        if self.password != password:
+    def verify(self, password, role=None):
+        if not bcrypt.verify(password, self.hashed_password):
             return False
         if role is not None and self.role != role:
             return False
