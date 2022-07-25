@@ -89,8 +89,13 @@ class ObjectManager:
     def __init__(self, etcd_client):
         self.etcd_client = etcd_client
 
-    def register_object(self, object_metadata):
-        self.etcd_client.put(object_metadata.key(), object_metadata.value())
+    def register_object(self, object_md):
+        # Store alias (if not none nor empty) and object_md to etcd
+        if object_md.alias_name:
+            alias = Alias(object_md.alias_name, object_md.dataset_name, object_md.id)
+            self.new_alias(alias)
+
+        self.etcd_client.put(object_md.key(), object_md.value())
 
     def put(self, o):
         self.etcd_client.put(o.key(), o.value())
