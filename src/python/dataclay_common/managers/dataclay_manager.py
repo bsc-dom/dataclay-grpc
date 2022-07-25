@@ -50,6 +50,24 @@ class ExecutionEnvironment:
         )
 
 
+class Dataclay:
+    def __init__(self, id, hostname, port):
+        # TODO: Create new uuid if id is none
+        self.id = id
+        self.hostname = hostname
+        self.port = port
+
+    def key(self):
+        return f"/dataclay/{self.id}"
+
+    def value(self):
+        return json.dumps(self.__dict__)
+
+    @classmethod
+    def from_json(cls, s):
+        return cls(**json.loads(s))
+
+
 class DataclayManager:
 
     lock = "lock_dataclay"
