@@ -51,14 +51,18 @@ class ExecutionEnvironment:
 
 
 class Dataclay:
-    def __init__(self, id, hostname, port):
+    def __init__(self, id, hostname, port, is_this):
         # TODO: Create new uuid if id is none
         self.id = id
         self.hostname = hostname
         self.port = port
+        self.is_this = is_this
 
     def key(self):
-        return f"/dataclay/{self.id}"
+        if self.is_this:
+            return "/dataclay/this"
+        else:
+            return f"/dataclay/{self.id}"
 
     def value(self):
         return json.dumps(self.__dict__)
@@ -75,10 +79,13 @@ class DataclayManager:
     def __init__(self, etcd_client):
         self.etcd_client = etcd_client
 
-    def put_ee(self, exe_env):
-        """Put execution environment to etcd"""
+    def put_ee(self, exec_env):
+        """Put exec_env to etcd"""
+        self.etcd_client.put(exec_env.key(), exec_env.value())
 
-        self.etcd_client.put(exe_env.key(), exe_env.value())
+    def put_dataclay(self, dataclay):
+        """Put dataclay to etcd"""
+        self.etcd_client.put(dataclay.key(), dataclay.value())
 
     def get_all_execution_environments(self, lang=None):
         """Get all execution environments"""
@@ -93,17 +100,41 @@ class DataclayManager:
                 exe_envs[key] = exe_env
         return exe_envs
 
+    def get_dataclay(self, dataclay_id):
+        # Get account from etcd and checks that it exists
+        key = f"/dataclay/{dataclay_id}"
+        value = self.etcd_client.get(key)[0]
+        if value is None:
+            raise DataclayDoesNotExistError(dataclay_id)
+
+        return Dataclay.from_json(value)
+
     def exists_ee(self, id):
-        """ "Returns true if the execution environment exists"""
+        """Returns true if the execution environment exists"""
 
         key = f"/executionenvironment/{id}"
         value = self.etcd_client.get(key)[0]
         return value is not None
 
+    def exists_dataclay(self, id):
+        """Returns true if the dataclay exists"""
+
+        key = f"/dataclay/{id}"
+        value = self.etcd_client.get(key)[0]
+        return value is not None
+
     def new_execution_environment(self, exe_env):
-        """Creates a new execution environment. Checks that the it doesn't exists"""
+        """Creates a new execution environment. Checks that it doesn't exists"""
 
         with self.etcd_client.lock(self.lock):
             if self.exists_ee(exe_env.id):
                 raise ExecutionEnvironmentAlreadyExistError(exe_env.id)
             self.put_ee(exe_env)
+
+    def new_dataclay(self, dataclay):
+        """Creates a new dataclay. Checks that it doesn't exists"""
+
+        with self.etcd_client.lock(self.lock):
+            if self.exists_dataclay(dataclay.id):
+                raise DataclayAlreadyExistError(dataclay.id)
+            self.put_dataclay(dataclay)
