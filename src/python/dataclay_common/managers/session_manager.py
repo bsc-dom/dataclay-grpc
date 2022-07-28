@@ -43,6 +43,13 @@ class SessionManager:
 
         return Session.from_json(value)
 
+    def exists_session(self, session_id):
+        """ "Returns ture if the session exists, false otherwise"""
+
+        key = f"/session/{session_id}"
+        value = self.etcd_client.get(key)[0]
+        return value is not None
+
     def delete_session(self, session_id):
         key = f"/session/{session_id}"
         self.etcd_client.delete(key)
