@@ -84,9 +84,9 @@ class MDSClient:
     # Autoregister #
     ################
 
-    def autoregister_ee(self, id, name, hostname, port, lang):
+    def autoregister_ee(self, id, hostname, port, sl_name, lang):
         request = metadata_service_pb2.AutoRegisterEERequest(
-            id=str(id), name=name, hostname=hostname, port=port, lang=lang
+            id=str(id), hostname=hostname, port=port, sl_name=sl_name, lang=lang
         )
         self.stub.AutoregisterEE(request)
 

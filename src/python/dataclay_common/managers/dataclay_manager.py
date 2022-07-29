@@ -8,11 +8,11 @@ from dataclay_common.utils.json import UUIDEncoder, uuid_parser
 
 
 class ExecutionEnvironment:
-    def __init__(self, id, name, hostname, port, language, dataclay_id):
+    def __init__(self, id, hostname, port, sl_name, language, dataclay_id):
         self.id = id
-        self.name = name
         self.hostname = hostname
         self.port = port
+        self.sl_name = sl_name
         self.language = language
         self.dataclay_id = dataclay_id
 
@@ -30,9 +30,9 @@ class ExecutionEnvironment:
     def from_proto(cls, proto):
         exe_env = cls(
             uuid.UUID(proto.id),
-            proto.name,
             proto.hostname,
             proto.port,
+            proto.sl_name,
             proto.language,
             uuid.UUID(proto.dataclay_id),
         )
@@ -42,9 +42,9 @@ class ExecutionEnvironment:
     def get_proto(self):
         return common_messages_pb2.ExecutionEnvironment(
             id=str(self.id),
-            name=self.name,
             hostname=self.hostname,
             port=self.port,
+            sl_name=self.sl_name,
             language=self.language,
             dataclay_id=str(self.dataclay_id),
         )
