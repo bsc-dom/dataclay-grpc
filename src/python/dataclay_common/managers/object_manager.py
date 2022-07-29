@@ -4,6 +4,7 @@ import uuid
 from dataclay_common.protos import common_messages_pb2
 from dataclay_common.protos.common_messages_pb2 import LANG_NONE
 from dataclay_common.exceptions.exceptions import *
+from dataclay_common.utils.json import UUIDEncoder, uuid_parser
 
 
 class ObjectMetadata:
@@ -31,16 +32,20 @@ class ObjectMetadata:
         return f"/object/{self.id}"
 
     def value(self):
-        return json.dumps(self.__dict__)
+        return json.dumps(self.__dict__, cls=UUIDEncoder)
+
+    @classmethod
+    def from_json(cls, s):
+        return cls(**json.loads(s, object_hook=uuid_parser))
 
     @classmethod
     def from_proto(cls, proto):
         object_md = cls(
-            proto.id,
+            uuid.UUID(proto.id),
             proto.alias_name,
             proto.dataset_name,
-            proto.class_id,
-            list(proto.execution_environment_ids),
+            uuid.UUID(proto.class_id),
+            list(map(uuid.UUID, proto.execution_environment_ids)),
             proto.language,
             proto.owner,
             proto.is_read_only,
@@ -53,15 +58,11 @@ class ObjectMetadata:
             alias_name=self.alias_name,
             dataset_name=self.dataset_name,
             class_id=str(self.class_id),
-            execution_environment_ids=self.execution_environment_ids,
+            execution_environment_ids=list(map(str, self.execution_environment_ids)),
             language=self.language,
             owner=self.owner,
             is_read_only=self.is_read_only,
         )
-
-    @classmethod
-    def from_json(cls, s):
-        return cls(**json.loads(s))
 
 
 class Alias:
@@ -75,11 +76,11 @@ class Alias:
         return f"/alias/{self.dataset_name}/{self.name}"
 
     def value(self):
-        return json.dumps(self.__dict__)
+        return json.dumps(self.__dict__, cls=UUIDEncoder)
 
     @classmethod
     def from_json(cls, s):
-        return cls(**json.loads(s))
+        return cls(**json.loads(s, object_hook=uuid_parser))
 
 
 class ObjectManager:

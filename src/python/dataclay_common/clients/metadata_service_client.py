@@ -1,5 +1,6 @@
 import logging
 import atexit
+from uuid import UUID
 
 import grpc
 from google.protobuf.empty_pb2 import Empty
@@ -67,8 +68,8 @@ class MDSClient:
         response = self.stub.GetAllExecutionEnvironments(request)
 
         result = dict()
-        for id, proto in response.exe_envs.items():
-            result[id] = ExecutionEnvironment.from_proto(proto)
+        for id, proto in response.exec_envs.items():
+            result[UUID(id)] = ExecutionEnvironment.from_proto(proto)
         return result
 
     ##############
@@ -77,7 +78,7 @@ class MDSClient:
 
     def get_dataclay_id(self):
         response = self.stub.GetDataclayID(Empty())
-        return response.dataclay_id
+        return UUID(response.dataclay_id)
 
     ################
     # Autoregister #
@@ -85,7 +86,7 @@ class MDSClient:
 
     def autoregister_ee(self, id, name, hostname, port, lang):
         request = metadata_service_pb2.AutoRegisterEERequest(
-            id=id, name=name, hostname=hostname, port=port, lang=lang
+            id=str(id), name=name, hostname=hostname, port=port, lang=lang
         )
         self.stub.AutoregisterEE(request)
 
@@ -95,19 +96,19 @@ class MDSClient:
 
     def register_object(self, session_id, object_md):
         request = metadata_service_pb2.RegisterObjectRequest(
-            session_id=session_id, object_md=object_md.get_proto()
+            session_id=str(session_id), object_md=object_md.get_proto()
         )
         self.stub.RegisterObject(request)
 
     def get_object_from_alias(self, session_id, alias_name, dataset_name):
         request = metadata_service_pb2.GetObjectFromAliasRequest(
-            session_id=session_id, alias_name=alias_name, dataset_name=dataset_name
+            session_id=str(session_id), alias_name=alias_name, dataset_name=dataset_name
         )
         response = self.stub.GetObjectFromAlias(request)
-        return response.object_id, response.class_id, response.hint
+        return UUID(response.object_id), UUID(response.class_id), UUID(response.hint)
 
     def delete_alias(self, session_id, alias_name, dataset_name):
         request = metadata_service_pb2.DeleteAliasRequest(
-            session_id=session_id, alias_name=alias_name, dataset_name=dataset_name
+            session_id=str(session_id), alias_name=alias_name, dataset_name=dataset_name
         )
         self.stub.DeleteAlias(request)

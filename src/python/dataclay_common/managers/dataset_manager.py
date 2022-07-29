@@ -2,6 +2,7 @@ import json
 import uuid
 
 from dataclay_common.exceptions.exceptions import *
+from dataclay_common.utils.json import UUIDEncoder, uuid_parser
 
 
 class Dataset:
@@ -20,11 +21,11 @@ class Dataset:
         return f"/dataset/{self.name}"
 
     def value(self):
-        return json.dumps(self.__dict__)
+        return json.dumps(self.__dict__, cls=UUIDEncoder)
 
     @classmethod
     def from_json(cls, s):
-        return cls(**json.loads(s))
+        return cls(**json.loads(s, object_hook=uuid_parser))
 
 
 class DatasetManager:

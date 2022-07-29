@@ -4,11 +4,11 @@ import uuid
 from dataclay_common.protos import common_messages_pb2
 from dataclay_common.protos.common_messages_pb2 import LANG_NONE
 from dataclay_common.exceptions.exceptions import *
+from dataclay_common.utils.json import UUIDEncoder, uuid_parser
 
 
 class ExecutionEnvironment:
     def __init__(self, id, name, hostname, port, language, dataclay_id):
-        # TODO: Create new uuid if id is none
         self.id = id
         self.name = name
         self.hostname = hostname
@@ -20,33 +20,33 @@ class ExecutionEnvironment:
         return f"/executionenvironment/{self.id}"
 
     def value(self):
-        return json.dumps(self.__dict__)
+        return json.dumps(self.__dict__, cls=UUIDEncoder)
 
     @classmethod
     def from_json(cls, s):
-        return cls(**json.loads(s))
+        return cls(**json.loads(s, object_hook=uuid_parser))
 
     @classmethod
     def from_proto(cls, proto):
         exe_env = cls(
-            proto.id,
+            uuid.UUID(proto.id),
             proto.name,
             proto.hostname,
             proto.port,
             proto.language,
-            proto.dataclay_id,
+            uuid.UUID(proto.dataclay_id),
         )
         return exe_env
 
     # TODO: Improve it with __getattributes__ and interface
     def get_proto(self):
         return common_messages_pb2.ExecutionEnvironment(
-            id=self.id,
+            id=str(self.id),
             name=self.name,
             hostname=self.hostname,
             port=self.port,
             language=self.language,
-            dataclay_id=self.dataclay_id,
+            dataclay_id=str(self.dataclay_id),
         )
 
 
@@ -92,13 +92,13 @@ class DataclayManager:
 
         prefix = "/executionenvironment/"
         values = self.etcd_client.get_prefix(prefix)
-        exe_envs = dict()
+        exec_envs = dict()
         for value, metadata in values:
             key = metadata.key.decode().split("/")[-1]
-            exe_env = ExecutionEnvironment.from_json(value)
-            if lang is None or lang == LANG_NONE or exe_env.language == lang:
-                exe_envs[key] = exe_env
-        return exe_envs
+            exec_env = ExecutionEnvironment.from_json(value)
+            if lang is None or lang == LANG_NONE or exec_env.language == lang:
+                exec_envs[uuid.UUID(key)] = exec_env
+        return exec_envs
 
     def get_dataclay(self, dataclay_id):
         # Get account from etcd and checks that it exists

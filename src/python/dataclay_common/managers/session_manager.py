@@ -2,29 +2,25 @@ import json
 import uuid
 
 from dataclay_common.exceptions.exceptions import *
+from dataclay_common.utils.json import UUIDEncoder, uuid_parser
 
 
 class Session:
-    def __init__(
-        self, username, namespaces=[], datasets=[], default_dataset=None, is_active=True, **kwargs
-    ):
-        self.id = str(uuid.uuid4())
+    def __init__(self, id, username, default_dataset=None, is_active=True):
+        self.id = id
         self.username = username
-        self.namespaces = namespaces
-        self.datasets = datasets
         self.default_dataset = default_dataset
         self.is_active = is_active
-        self.__dict__.update(kwargs)
 
     def key(self):
         return f"/session/{self.id}"
 
     def value(self):
-        return json.dumps(self.__dict__)
+        return json.dumps(self.__dict__, cls=UUIDEncoder)
 
     @classmethod
     def from_json(cls, s):
-        return cls(**json.loads(s))
+        return cls(**json.loads(s, object_hook=uuid_parser))
 
 
 class SessionManager:

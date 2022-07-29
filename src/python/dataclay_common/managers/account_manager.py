@@ -4,27 +4,31 @@ import logging
 from passlib.hash import bcrypt
 
 from dataclay_common.exceptions.exceptions import *
+from dataclay_common.utils.json import UUIDEncoder, uuid_parser
 
 logger = logging.getLogger(__name__)
 
 
 # TODO: Extend class to generic with key(), value(), ...
 class Account:
-    def __init__(
-        self, username, password=None, role="NORMAL", namespaces=[], datasets=[], **kwargs
-    ):
-        # TODO: Remove namespaces from account?
+    def __init__(self, username, password=None, hashed_password=None, role="NORMAL", datasets=None):
         self.username = username
         if password is not None:
             self.hashed_password = bcrypt.hash(password)
+        else:
+            self.hashed_password = hashed_password
         self.role = role
-        self.namespaces = namespaces
-        self.datasets = datasets
-        self.__dict__.update(kwargs)
+        self.datasets = datasets or []
+
+    def key(self):
+        return f"/account/{self.username}"
+
+    def value(self):
+        return json.dumps(self.__dict__, cls=UUIDEncoder)
 
     @classmethod
     def from_json(cls, s):
-        return cls(**json.loads(s))
+        return cls(**json.loads(s, object_hook=uuid_parser))
 
     def verify(self, password, role=None):
         if not bcrypt.verify(password, self.hashed_password):
@@ -32,12 +36,6 @@ class Account:
         if role is not None and self.role != role:
             return False
         return True
-
-    def key(self):
-        return f"/account/{self.username}"
-
-    def value(self):
-        return json.dumps(self.__dict__)
 
 
 class AccountManager:
