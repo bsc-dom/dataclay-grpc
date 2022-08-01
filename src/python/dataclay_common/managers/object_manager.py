@@ -20,7 +20,7 @@ class ObjectMetadata:
         is_read_only=False,
     ):
         self.id = id
-        self.alias_name = alias_name
+        self.alias_name = alias_name or None
         self.dataset_name = dataset_name
         self.class_id = class_id
         self.execution_environment_ids = execution_environment_ids
