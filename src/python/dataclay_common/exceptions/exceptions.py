@@ -144,12 +144,12 @@ class ExecutionEnvironmentError(DataClayException):
 
 class ExecutionEnvironmentDoesNotExistError(ExecutionEnvironmentError):
     def __str__(self):
-        return f"Execution Environment {self.ee_id} does not exist!"
+        return f"ExecutionEnvironment {self.ee_id} does not exist!"
 
 
 class ExecutionEnvironmentAlreadyExistError(ExecutionEnvironmentError):
     def __str__(self):
-        return f"Execution Environment {self.ee_id} already exist!"
+        return f"ExecutionEnvironment {self.ee_id} already exist!"
 
 
 ############
@@ -170,3 +170,23 @@ class DataclayDoesNotExistError(DataclayError):
 class DataclayAlreadyExistError(DataclayError):
     def __str__(self):
         return f"Dataclay {self.dataclay_id} already exist!"
+
+
+###################
+# StorageLocation #
+###################
+
+
+class StorageLocationError(DataClayException):
+    def __init__(self, sl_name):
+        self.sl_name = sl_name
+
+
+class StorageLocationDoesNotExistError(StorageLocationError):
+    def __str__(self):
+        return f"StorageLocation {self.sl_name} does not exist!"
+
+
+class StorageLocationAlreadyExistError(StorageLocationError):
+    def __str__(self):
+        return f"Dataclay {self.sl_name} already exist!"

@@ -50,6 +50,23 @@ class ExecutionEnvironment:
         )
 
 
+class StorageLocation:
+    def __init__(self, name, hostname, port):
+        self.name = name
+        self.hostname = hostname
+        self.port = port
+
+    def key(self):
+        return f"/storagelocation/{self.name}"
+
+    def value(self):
+        return json.dumps(self.__dict__, cls=UUIDEncoder)
+
+    @classmethod
+    def from_json(cls, s):
+        return cls(**json.loads(s, object_hook=uuid_parser))
+
+
 class Dataclay:
     def __init__(self, id, hostname, port, is_this):
         # TODO: Create new uuid if id is none
@@ -106,8 +123,15 @@ class DataclayManager:
         value = self.etcd_client.get(key)[0]
         if value is None:
             raise DataclayDoesNotExistError(dataclay_id)
-
         return Dataclay.from_json(value)
+
+    def get_storage_location(self, sl_name):
+        # Get account from etcd and checks that it exists
+        key = f"/storagelocation/{sl_name}"
+        value = self.etcd_client.get(key)[0]
+        if value is None:
+            raise StorageLocationDoesNotExistError(sl_name)
+        return StorageLocation.from_json(value)
 
     def exists_ee(self, id):
         """Returns true if the execution environment exists"""
