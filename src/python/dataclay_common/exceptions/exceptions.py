@@ -190,3 +190,23 @@ class StorageLocationDoesNotExistError(StorageLocationError):
 class StorageLocationAlreadyExistError(StorageLocationError):
     def __str__(self):
         return f"Dataclay {self.sl_name} already exist!"
+
+
+#############
+# MetaClass #
+#############
+
+
+class MetaclassError(DataClayException):
+    def __init__(self, metaclass_id):
+        self.metaclass_id = metaclass_id
+
+
+class MetaclassDoesNotExistError(MetaclassError):
+    def __str__(self):
+        return f"Metaclass {self.metaclass_id} does not exist!"
+
+
+class MetaclassAlreadyExistError(MetaclassError):
+    def __str__(self):
+        return f"Dataclay {self.metaclass_id} already exist!"

@@ -118,7 +118,6 @@ class DataclayManager:
         return exec_envs
 
     def get_dataclay(self, dataclay_id):
-        # Get account from etcd and checks that it exists
         key = f"/dataclay/{dataclay_id}"
         value = self.etcd_client.get(key)[0]
         if value is None:
@@ -126,7 +125,6 @@ class DataclayManager:
         return Dataclay.from_json(value)
 
     def get_storage_location(self, sl_name):
-        # Get account from etcd and checks that it exists
         key = f"/storagelocation/{sl_name}"
         value = self.etcd_client.get(key)[0]
         if value is None:
