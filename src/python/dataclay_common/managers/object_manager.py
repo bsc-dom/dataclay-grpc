@@ -16,7 +16,6 @@ class ObjectMetadata:
         class_id,
         execution_environment_ids,
         language,
-        owner,
         is_read_only=False,
     ):
         self.id = id
@@ -25,7 +24,6 @@ class ObjectMetadata:
         self.class_id = class_id
         self.execution_environment_ids = execution_environment_ids
         self.language = language
-        self.owner = owner
         self.is_read_only = is_read_only
 
     def key(self):
@@ -47,7 +45,6 @@ class ObjectMetadata:
             uuid.UUID(proto.class_id),
             list(map(uuid.UUID, proto.execution_environment_ids)),
             proto.language,
-            proto.owner,
             proto.is_read_only,
         )
         return object_md
@@ -60,7 +57,6 @@ class ObjectMetadata:
             class_id=str(self.class_id),
             execution_environment_ids=list(map(str, self.execution_environment_ids)),
             language=self.language,
-            owner=self.owner,
             is_read_only=self.is_read_only,
         )
 
@@ -109,15 +105,6 @@ class ObjectManager:
             raise Exception(
                 f"New object dataset ({object_md.dataset_name}) is different from previous one ({old_object_md.dataset_name})"
             )
-
-        # TODO: ¿Remove owner from object metadata?
-        if object_md.owner:
-            if object_md.owner != old_object_md.owner:
-                raise Exception(
-                    f"New object owner ({object_md.owner}) is different from previous one ({old_object_md.owner})"
-                )
-        else:
-            object_md.owner = old_object_md.owner
 
         if object_md.language != old_object_md.language:
             raise Exception(
