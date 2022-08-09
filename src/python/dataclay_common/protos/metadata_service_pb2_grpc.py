@@ -3,6 +3,7 @@
 import grpc
 
 from google.protobuf import empty_pb2 as google_dot_protobuf_dot_empty__pb2
+from . import common_messages_pb2 as protos_dot_common__messages__pb2
 from . import metadata_service_pb2 as protos_dot_metadata__service__pb2
 
 
@@ -28,7 +29,7 @@ class MetadataServiceStub(object):
         self.NewSession = channel.unary_unary(
                 '/protos.metadata_service.MetadataService/NewSession',
                 request_serializer=protos_dot_metadata__service__pb2.NewSessionRequest.SerializeToString,
-                response_deserializer=protos_dot_metadata__service__pb2.NewSessionResponse.FromString,
+                response_deserializer=protos_dot_common__messages__pb2.Session.FromString,
                 )
         self.CloseSession = channel.unary_unary(
                 '/protos.metadata_service.MetadataService/CloseSession',
@@ -164,7 +165,7 @@ def add_MetadataServiceServicer_to_server(servicer, server):
             'NewSession': grpc.unary_unary_rpc_method_handler(
                     servicer.NewSession,
                     request_deserializer=protos_dot_metadata__service__pb2.NewSessionRequest.FromString,
-                    response_serializer=protos_dot_metadata__service__pb2.NewSessionResponse.SerializeToString,
+                    response_serializer=protos_dot_common__messages__pb2.Session.SerializeToString,
             ),
             'CloseSession': grpc.unary_unary_rpc_method_handler(
                     servicer.CloseSession,
@@ -263,7 +264,7 @@ class MetadataService(object):
             metadata=None):
         return grpc.experimental.unary_unary(request, target, '/protos.metadata_service.MetadataService/NewSession',
             protos_dot_metadata__service__pb2.NewSessionRequest.SerializeToString,
-            protos_dot_metadata__service__pb2.NewSessionResponse.FromString,
+            protos_dot_common__messages__pb2.Session.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 

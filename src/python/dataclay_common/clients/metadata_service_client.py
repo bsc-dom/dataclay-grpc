@@ -9,6 +9,7 @@ from dataclay_common.protos import metadata_service_pb2_grpc
 from dataclay_common.protos import metadata_service_pb2
 from dataclay_common.protos import common_messages_pb2
 from dataclay_common.managers.dataclay_manager import ExecutionEnvironment
+from dataclay_common.managers.session_manager import Session
 from dataclay_common.managers.object_manager import ObjectMetadata
 
 logger = logging.getLogger(__name__)
@@ -28,12 +29,12 @@ class MDSClient:
     # Session Manager #
     ###################
 
-    def new_session(self, username, password, default_dataset):
+    def new_session(self, username, password, dataset_name):
         request = metadata_service_pb2.NewSessionRequest(
-            username=username, password=password, default_dataset=default_dataset
+            username=username, password=password, dataset_name=dataset_name
         )
         response = self.stub.NewSession(request)
-        return response.id
+        return Session.from_proto(response)
 
     def close_session(self, id):
         request = metadata_service_pb2.CloseSessionRequest(id=str(id))

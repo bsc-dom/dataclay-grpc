@@ -164,3 +164,10 @@ message ObjectMetadata {
 	Langs language = 6;
 	bool is_read_only = 7;
 }
+
+message Session {
+	string id = 1;
+	string username = 2;
+	string dataset_name = 3;
+	bool is_active = 4;
+}
