@@ -98,6 +98,45 @@ class ObjectManager:
 
         self.etcd_client.put(object_md.key(), object_md.value())
 
+    def update_object(self, object_md):
+        # Update object metadata
+
+        old_object_md = self.get_object_md(object_md.id)
+        if object_md.dataset_name != old_object_md.dataset_name:
+            raise Exception(
+                f"New object dataset ({object_md.dataset_name}) is different from previous one ({old_object_md.dataset_name})"
+            )
+
+        # TODO: ¿Remove owner from object metadata?
+        if object_md.owner:
+            if object_md.owner != old_object_md.owner:
+                raise Exception(
+                    f"New object owner ({object_md.owner}) is different from previous one ({old_object_md.owner})"
+                )
+        else:
+            object_md.owner = old_object_md.owner
+
+        if object_md.language != old_object_md.language:
+            raise Exception(
+                f"New object language ({object_md.language}) is different from previous one ({old_object_md.language})"
+            )
+
+        if object_md.class_id != old_object_md.class_id:
+            raise Exception(
+                f"New object class_id ({object_md.class_id}) is different from previous one ({old_object_md.class_id})"
+            )
+
+        if object_md.alias_name and old_object_md.alias_name != object_md.alias_name:
+            # Remove the old alias and create the new alias
+            if old_object_md.alias_name:
+                alias_key = f"/alias/{old_object_md.dataset_name}/{old_object_md.alias_name}"
+                self.etcd_client.delete(alias_key)
+
+            alias = Alias(object_md.alias_name, object_md.dataset_name, object_md.id)
+            self.new_alias(alias)
+
+        self.etcd_client.put(object_md.key(), object_md.value())
+
     def put(self, o):
         self.etcd_client.put(o.key(), o.value())
 
