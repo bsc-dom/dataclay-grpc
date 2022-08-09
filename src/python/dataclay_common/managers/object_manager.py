@@ -102,6 +102,9 @@ class ObjectManager:
         # Update object metadata
 
         old_object_md = self.get_object_md(object_md.id)
+
+        # NOTE: If only one dataset per session, it should never be different
+        #       ¿Remove the check?
         if object_md.dataset_name != old_object_md.dataset_name:
             raise Exception(
                 f"New object dataset ({object_md.dataset_name}) is different from previous one ({old_object_md.dataset_name})"
