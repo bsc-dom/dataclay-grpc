@@ -1,16 +1,15 @@
-import logging
 import atexit
+import logging
 from uuid import UUID
 
 import grpc
 from google.protobuf.empty_pb2 import Empty
 
-from dataclay_common.protos import metadata_service_pb2_grpc
-from dataclay_common.protos import metadata_service_pb2
-from dataclay_common.protos import common_messages_pb2
 from dataclay_common.managers.dataclay_manager import ExecutionEnvironment
-from dataclay_common.managers.session_manager import Session
 from dataclay_common.managers.object_manager import ObjectMetadata
+from dataclay_common.managers.session_manager import Session
+from dataclay_common.protos import (common_messages_pb2, metadata_service_pb2,
+                                    metadata_service_pb2_grpc)
 
 logger = logging.getLogger(__name__)
 
