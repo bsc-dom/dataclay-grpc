@@ -1,11 +1,3 @@
-""" Class description goes here. """
-
-from dataclay.exceptions.ErrorDefs import ErrorCodes
-
-__author__ = "Alex Barcelo <alex.barcelo@bsc.es>"
-__copyright__ = "2015 Barcelona Supercomputing Center (BSC-CNS)"
-
-
 class DataClayException(Exception):
     """Base class for exceptions in this module."""
 
