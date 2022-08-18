@@ -103,14 +103,6 @@ class MDSClient:
         )
         self.stub.RegisterObject(request)
 
-    # DEPRECATED
-    def get_object_from_alias(self, session_id, alias_name, dataset_name):
-        request = metadata_service_pb2.GetObjectFromAliasRequest(
-            session_id=str(session_id), alias_name=alias_name, dataset_name=dataset_name
-        )
-        response = self.stub.GetObjectFromAlias(request)
-        return UUID(response.object_id), UUID(response.class_id), UUID(response.hint)
-
     def get_object_md_by_id(self, session_id, object_id):
         request = metadata_service_pb2.GetObjectMDByIdRequest(
             session_id=str(session_id), object_id=str(object_id)

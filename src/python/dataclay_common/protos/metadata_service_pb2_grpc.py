@@ -61,11 +61,6 @@ class MetadataServiceStub(object):
                 request_serializer=protos_dot_metadata__service__pb2.RegisterObjectRequest.SerializeToString,
                 response_deserializer=google_dot_protobuf_dot_empty__pb2.Empty.FromString,
                 )
-        self.GetObjectFromAlias = channel.unary_unary(
-                '/protos.metadata_service.MetadataService/GetObjectFromAlias',
-                request_serializer=protos_dot_metadata__service__pb2.GetObjectFromAliasRequest.SerializeToString,
-                response_deserializer=protos_dot_metadata__service__pb2.GetObjectFromAliasResponse.FromString,
-                )
         self.GetObjectMDById = channel.unary_unary(
                 '/protos.metadata_service.MetadataService/GetObjectMDById',
                 request_serializer=protos_dot_metadata__service__pb2.GetObjectMDByIdRequest.SerializeToString,
@@ -147,12 +142,6 @@ class MetadataServiceServicer(object):
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
-    def GetObjectFromAlias(self, request, context):
-        """Missing associated documentation comment in .proto file."""
-        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
-        context.set_details('Method not implemented!')
-        raise NotImplementedError('Method not implemented!')
-
     def GetObjectMDById(self, request, context):
         """Missing associated documentation comment in .proto file."""
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
@@ -218,11 +207,6 @@ def add_MetadataServiceServicer_to_server(servicer, server):
                     servicer.RegisterObject,
                     request_deserializer=protos_dot_metadata__service__pb2.RegisterObjectRequest.FromString,
                     response_serializer=google_dot_protobuf_dot_empty__pb2.Empty.SerializeToString,
-            ),
-            'GetObjectFromAlias': grpc.unary_unary_rpc_method_handler(
-                    servicer.GetObjectFromAlias,
-                    request_deserializer=protos_dot_metadata__service__pb2.GetObjectFromAliasRequest.FromString,
-                    response_serializer=protos_dot_metadata__service__pb2.GetObjectFromAliasResponse.SerializeToString,
             ),
             'GetObjectMDById': grpc.unary_unary_rpc_method_handler(
                     servicer.GetObjectMDById,
@@ -399,23 +383,6 @@ class MetadataService(object):
         return grpc.experimental.unary_unary(request, target, '/protos.metadata_service.MetadataService/RegisterObject',
             protos_dot_metadata__service__pb2.RegisterObjectRequest.SerializeToString,
             google_dot_protobuf_dot_empty__pb2.Empty.FromString,
-            options, channel_credentials,
-            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
-
-    @staticmethod
-    def GetObjectFromAlias(request,
-            target,
-            options=(),
-            channel_credentials=None,
-            call_credentials=None,
-            insecure=False,
-            compression=None,
-            wait_for_ready=None,
-            timeout=None,
-            metadata=None):
-        return grpc.experimental.unary_unary(request, target, '/protos.metadata_service.MetadataService/GetObjectFromAlias',
-            protos_dot_metadata__service__pb2.GetObjectFromAliasRequest.SerializeToString,
-            protos_dot_metadata__service__pb2.GetObjectFromAliasResponse.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
