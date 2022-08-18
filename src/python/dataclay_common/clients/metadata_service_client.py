@@ -8,8 +8,11 @@ from google.protobuf.empty_pb2 import Empty
 from dataclay_common.managers.dataclay_manager import ExecutionEnvironment
 from dataclay_common.managers.object_manager import ObjectMetadata
 from dataclay_common.managers.session_manager import Session
-from dataclay_common.protos import (common_messages_pb2, metadata_service_pb2,
-                                    metadata_service_pb2_grpc)
+from dataclay_common.protos import (
+    common_messages_pb2,
+    metadata_service_pb2,
+    metadata_service_pb2_grpc,
+)
 
 logger = logging.getLogger(__name__)
 
@@ -100,12 +103,27 @@ class MDSClient:
         )
         self.stub.RegisterObject(request)
 
+    # DEPRECATED
     def get_object_from_alias(self, session_id, alias_name, dataset_name):
         request = metadata_service_pb2.GetObjectFromAliasRequest(
             session_id=str(session_id), alias_name=alias_name, dataset_name=dataset_name
         )
         response = self.stub.GetObjectFromAlias(request)
         return UUID(response.object_id), UUID(response.class_id), UUID(response.hint)
+
+    def get_object_md_by_id(self, session_id, object_id):
+        request = metadata_service_pb2.GetObjectMDByIdRequest(
+            session_id=str(session_id), object_id=str(object_id)
+        )
+        object_md_proto = self.stub.GetObjectMDById(request)
+        return ObjectMetadata.from_proto(object_md_proto)
+
+    def get_object_md_by_alias(self, session_id, alias_name, dataset_name):
+        request = metadata_service_pb2.GetObjectMDByAliasRequest(
+            session_id=str(session_id), alias_name=alias_name, dataset_name=dataset_name
+        )
+        object_md_proto = self.stub.GetObjectMDByAlias(request)
+        return ObjectMetadata.from_proto(object_md_proto)
 
     def delete_alias(self, session_id, alias_name, dataset_name):
         request = metadata_service_pb2.DeleteAliasRequest(
