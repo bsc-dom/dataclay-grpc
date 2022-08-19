@@ -161,7 +161,7 @@ message ObjectMetadata {
 	string dataset_name = 3;
 	string class_id = 4;
 	string ee_id = 5;
-	repeated string replica_ee_ids = 6;
+	repeated string ee_replica_ids = 6;
 	Langs language = 7;
 	bool is_read_only = 8;
 }

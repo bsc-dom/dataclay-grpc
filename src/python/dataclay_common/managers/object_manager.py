@@ -8,23 +8,35 @@ from dataclay_common.utils.json import UUIDEncoder, uuid_parser
 
 
 class ObjectMetadata:
+
+    # __slots__ = (
+    #     "id",
+    #     "alias_name",
+    #     "dataset_name",
+    #     "class_id",
+    #     "ee_id",
+    #     "ee_replica_ids",
+    #     "language",
+    #     "is_read_only",
+    # )
+
     def __init__(
         self,
-        id,
-        alias_name,
-        dataset_name,
-        class_id,
-        ee_id,
-        replica_ee_ids,
-        language,
+        id=None,
+        alias_name=None,
+        dataset_name=None,
+        class_id=None,
+        ee_id=None,
+        ee_replica_ids=None,
+        language=None,
         is_read_only=False,
     ):
         self.id = id
-        self.alias_name = alias_name or None
+        self.alias_name = alias_name
         self.dataset_name = dataset_name
         self.class_id = class_id
         self.ee_id = ee_id
-        self.replica_ee_ids = replica_ee_ids
+        self.ee_replica_ids = ee_replica_ids
         self.language = language
         self.is_read_only = is_read_only
 
@@ -46,7 +58,7 @@ class ObjectMetadata:
             proto.dataset_name,
             uuid.UUID(proto.class_id),
             uuid.UUID(proto.ee_id),
-            list(map(uuid.UUID, proto.replica_ee_ids)),
+            list(map(uuid.UUID, proto.ee_replica_ids)),
             proto.language,
             proto.is_read_only,
         )
@@ -59,7 +71,7 @@ class ObjectMetadata:
             dataset_name=self.dataset_name,
             class_id=str(self.class_id),
             ee_id=str(self.ee_id),
-            replica_ee_ids=list(map(str, self.replica_ee_ids)),
+            ee_replica_ids=list(map(str, self.ee_replica_ids)),
             language=self.language,
             is_read_only=self.is_read_only,
         )
