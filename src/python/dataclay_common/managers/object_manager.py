@@ -14,8 +14,8 @@ class ObjectMetadata:
     #     "alias_name",
     #     "dataset_name",
     #     "class_id",
-    #     "ee_id",
-    #     "ee_replica_ids",
+    #     "master_ee_id",
+    #     "replica_ee_ids",
     #     "language",
     #     "is_read_only",
     # )
@@ -26,8 +26,8 @@ class ObjectMetadata:
         alias_name=None,
         dataset_name=None,
         class_id=None,
-        ee_id=None,
-        ee_replica_ids=None,
+        master_ee_id=None,
+        replica_ee_ids=None,
         language=None,
         is_read_only=False,
     ):
@@ -35,8 +35,8 @@ class ObjectMetadata:
         self.alias_name = alias_name
         self.dataset_name = dataset_name
         self.class_id = class_id
-        self.ee_id = ee_id
-        self.ee_replica_ids = ee_replica_ids
+        self.master_ee_id = master_ee_id
+        self.replica_ee_ids = replica_ee_ids
         self.language = language
         self.is_read_only = is_read_only
 
@@ -57,8 +57,8 @@ class ObjectMetadata:
             proto.alias_name,
             proto.dataset_name,
             uuid.UUID(proto.class_id),
-            uuid.UUID(proto.ee_id),
-            list(map(uuid.UUID, proto.ee_replica_ids)),
+            uuid.UUID(proto.master_ee_id),
+            list(map(uuid.UUID, proto.replica_ee_ids)),
             proto.language,
             proto.is_read_only,
         )
@@ -70,8 +70,8 @@ class ObjectMetadata:
             alias_name=self.alias_name,
             dataset_name=self.dataset_name,
             class_id=str(self.class_id),
-            ee_id=str(self.ee_id),
-            ee_replica_ids=list(map(str, self.ee_replica_ids)),
+            master_ee_id=str(self.master_ee_id),
+            replica_ee_ids=list(map(str, self.replica_ee_ids)),
             language=self.language,
             is_read_only=self.is_read_only,
         )
