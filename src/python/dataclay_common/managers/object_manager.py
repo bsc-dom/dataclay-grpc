@@ -183,3 +183,16 @@ class ObjectManager:
 
         # Remove alias metadata
         self.etcd_client.delete(alias.key())
+
+    def get_all_object_md(self, language=None):
+        """Get all objects_md"""
+        prefix = "/object/"
+        values = self.etcd_client.get_prefix(prefix)
+
+        all_object_md = dict()
+        for value, metadata in values:
+            key = metadata.key.decode().split("/")[-1]
+            object_md = ObjectMetadata.from_json(value)
+            if lang is None or lang == LANG_NONE or object_md.language == lang:
+                all_object_md[uuid.UUID(key)] = object_md
+        return all_object_md
