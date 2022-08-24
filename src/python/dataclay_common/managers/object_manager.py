@@ -110,6 +110,7 @@ class ObjectManager:
 
         self.etcd_client.put(object_md.key(), object_md.value())
 
+    # NOTE: The update should be done by field, not all object_md at once
     def update_object(self, object_md):
         # Update object metadata
 
