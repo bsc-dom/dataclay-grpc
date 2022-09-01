@@ -2,10 +2,12 @@ import json
 import logging
 
 from passlib.hash import bcrypt
+from opentelemetry import trace
 
 from dataclay_common.exceptions.exceptions import *
 from dataclay_common.utils.json import UUIDEncoder, uuid_parser
 
+tracer = trace.get_tracer(__name__)
 logger = logging.getLogger(__name__)
 
 
@@ -30,6 +32,7 @@ class Account:
     def from_json(cls, s):
         return cls(**json.loads(s, object_hook=uuid_parser))
 
+    @tracer.start_as_current_span("verify")
     def verify(self, password, role=None):
         if not bcrypt.verify(password, self.hashed_password):
             return False
@@ -45,9 +48,11 @@ class AccountManager:
     def __init__(self, etcd_client):
         self.etcd_client = etcd_client
 
+    @tracer.start_as_current_span("put_account")
     def put_account(self, account):
         self.etcd_client.put(account.key(), account.value())
 
+    @tracer.start_as_current_span("get_account")
     def get_account(self, username):
         # Get account from etcd and checks that it exists
         key = f"/account/{username}"
@@ -57,6 +62,7 @@ class AccountManager:
 
         return Account.from_json(value)
 
+    @tracer.start_as_current_span("exists_account")
     def exists_account(self, username):
         """ "Returns ture if the account exists"""
 
@@ -64,6 +70,7 @@ class AccountManager:
         value = self.etcd_client.get(key)[0]
         return value is not None
 
+    @tracer.start_as_current_span("new_account")
     def new_account(self, account):
         """Creates a new account. Checks that the username doesn't exists"""
 

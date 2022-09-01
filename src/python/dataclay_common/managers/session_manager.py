@@ -1,9 +1,13 @@
 import json
 import uuid
 
+from opentelemetry import trace
+
 from dataclay_common.exceptions.exceptions import *
 from dataclay_common.protos import common_messages_pb2
 from dataclay_common.utils.json import UUIDEncoder, uuid_parser
+
+tracer = trace.get_tracer(__name__)
 
 
 class Session:
@@ -46,9 +50,11 @@ class SessionManager:
     def __init__(self, etcd_client):
         self.etcd_client = etcd_client
 
+    @tracer.start_as_current_span("put_session")
     def put_session(self, session):
         self.etcd_client.put(session.key(), session.value())
 
+    @tracer.start_as_current_span("get_session")
     def get_session(self, session_id):
         """Return Session with session_id."""
         key = f"/session/{session_id}"
@@ -58,6 +64,7 @@ class SessionManager:
 
         return Session.from_json(value)
 
+    @tracer.start_as_current_span("exists_session")
     def exists_session(self, session_id):
         """ "Returns ture if the session exists, false otherwise"""
 
@@ -65,6 +72,7 @@ class SessionManager:
         value = self.etcd_client.get(key)[0]
         return value is not None
 
+    @tracer.start_as_current_span("delete_session")
     def delete_session(self, session_id):
         key = f"/session/{session_id}"
         self.etcd_client.delete(key)
