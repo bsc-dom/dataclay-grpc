@@ -7,11 +7,9 @@ class LoggerEvent:
 
     def __getattr__(self, name):
         def wrapper(msg, *args, **kwargs):
-            try:
-                current_span = trace.get_current_span()
+            current_span = trace.get_current_span()
+            if current_span.is_recording:
                 current_span.add_event(msg % args)
-            except NameError:
-                pass
             getattr(self.logger, name)(msg, *args, **kwargs)
 
         return wrapper
