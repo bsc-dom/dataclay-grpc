@@ -26,13 +26,15 @@ it from https://github.com/bsc-dom/protobufferize and run `python setup.py insta
 
 # Packaging Python
 
+```bash
 python3 -m pip install --upgrade build
 
 python3 -m build
 
 python3 -m pip install --upgrade twine
 
+python3 -m twine upload dist/*
+```
+
 <!-- For testing -->
 <!-- python3 -m twine upload --repository testpypi dist/* -->
-
-python3 -m twine upload dist/*
