@@ -35,8 +35,9 @@ python3 -m pip install --upgrade build twine
 # Remove dist folder if exists
 rm -rf dist/
 
-# Build release distribution
-python3 -m build
+# Build release distribution with date tag
+python3 -m build -C--global-option=egg_info -C--global-option=--tag-build=$(date +"%Y%m%d%H%M")
+
 
 # Publish package to PyPI
 python3 -m twine upload dist/*
