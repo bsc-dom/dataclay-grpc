@@ -34,7 +34,7 @@ jobs:
           pip install build
 
       - name: Build package
-        run: python3 -m build -C--global-option=egg_info -C--global-option=--tag-build=$(date +"%Y%m%d%H%M")
+        run: python3 -m build -C--global-option=egg_info -C--global-option=--tag-build=$(date +%s)
 
       - name: Publish package
         uses: pypa/gh-action-pypi-publish@release/v1
