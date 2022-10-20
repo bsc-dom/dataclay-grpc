@@ -1,6 +1,6 @@
 syntax = "proto3";
-package dataclay.communication.grpc.logicmodule;
-import "dataclay/communication/grpc/messages/common/common_messages.proto";
+package protos.logicmodule;
+import "protos/common_messages.proto";
 option java_package = "es.bsc.dataclay.communication.grpc.messages.logicmodule";
 option java_multiple_files = false;
 
@@ -10,13 +10,13 @@ message NewAccountNoAdminRequest {
 
 message NewAccountRequest {
 	string adminID = 1;
-	dataclay.communication.grpc.common.Credential admincredential = 2;
+	protos.common.Credential admincredential = 2;
 	string yamlNewAccount = 3;
 }
 
 message NewAccountResponse {
 	string newAccountID = 1;
-	dataclay.communication.grpc.common.ExceptionInfo excInfo = 2;
+	protos.common.ExceptionInfo excInfo = 2;
 }
 
 message PublishAddressRequest { 
@@ -30,7 +30,7 @@ message GetAccountIDRequest {
 
 message GetAccountIDResponse {
 	string newAccountID = 1;
-	dataclay.communication.grpc.common.ExceptionInfo excInfo = 2;
+	protos.common.ExceptionInfo excInfo = 2;
 }
 
 message AutoRegisterSLRequest {
@@ -46,12 +46,12 @@ message AutoRegisterEERequest {
 	string eeName = 2;
 	string eeHostname = 3;
 	int32 eePort = 4;
-	dataclay.communication.grpc.common.Langs lang = 5;
+	protos.common.Langs lang = 5;
 }
 
 message AutoRegisterEEResponse {
 	string storageLocationID = 1;
-	dataclay.communication.grpc.common.ExceptionInfo excInfo = 2;
+	protos.common.ExceptionInfo excInfo = 2;
 }
 
 message UnregisterStorageLocationRequest {
@@ -64,48 +64,48 @@ message UnregisterExecutionEnvironmentRequest {
 
 message PerformSetAccountsRequest {
 	string accountID = 1;
-	dataclay.communication.grpc.common.Credential credential = 2;
+	protos.common.Credential credential = 2;
 	string yaml = 3;
 }
 
 message PerformSetAccountsResponse {
 	string resultYaml = 1;
-	dataclay.communication.grpc.common.ExceptionInfo excInfo = 2;
+	protos.common.ExceptionInfo excInfo = 2;
 }
 
 message PerformSetOperationsRequest {
 	string accountID = 1;
-	dataclay.communication.grpc.common.Credential credential = 2;
+	protos.common.Credential credential = 2;
 	string yaml = 3;
 }
 
 message PerformSetOperationsResponse {
 	string resultYaml = 1;
-	dataclay.communication.grpc.common.ExceptionInfo excInfo = 2;
+	protos.common.ExceptionInfo excInfo = 2;
 }
 
 message GetAccountListRequest {
 	string adminID = 1;
-	dataclay.communication.grpc.common.Credential admincredential = 2;
+	protos.common.Credential admincredential = 2;
 }
 
 message GetAccountListResponse {
 	repeated string accountIDs = 1;
-	dataclay.communication.grpc.common.ExceptionInfo excInfo = 2;
+	protos.common.ExceptionInfo excInfo = 2;
 }
 
 message NewSessionRequest {
 	string accountID = 1;
-	dataclay.communication.grpc.common.Credential credential = 2;
+	protos.common.Credential credential = 2;
 	repeated string contractIDs = 3;
 	repeated string dataSetIDs = 4;
 	string storeDataSet = 5;
-	dataclay.communication.grpc.common.Langs sessionLang = 6;
+	protos.common.Langs sessionLang = 6;
 }
 
 message NewSessionResponse {
 	string sessionInfo = 1;
-	dataclay.communication.grpc.common.ExceptionInfo excInfo = 2;
+	protos.common.ExceptionInfo excInfo = 2;
 }
 
 message GetInfoOfSessionForDSRequest {
@@ -116,56 +116,56 @@ message GetInfoOfSessionForDSResponse {
 	string dataSetID = 1;
 	int64 date = 2;
 	repeated string dataSetIDs = 3;
-	dataclay.communication.grpc.common.ExceptionInfo excInfo = 4;
+	protos.common.ExceptionInfo excInfo = 4;
 }
 
 message NewNamespaceRequest {
 	string accountID = 1;
-	dataclay.communication.grpc.common.Credential credential = 2;
+	protos.common.Credential credential = 2;
 	string newNamespaceYaml = 3;
 }
 
 message NewNamespaceResponse {
 	string namespaceID = 1;
-	dataclay.communication.grpc.common.ExceptionInfo excInfo = 2;
+	protos.common.ExceptionInfo excInfo = 2;
 }
 
 message GetNamespacesRequest {
 	string accountID = 1;
-	dataclay.communication.grpc.common.Credential credential = 2;
+	protos.common.Credential credential = 2;
 }
 
 message GetNamespacesResponse {
 	repeated string namespaces = 1;
-	dataclay.communication.grpc.common.ExceptionInfo excInfo = 2;
+	protos.common.ExceptionInfo excInfo = 2;
 }
 
 message RemoveNamespaceRequest {
 	string accountID = 1;
-	dataclay.communication.grpc.common.Credential credential = 2;
+	protos.common.Credential credential = 2;
 	string namespaceName = 3;
 }
 
 message GetNamespaceIDRequest {
 	string accountID = 1;
-	dataclay.communication.grpc.common.Credential credential = 2;
+	protos.common.Credential credential = 2;
 	string namespaceName = 3;
 }
 
 message GetNamespaceIDResponse {
 	string namespaceID = 1;
-	dataclay.communication.grpc.common.ExceptionInfo excInfo = 2;
+	protos.common.ExceptionInfo excInfo = 2;
 }
 
 message GetNamespaceLangRequest {
 	string accountID = 1;
-	dataclay.communication.grpc.common.Credential credential = 2;
+	protos.common.Credential credential = 2;
 	string namespaceName = 3;
 }
 
 message GetNamespaceLangResponse {
-	dataclay.communication.grpc.common.Langs language = 1;
-	dataclay.communication.grpc.common.ExceptionInfo excInfo = 2;
+	protos.common.Langs language = 1;
+	protos.common.ExceptionInfo excInfo = 2;
 }
 
 message GetObjectDataSetIDRequest {
@@ -175,12 +175,12 @@ message GetObjectDataSetIDRequest {
 
 message GetObjectDataSetIDResponse {
 	string dataSetID = 1;
-	dataclay.communication.grpc.common.ExceptionInfo excInfo = 2;
+	protos.common.ExceptionInfo excInfo = 2;
 }
 
 message ImportInterfaceRequest {
 	string accountID = 1;
-	dataclay.communication.grpc.common.Credential credential = 2;
+	protos.common.Credential credential = 2;
 	string namespaceID = 3;
 	string contractID = 4;
 	string interfaceID = 5;
@@ -189,57 +189,57 @@ message ImportInterfaceRequest {
 
 message ImportContractRequest {
 	string accountID = 1;
-	dataclay.communication.grpc.common.Credential credential = 2;
+	protos.common.Credential credential = 2;
 	string namespaceID = 3;
 	string contractID = 4;
 }
 
 message NewDataSetRequest {
 	string accountID = 1;
-	dataclay.communication.grpc.common.Credential credential = 2;
+	protos.common.Credential credential = 2;
 	string dataSetYaml = 3;
 }
 
 message NewDataSetResponse {
 	string dataSetID = 1;
-	dataclay.communication.grpc.common.ExceptionInfo excInfo = 2;
+	protos.common.ExceptionInfo excInfo = 2;
 }
 
 message RemoveDataSetRequest {
 	string accountID = 1;
-	dataclay.communication.grpc.common.Credential credential = 2;
+	protos.common.Credential credential = 2;
 	string dataSetName = 3;
 }
 
 message GetDataSetIDRequest {
 	string accountID = 1;
-	dataclay.communication.grpc.common.Credential credential = 2;
+	protos.common.Credential credential = 2;
 	string dataSetName = 3;
 }
 
 message GetDataSetIDResponse {
 	string dataSetID = 1;
-	dataclay.communication.grpc.common.ExceptionInfo excInfo = 2;
+	protos.common.ExceptionInfo excInfo = 2;
 }
 
 message GetPublicDataSetsRequest {
 	string accountID = 1;
-	dataclay.communication.grpc.common.Credential credential = 2;
+	protos.common.Credential credential = 2;
 }
 
 message GetPublicDataSetsResponse {
 	repeated string dataSets = 1;
-	dataclay.communication.grpc.common.ExceptionInfo excInfo = 2;
+	protos.common.ExceptionInfo excInfo = 2;
 }
 
 message GetAccountDataSetsRequest {
 	string accountID = 1;
-	dataclay.communication.grpc.common.Credential credential = 2;
+	protos.common.Credential credential = 2;
 }
 
 message GetAccountDataSetsResponse {
 	repeated string dataSets = 1;
-	dataclay.communication.grpc.common.ExceptionInfo excInfo = 2;
+	protos.common.ExceptionInfo excInfo = 2;
 }
 
 
@@ -249,31 +249,31 @@ message CheckDataSetIsPublicRequest {
 
 message CheckDataSetIsPublicResponse {
 	bool isPublic = 1;
-	dataclay.communication.grpc.common.ExceptionInfo excInfo = 2;
+	protos.common.ExceptionInfo excInfo = 2;
 }
 
 message NewClassRequest {
 	string accountID = 1;
-	dataclay.communication.grpc.common.Credential credential = 2;
-	dataclay.communication.grpc.common.Langs language = 3;
+	protos.common.Credential credential = 2;
+	protos.common.Langs language = 3;
 	map<string, string> newClasses = 4;
 }
 
 message NewClassResponse {
 	map<string, string> newClasses = 1;
-	dataclay.communication.grpc.common.ExceptionInfo excInfo = 2;
+	protos.common.ExceptionInfo excInfo = 2;
 }
 
 message RemoveClassRequest {
 	string accountID = 1;
-	dataclay.communication.grpc.common.Credential credential = 2;
+	protos.common.Credential credential = 2;
 	string namespaceID = 3;
 	string className = 4;
 }
 
 message RemoveOperationRequest {
 	string accountID = 1;
-	dataclay.communication.grpc.common.Credential credential = 2;
+	protos.common.Credential credential = 2;
 	string namespaceID = 3;
 	string className = 4;
 	string operationNameAndSignature = 5;
@@ -281,7 +281,7 @@ message RemoveOperationRequest {
 
 message RemoveImplementationRequest {
 	string accountID = 1;
-	dataclay.communication.grpc.common.Credential credential = 2;
+	protos.common.Credential credential = 2;
 	string namespaceID = 3;
 	string className = 4;
 	string implementationID = 5;
@@ -289,7 +289,7 @@ message RemoveImplementationRequest {
 
 message GetOperationIDRequest {
 	string accountID = 1;
-	dataclay.communication.grpc.common.Credential credential = 2;
+	protos.common.Credential credential = 2;
 	string namespaceID = 3;
 	string className = 4;
 	string operationNameAndSignature = 5;
@@ -297,12 +297,12 @@ message GetOperationIDRequest {
 
 message GetOperationIDResponse {
 	string operationID = 1;
-	dataclay.communication.grpc.common.ExceptionInfo excInfo = 2;
+	protos.common.ExceptionInfo excInfo = 2;
 }
 
 message GetPropertyIDRequest {
 	string accountID = 1;
-	dataclay.communication.grpc.common.Credential credential = 2;
+	protos.common.Credential credential = 2;
 	string namespaceID = 3;
 	string className = 4;
 	string propertyName = 5;
@@ -310,201 +310,201 @@ message GetPropertyIDRequest {
 
 message GetPropertyIDResponse {
 	string propertyID = 1;
-	dataclay.communication.grpc.common.ExceptionInfo excInfo = 2;
+	protos.common.ExceptionInfo excInfo = 2;
 }
 
 message GetClassIDRequest {
 	string accountID = 1;
-	dataclay.communication.grpc.common.Credential credential = 2;
+	protos.common.Credential credential = 2;
 	string namespaceID = 3;
 	string className = 4;
 }
 
 message GetClassIDResponse {
 	string classID = 1;
-	dataclay.communication.grpc.common.ExceptionInfo excInfo = 2;
+	protos.common.ExceptionInfo excInfo = 2;
 }
 
 message GetClassInfoRequest {
 	string accountID = 1;
-	dataclay.communication.grpc.common.Credential credential = 2;
+	protos.common.Credential credential = 2;
 	string namespaceID = 3;
 	string className = 4;
 }
 
 message GetClassInfoResponse {
 	string metaClassYaml = 1;
-	dataclay.communication.grpc.common.ExceptionInfo excInfo = 2;
+	protos.common.ExceptionInfo excInfo = 2;
 }
 
 message GetInfoOfClassesInNamespaceRequest {
 	string accountID = 1;
-	dataclay.communication.grpc.common.Credential credential = 2;
+	protos.common.Credential credential = 2;
 	string namespaceID = 3;
 }
 
 message GetInfoOfClassesInNamespaceResponse {
 	map<string, string> classesInfo = 1;
-	dataclay.communication.grpc.common.ExceptionInfo excInfo = 2;
+	protos.common.ExceptionInfo excInfo = 2;
 }
 
 message GetImportedClassesInfoInNamespaceRequest {
 	string accountID = 1;
-	dataclay.communication.grpc.common.Credential credential = 2;
+	protos.common.Credential credential = 2;
 	string namespaceID = 3;
 }
 
 message GetImportedClassesInfoInNamespaceResponse {
 	map<string, string> importedClasses = 1;
-	dataclay.communication.grpc.common.ExceptionInfo excInfo = 2;
+	protos.common.ExceptionInfo excInfo = 2;
 }
 
 message GetClassIDFromImportRequest {
 	string accountID = 1;
-	dataclay.communication.grpc.common.Credential credential = 2;
+	protos.common.Credential credential = 2;
 	string namespaceID = 3;
 	string className = 4;
 }
 
 message GetClassIDFromImportResponse {
 	string classID = 1;
-	dataclay.communication.grpc.common.ExceptionInfo excInfo = 2;
+	protos.common.ExceptionInfo excInfo = 2;
 }
 
 message NewContractRequest {
 	string accountID = 1;
-	dataclay.communication.grpc.common.Credential credential = 2;
+	protos.common.Credential credential = 2;
 	string newContractYaml = 3;
 }
 
 message NewContractResponse {
 	string contractID = 1;
-	dataclay.communication.grpc.common.ExceptionInfo excInfo = 2;
+	protos.common.ExceptionInfo excInfo = 2;
 }
 
 message RegisterToPublicContractRequest {
 	string accountID = 1;
-	dataclay.communication.grpc.common.Credential credential = 2;
+	protos.common.Credential credential = 2;
 	string contractID = 3;
 }
 
 message RegisterToPublicContractOfNamespaceRequest {
 	string accountID = 1;
-	dataclay.communication.grpc.common.Credential credential = 2;
+	protos.common.Credential credential = 2;
 	string namespaceID = 3;
 }
 
 message RegisterToPublicContractOfNamespaceResponse {
 	string contractID = 1;
-	dataclay.communication.grpc.common.ExceptionInfo excInfo = 2;
+	protos.common.ExceptionInfo excInfo = 2;
 }
 
 message GetContractIDsOfApplicantRequest {
 	string applicantID = 1;
-	dataclay.communication.grpc.common.Credential credential = 2;
+	protos.common.Credential credential = 2;
 }
 
 message GetContractIDsOfApplicantResponse {
 	map<string,string> contracts = 1;
-	dataclay.communication.grpc.common.ExceptionInfo excInfo = 2;
+	protos.common.ExceptionInfo excInfo = 2;
 }
 
 message GetContractIDsOfProviderRequest {
 	string providerID = 1;
-	dataclay.communication.grpc.common.Credential credential = 2;
+	protos.common.Credential credential = 2;
 	string namespaceIDOfProvider = 3;
 }
 
 message GetContractIDsOfProviderResponse {
 	map<string,string> contracts = 1;
-	dataclay.communication.grpc.common.ExceptionInfo excInfo = 2;
+	protos.common.ExceptionInfo excInfo = 2;
 }
 
 message GetContractsOfApplicantWithProvRequest {
 	string applicantID = 1;
-	dataclay.communication.grpc.common.Credential credential = 2;
+	protos.common.Credential credential = 2;
 	string namespaceIDOfProvider = 3;
 }
 
 message GetContractsOfApplicantWithProvResponse {
 	map<string,string> contracts = 1;
-	dataclay.communication.grpc.common.ExceptionInfo excInfo = 2;
+	protos.common.ExceptionInfo excInfo = 2;
 }
 
 message NewDataContractRequest {
 	string accountID = 1;
-	dataclay.communication.grpc.common.Credential credential = 2;
+	protos.common.Credential credential = 2;
 	string dataContractYaml = 3;
 }
 
 message NewDataContractResponse {
 	string dataContractID = 1;
-	dataclay.communication.grpc.common.ExceptionInfo excInfo = 2;
+	protos.common.ExceptionInfo excInfo = 2;
 }
 
 message RegisterToPublicDataContractRequest {
 	string accountID = 1;
-	dataclay.communication.grpc.common.Credential credential = 2;
+	protos.common.Credential credential = 2;
 	string dataContractID = 3;
 }
 
 message GetDataContractIDsOfApplicantRequest {
 	string applicantID = 1;
-	dataclay.communication.grpc.common.Credential credential = 2;
+	protos.common.Credential credential = 2;
 }
 
 message GetDataContractIDsOfApplicantResponse {
 	map<string,string> datacontracts = 1;
-	dataclay.communication.grpc.common.ExceptionInfo excInfo = 2;
+	protos.common.ExceptionInfo excInfo = 2;
 }
 
 message GetDataContractIDsOfProviderRequest {
 	string providerID = 1;
-	dataclay.communication.grpc.common.Credential credential = 2;
+	protos.common.Credential credential = 2;
 	string dataSetIDOfProvider = 3;
 }
 
 message GetDataContractIDsOfProviderResponse {
 	map<string,string> datacontracts = 1;
-	dataclay.communication.grpc.common.ExceptionInfo excInfo = 2;
+	protos.common.ExceptionInfo excInfo = 2;
 }
 
 message GetDataContractInfoOfApplicantWithProvRequest {
 	string applicantID = 1;
-	dataclay.communication.grpc.common.Credential credential = 2;
+	protos.common.Credential credential = 2;
 	string dataSetIDOfProvider = 3;
 }
 
 message GetDataContractInfoOfApplicantWithProvResponse {
 	string dataContractInfo = 1;
-	dataclay.communication.grpc.common.ExceptionInfo excInfo = 2;
+	protos.common.ExceptionInfo excInfo = 2;
 }
 
 message NewInterfaceRequest {
 	string applicantID = 1;
-	dataclay.communication.grpc.common.Credential credential = 2;
+	protos.common.Credential credential = 2;
 	string interfaceYaml = 3;
 }
 
 message NewInterfaceResponse {
 	string interfaceID = 1;
-	dataclay.communication.grpc.common.ExceptionInfo excInfo = 2;
+	protos.common.ExceptionInfo excInfo = 2;
 }
 
 message GetInterfaceInfoRequest {
 	string applicantID = 1;
-	dataclay.communication.grpc.common.Credential credential = 2;
+	protos.common.Credential credential = 2;
 	string interfaceID = 3;
 }
 
 message GetInterfaceInfoResponse {
 	string interfaceYaml = 1;
-	dataclay.communication.grpc.common.ExceptionInfo excInfo = 2;
+	protos.common.ExceptionInfo excInfo = 2;
 }
 
 message RemoveInterfaceRequest {
 	string applicantID = 1;
-	dataclay.communication.grpc.common.Credential credential = 2;
+	protos.common.Credential credential = 2;
 	string namespaceID = 3;
 	string interfaceID = 4;
 }
@@ -515,8 +515,8 @@ message GetStorageLocationInfoRequest {
 }
 
 message GetStorageLocationInfoResponse {
-	dataclay.communication.grpc.common.StorageLocationInfo storageLocationInfo = 1;
-	dataclay.communication.grpc.common.ExceptionInfo excInfo = 2;
+	protos.common.StorageLocationInfo storageLocationInfo = 1;
+	protos.common.ExceptionInfo excInfo = 2;
 }
 
 message GetExecutionEnvironmentInfoRequest {
@@ -525,13 +525,13 @@ message GetExecutionEnvironmentInfoRequest {
 }
 
 message GetExecutionEnvironmentInfoResponse {
-	dataclay.communication.grpc.common.ExecutionEnvironmentInfo executionEnvironmentInfo = 1;
-	dataclay.communication.grpc.common.ExceptionInfo excInfo = 2;
+	protos.common.ExecutionEnvironmentInfo executionEnvironmentInfo = 1;
+	protos.common.ExceptionInfo excInfo = 2;
 }
 
 message GetDataClayIDResponse {
 	string dataClayID = 1;
-	dataclay.communication.grpc.common.ExceptionInfo excInfo = 2;
+	protos.common.ExceptionInfo excInfo = 2;
 }
 
 message RegisterExternalDataClayRequest {
@@ -541,7 +541,7 @@ message RegisterExternalDataClayRequest {
 
 message RegisterExternalDataClayOverrideAuthorityRequest {
 	string adminAccountID = 1;
-	dataclay.communication.grpc.common.Credential adminCredential = 2;
+	protos.common.Credential adminCredential = 2;
 	string hostname = 3;
 	int32 port = 4;
 	string authority = 5;
@@ -549,7 +549,7 @@ message RegisterExternalDataClayOverrideAuthorityRequest {
 
 message RegisterExternalDataClayResponse {
 	string extDataClayID = 1;
-	dataclay.communication.grpc.common.ExceptionInfo excInfo = 2;
+	protos.common.ExceptionInfo excInfo = 2;
 }
 
 message NotifyRegistrationOfExternalDataClayRequest { 
@@ -560,7 +560,7 @@ message NotifyRegistrationOfExternalDataClayRequest {
 
 message NotifyRegistrationOfExternalDataClayResponse {
 	string extDataClayID = 1;
-	dataclay.communication.grpc.common.ExceptionInfo excInfo = 2;
+	protos.common.ExceptionInfo excInfo = 2;
 }
 
 
@@ -571,7 +571,7 @@ message GetExternalDataclayIDRequest {
 
 message GetExternalDataclayIDResponse {
 	string extDataClayID = 1;
-	dataclay.communication.grpc.common.ExceptionInfo excInfo = 2;
+	protos.common.ExceptionInfo excInfo = 2;
 }
 
 message GetExtDataClayInfoRequest {
@@ -579,36 +579,36 @@ message GetExtDataClayInfoRequest {
 }
 
 message GetExtDataClayInfoResponse {
-	dataclay.communication.grpc.common.DataClayInstance extDataClayInfo = 1;
-	dataclay.communication.grpc.common.ExceptionInfo excInfo = 2;
+	protos.common.DataClayInstance extDataClayInfo = 1;
+	protos.common.ExceptionInfo excInfo = 2;
 }
 
 message RegisterObjectForGCRequest {
-	dataclay.communication.grpc.common.RegistrationInfo regInfo = 1;
+	protos.common.RegistrationInfo regInfo = 1;
 	string backendID = 2;
 }
 
 message RegisterObjectsRequest {
-	repeated dataclay.communication.grpc.common.RegistrationInfo regInfos = 1;
+	repeated protos.common.RegistrationInfo regInfos = 1;
 	string backendID = 2;
-	dataclay.communication.grpc.common.Langs lang = 3;
+	protos.common.Langs lang = 3;
 }
 
 message RegisterObjectsResponse {
 	repeated string objectIDs = 1;
-	dataclay.communication.grpc.common.ExceptionInfo excInfo = 2;
+	protos.common.ExceptionInfo excInfo = 2;
 }
 
 
 message GetAllExecutionEnvironmentsInfoRequest {
-	dataclay.communication.grpc.common.Langs execEnvLang = 1;
+	protos.common.Langs execEnvLang = 1;
 	bool getExternal = 2;
 	bool fromBackend = 3;
 }
 
 message GetAllExecutionEnvironmentsInfoResponse {
-	map<string, dataclay.communication.grpc.common.ExecutionEnvironmentInfo> execEnvs = 1;
-	dataclay.communication.grpc.common.ExceptionInfo excInfo = 2;
+	map<string, protos.common.ExecutionEnvironmentInfo> execEnvs = 1;
+	protos.common.ExceptionInfo excInfo = 2;
 }
 
 message GetObjectInfoRequest {
@@ -619,7 +619,7 @@ message GetObjectInfoRequest {
 message GetObjectInfoResponse {
 	string classname = 1;
 	string namespace = 2;
-	dataclay.communication.grpc.common.ExceptionInfo excInfo = 3;
+	protos.common.ExceptionInfo excInfo = 3;
 }
 
 message GetObjectFromAliasRequest {
@@ -631,7 +631,7 @@ message GetObjectFromAliasResponse {
 	string objectID = 1;
 	string classID = 2;
 	string hint = 3;
-	dataclay.communication.grpc.common.ExceptionInfo excInfo = 4;
+	protos.common.ExceptionInfo excInfo = 4;
 }
 
 
@@ -647,7 +647,7 @@ message DeleteAliasRequest {
 
 message DeleteAliasResponse {
 	string objectID = 1;
-	dataclay.communication.grpc.common.ExceptionInfo excInfo = 2;
+	protos.common.ExceptionInfo excInfo = 2;
 }
 
 message GetObjectsMetaDataInfoOfClassForNMRequest {
@@ -655,8 +655,8 @@ message GetObjectsMetaDataInfoOfClassForNMRequest {
 }
 
 message GetObjectsMetaDataInfoOfClassForNMResponse {
-	map<string, dataclay.communication.grpc.common.MetaDataInfo> mdataInfo = 1;
-	dataclay.communication.grpc.common.ExceptionInfo excInfo = 2;
+	map<string, protos.common.MetaDataInfo> mdataInfo = 1;
+	protos.common.ExceptionInfo excInfo = 2;
 }
 
 message SetDataSetIDRequest { 
@@ -680,7 +680,7 @@ message MoveObjectRequest {
 
 message MoveObjectResponse {
 	repeated string objectIDs = 1;
-	dataclay.communication.grpc.common.ExceptionInfo excInfo = 2;
+	protos.common.ExceptionInfo excInfo = 2;
 }
 
 message SetObjectReadOnlyRequest {
@@ -699,8 +699,8 @@ message GetMetadataByOIDRequest {
 }
 
 message GetMetadataByOIDResponse {
-	dataclay.communication.grpc.common.MetaDataInfo mdInfo = 1;
-	dataclay.communication.grpc.common.ExceptionInfo excInfo = 2;
+	protos.common.MetaDataInfo mdInfo = 1;
+	protos.common.ExceptionInfo excInfo = 2;
 }
 
 message GetMetadataByOIDForDSRequest {
@@ -708,8 +708,8 @@ message GetMetadataByOIDForDSRequest {
 }
 
 message GetMetadataByOIDForDSResponse {
-	dataclay.communication.grpc.common.MetaDataInfo mdInfo = 1;
-	dataclay.communication.grpc.common.ExceptionInfo excInfo = 2;
+	protos.common.MetaDataInfo mdInfo = 1;
+	protos.common.ExceptionInfo excInfo = 2;
 }
 
 message ExecuteImplementationRequest {
@@ -719,56 +719,56 @@ message ExecuteImplementationRequest {
 	string contractID = 4;
 	string interfaceID = 5;
 	string objectID = 6;
-	dataclay.communication.grpc.common.SerializedParametersOrReturn params = 7;
+	protos.common.SerializedParametersOrReturn params = 7;
 }
 
 message ExecuteImplementationResponse {
-	dataclay.communication.grpc.common.SerializedParametersOrReturn ret = 1;
-	dataclay.communication.grpc.common.ExceptionInfo excInfo = 2;
+	protos.common.SerializedParametersOrReturn ret = 1;
+	protos.common.ExceptionInfo excInfo = 2;
 }
 
 message ExecuteMethodOnTargetRequest {
 	string sessionID = 1;
 	string objectID = 2;
 	string operationNameAndSignature = 3;
-	dataclay.communication.grpc.common.SerializedParametersOrReturn params = 4;
+	protos.common.SerializedParametersOrReturn params = 4;
 	string targetBackendID = 5;
 }
 
 message ExecuteMethodOnTargetResponse {
-	dataclay.communication.grpc.common.SerializedParametersOrReturn ret = 1;
-	dataclay.communication.grpc.common.ExceptionInfo excInfo = 2;
+	protos.common.SerializedParametersOrReturn ret = 1;
+	protos.common.ExceptionInfo excInfo = 2;
 }
 
 message SynchronizeFederatedObjectRequest {
 	string extDataClayID = 1;
 	string objectID = 2;
 	string implementationID = 3;
-	dataclay.communication.grpc.common.SerializedParametersOrReturn params = 4;
+	protos.common.SerializedParametersOrReturn params = 4;
 	bool allBackends = 5;
 }
 
 message GetStubsRequest {
 	string applicantAccountID = 1;
-	dataclay.communication.grpc.common.Credential credentials = 2;
-	dataclay.communication.grpc.common.Langs language = 3;
+	protos.common.Credential credentials = 2;
+	protos.common.Langs language = 3;
 	repeated string contractIDs = 4;
 }
 
 message GetStubsResponse {
 	map<string, bytes> stubs = 1;
-	dataclay.communication.grpc.common.ExceptionInfo excInfo = 2;
+	protos.common.ExceptionInfo excInfo = 2;
 }
 
 message GetBabelStubsRequest {
 	string accountID = 1;
-	dataclay.communication.grpc.common.Credential credentials = 2;
+	protos.common.Credential credentials = 2;
 	repeated string contractIDs = 4;
 }
 
 message GetBabelStubsResponse {
 	bytes yamlStub = 1;
-	dataclay.communication.grpc.common.ExceptionInfo excInfo = 2;
+	protos.common.ExceptionInfo excInfo = 2;
 }
 
 message GetClassNameForDSRequest {
@@ -777,7 +777,7 @@ message GetClassNameForDSRequest {
 
 message GetClassNameForDSResponse {
 	string className = 1;
-	dataclay.communication.grpc.common.ExceptionInfo excInfo = 2;
+	protos.common.ExceptionInfo excInfo = 2;
 }
 
 message GetClassNameAndNamespaceForDSRequest {
@@ -787,12 +787,12 @@ message GetClassNameAndNamespaceForDSRequest {
 message GetClassNameAndNamespaceForDSResponse {
 	string className = 1;
 	string namespace = 2;
-	dataclay.communication.grpc.common.ExceptionInfo excInfo = 3;
+	protos.common.ExceptionInfo excInfo = 3;
 }
 
 message RegisterECARequest {
 	string applicantAccountID = 1;
-	dataclay.communication.grpc.common.Credential credentials = 2;
+	protos.common.Credential credentials = 2;
 	string eca = 3;
 }
 
@@ -802,12 +802,12 @@ message AdviseEventRequest {
 
 message GetContractIDOfDataClayProviderRequest {
 	string applicantAccountID = 1;
-	dataclay.communication.grpc.common.Credential credentials = 2;
+	protos.common.Credential credentials = 2;
 }
 
 message GetContractIDOfDataClayProviderResponse {
 	string contractID = 1;
-	dataclay.communication.grpc.common.ExceptionInfo excInfo = 2;
+	protos.common.ExceptionInfo excInfo = 2;
 }
 
 message ActivateTracingRequest {
@@ -825,7 +825,7 @@ message UnregisterObjectsRequest {
 
 message IsPrefetchingEnabledResponse { 
 	bool enabled = 1;
-	dataclay.communication.grpc.common.ExceptionInfo excInfo = 2;
+	protos.common.ExceptionInfo excInfo = 2;
 }
 
 message ObjectExistsInDataClayRequest { 
@@ -834,7 +834,7 @@ message ObjectExistsInDataClayRequest {
 
 message ObjectExistsInDataClayResponse { 
 	bool exists = 1;
-	dataclay.communication.grpc.common.ExceptionInfo excInfo = 2;
+	protos.common.ExceptionInfo excInfo = 2;
 }
 
 message GetClassesInNamespaceRequest {
@@ -844,7 +844,7 @@ message GetClassesInNamespaceRequest {
 message GetClassesInNamespaceResponse {
 	string namespaceYaml = 1;
 	repeated string metaClassYaml = 2;
-	dataclay.communication.grpc.common.ExceptionInfo excInfo = 3;
+	protos.common.ExceptionInfo excInfo = 3;
 }
 
 message ImportModelsFromExternalDataClayRequest {
@@ -858,7 +858,7 @@ message GetStorageLocationIDRequest {
 
 message GetStorageLocationIDResponse {
 	string storageLocationID = 1;
-	dataclay.communication.grpc.common.ExceptionInfo excInfo = 2;
+	protos.common.ExceptionInfo excInfo = 2;
 }
 
 message NotifyExecutionEnvironmentShutdownRequest {
@@ -875,7 +875,7 @@ message ExistsActiveEnvironmentsForSLRequest {
 
 message ExistsActiveEnvironmentsForSLResponse {
 	bool exists = 1;
-	dataclay.communication.grpc.common.ExceptionInfo excInfo = 2;
+	protos.common.ExceptionInfo excInfo = 2;
 }
 
 message MetadataInfo {

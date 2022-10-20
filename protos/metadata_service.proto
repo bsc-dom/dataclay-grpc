@@ -1,0 +1,137 @@
+syntax = "proto3";
+
+package protos.metadata_service;
+
+import "google/protobuf/empty.proto";
+import "protos/common_messages.proto";
+
+service MetadataService {
+    
+    // Account Manager
+    rpc NewAccount(NewAccountRequest) returns (google.protobuf.Empty) {}
+    rpc GetAccount(GetAccountRequest) returns (GetAccountResponse) {}
+    
+    // Session Manager
+    rpc NewSession(NewSessionRequest) returns (protos.common.Session) {}
+    rpc CloseSession(CloseSessionRequest) returns (google.protobuf.Empty) {}
+
+    // Dataset Manager
+    rpc NewDataset(NewDatasetRequest) returns (google.protobuf.Empty) {}
+    
+    // EE-SL information
+	rpc GetAllExecutionEnvironments(GetAllExecutionEnvironmentsRequest) returns (GetAllExecutionEnvironmentsResponse) {}
+    
+    // Federation
+    rpc GetDataclayID(google.protobuf.Empty) returns (GetDataclayIDResponse) {}
+    
+    // Autoregister
+    rpc AutoregisterEE(AutoRegisterEERequest) returns (google.protobuf.Empty) {}
+
+    // Object Metadata
+	rpc RegisterObject(RegisterObjectRequest) returns (google.protobuf.Empty) {}
+    rpc GetObjectMDById(GetObjectMDByIdRequest) returns (protos.common.ObjectMetadata) {}
+    rpc GetObjectMDByAlias(GetObjectMDByAliasRequest) returns (protos.common.ObjectMetadata) {}
+	rpc DeleteAlias(DeleteAliasRequest) returns (google.protobuf.Empty) {}
+    
+
+
+}
+
+// ***************
+// Account Manager
+// ***************
+
+message NewAccountRequest {
+    string username = 1;
+    string password = 2;
+}
+
+message GetAccountRequest {
+    string username = 1;
+}
+
+message GetAccountResponse {
+}
+
+// ***************
+// Session Manager
+// ***************
+
+message NewSessionRequest {
+    string username = 1;
+    string password = 2;
+    string dataset_name = 3;
+}
+
+message CloseSessionRequest {
+    string id = 1;
+}
+
+// ***************
+// Dataset Manager
+// ***************
+
+message NewDatasetRequest {
+    string username = 1;
+    string password = 2;
+    string dataset = 3;
+}
+
+// *****************
+// EE-SL information
+// *****************
+
+message GetAllExecutionEnvironmentsRequest {
+	protos.common.Langs language = 1;
+	bool get_external = 2;
+	bool from_backend = 3;
+}
+
+message GetAllExecutionEnvironmentsResponse {
+	map<string, protos.common.ExecutionEnvironment> exec_envs = 1;
+}
+
+// **********
+// Federation
+// **********
+
+message GetDataclayIDResponse {
+    string dataclay_id = 1;
+}
+
+// ************
+// Autoregister
+// ************
+message AutoRegisterEERequest {
+	string id = 1;
+	string hostname = 2;
+	int32 port = 3;
+	string sl_name = 4;
+	protos.common.Langs lang = 5;
+}
+
+// ***************
+// Object Metadata
+// ***************
+
+message RegisterObjectRequest {
+	string session_id = 1;
+	protos.common.ObjectMetadata object_md = 2;
+}
+
+message GetObjectMDByIdRequest {
+	string session_id = 1;
+    string object_id = 2;
+}
+
+message GetObjectMDByAliasRequest {
+	string session_id = 1;
+    string alias_name = 2;
+    string dataset_name = 3;
+}
+
+message DeleteAliasRequest {
+	string session_id = 1;
+	string alias_name = 2;
+    string dataset_name = 3;
+}

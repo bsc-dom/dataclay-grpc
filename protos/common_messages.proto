@@ -1,5 +1,5 @@
 syntax = "proto3";
-package dataclay.communication.grpc.common;
+package protos.common;
 option java_package = "es.bsc.dataclay.communication.grpc.messages.common";
 
 message Credential {
@@ -63,6 +63,7 @@ message DataClayObjectMetaData {
 	repeated string replicaLocations = 8;
 	string alias = 9;
 	bool isReadOnly = 10;
+	string dataset_name = 11;
 }
 
 message PersistentObjectInDB {
@@ -87,7 +88,7 @@ message FederatedObjectInfo {
 
 message GetTracesResponse { 
 	map<string, bytes> traces = 1;
-	dataclay.communication.grpc.common.ExceptionInfo excInfo = 2;
+	protos.common.ExceptionInfo excInfo = 2;
 	
 }
 
@@ -132,5 +133,42 @@ message DataClayInstance {
 
 message GetNumObjectsResponse {
 	int32 numObjs = 1;
-	dataclay.communication.grpc.common.ExceptionInfo excInfo = 2;
+	protos.common.ExceptionInfo excInfo = 2;
+}
+
+// New
+
+message ExecutionEnvironment {
+	string id = 1;
+	string hostname = 2;
+	int32 port = 3;
+	string sl_name = 4;
+	Langs language = 5;
+	string dataclay_id = 6;
+}
+
+message ObjectRegisterInfo {
+	string object_id = 1;
+	string class_id = 2;
+	string session_id = 3;
+	string dataset_name = 4;
+	string alias = 5;
+}
+
+message ObjectMetadata {
+	string id = 1;
+	string alias_name = 2;
+	string dataset_name = 3;
+	string class_id = 4;
+	string master_ee_id = 5;
+	repeated string replica_ee_ids = 6;
+	Langs language = 7;
+	bool is_read_only = 8;
+}
+
+message Session {
+	string id = 1;
+	string username = 2;
+	string dataset_name = 3;
+	bool is_active = 4;
 }

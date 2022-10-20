@@ -1,6 +1,6 @@
 syntax = "proto3";
-package dataclay.communication.grpc.dataservice;
-import "dataclay/communication/grpc/messages/common/common_messages.proto";
+package protos.dataservice;
+import "protos/common_messages.proto";
 option java_package = "es.bsc.dataclay.communication.grpc.messages.dataservice";
 option java_multiple_files = false;
 
@@ -39,17 +39,17 @@ message NewPersistentInstanceRequest {
 	string classID = 2;
 	string implementationID = 3;
 	map<string, bytes> ifaceBitMaps = 4;
-	dataclay.communication.grpc.common.SerializedParametersOrReturn params = 5;
+	protos.common.SerializedParametersOrReturn params = 5;
 }
 
 message NewPersistentInstanceResponse {
 	string objectID = 1;
-	dataclay.communication.grpc.common.ExceptionInfo excInfo = 2;
+	protos.common.ExceptionInfo excInfo = 2;
 }
 
 message StoreObjectsRequest {
 	string sessionID = 1;
-	repeated dataclay.communication.grpc.common.ObjectWithDataParamOrReturn objects = 2;
+	repeated protos.common.ObjectWithDataParamOrReturn objects = 2;
 	bool moving = 3;
 	repeated string idsWithAlias = 4;
 }
@@ -61,14 +61,14 @@ message GetCopyOfObjectRequest {
 }
 
 message GetCopyOfObjectResponse {
-	dataclay.communication.grpc.common.SerializedParametersOrReturn ret = 1;
-	dataclay.communication.grpc.common.ExceptionInfo excInfo = 2;
+	protos.common.SerializedParametersOrReturn ret = 1;
+	protos.common.ExceptionInfo excInfo = 2;
 }
 
 message UpdateObjectRequest {
     string sessionID = 1;
     string intoObjectID = 2;
-    dataclay.communication.grpc.common.SerializedParametersOrReturn fromObject = 3;
+    protos.common.SerializedParametersOrReturn fromObject = 3;
 }
 
 message GetObjectsRequest {
@@ -81,13 +81,13 @@ message GetObjectsRequest {
 }
 
 message GetObjectsResponse {
-	repeated dataclay.communication.grpc.common.ObjectWithDataParamOrReturn objects = 1;
-	dataclay.communication.grpc.common.ExceptionInfo excInfo = 2;
+	repeated protos.common.ObjectWithDataParamOrReturn objects = 1;
+	protos.common.ExceptionInfo excInfo = 2;
 }
 
 message MakePersistentRequest { 
 	string sessionID = 1;
-	repeated dataclay.communication.grpc.common.ObjectWithDataParamOrReturn objects = 2;
+	repeated protos.common.ObjectWithDataParamOrReturn objects = 2;
 }
 
 message FederateRequest {
@@ -99,7 +99,7 @@ message FederateRequest {
 
 message NotifyFederationRequest {
 	string sessionID = 1;
-	repeated dataclay.communication.grpc.common.ObjectWithDataParamOrReturn objects = 2;
+	repeated protos.common.ObjectWithDataParamOrReturn objects = 2;
 }
 
 message UnfederateRequest {
@@ -118,13 +118,13 @@ message ExecuteImplementationRequest {
 	string objectID = 1;
 	string implementationID = 2;
 	string sessionID = 3;
-	dataclay.communication.grpc.common.SerializedParametersOrReturn params = 4;
+	protos.common.SerializedParametersOrReturn params = 4;
 
 }
 
 message ExecuteImplementationResponse {
-	dataclay.communication.grpc.common.SerializedParametersOrReturn ret = 1;
-	dataclay.communication.grpc.common.ExceptionInfo excInfo = 2;
+	protos.common.SerializedParametersOrReturn ret = 1;
+	protos.common.ExceptionInfo excInfo = 2;
 }
 
 message NewVersionRequest {
@@ -135,7 +135,7 @@ message NewVersionRequest {
 
 message NewVersionResponse {
 	string objectID = 1;
-	dataclay.communication.grpc.common.ExceptionInfo excInfo = 2;
+	protos.common.ExceptionInfo excInfo = 2;
 }
 
 message ConsolidateVersionRequest {
@@ -145,7 +145,7 @@ message ConsolidateVersionRequest {
 
 message UpsertObjectsRequest {
 	string sessionID = 1;
-	repeated dataclay.communication.grpc.common.ObjectWithDataParamOrReturn bytesUpdate = 2;
+	repeated protos.common.ObjectWithDataParamOrReturn bytesUpdate = 2;
 }
 
 message NewReplicaRequest {
@@ -157,7 +157,7 @@ message NewReplicaRequest {
 
 message NewReplicaResponse {
 	repeated string replicatedObjects = 1;
-	dataclay.communication.grpc.common.ExceptionInfo excInfo = 2;
+	protos.common.ExceptionInfo excInfo = 2;
 }
 
 message MoveObjectsRequest {
@@ -169,7 +169,7 @@ message MoveObjectsRequest {
 
 message MoveObjectsResponse {
 	repeated string movedObjects = 1;
-	dataclay.communication.grpc.common.ExceptionInfo excInfo = 2;
+	protos.common.ExceptionInfo excInfo = 2;
 }
 
 message RemoveObjectsRequest {
@@ -182,11 +182,11 @@ message RemoveObjectsRequest {
 
 message RemoveObjectsResponse {
 	map<string, string> removedObjects = 1;
-	dataclay.communication.grpc.common.ExceptionInfo excInfo = 2;
+	protos.common.ExceptionInfo excInfo = 2;
 }
 
 message MigrateObjectsRequest {
-	map<string, dataclay.communication.grpc.common.StorageLocationInfo> destStorageLocs = 1;
+	map<string, protos.common.StorageLocationInfo> destStorageLocs = 1;
 }
 
 message MigratedObjects {
@@ -196,7 +196,7 @@ message MigratedObjects {
 message MigrateObjectsResponse {
 	map<string, MigratedObjects> migratedObjs = 1;
 	MigratedObjects nonMigratedObjs = 2;
-	dataclay.communication.grpc.common.ExceptionInfo excInfo = 3;
+	protos.common.ExceptionInfo excInfo = 3;
 }
 
 message ActivateTracingRequest {
@@ -220,7 +220,7 @@ message GetClassIDFromObjectInMemoryRequest {
 
 message GetClassIDFromObjectInMemoryResponse {
 	string classID = 1;
-	dataclay.communication.grpc.common.ExceptionInfo excInfo = 2;
+	protos.common.ExceptionInfo excInfo = 2;
 }
 
 message StoreToDBRequest {
@@ -236,7 +236,7 @@ message GetFromDBRequest {
 
 message GetFromDBResponse {
 	bytes objBytes = 1;
-	dataclay.communication.grpc.common.ExceptionInfo excInfo = 2;
+	protos.common.ExceptionInfo excInfo = 2;
 }
 
 message UpdateToDBRequest {
@@ -253,7 +253,7 @@ message DeleteToDBRequest {
 
 message DeleteSetFromDBRequest {
 	repeated string objectIDs = 1;
-	dataclay.communication.grpc.common.ExceptionInfo excInfo = 2;
+	protos.common.ExceptionInfo excInfo = 2;
 }
 
 message UpdateRefsRequest {
@@ -262,14 +262,14 @@ message UpdateRefsRequest {
 
 message GetRetainedReferencesResponse {
 	repeated string retainedReferences = 1;
-	dataclay.communication.grpc.common.ExceptionInfo excInfo = 2;
+	protos.common.ExceptionInfo excInfo = 2;
 }
 
 message SynchronizeRequest {
 	string objectID = 1;
 	string implementationID = 2;
 	string sessionID = 3;
-	dataclay.communication.grpc.common.SerializedParametersOrReturn params = 4;
+	protos.common.SerializedParametersOrReturn params = 4;
 	string callingBackendID = 5;
 }
 
@@ -279,7 +279,7 @@ message ExistsRequest {
 
 message ExistsResponse { 
 	bool exists = 1;
-	dataclay.communication.grpc.common.ExceptionInfo excInfo = 2;
+	protos.common.ExceptionInfo excInfo = 2;
 }
 
 message ExistsInDBRequest { 
@@ -288,7 +288,7 @@ message ExistsInDBRequest {
 
 message ExistsInDBResponse { 
 	bool exists = 1;
-	dataclay.communication.grpc.common.ExceptionInfo excInfo = 2;
+	protos.common.ExceptionInfo excInfo = 2;
 }
 
 message DetachObjectFromSessionRequest {
@@ -303,5 +303,5 @@ message DeleteAliasRequest {
 
 message GetObjectGraphResponse {
 	bytes serializedGraph = 1;
-	dataclay.communication.grpc.common.ExceptionInfo excInfo = 2;
+	protos.common.ExceptionInfo excInfo = 2;
 }
