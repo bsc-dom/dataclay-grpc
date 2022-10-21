@@ -15,7 +15,7 @@ _sym_db = _symbol_database.Default()
 from . import common_messages_pb2 as protos_dot_common__messages__pb2
 
 
-DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n!protos/dataservice_messages.proto\x12\x12protos.dataservice\x1a\x1cprotos/common_messages.proto\")\n\x14InitBackendIDRequest\x12\x11\n\tbackendID\x18\x01 \x01(\t\"F\n$AssociateExecutionEnvironmentRequest\x12\x1e\n\x16\x65xecutionEnvironmentID\x18\x01 \x01(\t\"\xbe\x01\n\x18\x44\x65ployMetaClassesRequest\x12\x11\n\tnamespace\x18\x01 \x01(\t\x12X\n\x0e\x64\x65ploymentPack\x18\x02 \x03(\x0b\x32@.protos.dataservice.DeployMetaClassesRequest.DeploymentPackEntry\x1a\x35\n\x13\x44\x65ploymentPackEntry\x12\x0b\n\x03key\x18\x01 \x01(\t\x12\r\n\x05value\x18\x02 \x01(\t:\x02\x38\x01\"\x9e\x04\n\x14\x44\x65ployClassesRequest\x12\x11\n\tnamespace\x18\x01 \x01(\t\x12V\n\x0f\x63lassesToDeploy\x18\x02 \x03(\x0b\x32=.protos.dataservice.DeployClassesRequest.ClassesToDeployEntry\x12H\n\x08\x63lassIds\x18\x03 \x03(\x0b\x32\x36.protos.dataservice.DeployClassesRequest.ClassIdsEntry\x12\x46\n\x07\x61spects\x18\x04 \x03(\x0b\x32\x35.protos.dataservice.DeployClassesRequest.AspectsEntry\x12\x42\n\x05yamls\x18\x05 \x03(\x0b\x32\x33.protos.dataservice.DeployClassesRequest.YamlsEntry\x1a\x36\n\x14\x43lassesToDeployEntry\x12\x0b\n\x03key\x18\x01 \x01(\t\x12\r\n\x05value\x18\x02 \x01(\x0c:\x02\x38\x01\x1a/\n\rClassIdsEntry\x12\x0b\n\x03key\x18\x01 \x01(\t\x12\r\n\x05value\x18\x02 \x01(\t:\x02\x38\x01\x1a.\n\x0c\x41spectsEntry\x12\x0b\n\x03key\x18\x01 \x01(\t\x12\r\n\x05value\x18\x02 \x01(\x0c:\x02\x38\x01\x1a,\n\nYamlsEntry\x12\x0b\n\x03key\x18\x01 \x01(\t\x12\r\n\x05value\x18\x02 \x01(\x0c:\x02\x38\x01\"o\n\x12\x45nrichClassRequest\x12\x11\n\tnamespace\x18\x01 \x01(\t\x12\x11\n\tclassname\x18\x02 \x01(\t\x12\x15\n\rclassToDeploy\x18\x03 \x01(\x0c\x12\x0e\n\x06\x61spect\x18\x04 \x01(\x0c\x12\x0c\n\x04yaml\x18\x05 \x01(\x0c\"\xa8\x02\n\x1cNewPersistentInstanceRequest\x12\x11\n\tsessionID\x18\x01 \x01(\t\x12\x0f\n\x07\x63lassID\x18\x02 \x01(\t\x12\x18\n\x10implementationID\x18\x03 \x01(\t\x12X\n\x0cifaceBitMaps\x18\x04 \x03(\x0b\x32\x42.protos.dataservice.NewPersistentInstanceRequest.IfaceBitMapsEntry\x12;\n\x06params\x18\x05 \x01(\x0b\x32+.protos.common.SerializedParametersOrReturn\x1a\x33\n\x11IfaceBitMapsEntry\x12\x0b\n\x03key\x18\x01 \x01(\t\x12\r\n\x05value\x18\x02 \x01(\x0c:\x02\x38\x01\"`\n\x1dNewPersistentInstanceResponse\x12\x10\n\x08objectID\x18\x01 \x01(\t\x12-\n\x07\x65xcInfo\x18\x02 \x01(\x0b\x32\x1c.protos.common.ExceptionInfo\"\x8b\x01\n\x13StoreObjectsRequest\x12\x11\n\tsessionID\x18\x01 \x01(\t\x12;\n\x07objects\x18\x02 \x03(\x0b\x32*.protos.common.ObjectWithDataParamOrReturn\x12\x0e\n\x06moving\x18\x03 \x01(\x08\x12\x14\n\x0cidsWithAlias\x18\x04 \x03(\t\"P\n\x16GetCopyOfObjectRequest\x12\x11\n\tsessionID\x18\x01 \x01(\t\x12\x10\n\x08objectID\x18\x02 \x01(\t\x12\x11\n\trecursive\x18\x03 \x01(\x08\"\x82\x01\n\x17GetCopyOfObjectResponse\x12\x38\n\x03ret\x18\x01 \x01(\x0b\x32+.protos.common.SerializedParametersOrReturn\x12-\n\x07\x65xcInfo\x18\x02 \x01(\x0b\x32\x1c.protos.common.ExceptionInfo\"\x7f\n\x13UpdateObjectRequest\x12\x11\n\tsessionID\x18\x01 \x01(\t\x12\x14\n\x0cintoObjectID\x18\x02 \x01(\t\x12?\n\nfromObject\x18\x03 \x01(\x0b\x32+.protos.common.SerializedParametersOrReturn\"\x9e\x01\n\x11GetObjectsRequest\x12\x11\n\tsessionID\x18\x01 \x01(\t\x12\x11\n\tobjectIDS\x18\x02 \x03(\t\x12\x1e\n\x16\x61lreadyObtainedObjects\x18\x03 \x03(\t\x12\x11\n\trecursive\x18\x04 \x01(\x08\x12\x15\n\rdestBackendID\x18\x05 \x01(\t\x12\x19\n\x11updateReplicaLocs\x18\x06 \x01(\x05\"\x80\x01\n\x12GetObjectsResponse\x12;\n\x07objects\x18\x01 \x03(\x0b\x32*.protos.common.ObjectWithDataParamOrReturn\x12-\n\x07\x65xcInfo\x18\x02 \x01(\x0b\x32\x1c.protos.common.ExceptionInfo\"g\n\x15MakePersistentRequest\x12\x11\n\tsessionID\x18\x01 \x01(\t\x12;\n\x07objects\x18\x02 \x03(\x0b\x32*.protos.common.ObjectWithDataParamOrReturn\"q\n\x0f\x46\x65\x64\x65rateRequest\x12\x11\n\tsessionID\x18\x01 \x01(\t\x12\x10\n\x08objectID\x18\x02 \x01(\t\x12&\n\x1e\x65xternalExecutionEnvironmentID\x18\x03 \x01(\t\x12\x11\n\trecursive\x18\x04 \x01(\x08\"i\n\x17NotifyFederationRequest\x12\x11\n\tsessionID\x18\x01 \x01(\t\x12;\n\x07objects\x18\x02 \x03(\x0b\x32*.protos.common.ObjectWithDataParamOrReturn\"s\n\x11UnfederateRequest\x12\x11\n\tsessionID\x18\x01 \x01(\t\x12\x10\n\x08objectID\x18\x02 \x01(\t\x12&\n\x1e\x65xternalExecutionEnvironmentID\x18\x03 \x01(\t\x12\x11\n\trecursive\x18\x04 \x01(\x08\"A\n\x19NotifyUnfederationRequest\x12\x11\n\tsessionID\x18\x01 \x01(\t\x12\x11\n\tobjectIDs\x18\x02 \x03(\t\"\x9a\x01\n\x1c\x45xecuteImplementationRequest\x12\x10\n\x08objectID\x18\x01 \x01(\t\x12\x18\n\x10implementationID\x18\x02 \x01(\t\x12\x11\n\tsessionID\x18\x03 \x01(\t\x12;\n\x06params\x18\x04 \x01(\x0b\x32+.protos.common.SerializedParametersOrReturn\"\x88\x01\n\x1d\x45xecuteImplementationResponse\x12\x38\n\x03ret\x18\x01 \x01(\x0b\x32+.protos.common.SerializedParametersOrReturn\x12-\n\x07\x65xcInfo\x18\x02 \x01(\x0b\x32\x1c.protos.common.ExceptionInfo\"O\n\x11NewVersionRequest\x12\x11\n\tsessionID\x18\x01 \x01(\t\x12\x10\n\x08objectID\x18\x02 \x01(\t\x12\x15\n\rdestBackendID\x18\x03 \x01(\t\"U\n\x12NewVersionResponse\x12\x10\n\x08objectID\x18\x01 \x01(\t\x12-\n\x07\x65xcInfo\x18\x02 \x01(\x0b\x32\x1c.protos.common.ExceptionInfo\"G\n\x19\x43onsolidateVersionRequest\x12\x11\n\tsessionID\x18\x01 \x01(\t\x12\x17\n\x0fversionObjectID\x18\x02 \x01(\t\"j\n\x14UpsertObjectsRequest\x12\x11\n\tsessionID\x18\x01 \x01(\t\x12?\n\x0b\x62ytesUpdate\x18\x02 \x03(\x0b\x32*.protos.common.ObjectWithDataParamOrReturn\"b\n\x11NewReplicaRequest\x12\x11\n\tsessionID\x18\x01 \x01(\t\x12\x10\n\x08objectID\x18\x02 \x01(\t\x12\x15\n\rdestBackendID\x18\x03 \x01(\t\x12\x11\n\trecursive\x18\x04 \x01(\x08\"^\n\x12NewReplicaResponse\x12\x19\n\x11replicatedObjects\x18\x01 \x03(\t\x12-\n\x07\x65xcInfo\x18\x02 \x01(\x0b\x32\x1c.protos.common.ExceptionInfo\"_\n\x12MoveObjectsRequest\x12\x11\n\tsessionID\x18\x01 \x01(\t\x12\x10\n\x08objectID\x18\x02 \x01(\t\x12\x11\n\tdestLocID\x18\x03 \x01(\t\x12\x11\n\trecursive\x18\x04 \x01(\x08\"Z\n\x13MoveObjectsResponse\x12\x14\n\x0cmovedObjects\x18\x01 \x03(\t\x12-\n\x07\x65xcInfo\x18\x02 \x01(\x0b\x32\x1c.protos.common.ExceptionInfo\"p\n\x14RemoveObjectsRequest\x12\x11\n\tsessionID\x18\x01 \x01(\t\x12\x11\n\tobjectIDs\x18\x02 \x03(\t\x12\x11\n\trecursive\x18\x03 \x01(\x08\x12\x0e\n\x06moving\x18\x04 \x01(\x08\x12\x0f\n\x07newHint\x18\x05 \x01(\t\"\xd4\x01\n\x15RemoveObjectsResponse\x12U\n\x0eremovedObjects\x18\x01 \x03(\x0b\x32=.protos.dataservice.RemoveObjectsResponse.RemovedObjectsEntry\x12-\n\x07\x65xcInfo\x18\x02 \x01(\x0b\x32\x1c.protos.common.ExceptionInfo\x1a\x35\n\x13RemovedObjectsEntry\x12\x0b\n\x03key\x18\x01 \x01(\t\x12\r\n\x05value\x18\x02 \x01(\t:\x02\x38\x01\"\xcc\x01\n\x15MigrateObjectsRequest\x12W\n\x0f\x64\x65stStorageLocs\x18\x01 \x03(\x0b\x32>.protos.dataservice.MigrateObjectsRequest.DestStorageLocsEntry\x1aZ\n\x14\x44\x65stStorageLocsEntry\x12\x0b\n\x03key\x18\x01 \x01(\t\x12\x31\n\x05value\x18\x02 \x01(\x0b\x32\".protos.common.StorageLocationInfo:\x02\x38\x01\"\x1f\n\x0fMigratedObjects\x12\x0c\n\x04objs\x18\x01 \x03(\t\"\xb3\x02\n\x16MigrateObjectsResponse\x12R\n\x0cmigratedObjs\x18\x01 \x03(\x0b\x32<.protos.dataservice.MigrateObjectsResponse.MigratedObjsEntry\x12<\n\x0fnonMigratedObjs\x18\x02 \x01(\x0b\x32#.protos.dataservice.MigratedObjects\x12-\n\x07\x65xcInfo\x18\x03 \x01(\x0b\x32\x1c.protos.common.ExceptionInfo\x1aX\n\x11MigratedObjsEntry\x12\x0b\n\x03key\x18\x01 \x01(\t\x12\x32\n\x05value\x18\x02 \x01(\x0b\x32#.protos.dataservice.MigratedObjects:\x02\x38\x01\"(\n\x16\x41\x63tivateTracingRequest\x12\x0e\n\x06taskid\x18\x01 \x01(\x05\",\n\x17\x43loseSessionInDSRequest\x12\x11\n\tsessionID\x18\x01 \x01(\t\"\xd4\x01\n\x12\x44iskCollectRequest\x12\x13\n\x0b\x65pochNodeID\x18\x01 \x01(\t\x12\x10\n\x08ringPath\x18\x02 \x03(\t\x12\x12\n\ncandidates\x18\x03 \x03(\t\x12N\n\x0crefsToUpdate\x18\x04 \x03(\x0b\x32\x38.protos.dataservice.DiskCollectRequest.RefsToUpdateEntry\x1a\x33\n\x11RefsToUpdateEntry\x12\x0b\n\x03key\x18\x01 \x01(\t\x12\r\n\x05value\x18\x02 \x01(\x05:\x02\x38\x01\"7\n#GetClassIDFromObjectInMemoryRequest\x12\x10\n\x08objectID\x18\x01 \x01(\t\"f\n$GetClassIDFromObjectInMemoryResponse\x12\x0f\n\x07\x63lassID\x18\x01 \x01(\t\x12-\n\x07\x65xcInfo\x18\x02 \x01(\x0b\x32\x1c.protos.common.ExceptionInfo\"V\n\x10StoreToDBRequest\x12\x1e\n\x16\x65xecutionEnvironmentID\x18\x01 \x01(\t\x12\x10\n\x08objectID\x18\x02 \x01(\t\x12\x10\n\x08objBytes\x18\x03 \x01(\x0c\"D\n\x10GetFromDBRequest\x12\x1e\n\x16\x65xecutionEnvironmentID\x18\x01 \x01(\t\x12\x10\n\x08objectID\x18\x02 \x01(\t\"T\n\x11GetFromDBResponse\x12\x10\n\x08objBytes\x18\x01 \x01(\x0c\x12-\n\x07\x65xcInfo\x18\x02 \x01(\x0b\x32\x1c.protos.common.ExceptionInfo\"f\n\x11UpdateToDBRequest\x12\x1e\n\x16\x65xecutionEnvironmentID\x18\x01 \x01(\t\x12\x10\n\x08objectID\x18\x02 \x01(\t\x12\x10\n\x08objBytes\x18\x03 \x01(\x0c\x12\r\n\x05\x64irty\x18\x04 \x01(\x08\"E\n\x11\x44\x65leteToDBRequest\x12\x1e\n\x16\x65xecutionEnvironmentID\x18\x01 \x01(\t\x12\x10\n\x08objectID\x18\x02 \x01(\t\"Z\n\x16\x44\x65leteSetFromDBRequest\x12\x11\n\tobjectIDs\x18\x01 \x03(\t\x12-\n\x07\x65xcInfo\x18\x02 \x01(\x0b\x32\x1c.protos.common.ExceptionInfo\"\x97\x01\n\x11UpdateRefsRequest\x12M\n\x0crefsToUpdate\x18\x01 \x03(\x0b\x32\x37.protos.dataservice.UpdateRefsRequest.RefsToUpdateEntry\x1a\x33\n\x11RefsToUpdateEntry\x12\x0b\n\x03key\x18\x01 \x01(\t\x12\r\n\x05value\x18\x02 \x01(\x05:\x02\x38\x01\"j\n\x1dGetRetainedReferencesResponse\x12\x1a\n\x12retainedReferences\x18\x01 \x03(\t\x12-\n\x07\x65xcInfo\x18\x02 \x01(\x0b\x32\x1c.protos.common.ExceptionInfo\"\xaa\x01\n\x12SynchronizeRequest\x12\x10\n\x08objectID\x18\x01 \x01(\t\x12\x18\n\x10implementationID\x18\x02 \x01(\t\x12\x11\n\tsessionID\x18\x03 \x01(\t\x12;\n\x06params\x18\x04 \x01(\x0b\x32+.protos.common.SerializedParametersOrReturn\x12\x18\n\x10\x63\x61llingBackendID\x18\x05 \x01(\t\"!\n\rExistsRequest\x12\x10\n\x08objectID\x18\x01 \x01(\t\"O\n\x0e\x45xistsResponse\x12\x0e\n\x06\x65xists\x18\x01 \x01(\x08\x12-\n\x07\x65xcInfo\x18\x02 \x01(\x0b\x32\x1c.protos.common.ExceptionInfo\"%\n\x11\x45xistsInDBRequest\x12\x10\n\x08objectID\x18\x01 \x01(\t\"S\n\x12\x45xistsInDBResponse\x12\x0e\n\x06\x65xists\x18\x01 \x01(\x08\x12-\n\x07\x65xcInfo\x18\x02 \x01(\x0b\x32\x1c.protos.common.ExceptionInfo\"E\n\x1e\x44\x65tachObjectFromSessionRequest\x12\x10\n\x08objectID\x18\x01 \x01(\t\x12\x11\n\tsessionID\x18\x02 \x01(\t\"9\n\x12\x44\x65leteAliasRequest\x12\x10\n\x08objectID\x18\x01 \x01(\t\x12\x11\n\tsessionID\x18\x02 \x01(\t\"`\n\x16GetObjectGraphResponse\x12\x17\n\x0fserializedGraph\x18\x01 \x01(\x0c\x12-\n\x07\x65xcInfo\x18\x02 \x01(\x0b\x32\x1c.protos.common.ExceptionInfoB;\n7es.bsc.dataclay.communication.grpc.messages.dataserviceP\x00\x62\x06proto3')
+DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n!protos/dataservice_messages.proto\x12\x12protos.dataservice\x1a\x1cprotos/common_messages.proto\")\n\x14InitBackendIDRequest\x12\x11\n\tbackendID\x18\x01 \x01(\t\"F\n$AssociateExecutionEnvironmentRequest\x12\x1e\n\x16\x65xecutionEnvironmentID\x18\x01 \x01(\t\"\xbe\x01\n\x18\x44\x65ployMetaClassesRequest\x12\x11\n\tnamespace\x18\x01 \x01(\t\x12X\n\x0e\x64\x65ploymentPack\x18\x02 \x03(\x0b\x32@.protos.dataservice.DeployMetaClassesRequest.DeploymentPackEntry\x1a\x35\n\x13\x44\x65ploymentPackEntry\x12\x0b\n\x03key\x18\x01 \x01(\t\x12\r\n\x05value\x18\x02 \x01(\t:\x02\x38\x01\"\x9e\x04\n\x14\x44\x65ployClassesRequest\x12\x11\n\tnamespace\x18\x01 \x01(\t\x12V\n\x0f\x63lassesToDeploy\x18\x02 \x03(\x0b\x32=.protos.dataservice.DeployClassesRequest.ClassesToDeployEntry\x12H\n\x08\x63lassIds\x18\x03 \x03(\x0b\x32\x36.protos.dataservice.DeployClassesRequest.ClassIdsEntry\x12\x46\n\x07\x61spects\x18\x04 \x03(\x0b\x32\x35.protos.dataservice.DeployClassesRequest.AspectsEntry\x12\x42\n\x05yamls\x18\x05 \x03(\x0b\x32\x33.protos.dataservice.DeployClassesRequest.YamlsEntry\x1a\x36\n\x14\x43lassesToDeployEntry\x12\x0b\n\x03key\x18\x01 \x01(\t\x12\r\n\x05value\x18\x02 \x01(\x0c:\x02\x38\x01\x1a/\n\rClassIdsEntry\x12\x0b\n\x03key\x18\x01 \x01(\t\x12\r\n\x05value\x18\x02 \x01(\t:\x02\x38\x01\x1a.\n\x0c\x41spectsEntry\x12\x0b\n\x03key\x18\x01 \x01(\t\x12\r\n\x05value\x18\x02 \x01(\x0c:\x02\x38\x01\x1a,\n\nYamlsEntry\x12\x0b\n\x03key\x18\x01 \x01(\t\x12\r\n\x05value\x18\x02 \x01(\x0c:\x02\x38\x01\"o\n\x12\x45nrichClassRequest\x12\x11\n\tnamespace\x18\x01 \x01(\t\x12\x11\n\tclassname\x18\x02 \x01(\t\x12\x15\n\rclassToDeploy\x18\x03 \x01(\x0c\x12\x0e\n\x06\x61spect\x18\x04 \x01(\x0c\x12\x0c\n\x04yaml\x18\x05 \x01(\x0c\"\xa8\x02\n\x1cNewPersistentInstanceRequest\x12\x11\n\tsessionID\x18\x01 \x01(\t\x12\x0f\n\x07\x63lassID\x18\x02 \x01(\t\x12\x18\n\x10implementationID\x18\x03 \x01(\t\x12X\n\x0cifaceBitMaps\x18\x04 \x03(\x0b\x32\x42.protos.dataservice.NewPersistentInstanceRequest.IfaceBitMapsEntry\x12;\n\x06params\x18\x05 \x01(\x0b\x32+.protos.common.SerializedParametersOrReturn\x1a\x33\n\x11IfaceBitMapsEntry\x12\x0b\n\x03key\x18\x01 \x01(\t\x12\r\n\x05value\x18\x02 \x01(\x0c:\x02\x38\x01\"`\n\x1dNewPersistentInstanceResponse\x12\x10\n\x08objectID\x18\x01 \x01(\t\x12-\n\x07\x65xcInfo\x18\x02 \x01(\x0b\x32\x1c.protos.common.ExceptionInfo\"\x8b\x01\n\x13StoreObjectsRequest\x12\x11\n\tsessionID\x18\x01 \x01(\t\x12;\n\x07objects\x18\x02 \x03(\x0b\x32*.protos.common.ObjectWithDataParamOrReturn\x12\x0e\n\x06moving\x18\x03 \x01(\x08\x12\x14\n\x0cidsWithAlias\x18\x04 \x03(\t\"P\n\x16GetCopyOfObjectRequest\x12\x11\n\tsessionID\x18\x01 \x01(\t\x12\x10\n\x08objectID\x18\x02 \x01(\t\x12\x11\n\trecursive\x18\x03 \x01(\x08\"\x82\x01\n\x17GetCopyOfObjectResponse\x12\x38\n\x03ret\x18\x01 \x01(\x0b\x32+.protos.common.SerializedParametersOrReturn\x12-\n\x07\x65xcInfo\x18\x02 \x01(\x0b\x32\x1c.protos.common.ExceptionInfo\"\x7f\n\x13UpdateObjectRequest\x12\x11\n\tsessionID\x18\x01 \x01(\t\x12\x14\n\x0cintoObjectID\x18\x02 \x01(\t\x12?\n\nfromObject\x18\x03 \x01(\x0b\x32+.protos.common.SerializedParametersOrReturn\"\x9e\x01\n\x11GetObjectsRequest\x12\x11\n\tsessionID\x18\x01 \x01(\t\x12\x11\n\tobjectIDS\x18\x02 \x03(\t\x12\x1e\n\x16\x61lreadyObtainedObjects\x18\x03 \x03(\t\x12\x11\n\trecursive\x18\x04 \x01(\x08\x12\x15\n\rdestBackendID\x18\x05 \x01(\t\x12\x19\n\x11updateReplicaLocs\x18\x06 \x01(\x05\"\x80\x01\n\x12GetObjectsResponse\x12;\n\x07objects\x18\x01 \x03(\x0b\x32*.protos.common.ObjectWithDataParamOrReturn\x12-\n\x07\x65xcInfo\x18\x02 \x01(\x0b\x32\x1c.protos.common.ExceptionInfo\"j\n\x18OldMakePersistentRequest\x12\x11\n\tsessionID\x18\x01 \x01(\t\x12;\n\x07objects\x18\x02 \x03(\x0b\x32*.protos.common.ObjectWithDataParamOrReturn\"q\n\x0f\x46\x65\x64\x65rateRequest\x12\x11\n\tsessionID\x18\x01 \x01(\t\x12\x10\n\x08objectID\x18\x02 \x01(\t\x12&\n\x1e\x65xternalExecutionEnvironmentID\x18\x03 \x01(\t\x12\x11\n\trecursive\x18\x04 \x01(\x08\"i\n\x17NotifyFederationRequest\x12\x11\n\tsessionID\x18\x01 \x01(\t\x12;\n\x07objects\x18\x02 \x03(\x0b\x32*.protos.common.ObjectWithDataParamOrReturn\"s\n\x11UnfederateRequest\x12\x11\n\tsessionID\x18\x01 \x01(\t\x12\x10\n\x08objectID\x18\x02 \x01(\t\x12&\n\x1e\x65xternalExecutionEnvironmentID\x18\x03 \x01(\t\x12\x11\n\trecursive\x18\x04 \x01(\x08\"A\n\x19NotifyUnfederationRequest\x12\x11\n\tsessionID\x18\x01 \x01(\t\x12\x11\n\tobjectIDs\x18\x02 \x03(\t\"\x9a\x01\n\x1c\x45xecuteImplementationRequest\x12\x10\n\x08objectID\x18\x01 \x01(\t\x12\x18\n\x10implementationID\x18\x02 \x01(\t\x12\x11\n\tsessionID\x18\x03 \x01(\t\x12;\n\x06params\x18\x04 \x01(\x0b\x32+.protos.common.SerializedParametersOrReturn\"\x88\x01\n\x1d\x45xecuteImplementationResponse\x12\x38\n\x03ret\x18\x01 \x01(\x0b\x32+.protos.common.SerializedParametersOrReturn\x12-\n\x07\x65xcInfo\x18\x02 \x01(\x0b\x32\x1c.protos.common.ExceptionInfo\"O\n\x11NewVersionRequest\x12\x11\n\tsessionID\x18\x01 \x01(\t\x12\x10\n\x08objectID\x18\x02 \x01(\t\x12\x15\n\rdestBackendID\x18\x03 \x01(\t\"U\n\x12NewVersionResponse\x12\x10\n\x08objectID\x18\x01 \x01(\t\x12-\n\x07\x65xcInfo\x18\x02 \x01(\x0b\x32\x1c.protos.common.ExceptionInfo\"G\n\x19\x43onsolidateVersionRequest\x12\x11\n\tsessionID\x18\x01 \x01(\t\x12\x17\n\x0fversionObjectID\x18\x02 \x01(\t\"j\n\x14UpsertObjectsRequest\x12\x11\n\tsessionID\x18\x01 \x01(\t\x12?\n\x0b\x62ytesUpdate\x18\x02 \x03(\x0b\x32*.protos.common.ObjectWithDataParamOrReturn\"b\n\x11NewReplicaRequest\x12\x11\n\tsessionID\x18\x01 \x01(\t\x12\x10\n\x08objectID\x18\x02 \x01(\t\x12\x15\n\rdestBackendID\x18\x03 \x01(\t\x12\x11\n\trecursive\x18\x04 \x01(\x08\"^\n\x12NewReplicaResponse\x12\x19\n\x11replicatedObjects\x18\x01 \x03(\t\x12-\n\x07\x65xcInfo\x18\x02 \x01(\x0b\x32\x1c.protos.common.ExceptionInfo\"_\n\x12MoveObjectsRequest\x12\x11\n\tsessionID\x18\x01 \x01(\t\x12\x10\n\x08objectID\x18\x02 \x01(\t\x12\x11\n\tdestLocID\x18\x03 \x01(\t\x12\x11\n\trecursive\x18\x04 \x01(\x08\"Z\n\x13MoveObjectsResponse\x12\x14\n\x0cmovedObjects\x18\x01 \x03(\t\x12-\n\x07\x65xcInfo\x18\x02 \x01(\x0b\x32\x1c.protos.common.ExceptionInfo\"p\n\x14RemoveObjectsRequest\x12\x11\n\tsessionID\x18\x01 \x01(\t\x12\x11\n\tobjectIDs\x18\x02 \x03(\t\x12\x11\n\trecursive\x18\x03 \x01(\x08\x12\x0e\n\x06moving\x18\x04 \x01(\x08\x12\x0f\n\x07newHint\x18\x05 \x01(\t\"\xd4\x01\n\x15RemoveObjectsResponse\x12U\n\x0eremovedObjects\x18\x01 \x03(\x0b\x32=.protos.dataservice.RemoveObjectsResponse.RemovedObjectsEntry\x12-\n\x07\x65xcInfo\x18\x02 \x01(\x0b\x32\x1c.protos.common.ExceptionInfo\x1a\x35\n\x13RemovedObjectsEntry\x12\x0b\n\x03key\x18\x01 \x01(\t\x12\r\n\x05value\x18\x02 \x01(\t:\x02\x38\x01\"\xcc\x01\n\x15MigrateObjectsRequest\x12W\n\x0f\x64\x65stStorageLocs\x18\x01 \x03(\x0b\x32>.protos.dataservice.MigrateObjectsRequest.DestStorageLocsEntry\x1aZ\n\x14\x44\x65stStorageLocsEntry\x12\x0b\n\x03key\x18\x01 \x01(\t\x12\x31\n\x05value\x18\x02 \x01(\x0b\x32\".protos.common.StorageLocationInfo:\x02\x38\x01\"\x1f\n\x0fMigratedObjects\x12\x0c\n\x04objs\x18\x01 \x03(\t\"\xb3\x02\n\x16MigrateObjectsResponse\x12R\n\x0cmigratedObjs\x18\x01 \x03(\x0b\x32<.protos.dataservice.MigrateObjectsResponse.MigratedObjsEntry\x12<\n\x0fnonMigratedObjs\x18\x02 \x01(\x0b\x32#.protos.dataservice.MigratedObjects\x12-\n\x07\x65xcInfo\x18\x03 \x01(\x0b\x32\x1c.protos.common.ExceptionInfo\x1aX\n\x11MigratedObjsEntry\x12\x0b\n\x03key\x18\x01 \x01(\t\x12\x32\n\x05value\x18\x02 \x01(\x0b\x32#.protos.dataservice.MigratedObjects:\x02\x38\x01\"(\n\x16\x41\x63tivateTracingRequest\x12\x0e\n\x06taskid\x18\x01 \x01(\x05\",\n\x17\x43loseSessionInDSRequest\x12\x11\n\tsessionID\x18\x01 \x01(\t\"\xd4\x01\n\x12\x44iskCollectRequest\x12\x13\n\x0b\x65pochNodeID\x18\x01 \x01(\t\x12\x10\n\x08ringPath\x18\x02 \x03(\t\x12\x12\n\ncandidates\x18\x03 \x03(\t\x12N\n\x0crefsToUpdate\x18\x04 \x03(\x0b\x32\x38.protos.dataservice.DiskCollectRequest.RefsToUpdateEntry\x1a\x33\n\x11RefsToUpdateEntry\x12\x0b\n\x03key\x18\x01 \x01(\t\x12\r\n\x05value\x18\x02 \x01(\x05:\x02\x38\x01\"7\n#GetClassIDFromObjectInMemoryRequest\x12\x10\n\x08objectID\x18\x01 \x01(\t\"f\n$GetClassIDFromObjectInMemoryResponse\x12\x0f\n\x07\x63lassID\x18\x01 \x01(\t\x12-\n\x07\x65xcInfo\x18\x02 \x01(\x0b\x32\x1c.protos.common.ExceptionInfo\"V\n\x10StoreToDBRequest\x12\x1e\n\x16\x65xecutionEnvironmentID\x18\x01 \x01(\t\x12\x10\n\x08objectID\x18\x02 \x01(\t\x12\x10\n\x08objBytes\x18\x03 \x01(\x0c\"D\n\x10GetFromDBRequest\x12\x1e\n\x16\x65xecutionEnvironmentID\x18\x01 \x01(\t\x12\x10\n\x08objectID\x18\x02 \x01(\t\"T\n\x11GetFromDBResponse\x12\x10\n\x08objBytes\x18\x01 \x01(\x0c\x12-\n\x07\x65xcInfo\x18\x02 \x01(\x0b\x32\x1c.protos.common.ExceptionInfo\"f\n\x11UpdateToDBRequest\x12\x1e\n\x16\x65xecutionEnvironmentID\x18\x01 \x01(\t\x12\x10\n\x08objectID\x18\x02 \x01(\t\x12\x10\n\x08objBytes\x18\x03 \x01(\x0c\x12\r\n\x05\x64irty\x18\x04 \x01(\x08\"E\n\x11\x44\x65leteToDBRequest\x12\x1e\n\x16\x65xecutionEnvironmentID\x18\x01 \x01(\t\x12\x10\n\x08objectID\x18\x02 \x01(\t\"Z\n\x16\x44\x65leteSetFromDBRequest\x12\x11\n\tobjectIDs\x18\x01 \x03(\t\x12-\n\x07\x65xcInfo\x18\x02 \x01(\x0b\x32\x1c.protos.common.ExceptionInfo\"\x97\x01\n\x11UpdateRefsRequest\x12M\n\x0crefsToUpdate\x18\x01 \x03(\x0b\x32\x37.protos.dataservice.UpdateRefsRequest.RefsToUpdateEntry\x1a\x33\n\x11RefsToUpdateEntry\x12\x0b\n\x03key\x18\x01 \x01(\t\x12\r\n\x05value\x18\x02 \x01(\x05:\x02\x38\x01\"j\n\x1dGetRetainedReferencesResponse\x12\x1a\n\x12retainedReferences\x18\x01 \x03(\t\x12-\n\x07\x65xcInfo\x18\x02 \x01(\x0b\x32\x1c.protos.common.ExceptionInfo\"\xaa\x01\n\x12SynchronizeRequest\x12\x10\n\x08objectID\x18\x01 \x01(\t\x12\x18\n\x10implementationID\x18\x02 \x01(\t\x12\x11\n\tsessionID\x18\x03 \x01(\t\x12;\n\x06params\x18\x04 \x01(\x0b\x32+.protos.common.SerializedParametersOrReturn\x12\x18\n\x10\x63\x61llingBackendID\x18\x05 \x01(\t\"!\n\rExistsRequest\x12\x10\n\x08objectID\x18\x01 \x01(\t\"O\n\x0e\x45xistsResponse\x12\x0e\n\x06\x65xists\x18\x01 \x01(\x08\x12-\n\x07\x65xcInfo\x18\x02 \x01(\x0b\x32\x1c.protos.common.ExceptionInfo\"%\n\x11\x45xistsInDBRequest\x12\x10\n\x08objectID\x18\x01 \x01(\t\"S\n\x12\x45xistsInDBResponse\x12\x0e\n\x06\x65xists\x18\x01 \x01(\x08\x12-\n\x07\x65xcInfo\x18\x02 \x01(\x0b\x32\x1c.protos.common.ExceptionInfo\"E\n\x1e\x44\x65tachObjectFromSessionRequest\x12\x10\n\x08objectID\x18\x01 \x01(\t\x12\x11\n\tsessionID\x18\x02 \x01(\t\"9\n\x12\x44\x65leteAliasRequest\x12\x10\n\x08objectID\x18\x01 \x01(\t\x12\x11\n\tsessionID\x18\x02 \x01(\t\"`\n\x16GetObjectGraphResponse\x12\x17\n\x0fserializedGraph\x18\x01 \x01(\x0c\x12-\n\x07\x65xcInfo\x18\x02 \x01(\x0b\x32\x1c.protos.common.ExceptionInfoB;\n7es.bsc.dataclay.communication.grpc.messages.dataserviceP\x00\x62\x06proto3')
 
 
 
@@ -38,7 +38,7 @@ _GETCOPYOFOBJECTRESPONSE = DESCRIPTOR.message_types_by_name['GetCopyOfObjectResp
 _UPDATEOBJECTREQUEST = DESCRIPTOR.message_types_by_name['UpdateObjectRequest']
 _GETOBJECTSREQUEST = DESCRIPTOR.message_types_by_name['GetObjectsRequest']
 _GETOBJECTSRESPONSE = DESCRIPTOR.message_types_by_name['GetObjectsResponse']
-_MAKEPERSISTENTREQUEST = DESCRIPTOR.message_types_by_name['MakePersistentRequest']
+_OLDMAKEPERSISTENTREQUEST = DESCRIPTOR.message_types_by_name['OldMakePersistentRequest']
 _FEDERATEREQUEST = DESCRIPTOR.message_types_by_name['FederateRequest']
 _NOTIFYFEDERATIONREQUEST = DESCRIPTOR.message_types_by_name['NotifyFederationRequest']
 _UNFEDERATEREQUEST = DESCRIPTOR.message_types_by_name['UnfederateRequest']
@@ -223,12 +223,12 @@ GetObjectsResponse = _reflection.GeneratedProtocolMessageType('GetObjectsRespons
   })
 _sym_db.RegisterMessage(GetObjectsResponse)
 
-MakePersistentRequest = _reflection.GeneratedProtocolMessageType('MakePersistentRequest', (_message.Message,), {
-  'DESCRIPTOR' : _MAKEPERSISTENTREQUEST,
+OldMakePersistentRequest = _reflection.GeneratedProtocolMessageType('OldMakePersistentRequest', (_message.Message,), {
+  'DESCRIPTOR' : _OLDMAKEPERSISTENTREQUEST,
   '__module__' : 'protos.dataservice_messages_pb2'
-  # @@protoc_insertion_point(class_scope:protos.dataservice.MakePersistentRequest)
+  # @@protoc_insertion_point(class_scope:protos.dataservice.OldMakePersistentRequest)
   })
-_sym_db.RegisterMessage(MakePersistentRequest)
+_sym_db.RegisterMessage(OldMakePersistentRequest)
 
 FederateRequest = _reflection.GeneratedProtocolMessageType('FederateRequest', (_message.Message,), {
   'DESCRIPTOR' : _FEDERATEREQUEST,
@@ -614,96 +614,96 @@ if _descriptor._USE_C_DESCRIPTORS == False:
   _GETOBJECTSREQUEST._serialized_end=2095
   _GETOBJECTSRESPONSE._serialized_start=2098
   _GETOBJECTSRESPONSE._serialized_end=2226
-  _MAKEPERSISTENTREQUEST._serialized_start=2228
-  _MAKEPERSISTENTREQUEST._serialized_end=2331
-  _FEDERATEREQUEST._serialized_start=2333
-  _FEDERATEREQUEST._serialized_end=2446
-  _NOTIFYFEDERATIONREQUEST._serialized_start=2448
-  _NOTIFYFEDERATIONREQUEST._serialized_end=2553
-  _UNFEDERATEREQUEST._serialized_start=2555
-  _UNFEDERATEREQUEST._serialized_end=2670
-  _NOTIFYUNFEDERATIONREQUEST._serialized_start=2672
-  _NOTIFYUNFEDERATIONREQUEST._serialized_end=2737
-  _EXECUTEIMPLEMENTATIONREQUEST._serialized_start=2740
-  _EXECUTEIMPLEMENTATIONREQUEST._serialized_end=2894
-  _EXECUTEIMPLEMENTATIONRESPONSE._serialized_start=2897
-  _EXECUTEIMPLEMENTATIONRESPONSE._serialized_end=3033
-  _NEWVERSIONREQUEST._serialized_start=3035
-  _NEWVERSIONREQUEST._serialized_end=3114
-  _NEWVERSIONRESPONSE._serialized_start=3116
-  _NEWVERSIONRESPONSE._serialized_end=3201
-  _CONSOLIDATEVERSIONREQUEST._serialized_start=3203
-  _CONSOLIDATEVERSIONREQUEST._serialized_end=3274
-  _UPSERTOBJECTSREQUEST._serialized_start=3276
-  _UPSERTOBJECTSREQUEST._serialized_end=3382
-  _NEWREPLICAREQUEST._serialized_start=3384
-  _NEWREPLICAREQUEST._serialized_end=3482
-  _NEWREPLICARESPONSE._serialized_start=3484
-  _NEWREPLICARESPONSE._serialized_end=3578
-  _MOVEOBJECTSREQUEST._serialized_start=3580
-  _MOVEOBJECTSREQUEST._serialized_end=3675
-  _MOVEOBJECTSRESPONSE._serialized_start=3677
-  _MOVEOBJECTSRESPONSE._serialized_end=3767
-  _REMOVEOBJECTSREQUEST._serialized_start=3769
-  _REMOVEOBJECTSREQUEST._serialized_end=3881
-  _REMOVEOBJECTSRESPONSE._serialized_start=3884
-  _REMOVEOBJECTSRESPONSE._serialized_end=4096
-  _REMOVEOBJECTSRESPONSE_REMOVEDOBJECTSENTRY._serialized_start=4043
-  _REMOVEOBJECTSRESPONSE_REMOVEDOBJECTSENTRY._serialized_end=4096
-  _MIGRATEOBJECTSREQUEST._serialized_start=4099
-  _MIGRATEOBJECTSREQUEST._serialized_end=4303
-  _MIGRATEOBJECTSREQUEST_DESTSTORAGELOCSENTRY._serialized_start=4213
-  _MIGRATEOBJECTSREQUEST_DESTSTORAGELOCSENTRY._serialized_end=4303
-  _MIGRATEDOBJECTS._serialized_start=4305
-  _MIGRATEDOBJECTS._serialized_end=4336
-  _MIGRATEOBJECTSRESPONSE._serialized_start=4339
-  _MIGRATEOBJECTSRESPONSE._serialized_end=4646
-  _MIGRATEOBJECTSRESPONSE_MIGRATEDOBJSENTRY._serialized_start=4558
-  _MIGRATEOBJECTSRESPONSE_MIGRATEDOBJSENTRY._serialized_end=4646
-  _ACTIVATETRACINGREQUEST._serialized_start=4648
-  _ACTIVATETRACINGREQUEST._serialized_end=4688
-  _CLOSESESSIONINDSREQUEST._serialized_start=4690
-  _CLOSESESSIONINDSREQUEST._serialized_end=4734
-  _DISKCOLLECTREQUEST._serialized_start=4737
-  _DISKCOLLECTREQUEST._serialized_end=4949
-  _DISKCOLLECTREQUEST_REFSTOUPDATEENTRY._serialized_start=4898
-  _DISKCOLLECTREQUEST_REFSTOUPDATEENTRY._serialized_end=4949
-  _GETCLASSIDFROMOBJECTINMEMORYREQUEST._serialized_start=4951
-  _GETCLASSIDFROMOBJECTINMEMORYREQUEST._serialized_end=5006
-  _GETCLASSIDFROMOBJECTINMEMORYRESPONSE._serialized_start=5008
-  _GETCLASSIDFROMOBJECTINMEMORYRESPONSE._serialized_end=5110
-  _STORETODBREQUEST._serialized_start=5112
-  _STORETODBREQUEST._serialized_end=5198
-  _GETFROMDBREQUEST._serialized_start=5200
-  _GETFROMDBREQUEST._serialized_end=5268
-  _GETFROMDBRESPONSE._serialized_start=5270
-  _GETFROMDBRESPONSE._serialized_end=5354
-  _UPDATETODBREQUEST._serialized_start=5356
-  _UPDATETODBREQUEST._serialized_end=5458
-  _DELETETODBREQUEST._serialized_start=5460
-  _DELETETODBREQUEST._serialized_end=5529
-  _DELETESETFROMDBREQUEST._serialized_start=5531
-  _DELETESETFROMDBREQUEST._serialized_end=5621
-  _UPDATEREFSREQUEST._serialized_start=5624
-  _UPDATEREFSREQUEST._serialized_end=5775
-  _UPDATEREFSREQUEST_REFSTOUPDATEENTRY._serialized_start=4898
-  _UPDATEREFSREQUEST_REFSTOUPDATEENTRY._serialized_end=4949
-  _GETRETAINEDREFERENCESRESPONSE._serialized_start=5777
-  _GETRETAINEDREFERENCESRESPONSE._serialized_end=5883
-  _SYNCHRONIZEREQUEST._serialized_start=5886
-  _SYNCHRONIZEREQUEST._serialized_end=6056
-  _EXISTSREQUEST._serialized_start=6058
-  _EXISTSREQUEST._serialized_end=6091
-  _EXISTSRESPONSE._serialized_start=6093
-  _EXISTSRESPONSE._serialized_end=6172
-  _EXISTSINDBREQUEST._serialized_start=6174
-  _EXISTSINDBREQUEST._serialized_end=6211
-  _EXISTSINDBRESPONSE._serialized_start=6213
-  _EXISTSINDBRESPONSE._serialized_end=6296
-  _DETACHOBJECTFROMSESSIONREQUEST._serialized_start=6298
-  _DETACHOBJECTFROMSESSIONREQUEST._serialized_end=6367
-  _DELETEALIASREQUEST._serialized_start=6369
-  _DELETEALIASREQUEST._serialized_end=6426
-  _GETOBJECTGRAPHRESPONSE._serialized_start=6428
-  _GETOBJECTGRAPHRESPONSE._serialized_end=6524
+  _OLDMAKEPERSISTENTREQUEST._serialized_start=2228
+  _OLDMAKEPERSISTENTREQUEST._serialized_end=2334
+  _FEDERATEREQUEST._serialized_start=2336
+  _FEDERATEREQUEST._serialized_end=2449
+  _NOTIFYFEDERATIONREQUEST._serialized_start=2451
+  _NOTIFYFEDERATIONREQUEST._serialized_end=2556
+  _UNFEDERATEREQUEST._serialized_start=2558
+  _UNFEDERATEREQUEST._serialized_end=2673
+  _NOTIFYUNFEDERATIONREQUEST._serialized_start=2675
+  _NOTIFYUNFEDERATIONREQUEST._serialized_end=2740
+  _EXECUTEIMPLEMENTATIONREQUEST._serialized_start=2743
+  _EXECUTEIMPLEMENTATIONREQUEST._serialized_end=2897
+  _EXECUTEIMPLEMENTATIONRESPONSE._serialized_start=2900
+  _EXECUTEIMPLEMENTATIONRESPONSE._serialized_end=3036
+  _NEWVERSIONREQUEST._serialized_start=3038
+  _NEWVERSIONREQUEST._serialized_end=3117
+  _NEWVERSIONRESPONSE._serialized_start=3119
+  _NEWVERSIONRESPONSE._serialized_end=3204
+  _CONSOLIDATEVERSIONREQUEST._serialized_start=3206
+  _CONSOLIDATEVERSIONREQUEST._serialized_end=3277
+  _UPSERTOBJECTSREQUEST._serialized_start=3279
+  _UPSERTOBJECTSREQUEST._serialized_end=3385
+  _NEWREPLICAREQUEST._serialized_start=3387
+  _NEWREPLICAREQUEST._serialized_end=3485
+  _NEWREPLICARESPONSE._serialized_start=3487
+  _NEWREPLICARESPONSE._serialized_end=3581
+  _MOVEOBJECTSREQUEST._serialized_start=3583
+  _MOVEOBJECTSREQUEST._serialized_end=3678
+  _MOVEOBJECTSRESPONSE._serialized_start=3680
+  _MOVEOBJECTSRESPONSE._serialized_end=3770
+  _REMOVEOBJECTSREQUEST._serialized_start=3772
+  _REMOVEOBJECTSREQUEST._serialized_end=3884
+  _REMOVEOBJECTSRESPONSE._serialized_start=3887
+  _REMOVEOBJECTSRESPONSE._serialized_end=4099
+  _REMOVEOBJECTSRESPONSE_REMOVEDOBJECTSENTRY._serialized_start=4046
+  _REMOVEOBJECTSRESPONSE_REMOVEDOBJECTSENTRY._serialized_end=4099
+  _MIGRATEOBJECTSREQUEST._serialized_start=4102
+  _MIGRATEOBJECTSREQUEST._serialized_end=4306
+  _MIGRATEOBJECTSREQUEST_DESTSTORAGELOCSENTRY._serialized_start=4216
+  _MIGRATEOBJECTSREQUEST_DESTSTORAGELOCSENTRY._serialized_end=4306
+  _MIGRATEDOBJECTS._serialized_start=4308
+  _MIGRATEDOBJECTS._serialized_end=4339
+  _MIGRATEOBJECTSRESPONSE._serialized_start=4342
+  _MIGRATEOBJECTSRESPONSE._serialized_end=4649
+  _MIGRATEOBJECTSRESPONSE_MIGRATEDOBJSENTRY._serialized_start=4561
+  _MIGRATEOBJECTSRESPONSE_MIGRATEDOBJSENTRY._serialized_end=4649
+  _ACTIVATETRACINGREQUEST._serialized_start=4651
+  _ACTIVATETRACINGREQUEST._serialized_end=4691
+  _CLOSESESSIONINDSREQUEST._serialized_start=4693
+  _CLOSESESSIONINDSREQUEST._serialized_end=4737
+  _DISKCOLLECTREQUEST._serialized_start=4740
+  _DISKCOLLECTREQUEST._serialized_end=4952
+  _DISKCOLLECTREQUEST_REFSTOUPDATEENTRY._serialized_start=4901
+  _DISKCOLLECTREQUEST_REFSTOUPDATEENTRY._serialized_end=4952
+  _GETCLASSIDFROMOBJECTINMEMORYREQUEST._serialized_start=4954
+  _GETCLASSIDFROMOBJECTINMEMORYREQUEST._serialized_end=5009
+  _GETCLASSIDFROMOBJECTINMEMORYRESPONSE._serialized_start=5011
+  _GETCLASSIDFROMOBJECTINMEMORYRESPONSE._serialized_end=5113
+  _STORETODBREQUEST._serialized_start=5115
+  _STORETODBREQUEST._serialized_end=5201
+  _GETFROMDBREQUEST._serialized_start=5203
+  _GETFROMDBREQUEST._serialized_end=5271
+  _GETFROMDBRESPONSE._serialized_start=5273
+  _GETFROMDBRESPONSE._serialized_end=5357
+  _UPDATETODBREQUEST._serialized_start=5359
+  _UPDATETODBREQUEST._serialized_end=5461
+  _DELETETODBREQUEST._serialized_start=5463
+  _DELETETODBREQUEST._serialized_end=5532
+  _DELETESETFROMDBREQUEST._serialized_start=5534
+  _DELETESETFROMDBREQUEST._serialized_end=5624
+  _UPDATEREFSREQUEST._serialized_start=5627
+  _UPDATEREFSREQUEST._serialized_end=5778
+  _UPDATEREFSREQUEST_REFSTOUPDATEENTRY._serialized_start=4901
+  _UPDATEREFSREQUEST_REFSTOUPDATEENTRY._serialized_end=4952
+  _GETRETAINEDREFERENCESRESPONSE._serialized_start=5780
+  _GETRETAINEDREFERENCESRESPONSE._serialized_end=5886
+  _SYNCHRONIZEREQUEST._serialized_start=5889
+  _SYNCHRONIZEREQUEST._serialized_end=6059
+  _EXISTSREQUEST._serialized_start=6061
+  _EXISTSREQUEST._serialized_end=6094
+  _EXISTSRESPONSE._serialized_start=6096
+  _EXISTSRESPONSE._serialized_end=6175
+  _EXISTSINDBREQUEST._serialized_start=6177
+  _EXISTSINDBREQUEST._serialized_end=6214
+  _EXISTSINDBRESPONSE._serialized_start=6216
+  _EXISTSINDBRESPONSE._serialized_end=6299
+  _DETACHOBJECTFROMSESSIONREQUEST._serialized_start=6301
+  _DETACHOBJECTFROMSESSIONREQUEST._serialized_end=6370
+  _DELETEALIASREQUEST._serialized_start=6372
+  _DELETEALIASREQUEST._serialized_end=6429
+  _GETOBJECTGRAPHRESPONSE._serialized_start=6431
+  _GETOBJECTGRAPHRESPONSE._serialized_end=6527
 # @@protoc_insertion_point(module_scope)

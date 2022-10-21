@@ -2,8 +2,10 @@
 """Client and server classes corresponding to protobuf-defined services."""
 import grpc
 
+from google.protobuf import empty_pb2 as google_dot_protobuf_dot_empty__pb2
 from . import common_messages_pb2 as protos_dot_common__messages__pb2
 from . import dataservice_messages_pb2 as protos_dot_dataservice__messages__pb2
+from . import dataservice_pb2 as protos_dot_dataservice__pb2
 
 
 class DataServiceStub(object):
@@ -113,7 +115,7 @@ class DataServiceStub(object):
                 )
         self.makePersistent = channel.unary_unary(
                 '/protos.dataservice.DataService/makePersistent',
-                request_serializer=protos_dot_dataservice__messages__pb2.MakePersistentRequest.SerializeToString,
+                request_serializer=protos_dot_dataservice__messages__pb2.OldMakePersistentRequest.SerializeToString,
                 response_deserializer=protos_dot_common__messages__pb2.ExceptionInfo.FromString,
                 )
         self.federate = channel.unary_unary(
@@ -255,6 +257,11 @@ class DataServiceStub(object):
                 '/protos.dataservice.DataService/getObjectGraph',
                 request_serializer=protos_dot_common__messages__pb2.EmptyMessage.SerializeToString,
                 response_deserializer=protos_dot_dataservice__messages__pb2.GetObjectGraphResponse.FromString,
+                )
+        self.MakePersistent = channel.unary_unary(
+                '/protos.dataservice.DataService/MakePersistent',
+                request_serializer=protos_dot_dataservice__pb2.MakePersistentRequest.SerializeToString,
+                response_deserializer=google_dot_protobuf_dot_empty__pb2.Empty.FromString,
                 )
 
 
@@ -556,6 +563,13 @@ class DataServiceServicer(object):
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
+    def MakePersistent(self, request, context):
+        """NEW
+        """
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
 
 def add_DataServiceServicer_to_server(servicer, server):
     rpc_method_handlers = {
@@ -656,7 +670,7 @@ def add_DataServiceServicer_to_server(servicer, server):
             ),
             'makePersistent': grpc.unary_unary_rpc_method_handler(
                     servicer.makePersistent,
-                    request_deserializer=protos_dot_dataservice__messages__pb2.MakePersistentRequest.FromString,
+                    request_deserializer=protos_dot_dataservice__messages__pb2.OldMakePersistentRequest.FromString,
                     response_serializer=protos_dot_common__messages__pb2.ExceptionInfo.SerializeToString,
             ),
             'federate': grpc.unary_unary_rpc_method_handler(
@@ -798,6 +812,11 @@ def add_DataServiceServicer_to_server(servicer, server):
                     servicer.getObjectGraph,
                     request_deserializer=protos_dot_common__messages__pb2.EmptyMessage.FromString,
                     response_serializer=protos_dot_dataservice__messages__pb2.GetObjectGraphResponse.SerializeToString,
+            ),
+            'MakePersistent': grpc.unary_unary_rpc_method_handler(
+                    servicer.MakePersistent,
+                    request_deserializer=protos_dot_dataservice__pb2.MakePersistentRequest.FromString,
+                    response_serializer=google_dot_protobuf_dot_empty__pb2.Empty.SerializeToString,
             ),
     }
     generic_handler = grpc.method_handlers_generic_handler(
@@ -1145,7 +1164,7 @@ class DataService(object):
             timeout=None,
             metadata=None):
         return grpc.experimental.unary_unary(request, target, '/protos.dataservice.DataService/makePersistent',
-            protos_dot_dataservice__messages__pb2.MakePersistentRequest.SerializeToString,
+            protos_dot_dataservice__messages__pb2.OldMakePersistentRequest.SerializeToString,
             protos_dot_common__messages__pb2.ExceptionInfo.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
@@ -1623,5 +1642,22 @@ class DataService(object):
         return grpc.experimental.unary_unary(request, target, '/protos.dataservice.DataService/getObjectGraph',
             protos_dot_common__messages__pb2.EmptyMessage.SerializeToString,
             protos_dot_dataservice__messages__pb2.GetObjectGraphResponse.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def MakePersistent(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/protos.dataservice.DataService/MakePersistent',
+            protos_dot_dataservice__pb2.MakePersistentRequest.SerializeToString,
+            google_dot_protobuf_dot_empty__pb2.Empty.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)

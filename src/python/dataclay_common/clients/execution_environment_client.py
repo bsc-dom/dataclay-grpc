@@ -5,7 +5,7 @@ import traceback
 
 import grpc
 from dataclay_common.protos import common_messages_pb2 as CommonMessages
-from dataclay_common.protos import dataservice_messages_pb2, dataservice_pb2_grpc
+from dataclay_common.protos import dataservice_messages_pb2, dataservice_pb2_grpc, dataservice_pb2
 from grpc._cython.cygrpc import ChannelArgKey
 
 from dataclay.communication.grpc import Utils
@@ -313,13 +313,19 @@ class EEClient:
         if response.isException:
             raise DataClayException(response.exceptionMessage)
 
+    def new_make_persistent(self, session_id: "UUID", pickled_obj: bytes):
+        request = dataservice_pb2.MakePersistentRequest(
+            session_id=str(session_id), pickled_obj=pickled_obj
+        )
+        self.ds_stub.MakePersistent(request)
+
     def make_persistent(self, session_id, params):
         logger.debug("Client performing MakePersistent")
         obj_list = []
         for entry in params:
             obj_list.append(Utils.get_obj_with_data_param_or_return(entry))
 
-        request = dataservice_messages_pb2.MakePersistentRequest(
+        request = dataservice_messages_pb2.OldMakePersistentRequest(
             sessionID=Utils.get_msg_id(session_id),
             objects=obj_list,
         )

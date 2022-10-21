@@ -1,7 +1,11 @@
 syntax = "proto3";
+
 package protos.dataservice;
+
+import "google/protobuf/empty.proto";
 import "protos/dataservice_messages.proto";
 import "protos/common_messages.proto";
+
 option java_package = "es.bsc.dataclay.communication.grpc.generated.dataservice";
 option java_outer_classname="DataServiceGrpcService";
 
@@ -31,7 +35,7 @@ service DataService {
 	rpc migrateObjectsToBackends(MigrateObjectsRequest) returns (MigrateObjectsResponse) {}
 	rpc getClassIDFromObjectInMemory(GetClassIDFromObjectInMemoryRequest) returns (GetClassIDFromObjectInMemoryResponse) {}
 	rpc executeImplementation(ExecuteImplementationRequest) returns (ExecuteImplementationResponse) {}
-	rpc makePersistent(MakePersistentRequest) returns (protos.common.ExceptionInfo) {}
+	rpc makePersistent(OldMakePersistentRequest) returns (protos.common.ExceptionInfo) {}
 	rpc federate(FederateRequest) returns (protos.common.ExceptionInfo) {}
 	rpc unfederate(UnfederateRequest) returns (protos.common.ExceptionInfo) {}
 
@@ -69,4 +73,15 @@ service DataService {
 	rpc getNumObjects(protos.common.EmptyMessage) returns (protos.common.GetNumObjectsResponse) {}
 	rpc getNumObjectsInEE(protos.common.EmptyMessage) returns (protos.common.GetNumObjectsResponse) {}
 	rpc getObjectGraph(protos.common.EmptyMessage) returns (GetObjectGraphResponse) {}
+
+	// NEW
+    rpc MakePersistent(MakePersistentRequest) returns (google.protobuf.Empty) {}
+	
+}
+
+// NEW
+
+message MakePersistentRequest {
+    string session_id = 1;
+    bytes pickled_obj = 2;
 }
