@@ -2,6 +2,7 @@ import logging
 import pickle
 import sys
 import traceback
+from uuid import UUID
 
 import grpc
 from dataclay_common.protos import common_messages_pb2 as CommonMessages
@@ -93,14 +94,14 @@ class EEClient:
         except Exception as e:
             sys.exit("Error connecting to server %s" % self.address)
         else:
-            self.ds_stub = dataservice_pb2_grpc.DataServiceStub(self.channel)
+            self.stub = dataservice_pb2_grpc.DataServiceStub(self.channel)
 
     def close(self):
         """Closing channel by deleting channel and stub"""
         del self.channel
-        del self.ds_stub
+        del self.stub
         self.channel = None
-        self.ds_stub = None
+        self.stub = None
 
     def ds_deploy_metaclasses(self, namespace_name, deployment_pack):
         deployment_pack_dict = dict()
@@ -113,7 +114,7 @@ class EEClient:
         )
 
         try:
-            response = self.ds_stub.deployMetaClasses(request=request, metadata=self.metadata_call)
+            response = self.stub.deployMetaClasses(request=request, metadata=self.metadata_call)
 
         except RuntimeError as e:
             raise e
@@ -147,7 +148,7 @@ class EEClient:
         )
 
         try:
-            response = self.ds_stub.newPersistentInstance(request, metadata=self.metadata_call)
+            response = self.stub.newPersistentInstance(request, metadata=self.metadata_call)
 
         except RuntimeError as e:
             raise e
@@ -178,7 +179,7 @@ class EEClient:
         )
 
         try:
-            response = self.ds_stub.storeObjects(request, metadata=self.metadata_call)
+            response = self.stub.storeObjects(request, metadata=self.metadata_call)
 
         except RuntimeError as e:
             traceback.print_exc(file=sys.stdout)
@@ -195,7 +196,7 @@ class EEClient:
         )
 
         try:
-            response = self.ds_stub.getCopyOfObject(request, metadata=self.metadata_call)
+            response = self.stub.getCopyOfObject(request, metadata=self.metadata_call)
 
         except RuntimeError as e:
             raise e
@@ -215,7 +216,7 @@ class EEClient:
         )
 
         try:
-            response = self.ds_stub.updateObject(request, metadata=self.metadata_call)
+            response = self.stub.updateObject(request, metadata=self.metadata_call)
 
         except RuntimeError as e:
             raise e
@@ -250,7 +251,7 @@ class EEClient:
         )
 
         try:
-            response = self.ds_stub.getObjects(request, metadata=self.metadata_call)
+            response = self.stub.getObjects(request, metadata=self.metadata_call)
 
         except RuntimeError as e:
             raise e
@@ -271,7 +272,7 @@ class EEClient:
             destBackendID=Utils.get_msg_id(dest_backend_id),
         )
         try:
-            response = self.ds_stub.newVersion(request, metadata=self.metadata_call)
+            response = self.stub.newVersion(request, metadata=self.metadata_call)
         except RuntimeError as e:
             raise e
 
@@ -286,7 +287,7 @@ class EEClient:
             versionObjectID=Utils.get_msg_id(version_object_id),
         )
         try:
-            response = self.ds_stub.consolidateVersion(request, metadata=self.metadata_call)
+            response = self.stub.consolidateVersion(request, metadata=self.metadata_call)
 
         except RuntimeError as e:
             raise e
@@ -305,7 +306,7 @@ class EEClient:
         )
 
         try:
-            response = self.ds_stub.upsertObjects(request, metadata=self.metadata_call)
+            response = self.stub.upsertObjects(request, metadata=self.metadata_call)
 
         except RuntimeError as e:
             raise e
@@ -313,12 +314,13 @@ class EEClient:
         if response.isException:
             raise DataClayException(response.exceptionMessage)
 
-    def new_make_persistent(self, session_id: "UUID", pickled_obj: bytes):
+    def new_make_persistent(self, session_id: UUID, pickled_obj: bytes):
         request = dataservice_pb2.MakePersistentRequest(
             session_id=str(session_id), pickled_obj=pickled_obj
         )
-        self.ds_stub.MakePersistent(request)
+        self.stub.MakePersistent(request)
 
+    # TODO: deprecate it and use the new_make_persistent
     def make_persistent(self, session_id, params):
         logger.debug("Client performing MakePersistent")
         obj_list = []
@@ -331,7 +333,7 @@ class EEClient:
         )
 
         try:
-            response = self.ds_stub.makePersistent(request, metadata=self.metadata_call)
+            response = self.stub.makePersistent(request, metadata=self.metadata_call)
 
         except RuntimeError as e:
             logger.error("Failed to make persistent", exc_info=True)
@@ -348,7 +350,7 @@ class EEClient:
                 externalExecutionEnvironmentID=Utils.get_msg_id(external_execution_env_id),
                 recursive=recursive,
             )
-            response = self.ds_stub.federate(request, metadata=self.metadata_call)
+            response = self.stub.federate(request, metadata=self.metadata_call)
         except RuntimeError as e:
             traceback.print_exc()
             logger.error("Failed to federate", exc_info=True)
@@ -365,7 +367,7 @@ class EEClient:
             recursive=recursive,
         )
         try:
-            response = self.ds_stub.unfederate(request, metadata=self.metadata_call)
+            response = self.stub.unfederate(request, metadata=self.metadata_call)
         except RuntimeError as e:
             logger.error("Failed to unfederate", exc_info=True)
             raise e
@@ -383,7 +385,7 @@ class EEClient:
         )
 
         try:
-            response = self.ds_stub.notifyFederation(request, metadata=self.metadata_call)
+            response = self.stub.notifyFederation(request, metadata=self.metadata_call)
 
         except RuntimeError as e:
             logger.error("Failed to federate", exc_info=True)
@@ -403,7 +405,7 @@ class EEClient:
         )
 
         try:
-            response = self.ds_stub.notifyUnfederation(request, metadata=self.metadata_call)
+            response = self.stub.notifyUnfederation(request, metadata=self.metadata_call)
 
         except RuntimeError as e:
             logger.error("Failed to federate", exc_info=True)
@@ -412,6 +414,20 @@ class EEClient:
         if response.isException:
             raise DataClayException(response.exceptionMessage)
 
+    def call_active_method(self, session_id, object_id, method, parameters):
+        request = dataservice_pb2.CallActiveMethodRequest(
+            session_id=str(session_id),
+            object_id=str(object_id),
+            method=method,
+            parameters=parameters,
+        )
+
+        # TODO: Make it possible for the client to try..except, any possible exception from
+        # the method execution.
+        response = self.stub.CallActiveMethod(request)
+        return response.value
+
+    # TODO: Deprecate it and use call_active_method
     def ds_execute_implementation(self, object_id, implementation_id, session_id, params):
         logger.debug("Client performing ExecuteImplementation")
 
@@ -423,7 +439,7 @@ class EEClient:
         )
 
         try:
-            response = self.ds_stub.executeImplementation(request, metadata=self.metadata_call)
+            response = self.stub.executeImplementation(request, metadata=self.metadata_call)
 
         except RuntimeError as e:
             logger.error("Failed to execute implementation", exc_info=True)
@@ -451,7 +467,7 @@ class EEClient:
             callingBackendID=Utils.get_msg_id(calling_backend_id),
         )
         try:
-            response = self.ds_stub.synchronize(request, metadata=self.metadata_call)
+            response = self.stub.synchronize(request, metadata=self.metadata_call)
         except RuntimeError as e:
             raise e
         if response.isException:
@@ -467,7 +483,7 @@ class EEClient:
         )
 
         try:
-            response = self.ds_stub.newReplica(request, metadata=self.metadata_call)
+            response = self.stub.newReplica(request, metadata=self.metadata_call)
 
         except RuntimeError as e:
             raise e
@@ -492,7 +508,7 @@ class EEClient:
         )
 
         try:
-            response = self.ds_stub.moveObjects(request, metadata=self.metadata_call)
+            response = self.stub.moveObjects(request, metadata=self.metadata_call)
 
         except RuntimeError as e:
             raise e
@@ -522,7 +538,7 @@ class EEClient:
         )
 
         try:
-            response = self.ds_stub.removeObjects(request, metadata=self.metadata_call)
+            response = self.stub.removeObjects(request, metadata=self.metadata_call)
 
         except RuntimeError as e:
             raise e
@@ -547,7 +563,7 @@ class EEClient:
         request = dataservice_messages_pb2.MigrateObjectsRequest(destStorageLocs=back_ends_dict)
 
         try:
-            response = self.ds_stub.migrateObjectsToBackends(request, metadata=self.metadata_call)
+            response = self.stub.migrateObjectsToBackends(request, metadata=self.metadata_call)
 
         except RuntimeError as e:
             raise e
@@ -580,7 +596,7 @@ class EEClient:
             sessionID=Utils.get_msg_id(session_id), objectID=Utils.get_msg_id(object_id)
         )
         try:
-            response = self.ds_stub.deleteAlias(request, metadata=self.metadata_call)
+            response = self.stub.deleteAlias(request, metadata=self.metadata_call)
         except RuntimeError as e:
             raise e
         if response.isException:
@@ -591,7 +607,7 @@ class EEClient:
             objectID=Utils.get_msg_id(object_id), sessionID=Utils.get_msg_id(session_id)
         )
         try:
-            response = self.ds_stub.detachObjectFromSession(request, metadata=self.metadata_call)
+            response = self.stub.detachObjectFromSession(request, metadata=self.metadata_call)
         except RuntimeError as e:
             raise e
         if response.isException:
@@ -601,7 +617,7 @@ class EEClient:
         request = dataservice_messages_pb2.ActivateTracingRequest(taskid=task_id)
 
         try:
-            response = self.ds_stub.activateTracing(request, metadata=self.metadata_call)
+            response = self.stub.activateTracing(request, metadata=self.metadata_call)
 
         except RuntimeError as e:
             raise e
@@ -611,7 +627,7 @@ class EEClient:
 
     def deactivate_tracing(self):
         try:
-            response = self.ds_stub.deactivateTracing(
+            response = self.stub.deactivateTracing(
                 CommonMessages.EmptyMessage(), metadata=self.metadata_call
             )
 
@@ -623,7 +639,7 @@ class EEClient:
 
     def get_traces(self):
         try:
-            response = self.ds_stub.getTraces(
+            response = self.stub.getTraces(
                 CommonMessages.EmptyMessage(), metadata=self.metadata_call
             )
         except RuntimeError as e:

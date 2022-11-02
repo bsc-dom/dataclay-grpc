@@ -45,7 +45,7 @@ class MetadataService:
     ###################
 
     def new_account(self, username, password):
-        """ "Registers a new account
+        """Registers a new account
 
         Creates a new account. Checks that the username is not registered.
 
@@ -68,7 +68,7 @@ class MetadataService:
     ###################
 
     def new_session(self, username, password, dataset_name):
-        """ "Registers a new session
+        """Registers a new session
 
         Validates the account credentials, and creates a new session
         associated to the account and the dataset_name.
@@ -224,7 +224,9 @@ class MetadataService:
             )
             self.dataclay_mgr.new_execution_environment(exe_env)
             # TODO: Deploy classes to backend? (better call from ee)
-            logger.info(f"Autoregistered ee with id={id}, hostname={hostname}, port={port}, sl_name={sl_name}")
+            logger.info(
+                f"Autoregistered ee with id={id}, hostname={hostname}, port={port}, sl_name={sl_name}"
+            )
 
     ###################
     # Object Metadata #
