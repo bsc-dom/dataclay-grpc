@@ -24,6 +24,14 @@ class MDSClient:
         self.stub = metadata_service_pb2_grpc.MetadataServiceStub(self.channel)
         atexit.register(self.close)
 
+    def is_ready(self, timeout=None):
+        try:
+            grpc.channel_ready_future(self.channel).result(timeout)
+        except grpc.FutureTimeoutError:
+            return False
+        else:
+            return True
+
     def close(self):
         self.channel.close()
 
