@@ -1,5 +1,6 @@
 import logging
 import uuid
+from uuid import UUID
 
 import etcd3
 from dataclay_common.exceptions.exceptions import *
@@ -8,10 +9,11 @@ from dataclay_common.managers.dataclay_manager import (
     Dataclay,
     DataclayManager,
     ExecutionEnvironment,
+    StorageLocation,
 )
 from dataclay_common.managers.dataset_manager import Dataset, DatasetManager
 from dataclay_common.managers.metaclass_manager import MetaclassManager
-from dataclay_common.managers.object_manager import ObjectManager
+from dataclay_common.managers.object_manager import ObjectManager, ObjectMetadata
 from dataclay_common.managers.session_manager import Session, SessionManager
 
 from opentelemetry import trace
@@ -41,33 +43,10 @@ class MetadataService:
         logger.info("Initialized MetadataService")
 
     ###################
-    # Account Manager #
-    ###################
-
-    def new_account(self, username, password):
-        """Registers a new account
-
-        Creates a new account. Checks that the username is not registered.
-
-        Args:
-            username : Accounts username
-            password : Accounts password
-        """
-        with tracer.start_as_current_span("new_account", attributes={"username": username}):
-
-            # TODO: Ask for admin credentials for creating the account.
-
-            # Creates new account and put it to etcd
-            account = Account(username, password)
-            self.account_mgr.new_account(account)
-
-            logger.info(f"Created new account for {username}")
-
-    ###################
     # Session Manager #
     ###################
 
-    def new_session(self, username, password, dataset_name):
+    def new_session(self, username: str, password: str, dataset_name: str) -> Session:
         """Registers a new session
 
         Validates the account credentials, and creates a new session
@@ -107,13 +86,16 @@ class MetadataService:
             logger.info(f"Created new session for {username} with id {session.id}")
             return session
 
-    def get_session(self, session_id):
-        with tracer.start_as_current_span("get_session", attributes=locals()):
+    def get_session(self, session_id: UUID) -> Session:
+        with tracer.start_as_current_span(
+            "get_session", attributes={"session_id": str(session_id)}
+        ):
             return self.session_mgr.get_session(session_id)
 
-    def close_session(self, session_id):
-        """Close session by id"""
-        with tracer.start_as_current_span("close_session", attributes=locals()):
+    def close_session(self, session_id: UUID):
+        with tracer.start_as_current_span(
+            "close_session", attributes={"session_id": str(session_id)}
+        ):
             # TODO: decide if close session remove the entry from etcd
             #       or just set the flag is_active to false
 
@@ -129,10 +111,33 @@ class MetadataService:
             # self.session_mgr.delete_session(session_id)
 
     ###################
+    # Account Manager #
+    ###################
+
+    def new_account(self, username: str, password: str):
+        """Registers a new account
+
+        Creates a new account. Checks that the username is not registered.
+
+        Args:
+            username : Accounts username
+            password : Accounts password
+        """
+        with tracer.start_as_current_span("new_account", attributes={"username": username}):
+
+            # TODO: Ask for admin credentials for creating the account.
+
+            # Creates new account and put it to etcd
+            account = Account(username, password)
+            self.account_mgr.new_account(account)
+
+            logger.info(f"Created new account for {username}")
+
+    ###################
     # Dataset Manager #
     ###################
 
-    def new_dataset(self, username, password, dataset_name):
+    def new_dataset(self, username: str, password: str, dataset_name: str):
         """Registers a new dataset
 
         Validates the account credentials, and creates a new dataset
@@ -148,7 +153,9 @@ class MetadataService:
         Raises:
             Exception('Account is not valid!'): If wrong credentials
         """
-        with tracer.start_as_current_span("new_dataset", attributes=locals()):
+        with tracer.start_as_current_span(
+            "new_dataset", attributes={"username": username, "dataset_name": dataset_name}
+        ):
 
             # Validates account credentials
             account = self.account_mgr.get_account(username)
@@ -170,51 +177,58 @@ class MetadataService:
     # Metaclass Manager #
     #####################
 
-    def get_metaclass(self, metaclass_id):
-        with tracer.start_as_current_span("get_metaclass", attributes=locals()):
+    def get_metaclass(self, metaclass_id: UUID):
+        with tracer.start_as_current_span(
+            "get_metaclass", attributes={"metaclass_id": metaclass_id}
+        ):
             return self.metaclass_mgr.get_metaclass(metaclass_id)
 
     #####################
     # Dataclay Metadata #
     #####################
 
-    def get_dataclay_id(self):
-        """Get the dataclay id"""
-        with tracer.start_as_current_span("get_dataclay_id"):
-            dataclay = self.dataclay_mgr.get_dataclay("this")
-            return dataclay.id
+    @tracer.start_as_current_span("get_dataclay_id")
+    def get_dataclay_id(self) -> UUID:
+        dataclay = self.dataclay_mgr.get_dataclay("this")
+        return dataclay.id
 
+    @tracer.start_as_current_span("get_num_objects")
     def get_num_objects(self, language):
-        with tracer.start_as_current_span("get_num_objects", attributes=locals()):
-            all_object_md = self.object_mgr.get_all_object_md(language)
-            return len(all_object_md)
+        all_object_md = self.object_mgr.get_all_object_md(language)
+        return len(all_object_md)
 
-    def autoregister_mds(self, id, hostname, port, is_this=False):
+    def autoregister_mds(self, id: UUID, hostname: str, port: int, is_this=False):
         """Autoregister Metadata Service"""
-        with tracer.start_as_current_span("autoregister_mds", attributes=locals()):
+        with tracer.start_as_current_span(
+            "autoregister_mds",
+            attributes={"id": str(id), "hostname": hostname, "port": port, "is_this": is_this},
+        ):
             dataclay = Dataclay(id, hostname, port, is_this)
             self.dataclay_mgr.new_dataclay(dataclay)
 
-    def get_dataclay(self, dataclay_id):
-        with tracer.start_as_current_span("get_dataclay", attributes=locals()):
+    # TODO: Check if needed
+    def get_dataclay(self, dataclay_id: UUID) -> Dataclay:
+        with tracer.start_as_current_span("get_dataclay", attributes={"dataclay_id": dataclay_id}):
             return self.dataclay_mgr.get_dataclay(dataclay_id)
 
     #####################
     # EE-SL information #
     #####################
 
-    def get_storage_location(self, sl_name):
+    def get_storage_location(self, sl_name: str) -> StorageLocation:
         with tracer.start_as_current_span("get_storage_location", attributes=locals()):
             return self.dataclay_mgr.get_storage_location(sl_name)
 
     @tracer.start_as_current_span("get_all_execution_environments")
-    def get_all_execution_environments(self, language, get_external=True, from_backend=False):
+    def get_all_execution_environments(
+        self, language: int, get_external=True, from_backend=False
+    ) -> dict:
         """Get all execution environments"""
         # TODO: get_external should
         # TODO: Use exposed_ip_for_client if not from_backend to hide information?
         return self.dataclay_mgr.get_all_execution_environments(language)
 
-    def autoregister_ee(self, id, hostname, port, sl_name, lang):
+    def autoregister_ee(self, id: UUID, hostname: str, port: int, sl_name: str, lang: int):
         """Autoregister execution environment"""
         with tracer.start_as_current_span("autoregister_ee", attributes=locals()):
             # TODO: Check if ee already exists. If so, update its information.
@@ -232,10 +246,9 @@ class MetadataService:
     # Object Metadata #
     ###################
 
-    def register_object(self, session_id, object_md):
+    def register_object(self, object_md: ObjectMetadata, session_id: UUID = None):
         with tracer.start_as_current_span(
-            "register_object",
-            attributes={"session_id": session_id, "object_id": object_md.id},
+            "register_object", attributes={"object_id": object_md.id}
         ):
             # NOTE: If only EE can register objects, no need to check session
             # Checks that session exists and is active
@@ -249,10 +262,10 @@ class MetadataService:
 
             self.object_mgr.register_object(object_md)
 
-    def update_object(self, session_id, object_md):
-        with tracer.start_as_current_span(
-            "update_object", attributes={"session_id": session_id, "object_id": object_md.id}
-        ):
+    # NOTE: It should be used to update synchronously the metadata, not only
+    # when the service shutdowns
+    def update_object(self, object_md: ObjectMetadata, session_id: UUID = None):
+        with tracer.start_as_current_span("update_object", attributes={"object_id": object_md.id}):
             # NOTE: If only EE can update objects, no need to check session
             # Checks that session exists and is active
             # session = self.session_mgr.get_session(session_id)
@@ -265,10 +278,11 @@ class MetadataService:
 
             self.object_mgr.update_object(object_md)
 
-    def get_object_md_by_id(self, object_id, session_id=None, check_session=False):
+    def get_object_md_by_id(
+        self, object_id: UUID, session_id=None, check_session=False
+    ) -> ObjectMetadata:
         with tracer.start_as_current_span(
-            "get_object_md_by_id",
-            attributes={"object_id": object_id, "check_session": check_session},
+            "get_object_md_by_id", attributes={"object_id": object_id}
         ):
             if check_session:
                 session = self.session_mgr.get_session(session_id)
@@ -279,14 +293,13 @@ class MetadataService:
             return object_md
 
     def get_object_md_by_alias(
-        self, alias_name, dataset_name, session_id=None, check_session=False
+        self, alias_name: str, dataset_name: str, session_id: UUID = None, check_session=False
     ):
         with tracer.start_as_current_span(
             "get_object_md_by_alias",
             attributes={
                 "alias_name": alias_name,
                 "dataset_name": dataset_name,
-                "check_session": check_session,
             },
         ):
             if check_session:
@@ -305,14 +318,12 @@ class MetadataService:
             object_md = self.object_mgr.get_object_md(alias.object_id)
             return object_md
 
-    def delete_alias(self, session_id, alias_name, dataset_name, check_session=False):
+    def delete_alias(
+        self, alias_name: str, dataset_name: str, session_id: UUID, check_session=False
+    ):
         with tracer.start_as_current_span(
             "delete_alias",
-            attributes={
-                "alias_name": alias_name,
-                "dataset_name": dataset_name,
-                "check_session": check_session,
-            },
+            attributes={"alias_name": alias_name, "dataset_name": dataset_name},
         ):
 
             # NOTE: If the session is not checked, we supose the dataset_name is correct

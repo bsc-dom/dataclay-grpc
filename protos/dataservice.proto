@@ -90,6 +90,6 @@ message MakePersistentRequest {
 message CallActiveMethodRequest {
 	string session_id = 1;
 	string object_id = 2;
-	string method = 3;
+	string method_name = 3;
 	bytes parameters = 4;
 }

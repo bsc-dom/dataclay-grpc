@@ -82,11 +82,11 @@ class Dataclay:
             return f"/dataclay/{self.id}"
 
     def value(self):
-        return json.dumps(self.__dict__)
+        return json.dumps(self.__dict__, cls=UUIDEncoder)
 
     @classmethod
     def from_json(cls, s):
-        return cls(**json.loads(s))
+        return cls(**json.loads(s, object_hook=uuid_parser))
 
 
 class DataclayManager:
@@ -145,7 +145,7 @@ class DataclayManager:
         value = self.etcd_client.get(key)[0]
         return value is not None
 
-    def new_execution_environment(self, exe_env):
+    def new_execution_environment(self, exe_env: ExecutionEnvironment):
         """Creates a new execution environment. Checks that it doesn't exists"""
 
         with self.etcd_client.lock(self.lock):
@@ -153,7 +153,7 @@ class DataclayManager:
                 raise ExecutionEnvironmentAlreadyExistError(exe_env.id)
             self.put_ee(exe_env)
 
-    def new_dataclay(self, dataclay):
+    def new_dataclay(self, dataclay: Dataclay):
         """Creates a new dataclay. Checks that it doesn't exists"""
 
         with self.etcd_client.lock(self.lock):

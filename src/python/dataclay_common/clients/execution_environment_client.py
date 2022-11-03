@@ -414,11 +414,11 @@ class EEClient:
         if response.isException:
             raise DataClayException(response.exceptionMessage)
 
-    def call_active_method(self, session_id, object_id, method, parameters):
+    def call_active_method(self, session_id, object_id, method_name, parameters):
         request = dataservice_pb2.CallActiveMethodRequest(
             session_id=str(session_id),
             object_id=str(object_id),
-            method=method,
+            method_name=method_name,
             parameters=parameters,
         )
 
