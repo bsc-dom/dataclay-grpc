@@ -147,19 +147,19 @@ message ExecutionEnvironment {
 	string dataclay_id = 6;
 }
 
-message ObjectRegisterInfo {
-	string object_id = 1;
-	string class_id = 2;
-	string session_id = 3;
-	string dataset_name = 4;
-	string alias = 5;
-}
+// message ObjectRegisterInfo {
+// 	string object_id = 1;
+// 	string class_id = 2;
+// 	string session_id = 3;
+// 	string dataset_name = 4;
+// 	string alias = 5;
+// }
 
 message ObjectMetadata {
 	string id = 1;
 	string alias_name = 2;
 	string dataset_name = 3;
-	string class_id = 4;
+	string class_name = 4;
 	string master_ee_id = 5;
 	repeated string replica_ee_ids = 6;
 	Langs language = 7;

@@ -25,7 +25,7 @@ class ObjectMetadata:
         id=None,
         alias_name=None,
         dataset_name=None,
-        class_id=None,
+        class_name=None,
         master_ee_id=None,
         replica_ee_ids=None,
         language=None,
@@ -34,7 +34,7 @@ class ObjectMetadata:
         self.id = id
         self.alias_name = alias_name
         self.dataset_name = dataset_name
-        self.class_id = class_id
+        self.class_name = class_name
         self.master_ee_id = master_ee_id
         self.replica_ee_ids = replica_ee_ids
         self.language = language
@@ -56,7 +56,7 @@ class ObjectMetadata:
             uuid.UUID(proto.id),
             proto.alias_name,
             proto.dataset_name,
-            uuid.UUID(proto.class_id),
+            proto.class_name,
             uuid.UUID(proto.master_ee_id),
             list(map(uuid.UUID, proto.replica_ee_ids)),
             proto.language,
@@ -69,7 +69,7 @@ class ObjectMetadata:
             id=str(self.id),
             alias_name=self.alias_name,
             dataset_name=self.dataset_name,
-            class_id=str(self.class_id),
+            class_name=self.class_name,
             master_ee_id=str(self.master_ee_id),
             replica_ee_ids=list(map(str, self.replica_ee_ids)),
             language=self.language,
@@ -128,9 +128,9 @@ class ObjectManager:
                 f"New object language ({object_md.language}) is different from previous one ({old_object_md.language})"
             )
 
-        if object_md.class_id != old_object_md.class_id:
+        if object_md.class_name != old_object_md.class_name:
             raise Exception(
-                f"New object class_id ({object_md.class_id}) is different from previous one ({old_object_md.class_id})"
+                f"New object class_name ({object_md.class_name}) is different from previous one ({old_object_md.class_name})"
             )
 
         if object_md.alias_name and old_object_md.alias_name != object_md.alias_name:
@@ -194,6 +194,6 @@ class ObjectManager:
         for value, metadata in values:
             key = metadata.key.decode().split("/")[-1]
             object_md = ObjectMetadata.from_json(value)
-            if lang is None or lang == LANG_NONE or object_md.language == lang:
+            if language is None or language == LANG_NONE or object_md.language == language:
                 all_object_md[uuid.UUID(key)] = object_md
         return all_object_md

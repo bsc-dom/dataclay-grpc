@@ -177,11 +177,12 @@ class MetadataService:
     # Metaclass Manager #
     #####################
 
-    def get_metaclass(self, metaclass_id: UUID):
-        with tracer.start_as_current_span(
-            "get_metaclass", attributes={"metaclass_id": metaclass_id}
-        ):
-            return self.metaclass_mgr.get_metaclass(metaclass_id)
+    # TODO: Deprecate it, no need when using class_name instead of class_id
+    # def get_metaclass(self, metaclass_id: UUID):
+    #     with tracer.start_as_current_span(
+    #         "get_metaclass", attributes={"metaclass_id": metaclass_id}
+    #     ):
+    #         return self.metaclass_mgr.get_metaclass(metaclass_id)
 
     #####################
     # Dataclay Metadata #

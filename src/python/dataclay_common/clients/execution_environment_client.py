@@ -96,6 +96,7 @@ class EEClient:
         else:
             self.stub = dataservice_pb2_grpc.DataServiceStub(self.channel)
 
+    # NOTE: It may be not need if the channel_ready_future is check on __init__
     def is_ready(self, timeout=None):
         try:
             grpc.channel_ready_future(self.channel).result(timeout)
