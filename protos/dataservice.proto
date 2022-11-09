@@ -91,5 +91,6 @@ message CallActiveMethodRequest {
 	string session_id = 1;
 	string object_id = 2;
 	string method_name = 3;
-	bytes parameters = 4;
+	bytes args = 4;
+	bytes kwargs = 5;
 }
