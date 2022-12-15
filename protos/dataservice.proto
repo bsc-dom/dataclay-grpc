@@ -84,7 +84,7 @@ service DataService {
 
 message MakePersistentRequest {
     string session_id = 1;
-    bytes pickled_obj = 2;
+    repeated bytes pickled_obj = 2;
 }
 
 message CallActiveMethodRequest {
