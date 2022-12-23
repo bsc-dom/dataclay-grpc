@@ -138,7 +138,7 @@ message GetNumObjectsResponse {
 
 // New
 
-message ExecutionEnvironment {
+message Backend {
 	string id = 1;
 	string hostname = 2;
 	int32 port = 3;
