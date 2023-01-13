@@ -142,18 +142,8 @@ message Backend {
 	string id = 1;
 	string hostname = 2;
 	int32 port = 3;
-	string sl_name = 4;
-	Langs language = 5;
-	string dataclay_id = 6;
+	string dataclay_id = 4;
 }
-
-// message ObjectRegisterInfo {
-// 	string object_id = 1;
-// 	string class_id = 2;
-// 	string session_id = 3;
-// 	string dataset_name = 4;
-// 	string alias = 5;
-// }
 
 message ObjectMetadata {
 	string id = 1;
@@ -171,4 +161,11 @@ message Session {
 	string username = 2;
 	string dataset_name = 3;
 	bool is_active = 4;
+}
+
+message Dataclay {
+	string id = 1;
+	string hostname = 2;
+	int32 port = 3;
+	bool is_this = 4;
 }

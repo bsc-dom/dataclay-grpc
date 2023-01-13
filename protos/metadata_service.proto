@@ -19,14 +19,11 @@ service MetadataService {
     rpc NewDataset(NewDatasetRequest) returns (google.protobuf.Empty) {}
     
     // EE-SL information
-	rpc GetAllExecutionEnvironments(GetAllExecutionEnvironmentsRequest) returns (GetAllExecutionEnvironmentsResponse) {}
+	rpc GetAllBackends(GetAllBackendsRequest) returns (GetAllBackendsResponse) {}
     
     // Federation
-    rpc GetDataclayID(google.protobuf.Empty) returns (GetDataclayIDResponse) {}
+    rpc GetDataclay(GetDataclayRequest) returns (protos.common.Dataclay) {}
     
-    // Autoregister
-    rpc AutoregisterEE(AutoRegisterEERequest) returns (google.protobuf.Empty) {}
-
     // Object Metadata
 	rpc RegisterObject(RegisterObjectRequest) returns (google.protobuf.Empty) {}
     rpc GetObjectMDById(GetObjectMDByIdRequest) returns (protos.common.ObjectMetadata) {}
@@ -81,33 +78,20 @@ message NewDatasetRequest {
 // EE-SL information
 // *****************
 
-message GetAllExecutionEnvironmentsRequest {
-	protos.common.Langs language = 1;
-	bool get_external = 2;
-	bool from_backend = 3;
+message GetAllBackendsRequest {
+	bool from_backend = 1;
 }
 
-message GetAllExecutionEnvironmentsResponse {
-	map<string, protos.common.Backend> exec_envs = 1;
+message GetAllBackendsResponse {
+	map<string, protos.common.Backend> backends = 1;
 }
 
 // **********
 // Federation
 // **********
 
-message GetDataclayIDResponse {
+message GetDataclayRequest {
     string dataclay_id = 1;
-}
-
-// ************
-// Autoregister
-// ************
-message AutoRegisterEERequest {
-	string id = 1;
-	string hostname = 2;
-	int32 port = 3;
-	string sl_name = 4;
-	protos.common.Langs lang = 5;
 }
 
 // ***************
