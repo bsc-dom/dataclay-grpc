@@ -29,7 +29,6 @@ service DataService {
 	rpc consolidateVersion(ConsolidateVersionRequest) returns (protos.common.ExceptionInfo) {}
 	rpc upsertObjects(UpsertObjectsRequest) returns (protos.common.ExceptionInfo) {}
 	rpc newReplica(NewReplicaRequest) returns (NewReplicaResponse) {}
-	rpc moveObjects(MoveObjectsRequest) returns (MoveObjectsResponse) {}
 	rpc removeObjects(RemoveObjectsRequest) returns (RemoveObjectsResponse) {}
 	rpc migrateObjectsToBackends(MigrateObjectsRequest) returns (MigrateObjectsResponse) {}
 	rpc getClassIDFromObjectInMemory(GetClassIDFromObjectInMemoryRequest) returns (GetClassIDFromObjectInMemoryResponse) {}
@@ -80,6 +79,9 @@ service DataService {
 	rpc GetCopyOfObject(GetCopyOfObjectRequest) returns (google.protobuf.BytesValue) {}
 	rpc UpdateObject(UpdateObjectRequest) returns (google.protobuf.Empty) {}
 
+	rpc MoveObject(MoveObjectRequest) returns (google.protobuf.Empty) {}
+	rpc SendObject(SendObjectRequest) returns (google.protobuf.Empty) {}
+	
 }
 
 // NEW
@@ -111,4 +113,17 @@ message UpdateObjectRequest {
     string session_id = 1;
     string object_id = 2;
     bytes serialized_properties = 3;
+}
+
+message MoveObjectRequest {
+	string session_id = 1;
+	string object_id = 2;
+	string backend_id = 3;
+	bool recursive = 4;
+}
+
+message SendObjectRequest {
+	string session_id = 1;
+	string object_id = 2;
+	bytes serialized_properties = 3;
 }

@@ -144,13 +144,6 @@ message NewReplicaResponse {
 	protos.common.ExceptionInfo excInfo = 2;
 }
 
-message MoveObjectsRequest {
-	string sessionID = 1;
-	string objectID = 2;
-	string destLocID = 3;
-	bool recursive = 4;
-}
-
 message MoveObjectsResponse {
 	repeated string movedObjects = 1;
 	protos.common.ExceptionInfo excInfo = 2;
