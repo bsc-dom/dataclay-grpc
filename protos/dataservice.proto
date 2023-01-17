@@ -23,7 +23,6 @@ service DataService {
 	// Execution Environment
 	rpc newPersistentInstance(NewPersistentInstanceRequest) returns (NewPersistentInstanceResponse) {}
 	rpc storeObjects(StoreObjectsRequest) returns (protos.common.ExceptionInfo) {}
-	rpc getCopyOfObject(GetCopyOfObjectRequest) returns (GetCopyOfObjectResponse) {}
 	rpc updateObject(UpdateObjectRequest) returns (protos.common.ExceptionInfo) {}
 	rpc getObjects(GetObjectsRequest) returns (GetObjectsResponse) {}
 	
@@ -78,6 +77,9 @@ service DataService {
 	// NEW
     rpc MakePersistent(MakePersistentRequest) returns (google.protobuf.Empty) {}
 	rpc CallActiveMethod(CallActiveMethodRequest) returns (google.protobuf.BytesValue) {}
+
+	rpc GetCopyOfObject(GetCopyOfObjectRequest) returns (google.protobuf.BytesValue) {}
+
 }
 
 // NEW
@@ -93,4 +95,11 @@ message CallActiveMethodRequest {
 	string method_name = 3;
 	bytes args = 4;
 	bytes kwargs = 5;
+}
+
+
+message GetCopyOfObjectRequest {
+    string session_id = 1;
+    string object_id = 2;
+    bool recursive = 3;
 }
