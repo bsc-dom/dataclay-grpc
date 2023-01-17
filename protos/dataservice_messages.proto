@@ -55,12 +55,6 @@ message StoreObjectsRequest {
 }
 
 
-message UpdateObjectRequest {
-    string sessionID = 1;
-    string intoObjectID = 2;
-    protos.common.SerializedParametersOrReturn fromObject = 3;
-}
-
 message GetObjectsRequest {
 	string sessionID = 1;
 	repeated string objectIDS = 2;
