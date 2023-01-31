@@ -28,7 +28,10 @@ service MetadataService {
 	rpc RegisterObject(RegisterObjectRequest) returns (google.protobuf.Empty) {}
     rpc GetObjectMDById(GetObjectMDByIdRequest) returns (protos.common.ObjectMetadata) {}
     rpc GetObjectMDByAlias(GetObjectMDByAliasRequest) returns (protos.common.ObjectMetadata) {}
+
+    // Alias
 	rpc DeleteAlias(DeleteAliasRequest) returns (google.protobuf.Empty) {}
+	rpc NewAlias(NewAliasRequest) returns (google.protobuf.Empty) {}
     
 
 
@@ -114,8 +117,19 @@ message GetObjectMDByAliasRequest {
     string dataset_name = 3;
 }
 
+// *****
+// Alias 
+// *****
+
 message DeleteAliasRequest {
 	string session_id = 1;
 	string alias_name = 2;
     string dataset_name = 3;
+}
+
+message NewAliasRequest {
+	string session_id = 1;
+	string alias_name = 2;
+    string dataset_name = 3;
+    string object_id = 4;
 }
