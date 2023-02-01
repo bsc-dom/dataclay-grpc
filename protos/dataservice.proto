@@ -74,7 +74,7 @@ service DataService {
 
 	// NEW
     rpc MakePersistent(MakePersistentRequest) returns (google.protobuf.Empty) {}
-	rpc CallActiveMethod(CallActiveMethodRequest) returns (google.protobuf.BytesValue) {}
+	rpc CallActiveMethod(CallActiveMethodRequest) returns (CallActiveMethodResponse) {}
 
 	rpc GetCopyOfObject(GetCopyOfObjectRequest) returns (google.protobuf.BytesValue) {}
 	rpc UpdateObject(UpdateObjectRequest) returns (google.protobuf.Empty) {}
@@ -97,6 +97,11 @@ message CallActiveMethodRequest {
 	string method_name = 3;
 	bytes args = 4;
 	bytes kwargs = 5;
+}
+
+message CallActiveMethodResponse {
+	bytes value = 1;
+	bool is_exception = 2;
 }
 
 ///////////////////
