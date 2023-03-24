@@ -82,6 +82,7 @@ service DataService {
 	rpc MoveObject(MoveObjectRequest) returns (google.protobuf.Empty) {}
 	rpc SendObject(SendObjectRequest) returns (google.protobuf.Empty) {}
 	
+	rpc FlushAll(google.protobuf.Empty) returns (google.protobuf.Empty) {}
 }
 
 // NEW
