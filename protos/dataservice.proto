@@ -53,7 +53,6 @@ service DataService {
 	// Others
 	rpc cleanExecutionClassDirectory(protos.common.EmptyMessage) returns (protos.common.ExceptionInfo) {}
 	rpc closeDbHandler(protos.common.EmptyMessage) returns (protos.common.ExceptionInfo) {}
-	rpc shutDown(protos.common.EmptyMessage) returns (protos.common.ExceptionInfo) {}
 	rpc disconnectFromOthers(protos.common.EmptyMessage) returns (protos.common.ExceptionInfo) {}
 	rpc registerPendingObjects(protos.common.EmptyMessage) returns (protos.common.ExceptionInfo) {}
 
@@ -83,6 +82,7 @@ service DataService {
 	rpc SendObject(SendObjectRequest) returns (google.protobuf.Empty) {}
 	
 	rpc FlushAll(google.protobuf.Empty) returns (google.protobuf.Empty) {}
+	rpc Shutdown(google.protobuf.Empty) returns (google.protobuf.Empty) {}
 }
 
 // NEW
