@@ -33,7 +33,6 @@ service DataService {
 	rpc migrateObjectsToBackends(MigrateObjectsRequest) returns (MigrateObjectsResponse) {}
 	rpc getClassIDFromObjectInMemory(GetClassIDFromObjectInMemoryRequest) returns (GetClassIDFromObjectInMemoryResponse) {}
 	rpc executeImplementation(ExecuteImplementationRequest) returns (ExecuteImplementationResponse) {}
-	rpc makePersistent(OldMakePersistentRequest) returns (protos.common.ExceptionInfo) {}
 	rpc federate(FederateRequest) returns (protos.common.ExceptionInfo) {}
 	rpc unfederate(UnfederateRequest) returns (protos.common.ExceptionInfo) {}
 
@@ -72,7 +71,7 @@ service DataService {
 	rpc getObjectGraph(protos.common.EmptyMessage) returns (GetObjectGraphResponse) {}
 
 	// NEW
-    rpc MakePersistent(MakePersistentRequest) returns (google.protobuf.Empty) {}
+  rpc MakePersistent(MakePersistentRequest) returns (google.protobuf.Empty) {}
 	rpc CallActiveMethod(CallActiveMethodRequest) returns (CallActiveMethodResponse) {}
 
 	rpc GetCopyOfObject(GetCopyOfObjectRequest) returns (google.protobuf.BytesValue) {}
@@ -88,8 +87,7 @@ service DataService {
 // NEW
 
 message MakePersistentRequest {
-    string session_id = 1;
-    repeated bytes pickled_obj = 2;
+    repeated bytes pickled_obj = 1;
 }
 
 message CallActiveMethodRequest {
@@ -122,10 +120,9 @@ message UpdateObjectRequest {
 }
 
 message MoveObjectRequest {
-	string session_id = 1;
-	string object_id = 2;
-	string backend_id = 3;
-	bool recursive = 4;
+	string object_id = 1;
+	string backend_id = 2;
+	bool recursive = 3;
 }
 
 message SendObjectRequest {

@@ -69,11 +69,6 @@ message GetObjectsResponse {
 	protos.common.ExceptionInfo excInfo = 2;
 }
 
-message OldMakePersistentRequest { 
-	string sessionID = 1;
-	repeated protos.common.ObjectWithDataParamOrReturn objects = 2;
-}
-
 message FederateRequest {
 	string sessionID = 1;
 	string objectID = 2;
