@@ -108,9 +108,8 @@ message CallActiveMethodResponse {
 ///////////////////
 
 message GetCopyOfObjectRequest {
-    string session_id = 1;
-    string object_id = 2;
-    bool recursive = 3;
+    string object_id = 1;
+    bool recursive = 2;
 }
 
 message UpdateObjectRequest {
