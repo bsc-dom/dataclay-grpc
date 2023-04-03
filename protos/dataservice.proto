@@ -74,7 +74,7 @@ service DataService {
   rpc MakePersistent(MakePersistentRequest) returns (google.protobuf.Empty) {}
 	rpc CallActiveMethod(CallActiveMethodRequest) returns (CallActiveMethodResponse) {}
 
-	rpc GetCopyOfObject(GetCopyOfObjectRequest) returns (google.protobuf.BytesValue) {}
+	rpc GetObjectProperties(GetObjectPropertiesRequest) returns (google.protobuf.BytesValue) {}
 	rpc UpdateObject(UpdateObjectRequest) returns (google.protobuf.Empty) {}
 
 	rpc MoveObject(MoveObjectRequest) returns (google.protobuf.Empty) {}
@@ -108,7 +108,7 @@ message CallActiveMethodResponse {
 // Store Methods //
 ///////////////////
 
-message GetCopyOfObjectRequest {
+message GetObjectPropertiesRequest {
     string object_id = 1;
     bool recursive = 2;
 }
