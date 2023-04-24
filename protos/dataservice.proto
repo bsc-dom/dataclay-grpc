@@ -79,6 +79,9 @@ service DataService {
 
 	rpc MoveObject(MoveObjectRequest) returns (google.protobuf.Empty) {}
 	rpc SendObject(SendObjectRequest) returns (google.protobuf.Empty) {}
+
+	rpc ProxifyObject(ProxifyObjectRequest) returns (google.protobuf.Empty) {}
+	rpc ChangeObjectId(ChangeObjectIdRequest) returns (google.protobuf.Empty) {}
 	
 	rpc FlushAll(google.protobuf.Empty) returns (google.protobuf.Empty) {}
 	rpc Shutdown(google.protobuf.Empty) returns (google.protobuf.Empty) {}
@@ -128,4 +131,14 @@ message SendObjectRequest {
 	string session_id = 1;
 	string object_id = 2;
 	bytes serialized_properties = 3;
+}
+
+message ProxifyObjectRequest {
+    string object_id = 1;
+    string new_object_id = 2;
+}
+
+message ChangeObjectIdRequest {
+    string object_id = 1;
+    string new_object_id = 2;
 }
