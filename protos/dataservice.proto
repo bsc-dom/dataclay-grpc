@@ -75,11 +75,13 @@ service DataService {
 	rpc CallActiveMethod(CallActiveMethodRequest) returns (CallActiveMethodResponse) {}
 
 	rpc GetObjectProperties(GetObjectPropertiesRequest) returns (google.protobuf.BytesValue) {}
-	rpc UpdateObject(UpdateObjectRequest) returns (google.protobuf.Empty) {}
+	rpc UpdateObjectProperties(UpdateObjectPropertiesRequest) returns (google.protobuf.Empty) {}
 
 	rpc MoveObject(MoveObjectRequest) returns (google.protobuf.Empty) {}
 	rpc SendObject(SendObjectRequest) returns (google.protobuf.Empty) {}
 
+	rpc NewObjectVersion(NewObjectVersionRequest) returns (NewObjectVersionResponse) {}
+	rpc ConsolidateObjectVersion(ConsolidateObjectVersionRequest) returns (google.protobuf.Empty) {}
 	rpc ProxifyObject(ProxifyObjectRequest) returns (google.protobuf.Empty) {}
 	rpc ChangeObjectId(ChangeObjectIdRequest) returns (google.protobuf.Empty) {}
 	
@@ -113,10 +115,9 @@ message CallActiveMethodResponse {
 
 message GetObjectPropertiesRequest {
     string object_id = 1;
-    bool recursive = 2;
 }
 
-message UpdateObjectRequest {
+message UpdateObjectPropertiesRequest {
     string object_id = 1;
     bytes serialized_properties = 2;
 }
@@ -131,6 +132,19 @@ message SendObjectRequest {
 	string session_id = 1;
 	string object_id = 2;
 	bytes serialized_properties = 3;
+}
+
+
+message NewObjectVersionRequest {
+    string object_id = 1;
+}
+
+message ConsolidateObjectVersionRequest {
+    string object_id = 1;
+}
+
+message NewObjectVersionResponse {
+    string object_full_id = 1;
 }
 
 message ProxifyObjectRequest {
