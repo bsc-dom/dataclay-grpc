@@ -138,6 +138,7 @@ message GetNumObjectsResponse {
 
 // New
 
+
 message Backend {
 	string id = 1;
 	string hostname = 2;
@@ -168,4 +169,10 @@ message Dataclay {
 	string hostname = 2;
 	int32 port = 3;
 	bool is_this = 4;
+}
+
+message Alias {
+	string name = 1;
+	string dataset_name = 2;
+	string object_id = 3;
 }

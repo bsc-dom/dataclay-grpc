@@ -34,6 +34,7 @@ service MetadataService {
     // Alias
 	rpc DeleteAlias(DeleteAliasRequest) returns (google.protobuf.Empty) {}
 	rpc NewAlias(NewAliasRequest) returns (google.protobuf.Empty) {}
+	rpc GetAllAlias(GetAllAliasRequest) returns (GetAllAliasResponse) {}
     
 
 
@@ -131,6 +132,15 @@ message DeleteAliasRequest {
 	string session_id = 1;
 	string alias_name = 2;
     string dataset_name = 3;
+}
+
+message GetAllAliasRequest {
+	string dataset_name = 1;
+  string object_id = 2;
+}
+
+message GetAllAliasResponse {
+	map<string, protos.common.Alias> aliases = 1;
 }
 
 message NewAliasRequest {
