@@ -1,9 +1,9 @@
 syntax = "proto3";
 
-package protos.metadata_service;
+package proto.metadata;
 
 import "google/protobuf/empty.proto";
-import "protos/common_messages.proto";
+import "proto/common.proto";
 
 service MetadataService {
     
@@ -12,7 +12,7 @@ service MetadataService {
     rpc GetAccount(GetAccountRequest) returns (GetAccountResponse) {}
     
     // Session Manager
-    rpc NewSession(NewSessionRequest) returns (protos.common.Session) {}
+    rpc NewSession(NewSessionRequest) returns (proto.common.Session) {}
     rpc CloseSession(CloseSessionRequest) returns (google.protobuf.Empty) {}
 
     // Dataset Manager
@@ -22,12 +22,12 @@ service MetadataService {
 	rpc GetAllBackends(GetAllBackendsRequest) returns (GetAllBackendsResponse) {}
     
     // Federation
-    rpc GetDataclay(GetDataclayRequest) returns (protos.common.Dataclay) {}
+    rpc GetDataclay(GetDataclayRequest) returns (proto.common.Dataclay) {}
     
     // Object Metadata
 	rpc RegisterObject(RegisterObjectRequest) returns (google.protobuf.Empty) {}
-    rpc GetObjectMDById(GetObjectMDByIdRequest) returns (protos.common.ObjectMetadata) {}
-    rpc GetObjectMDByAlias(GetObjectMDByAliasRequest) returns (protos.common.ObjectMetadata) {}
+    rpc GetObjectMDById(GetObjectMDByIdRequest) returns (proto.common.ObjectMetadata) {}
+    rpc GetObjectMDByAlias(GetObjectMDByAliasRequest) returns (proto.common.ObjectMetadata) {}
     rpc GetAllObjects(google.protobuf.Empty) returns (GetAllObjectsResponse) {}
 
 
@@ -89,7 +89,7 @@ message GetAllBackendsRequest {
 }
 
 message GetAllBackendsResponse {
-	map<string, protos.common.Backend> backends = 1;
+	map<string, proto.common.Backend> backends = 1;
 }
 
 // **********
@@ -106,7 +106,7 @@ message GetDataclayRequest {
 
 message RegisterObjectRequest {
 	string session_id = 1;
-	protos.common.ObjectMetadata object_md = 2;
+	proto.common.ObjectMetadata object_md = 2;
 }
 
 message GetObjectMDByIdRequest {
@@ -121,7 +121,7 @@ message GetObjectMDByAliasRequest {
 }
 
 message GetAllObjectsResponse {
-	map<string, protos.common.ObjectMetadata> objects = 1;
+	map<string, proto.common.ObjectMetadata> objects = 1;
 }
 
 // *****
@@ -140,7 +140,7 @@ message GetAllAliasRequest {
 }
 
 message GetAllAliasResponse {
-	map<string, protos.common.Alias> aliases = 1;
+	map<string, proto.common.Alias> aliases = 1;
 }
 
 message NewAliasRequest {
