@@ -1,15 +1,16 @@
 syntax = "proto3";
 
-package proto.backend;
+package dataclay.proto.backend;
 
 import "google/protobuf/empty.proto";
 import "google/protobuf/wrappers.proto";
 
-// Interface exported by the server.
+option java_multiple_files = true;
+option java_package = "es.bsc.dataclay.proto.backend";
+
 service BackendService {
 
-	// NEW
-  	rpc MakePersistent(MakePersistentRequest) returns (google.protobuf.Empty) {}
+  rpc MakePersistent(MakePersistentRequest) returns (google.protobuf.Empty) {}
 	rpc CallActiveMethod(CallActiveMethodRequest) returns (CallActiveMethodResponse) {}
 
 	rpc GetObjectProperties(GetObjectPropertiesRequest) returns (google.protobuf.BytesValue) {}
@@ -28,10 +29,9 @@ service BackendService {
 	rpc Drain(google.protobuf.Empty) returns (google.protobuf.Empty) {}
 }
 
-// NEW
 
 message MakePersistentRequest {
-    repeated bytes pickled_obj = 1;
+  repeated bytes pickled_obj = 1;
 }
 
 message CallActiveMethodRequest {
@@ -52,12 +52,12 @@ message CallActiveMethodResponse {
 ///////////////////
 
 message GetObjectPropertiesRequest {
-    string object_id = 1;
+  string object_id = 1;
 }
 
 message UpdateObjectPropertiesRequest {
-    string object_id = 1;
-    bytes serialized_properties = 2;
+  string object_id = 1;
+  bytes serialized_properties = 2;
 }
 
 message MoveObjectRequest {
@@ -74,23 +74,23 @@ message SendObjectRequest {
 
 
 message NewObjectVersionRequest {
-    string object_id = 1;
+  string object_id = 1;
 }
 
 message ConsolidateObjectVersionRequest {
-    string object_id = 1;
+  string object_id = 1;
 }
 
 message NewObjectVersionResponse {
-    string object_full_id = 1;
+  string object_full_id = 1;
 }
 
 message ProxifyObjectRequest {
-    string object_id = 1;
-    string new_object_id = 2;
+  string object_id = 1;
+  string new_object_id = 2;
 }
 
 message ChangeObjectIdRequest {
-    string object_id = 1;
-    string new_object_id = 2;
+  string object_id = 1;
+  string new_object_id = 2;
 }

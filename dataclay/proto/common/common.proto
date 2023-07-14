@@ -1,6 +1,9 @@
 syntax = "proto3";
-package proto.common;
 
+package dataclay.proto.common;
+
+option java_multiple_files = true;
+option java_package = "es.bsc.dataclay.proto.common";
 
 message Backend {
   string id = 1;

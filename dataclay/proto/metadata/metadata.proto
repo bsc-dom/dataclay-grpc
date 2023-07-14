@@ -1,0 +1,152 @@
+syntax = "proto3";
+
+package dataclay.proto.metadata;
+
+import "google/protobuf/empty.proto";
+import "dataclay/proto/common/common.proto";
+
+option java_multiple_files = true;
+option java_package = "es.bsc.dataclay.proto.metadata";
+
+service MetadataService {
+  
+  // Account Manager
+  rpc NewAccount(NewAccountRequest) returns (google.protobuf.Empty) {}
+  rpc GetAccount(GetAccountRequest) returns (GetAccountResponse) {}
+  
+  // Session Manager
+  rpc NewSession(NewSessionRequest) returns (dataclay.proto.common.Session) {}
+  rpc CloseSession(CloseSessionRequest) returns (google.protobuf.Empty) {}
+
+  // Dataset Manager
+  rpc NewDataset(NewDatasetRequest) returns (google.protobuf.Empty) {}
+  
+  // EE-SL information
+	rpc GetAllBackends(GetAllBackendsRequest) returns (GetAllBackendsResponse) {}
+    
+  // Federation
+  rpc GetDataclay(GetDataclayRequest) returns (dataclay.proto.common.Dataclay) {}
+  
+  // Object Metadata
+	rpc RegisterObject(RegisterObjectRequest) returns (google.protobuf.Empty) {}
+  rpc GetObjectMDById(GetObjectMDByIdRequest) returns (dataclay.proto.common.ObjectMetadata) {}
+  rpc GetObjectMDByAlias(GetObjectMDByAliasRequest) returns (dataclay.proto.common.ObjectMetadata) {}
+  rpc GetAllObjects(google.protobuf.Empty) returns (GetAllObjectsResponse) {}
+
+
+  // Alias
+	rpc DeleteAlias(DeleteAliasRequest) returns (google.protobuf.Empty) {}
+	rpc NewAlias(NewAliasRequest) returns (google.protobuf.Empty) {}
+	rpc GetAllAlias(GetAllAliasRequest) returns (GetAllAliasResponse) {}
+    
+}
+
+// ***************
+// Account Manager
+// ***************
+
+message NewAccountRequest {
+  string username = 1;
+  string password = 2;
+}
+
+message GetAccountRequest {
+  string username = 1;
+}
+
+message GetAccountResponse {
+}
+
+// ***************
+// Session Manager
+// ***************
+
+message NewSessionRequest {
+  string username = 1;
+  string password = 2;
+  string dataset_name = 3;
+}
+
+message CloseSessionRequest {
+  string id = 1;
+}
+
+// ***************
+// Dataset Manager
+// ***************
+
+message NewDatasetRequest {
+  string username = 1;
+  string password = 2;
+  string dataset = 3;
+}
+
+// *****************
+// EE-SL information
+// *****************
+
+message GetAllBackendsRequest {
+	bool from_backend = 1;
+}
+
+message GetAllBackendsResponse {
+	map<string, dataclay.proto.common.Backend> backends = 1;
+}
+
+// **********
+// Federation
+// **********
+
+message GetDataclayRequest {
+  string dataclay_id = 1;
+}
+
+// ***************
+// Object Metadata
+// ***************
+
+message RegisterObjectRequest {
+	string session_id = 1;
+	dataclay.proto.common.ObjectMetadata object_md = 2;
+}
+
+message GetObjectMDByIdRequest {
+	string session_id = 1;
+  string object_id = 2;
+}
+
+message GetObjectMDByAliasRequest {
+	string session_id = 1;
+  string alias_name = 2;
+  string dataset_name = 3;
+}
+
+message GetAllObjectsResponse {
+	map<string, dataclay.proto.common.ObjectMetadata> objects = 1;
+}
+
+// *****
+// Alias 
+// *****
+
+message DeleteAliasRequest {
+	string session_id = 1;
+	string alias_name = 2;
+  string dataset_name = 3;
+}
+
+message GetAllAliasRequest {
+	string dataset_name = 1;
+  string object_id = 2;
+}
+
+message GetAllAliasResponse {
+	map<string, dataclay.proto.common.Alias> aliases = 1;
+}
+
+message NewAliasRequest {
+	string session_id = 1;
+	string alias_name = 2;
+  string dataset_name = 3;
+  string object_id = 4;
+}
