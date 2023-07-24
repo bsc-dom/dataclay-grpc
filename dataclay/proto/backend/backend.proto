@@ -64,6 +64,7 @@ message MoveObjectsRequest {
   repeated string object_ids = 1;
   string backend_id = 2;
   bool recursive = 3;
+  bool remotes = 4;
 }
 
 message SendObjectsRequest {
