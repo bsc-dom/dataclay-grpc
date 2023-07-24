@@ -11,22 +11,22 @@ option java_package = "es.bsc.dataclay.proto.backend";
 service BackendService {
 
   rpc MakePersistent(MakePersistentRequest) returns (google.protobuf.Empty) {}
-	rpc CallActiveMethod(CallActiveMethodRequest) returns (CallActiveMethodResponse) {}
+  rpc CallActiveMethod(CallActiveMethodRequest) returns (CallActiveMethodResponse) {}
 
-	rpc GetObjectProperties(GetObjectPropertiesRequest) returns (google.protobuf.BytesValue) {}
-	rpc UpdateObjectProperties(UpdateObjectPropertiesRequest) returns (google.protobuf.Empty) {}
+  rpc GetObjectProperties(GetObjectPropertiesRequest) returns (google.protobuf.BytesValue) {}
+  rpc UpdateObjectProperties(UpdateObjectPropertiesRequest) returns (google.protobuf.Empty) {}
 
-	rpc MoveObject(MoveObjectRequest) returns (google.protobuf.Empty) {}
-	rpc SendObject(SendObjectRequest) returns (google.protobuf.Empty) {}
+  rpc MoveObjects(MoveObjectsRequest) returns (google.protobuf.Empty) {}
+  rpc SendObjects(SendObjectsRequest) returns (google.protobuf.Empty) {}
 
-	rpc NewObjectVersion(NewObjectVersionRequest) returns (NewObjectVersionResponse) {}
-	rpc ConsolidateObjectVersion(ConsolidateObjectVersionRequest) returns (google.protobuf.Empty) {}
-	rpc ProxifyObject(ProxifyObjectRequest) returns (google.protobuf.Empty) {}
-	rpc ChangeObjectId(ChangeObjectIdRequest) returns (google.protobuf.Empty) {}
+  rpc NewObjectVersion(NewObjectVersionRequest) returns (NewObjectVersionResponse) {}
+  rpc ConsolidateObjectVersion(ConsolidateObjectVersionRequest) returns (google.protobuf.Empty) {}
+  rpc ProxifyObject(ProxifyObjectRequest) returns (google.protobuf.Empty) {}
+  rpc ChangeObjectId(ChangeObjectIdRequest) returns (google.protobuf.Empty) {}
 	
-	rpc FlushAll(google.protobuf.Empty) returns (google.protobuf.Empty) {}
-	rpc Shutdown(google.protobuf.Empty) returns (google.protobuf.Empty) {}
-	rpc Drain(google.protobuf.Empty) returns (google.protobuf.Empty) {}
+  rpc FlushAll(google.protobuf.Empty) returns (google.protobuf.Empty) {}
+  rpc Shutdown(google.protobuf.Empty) returns (google.protobuf.Empty) {}
+  rpc Drain(google.protobuf.Empty) returns (google.protobuf.Empty) {}
 }
 
 
@@ -35,16 +35,16 @@ message MakePersistentRequest {
 }
 
 message CallActiveMethodRequest {
-	string session_id = 1;
-	string object_id = 2;
-	string method_name = 3;
-	bytes args = 4;
-	bytes kwargs = 5;
+  string session_id = 1;
+  string object_id = 2;
+  string method_name = 3;
+  bytes args = 4;
+  bytes kwargs = 5;
 }
 
 message CallActiveMethodResponse {
-	bytes value = 1;
-	bool is_exception = 2;
+  bytes value = 1;
+  bool is_exception = 2;
 }
 
 ///////////////////
@@ -60,16 +60,15 @@ message UpdateObjectPropertiesRequest {
   bytes serialized_properties = 2;
 }
 
-message MoveObjectRequest {
-	string object_id = 1;
-	string backend_id = 2;
-	bool recursive = 3;
+message MoveObjectsRequest {
+  repeated string object_ids = 1;
+  string backend_id = 2;
+  bool recursive = 3;
 }
 
-message SendObjectRequest {
-	string session_id = 1;
-	string object_id = 2;
-	bytes serialized_properties = 3;
+message SendObjectsRequest {
+  repeated bytes dict_bytes = 1;
+  bool is_replica = 2;
 }
 
 message NewObjectVersionRequest {
