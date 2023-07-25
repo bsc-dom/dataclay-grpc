@@ -16,8 +16,8 @@ service BackendService {
   rpc GetObjectProperties(GetObjectPropertiesRequest) returns (google.protobuf.BytesValue) {}
   rpc UpdateObjectProperties(UpdateObjectPropertiesRequest) returns (google.protobuf.Empty) {}
 
-  rpc MoveObjects(MoveObjectsRequest) returns (google.protobuf.Empty) {}
   rpc SendObjects(SendObjectsRequest) returns (google.protobuf.Empty) {}
+  rpc RegisterObjects(RegisterObjectsRequest) returns (google.protobuf.Empty) {}
 
   rpc NewObjectVersion(NewObjectVersionRequest) returns (NewObjectVersionResponse) {}
   rpc ConsolidateObjectVersion(ConsolidateObjectVersionRequest) returns (google.protobuf.Empty) {}
@@ -60,16 +60,17 @@ message UpdateObjectPropertiesRequest {
   bytes serialized_properties = 2;
 }
 
-message MoveObjectsRequest {
+message SendObjectsRequest {
   repeated string object_ids = 1;
   string backend_id = 2;
-  bool recursive = 3;
-  bool remotes = 4;
+  bool make_replica = 3;
+  bool recursive = 4;
+  bool remotes = 5;
 }
 
-message SendObjectsRequest {
+message RegisterObjectsRequest {
   repeated bytes dict_bytes = 1;
-  bool is_replica = 2;
+  bool make_replica = 2;
 }
 
 message NewObjectVersionRequest {

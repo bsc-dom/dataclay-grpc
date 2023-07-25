@@ -28,7 +28,6 @@ service MetadataService {
   rpc GetDataclay(GetDataclayRequest) returns (dataclay.proto.common.Dataclay) {}
   
   // Object Metadata
-	rpc RegisterObject(RegisterObjectRequest) returns (google.protobuf.Empty) {}
   rpc GetObjectMDById(GetObjectMDByIdRequest) returns (dataclay.proto.common.ObjectMetadata) {}
   rpc GetObjectMDByAlias(GetObjectMDByAliasRequest) returns (dataclay.proto.common.ObjectMetadata) {}
   rpc GetAllObjects(google.protobuf.Empty) returns (GetAllObjectsResponse) {}
@@ -104,11 +103,6 @@ message GetDataclayRequest {
 // ***************
 // Object Metadata
 // ***************
-
-message RegisterObjectRequest {
-	string session_id = 1;
-	dataclay.proto.common.ObjectMetadata object_md = 2;
-}
 
 message GetObjectMDByIdRequest {
 	string session_id = 1;
