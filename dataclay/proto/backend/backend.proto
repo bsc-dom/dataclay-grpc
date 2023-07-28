@@ -23,7 +23,9 @@ service BackendService {
   rpc ConsolidateObjectVersion(ConsolidateObjectVersionRequest) returns (google.protobuf.Empty) {}
   rpc ProxifyObject(ProxifyObjectRequest) returns (google.protobuf.Empty) {}
   rpc ChangeObjectId(ChangeObjectIdRequest) returns (google.protobuf.Empty) {}
-	
+
+  rpc NewObjectReplica(NewObjectReplicaRequest) returns (google.protobuf.Empty) {}
+
   rpc FlushAll(google.protobuf.Empty) returns (google.protobuf.Empty) {}
   rpc Shutdown(google.protobuf.Empty) returns (google.protobuf.Empty) {}
   rpc Drain(google.protobuf.Empty) returns (google.protobuf.Empty) {}
@@ -93,4 +95,11 @@ message ProxifyObjectRequest {
 message ChangeObjectIdRequest {
   string object_id = 1;
   string new_object_id = 2;
+}
+
+message NewObjectReplicaRequest {
+  string object_id = 1;
+  string backend_id = 2;
+  bool recursive = 3;
+  bool remotes = 4;
 }
