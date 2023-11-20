@@ -27,7 +27,7 @@ service BackendService {
   rpc NewObjectReplica(NewObjectReplicaRequest) returns (google.protobuf.Empty) {}
 
   rpc FlushAll(google.protobuf.Empty) returns (google.protobuf.Empty) {}
-  rpc Shutdown(google.protobuf.Empty) returns (google.protobuf.Empty) {}
+  rpc Stop(google.protobuf.Empty) returns (google.protobuf.Empty) {}
   rpc Drain(google.protobuf.Empty) returns (google.protobuf.Empty) {}
 }
 

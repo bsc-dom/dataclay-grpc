@@ -37,7 +37,8 @@ service MetadataService {
 	rpc DeleteAlias(DeleteAliasRequest) returns (google.protobuf.Empty) {}
 	rpc NewAlias(NewAliasRequest) returns (google.protobuf.Empty) {}
 	rpc GetAllAlias(GetAllAliasRequest) returns (GetAllAliasResponse) {}
-    
+
+  rpc Stop(google.protobuf.Empty) returns (google.protobuf.Empty) {}
 }
 
 // ***************
