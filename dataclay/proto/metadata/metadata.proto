@@ -87,6 +87,7 @@ message NewDatasetRequest {
 
 message GetAllBackendsRequest {
 	bool from_backend = 1;
+  bool force = 2;
 }
 
 message GetAllBackendsResponse {
