@@ -13,6 +13,10 @@ service BackendService {
   rpc MakePersistent(MakePersistentRequest) returns (google.protobuf.Empty) {}
   rpc CallActiveMethod(CallActiveMethodRequest) returns (CallActiveMethodResponse) {}
 
+  rpc GetObjectAttribute(GetObjectAttributeRequest) returns (google.protobuf.BytesValue) {}
+  rpc SetObjectAttribute(SetObjectAttributeRequest) returns (google.protobuf.Empty) {}
+  rpc DelObjectAttribute(DelObjectAttributeRequest) returns (google.protobuf.Empty) {}
+
   rpc GetObjectProperties(GetObjectPropertiesRequest) returns (google.protobuf.BytesValue) {}
   rpc UpdateObjectProperties(UpdateObjectPropertiesRequest) returns (google.protobuf.Empty) {}
 
@@ -48,6 +52,23 @@ message CallActiveMethodResponse {
   bytes value = 1;
   bool is_exception = 2;
 }
+
+message GetObjectAttributeRequest{
+  string object_id = 1;
+  string attribute = 2;
+}
+
+message SetObjectAttributeRequest{
+  string object_id = 1;
+  string attribute = 2;
+  bytes serialized_attribute = 3;
+}
+
+message DelObjectAttributeRequest{
+  string object_id = 1;
+  string attribute = 2;
+}
+
 
 ///////////////////
 // Store Methods //
