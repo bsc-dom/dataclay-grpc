@@ -13,6 +13,10 @@ service BackendService {
   rpc MakePersistent(MakePersistentRequest) returns (google.protobuf.Empty) {}
   rpc CallActiveMethod(CallActiveMethodRequest) returns (CallActiveMethodResponse) {}
 
+  rpc GetObjectAttribute(GetObjectAttributeRequest) returns (GetObjectAttributeResponse) {}
+  rpc SetObjectAttribute(SetObjectAttributeRequest) returns (SetObjectAttributeResponse) {}
+  rpc DelObjectAttribute(DelObjectAttributeRequest) returns (DelObjectAttributeResponse) {}
+
   rpc GetObjectProperties(GetObjectPropertiesRequest) returns (google.protobuf.BytesValue) {}
   rpc UpdateObjectProperties(UpdateObjectPropertiesRequest) returns (google.protobuf.Empty) {}
 
@@ -45,6 +49,37 @@ message CallActiveMethodRequest {
 }
 
 message CallActiveMethodResponse {
+  bytes value = 1;
+  bool is_exception = 2;
+}
+
+message GetObjectAttributeRequest{
+  string object_id = 1;
+  string attribute = 2;
+}
+
+message GetObjectAttributeResponse {
+  bytes value = 1;
+  bool is_exception = 2;
+}
+
+message SetObjectAttributeRequest{
+  string object_id = 1;
+  string attribute = 2;
+  bytes serialized_attribute = 3;
+}
+
+message SetObjectAttributeResponse {
+  bytes value = 1;
+  bool is_exception = 2;
+}
+
+message DelObjectAttributeRequest{
+  string object_id = 1;
+  string attribute = 2;
+}
+
+message DelObjectAttributeResponse {
   bytes value = 1;
   bool is_exception = 2;
 }
