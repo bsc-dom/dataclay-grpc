@@ -13,10 +13,6 @@ service MetadataService {
   // Account Manager
   rpc NewAccount(NewAccountRequest) returns (google.protobuf.Empty) {}
   rpc GetAccount(GetAccountRequest) returns (GetAccountResponse) {}
-  
-  // Session Manager
-  rpc NewSession(NewSessionRequest) returns (dataclay.proto.common.Session) {}
-  rpc CloseSession(CloseSessionRequest) returns (google.protobuf.Empty) {}
 
   // Dataset Manager
   rpc NewDataset(NewDatasetRequest) returns (google.protobuf.Empty) {}
@@ -57,19 +53,6 @@ message GetAccountRequest {
 message GetAccountResponse {
 }
 
-// ***************
-// Session Manager
-// ***************
-
-message NewSessionRequest {
-  string username = 1;
-  string password = 2;
-  string dataset_name = 3;
-}
-
-message CloseSessionRequest {
-  string id = 1;
-}
 
 // ***************
 // Dataset Manager
@@ -107,14 +90,12 @@ message GetDataclayRequest {
 // ***************
 
 message GetObjectMDByIdRequest {
-	string session_id = 1;
-  string object_id = 2;
+  string object_id = 1;
 }
 
 message GetObjectMDByAliasRequest {
-	string session_id = 1;
-  string alias_name = 2;
-  string dataset_name = 3;
+  string alias_name = 1;
+  string dataset_name = 2;
 }
 
 message GetAllObjectsResponse {
@@ -126,9 +107,8 @@ message GetAllObjectsResponse {
 // *****
 
 message DeleteAliasRequest {
-	string session_id = 1;
-	string alias_name = 2;
-  string dataset_name = 3;
+	string alias_name = 1;
+  string dataset_name = 2;
 }
 
 message GetAllAliasRequest {
@@ -141,8 +121,7 @@ message GetAllAliasResponse {
 }
 
 message NewAliasRequest {
-	string session_id = 1;
-	string alias_name = 2;
-  string dataset_name = 3;
-  string object_id = 4;
+	string alias_name = 1;
+  string dataset_name = 2;
+  string object_id = 3;
 }

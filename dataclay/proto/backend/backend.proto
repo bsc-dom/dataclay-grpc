@@ -41,11 +41,10 @@ message MakePersistentRequest {
 }
 
 message CallActiveMethodRequest {
-  string session_id = 1;
-  string object_id = 2;
-  string method_name = 3;
-  bytes args = 4;
-  bytes kwargs = 5;
+  string object_id = 1;
+  string method_name = 2;
+  bytes args = 3;
+  bytes kwargs = 4;
 }
 
 message CallActiveMethodResponse {
