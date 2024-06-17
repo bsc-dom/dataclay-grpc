@@ -8,13 +8,68 @@ import "google/protobuf/wrappers.proto";
 option java_multiple_files = true;
 option java_package = "es.bsc.dataclay.proto.backend";
 
+/* The BackendService provides the storage and active features of dataClay.
+
+A typical dataClay deployment will have one or several backends depending on the available
+resources of the system. Each backend is responsible for storing objects and executing methods
+on them.
+*/
 service BackendService {
 
+  /*
+  MakePersistent(pickled_obj: list[bytes])
+
+  :param pickled_obj: List of pickled objects to make persistent.
+
+  Given a set of objects, store them inside dataClay (make them persistent).
+  */
   rpc MakePersistent(MakePersistentRequest) returns (google.protobuf.Empty) {}
+
+  /*
+  CallActiveMethod(object_id: str, method_name: str, args: bytes, kwargs: bytes) -> (bytes, bool)
+
+  :param object_id: ID of the object to call the method.
+  :param method_name: Name of the method to call.
+  :param args: Pickled arguments for the method.
+  :param kwargs: Pickled keyword arguments for the method.
+  :return: Pickled result of the method call and a flag to indicate that the result is an exception.
+
+  Call a method on an object stored in dataClay.
+  */
   rpc CallActiveMethod(CallActiveMethodRequest) returns (CallActiveMethodResponse) {}
 
+  /*
+  GetObjectAttribute(object_id: str, attribute: str) -> (bytes, bool)
+
+  :param object_id: ID of the object to get the attribute.
+  :param attribute: Name of the attribute to get.
+  :return: Pickled value of the attribute and a flag to indicate if the result is an exception.
+
+  Get an attribute from an object stored in dataClay.
+  */
   rpc GetObjectAttribute(GetObjectAttributeRequest) returns (GetObjectAttributeResponse) {}
+
+  /*
+  SetObjectAttribute(object_id: str, attribute: str, serialized_attribute: bytes) -> (bytes, bool)
+
+  :param object_id: ID of the object to set the attribute.
+  :param attribute: Name of the attribute to set.
+  :param serialized_attribute: Pickled value of the attribute.
+  :return: Pickled result of the setter operation and a flag to indicate if the result is an exception.
+
+  Set an attribute into an object stored in dataClay.
+  */
   rpc SetObjectAttribute(SetObjectAttributeRequest) returns (SetObjectAttributeResponse) {}
+
+  /*
+  DelObjectAttribute(object_id: str, attribute: str) -> (bytes, bool)
+
+  :param object_id: ID of the object to delete the attribute.
+  :param attribute: Name of the attribute to delete.
+  :return: Pickled result of the delete operation and a flag to indicate if the result is an exception.
+
+  Delete an attribute from an object stored in dataClay.
+  */
   rpc DelObjectAttribute(DelObjectAttributeRequest) returns (DelObjectAttributeResponse) {}
 
   rpc GetObjectProperties(GetObjectPropertiesRequest) returns (google.protobuf.BytesValue) {}
