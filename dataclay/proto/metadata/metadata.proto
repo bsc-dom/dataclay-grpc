@@ -8,6 +8,15 @@ import "dataclay/proto/common/common.proto";
 option java_multiple_files = true;
 option java_package = "es.bsc.dataclay.proto.metadata";
 
+
+/*
+The Metadata Service is the interface between the Client and the metadata of the system.
+
+All metadata operations (request and requests) performed by the client go through the Metadata Service.
+
+Note that the actual metadata is persisted in a database, outside of this service. This service
+is mostly stateless.
+*/
 service MetadataService {
   
   // Account Manager
@@ -17,7 +26,11 @@ service MetadataService {
   // Dataset Manager
   rpc NewDataset(NewDatasetRequest) returns (google.protobuf.Empty) {}
   
-  // EE-SL information
+  /*
+  GetAllBackends(from_backend: bool, force: bool) -> dict[str, Backend]
+
+  Get all backends registered in the system.
+  */
 	rpc GetAllBackends(GetAllBackendsRequest) returns (GetAllBackendsResponse) {}
     
   // Federation
@@ -34,6 +47,11 @@ service MetadataService {
 	rpc NewAlias(NewAliasRequest) returns (google.protobuf.Empty) {}
 	rpc GetAllAlias(GetAllAliasRequest) returns (GetAllAliasResponse) {}
 
+  /*
+  Stop() -> None
+
+  Stop the Metadata Service. Finish all pending operations and close all connections.
+  */
   rpc Stop(google.protobuf.Empty) returns (google.protobuf.Empty) {}
 }
 
