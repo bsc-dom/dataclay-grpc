@@ -45,6 +45,7 @@ message CallActiveMethodRequest {
   string method_name = 2;
   bytes args = 3;
   bytes kwargs = 4;
+  int32 max_threads = 5;
 }
 
 message CallActiveMethodResponse {
